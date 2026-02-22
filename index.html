@@ -1,26 +1,382 @@
 <!doctype html>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>My Website</title>
-  </head>
-  <body>
-    <body>
-  <h1>Hi. I'm Merlin Komenda.</h1>
-  <p>AI at the front, customers at heart.</p>
-  <h2>Latest:</h2>
-  <p>With nearly 10 years in SaaS across PS, CS, product, and ops, I’m a listener, systems-builder, and problem-solver who thrives on making teams and customers successful.
-  Past 12 months: Reduced Time-to-Live by 30+% and got first platform usage/value realization live in ~15 days during implementations, while driving six-figure spend during onboarding.</p>
-  <h2>What I Do:</h2>
-  <ul>
-    <li>Implementation: I make onboarding calm, repeatable, and fast.</li>
-    <li>Professional Services: I turn scoped problems into defined services, shipped results and clear programs</li>
-    <li>Enablement: I turn needs into areas of strength, scaled playbooks, and adoption.</li>
-    <li>Project Management: I align teams, execution, and outcomes.</li>
-  </ul>
-  <h2>Contact</h2>
-  <p>Email me at: you@example.com</p>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Your Name / Brand</title>
+  <meta name="description" content="Short description of what you do." />
+
+  <style>
+    :root{
+      --bg: #0b0f19;
+      --panel: rgba(255,255,255,.06);
+      --panel2: rgba(255,255,255,.10);
+      --text: rgba(255,255,255,.92);
+      --muted: rgba(255,255,255,.70);
+      --line: rgba(255,255,255,.14);
+      --accent: #7c3aed;   /* purple */
+      --accent2: #22d3ee;  /* cyan */
+      --shadow: 0 20px 60px rgba(0,0,0,.45);
+      --radius: 18px;
+      --max: 1100px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{margin:0; padding:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji","Segoe UI Emoji";}
+    body{
+      color: var(--text);
+      background:
+        radial-gradient(900px 600px at 15% 20%, rgba(124,58,237,.35), transparent 60%),
+        radial-gradient(900px 600px at 85% 10%, rgba(34,211,238,.22), transparent 55%),
+        radial-gradient(700px 500px at 70% 80%, rgba(124,58,237,.18), transparent 60%),
+        var(--bg);
+      min-height:100vh;
+    }
+    a{color:inherit}
+    .wrap{max-width:var(--max); margin:0 auto; padding:28px 20px 70px;}
+    .nav{
+      display:flex; align-items:center; justify-content:space-between;
+      border:1px solid var(--line);
+      background: rgba(0,0,0,.22);
+      backdrop-filter: blur(10px);
+      border-radius: 999px;
+      padding:12px 14px;
+      box-shadow: 0 8px 28px rgba(0,0,0,.25);
+      position:sticky; top:14px; z-index:10;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px; text-decoration:none;
+      font-weight:750; letter-spacing:.2px;
+    }
+    .logo{
+      width:34px; height:34px; border-radius: 12px;
+      background:
+        radial-gradient(circle at 30% 30%, rgba(255,255,255,.35), transparent 50%),
+        linear-gradient(135deg, var(--accent), var(--accent2));
+      box-shadow: 0 10px 30px rgba(124,58,237,.25);
+      border:1px solid rgba(255,255,255,.18);
+    }
+    .navlinks{display:flex; gap:10px; align-items:center; flex-wrap:wrap;}
+    .navlinks a{
+      text-decoration:none; color:var(--muted);
+      padding:8px 10px; border-radius: 999px;
+      border:1px solid transparent;
+    }
+    .navlinks a:hover{
+      color:var(--text);
+      border-color: var(--line);
+      background: rgba(255,255,255,.05);
+    }
+
+    .hero{padding:46px 0 20px;}
+    .grid{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:18px;
+      align-items:stretch;
+    }
+    @media (max-width: 900px){ .grid{grid-template-columns: 1fr;} .nav{position:static;} }
+
+    .card{
+      border:1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .cardpad{padding:26px;}
+    .kicker{
+      display:inline-flex; gap:10px; align-items:center;
+      padding:8px 12px;
+      border:1px solid rgba(255,255,255,.16);
+      border-radius: 999px;
+      background: rgba(0,0,0,.22);
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .dot{
+      width:10px; height:10px; border-radius:99px;
+      background: linear-gradient(135deg, var(--accent2), var(--accent));
+      box-shadow: 0 0 22px rgba(34,211,238,.45);
+    }
+    h1{
+      font-size: clamp(34px, 5vw, 56px);
+      line-height: 1.02;
+      margin: 14px 0 12px;
+      letter-spacing: -0.6px;
+    }
+    .sub{
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.55;
+      margin: 0 0 18px;
+      max-width: 60ch;
+    }
+    .actions{display:flex; gap:12px; flex-wrap:wrap; margin-top: 8px;}
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:10px;
+      text-decoration:none;
+      padding: 12px 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.06);
+      color: var(--text);
+      font-weight: 650;
+    }
+    .btn:hover{background: rgba(255,255,255,.10)}
+    .btn.primary{
+      border-color: transparent;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      box-shadow: 0 14px 35px rgba(124,58,237,.25);
+    }
+    .btn.primary:hover{filter: brightness(1.03)}
+    .mini{
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 12px;
+    }
+
+    .stats{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:10px;
+      margin-top: 14px;
+    }
+    @media (max-width: 520px){ .stats{grid-template-columns: 1fr;} }
+    .stat{
+      border: 1px solid var(--line);
+      background: rgba(0,0,0,.18);
+      border-radius: 16px;
+      padding: 14px;
+    }
+    .stat b{display:block; font-size: 18px; margin-bottom: 4px;}
+    .stat span{color: var(--muted); font-size: 13px;}
+
+    .side{
+      position:relative;
+      isolation:isolate;
+    }
+    .side:before{
+      content:"";
+      position:absolute; inset:-2px;
+      background: linear-gradient(135deg, rgba(124,58,237,.35), rgba(34,211,238,.20), transparent 70%);
+      filter: blur(18px);
+      z-index:-1;
+      border-radius: 24px;
+      opacity: .8;
+    }
+    .chiprow{display:flex; flex-wrap:wrap; gap:10px; margin-top: 10px;}
+    .chip{
+      padding: 9px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.05);
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    section{margin-top: 18px;}
+    .section-title{
+      display:flex; align-items:baseline; justify-content:space-between;
+      gap:12px; padding: 0 2px;
+    }
+    h2{margin: 0; font-size: 22px; letter-spacing: -.2px;}
+    .hint{color: var(--muted); font-size: 14px;}
+
+    .tiles{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:12px;
+      margin-top: 12px;
+    }
+    @media (max-width: 900px){ .tiles{grid-template-columns: 1fr;} }
+    .tile{
+      border: 1px solid var(--line);
+      background: rgba(0,0,0,.16);
+      border-radius: 18px;
+      padding: 18px;
+      min-height: 120px;
+    }
+    .tile h3{margin:0 0 8px; font-size: 16px;}
+    .tile p{margin:0; color: var(--muted); line-height: 1.5; font-size: 14px;}
+
+    .footer{
+      margin-top: 34px;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 13px;
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+    /* anchor offset for sticky header */
+    .anchor{scroll-margin-top: 90px;}
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="nav">
+      <a class="brand" href="#top">
+        <span class="logo" aria-hidden="true"></span>
+        <span>Your Brand</span>
+      </a>
+      <div class="navlinks">
+        <a href="#services">Services</a>
+        <a href="#process">Process</a>
+        <a href="#schedule">Schedule</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+
+    <div id="top" class="hero">
+      <div class="grid">
+        <div class="card">
+          <div class="cardpad">
+            <div class="kicker"><span class="dot"></span> Bold + techy, without the corporate cringe</div>
+            <h1>Write your main headline here.</h1>
+            <p class="sub">
+              Write a 1–2 sentence description here. Keep it simple:
+              who you help + what outcome you create.
+            </p>
+
+            <div class="actions">
+              <a class="btn primary" href="#schedule">Book a call</a>
+              <a class="btn" href="#services">See services</a>
+            </div>
+
+            <div class="mini">Tip: keep the headline under ~10 words for maximum punch.</div>
+
+            <div class="stats">
+              <div class="stat"><b>Outcome 1</b><span>Example: Clear plan in 7 days</span></div>
+              <div class="stat"><b>Outcome 2</b><span>Example: Better leads</span></div>
+              <div class="stat"><b>Outcome 3</b><span>Example: Less chaos</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card side">
+          <div class="cardpad">
+            <h2 style="margin:0 0 8px;">What you do (quick)</h2>
+            <p class="sub" style="font-size:15px; margin-bottom:12px;">
+              This right-side box is for a “snapshot” pitch. Short, concrete, confident.
+            </p>
+
+            <div class="chiprow">
+              <span class="chip">Strategy</span>
+              <span class="chip">Implementation</span>
+              <span class="chip">Automation</span>
+              <span class="chip">AI + Ops</span>
+              <span class="chip">Training</span>
+            </div>
+
+            <div style="margin-top:16px; padding-top:16px; border-top:1px solid var(--line);">
+              <div class="kicker" style="padding:10px 12px;">
+                <span class="dot"></span> Next step: book a quick intro call
+              </div>
+              <div class="actions" style="margin-top:12px;">
+                <a class="btn primary" href="#schedule">Schedule</a>
+                <a class="btn" href="#contact">Message</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <section id="services" class="anchor">
+      <div class="section-title">
+        <h2>Services</h2>
+        <div class="hint">3 is a magic number. Keep it tight.</div>
+      </div>
+
+      <div class="tiles">
+        <div class="tile">
+          <h3>Service #1</h3>
+          <p>One sentence: what it is + who it’s for + the win.</p>
+        </div>
+        <div class="tile">
+          <h3>Service #2</h3>
+          <p>One sentence: what it is + who it’s for + the win.</p>
+        </div>
+        <div class="tile">
+          <h3>Service #3</h3>
+          <p>One sentence: what it is + who it’s for + the win.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="process" class="anchor">
+      <div class="section-title">
+        <h2>How it works</h2>
+        <div class="hint">Simple beats clever.</div>
+      </div>
+
+      <div class="tiles">
+        <div class="tile">
+          <h3>1) Quick call</h3>
+          <p>We clarify your goal + confirm we’re a fit.</p>
+        </div>
+        <div class="tile">
+          <h3>2) Plan</h3>
+          <p>You get a clear plan with priorities and next steps.</p>
+        </div>
+        <div class="tile">
+          <h3>3) Execute</h3>
+          <p>We implement with tight feedback loops.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="schedule" class="anchor">
+      <div class="section-title">
+        <h2>Schedule</h2>
+        <div class="hint">We’ll embed your scheduler here next.</div>
+      </div>
+
+      <div class="card" style="margin-top:12px;">
+        <div class="cardpad">
+          <p class="sub" style="margin:0;">
+            Next step: you’ll paste your Calendly / Cal.com embed link here, and it will show right on the page.
+          </p>
+          <div style="margin-top:14px; border:1px dashed rgba(255,255,255,.22); border-radius:16px; padding:16px; color:var(--muted);">
+            Scheduler placeholder (we’ll swap this for your embed)
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="anchor">
+      <div class="section-title">
+        <h2>Contact</h2>
+        <div class="hint">We’ll add a real form next.</div>
+      </div>
+
+      <div class="card" style="margin-top:12px;">
+        <div class="cardpad">
+          <p class="sub" style="margin-top:0;">
+            For now, put your email here. Next step we’ll add a contact form that sends to your inbox.
+          </p>
+          <p style="margin:0;">
+            Email: <a href="mailto:you@example.com">you@example.com</a>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <div class="footer">
+      <div>© <span id="y"></span> Your Brand. All rights reserved.</div>
+      <div>Built on GitHub • Fast • Simple • Yours</div>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById("y").textContent = new Date().getFullYear();
+  </script>
 </body>
-  </body>
 </html>
