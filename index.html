@@ -8,171 +8,156 @@
 
   <style>
     :root{
-      --bg: #0b0f19;
-      --panel: rgba(255,255,255,.06);
-      --panel2: rgba(255,255,255,.10);
-      --text: rgba(255,255,255,.92);
-      --muted: rgba(255,255,255,.70);
-      --line: rgba(255,255,255,.14);
+      --bg: #ffffff;
+      --text: #0b1020;
+      --muted: rgba(11,16,32,.72);
+      --line: rgba(11,16,32,.12);
+      --panel: rgba(255,255,255,.75);
+      --shadow: 0 18px 45px rgba(15, 23, 42, .10);
+      --radius: 18px;
+
+      /* accents */
       --accent: #7c3aed;   /* purple */
       --accent2: #22d3ee;  /* cyan */
-      --shadow: 0 20px 60px rgba(0,0,0,.45);
-      --radius: 18px;
+      --accent3: #a78bfa;  /* soft purple */
       --max: 1100px;
     }
 
     *{box-sizing:border-box}
-    html,body{margin:0; padding:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji","Segoe UI Emoji";}
+    html,body{margin:0; padding:0;}
     body{
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji","Segoe UI Emoji";
       color: var(--text);
       background:
-        radial-gradient(900px 600px at 15% 20%, rgba(124,58,237,.35), transparent 60%),
-        radial-gradient(900px 600px at 85% 10%, rgba(34,211,238,.22), transparent 55%),
-        radial-gradient(700px 500px at 70% 80%, rgba(124,58,237,.18), transparent 60%),
+        radial-gradient(900px 600px at 15% 10%, rgba(124,58,237,.14), transparent 60%),
+        radial-gradient(900px 600px at 85% 0%, rgba(34,211,238,.10), transparent 55%),
+        radial-gradient(700px 500px at 70% 85%, rgba(124,58,237,.08), transparent 60%),
         var(--bg);
       min-height:100vh;
     }
+
     a{color:inherit}
     .wrap{max-width:var(--max); margin:0 auto; padding:28px 20px 70px;}
+
     .nav{
       display:flex; align-items:center; justify-content:space-between;
       border:1px solid var(--line);
-      background: rgba(0,0,0,.22);
+      background: rgba(255,255,255,.7);
       backdrop-filter: blur(10px);
       border-radius: 999px;
       padding:12px 14px;
-      box-shadow: 0 8px 28px rgba(0,0,0,.25);
+      box-shadow: 0 8px 22px rgba(15,23,42,.06);
       position:sticky; top:14px; z-index:10;
     }
+
     .brand{
       display:flex; align-items:center; gap:10px; text-decoration:none;
-      font-weight:750; letter-spacing:.2px;
+      font-weight:760; letter-spacing:.2px;
     }
     .logo{
       width:34px; height:34px; border-radius: 12px;
       background:
-        radial-gradient(circle at 30% 30%, rgba(255,255,255,.35), transparent 50%),
+        radial-gradient(circle at 30% 30%, rgba(255,255,255,.8), transparent 55%),
         linear-gradient(135deg, var(--accent), var(--accent2));
-      box-shadow: 0 10px 30px rgba(124,58,237,.25);
-      border:1px solid rgba(255,255,255,.18);
+      box-shadow: 0 10px 22px rgba(124,58,237,.18);
+      border:1px solid rgba(11,16,32,.10);
     }
+
     .navlinks{display:flex; gap:10px; align-items:center; flex-wrap:wrap;}
     .navlinks a{
-      text-decoration:none; color:var(--muted);
+      text-decoration:none; color:rgba(11,16,32,.70);
       padding:8px 10px; border-radius: 999px;
       border:1px solid transparent;
     }
     .navlinks a:hover{
       color:var(--text);
       border-color: var(--line);
-      background: rgba(255,255,255,.05);
+      background: rgba(11,16,32,.03);
     }
 
-    .hero{padding:46px 0 20px;}
+    .hero{padding:52px 0 18px;}
     .grid{
       display:grid;
-      grid-template-columns: 1.2fr .8fr;
-      gap:18px;
+      grid-template-columns: 1.15fr .85fr;
+      gap:16px;
       align-items:stretch;
     }
     @media (max-width: 900px){ .grid{grid-template-columns: 1fr;} .nav{position:static;} }
 
     .card{
       border:1px solid var(--line);
-      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
+      background: rgba(255,255,255,.72);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
       overflow:hidden;
     }
     .cardpad{padding:26px;}
+
     .kicker{
       display:inline-flex; gap:10px; align-items:center;
       padding:8px 12px;
-      border:1px solid rgba(255,255,255,.16);
+      border:1px solid rgba(11,16,32,.12);
       border-radius: 999px;
-      background: rgba(0,0,0,.22);
-      color: var(--muted);
+      background: rgba(255,255,255,.55);
+      color: rgba(11,16,32,.72);
       font-size: 14px;
     }
     .dot{
       width:10px; height:10px; border-radius:99px;
       background: linear-gradient(135deg, var(--accent2), var(--accent));
-      box-shadow: 0 0 22px rgba(34,211,238,.45);
+      box-shadow: 0 0 18px rgba(34,211,238,.28);
     }
+
     h1{
-      font-size: clamp(34px, 5vw, 56px);
-      line-height: 1.02;
-      margin: 14px 0 12px;
-      letter-spacing: -0.6px;
+      font-size: clamp(34px, 4.6vw, 54px);
+      line-height: 1.05;
+      margin: 14px 0 10px;
+      letter-spacing: -0.7px;
     }
+
     .sub{
       color: var(--muted);
       font-size: 18px;
       line-height: 1.55;
       margin: 0 0 18px;
-      max-width: 60ch;
+      max-width: 65ch;
     }
-    .actions{display:flex; gap:12px; flex-wrap:wrap; margin-top: 8px;}
+
+    .actions{display:flex; gap:12px; flex-wrap:wrap; margin-top: 10px;}
     .btn{
       display:inline-flex; align-items:center; justify-content:center;
       gap:10px;
       text-decoration:none;
       padding: 12px 14px;
       border-radius: 14px;
-      border: 1px solid rgba(255,255,255,.16);
-      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(11,16,32,.14);
+      background: rgba(255,255,255,.7);
       color: var(--text);
-      font-weight: 650;
+      font-weight: 700;
+      box-shadow: 0 8px 18px rgba(15,23,42,.06);
     }
-    .btn:hover{background: rgba(255,255,255,.10)}
+    .btn:hover{background: rgba(11,16,32,.03)}
     .btn.primary{
       border-color: transparent;
+      color: white;
       background: linear-gradient(135deg, var(--accent), var(--accent2));
-      box-shadow: 0 14px 35px rgba(124,58,237,.25);
+      box-shadow: 0 14px 30px rgba(124,58,237,.16);
     }
-    .btn.primary:hover{filter: brightness(1.03)}
+    .btn.primary:hover{filter: brightness(1.02)}
+
     .mini{
-      color: var(--muted);
+      color: rgba(11,16,32,.62);
       font-size: 13px;
       margin-top: 12px;
     }
 
-    .stats{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap:10px;
-      margin-top: 14px;
-    }
-    @media (max-width: 520px){ .stats{grid-template-columns: 1fr;} }
-    .stat{
-      border: 1px solid var(--line);
-      background: rgba(0,0,0,.18);
-      border-radius: 16px;
-      padding: 14px;
-    }
-    .stat b{display:block; font-size: 18px; margin-bottom: 4px;}
-    .stat span{color: var(--muted); font-size: 13px;}
-
-    .side{
-      position:relative;
-      isolation:isolate;
-    }
-    .side:before{
-      content:"";
-      position:absolute; inset:-2px;
-      background: linear-gradient(135deg, rgba(124,58,237,.35), rgba(34,211,238,.20), transparent 70%);
-      filter: blur(18px);
-      z-index:-1;
-      border-radius: 24px;
-      opacity: .8;
-    }
-    .chiprow{display:flex; flex-wrap:wrap; gap:10px; margin-top: 10px;}
+    .chips{display:flex; flex-wrap:wrap; gap:10px; margin-top: 14px;}
     .chip{
       padding: 9px 10px;
       border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.05);
-      color: var(--muted);
+      border: 1px solid rgba(11,16,32,.12);
+      background: rgba(255,255,255,.65);
+      color: rgba(11,16,32,.72);
       font-size: 13px;
     }
 
@@ -182,7 +167,7 @@
       gap:12px; padding: 0 2px;
     }
     h2{margin: 0; font-size: 22px; letter-spacing: -.2px;}
-    .hint{color: var(--muted); font-size: 14px;}
+    .hint{color: rgba(11,16,32,.58); font-size: 14px;}
 
     .tiles{
       display:grid;
@@ -191,12 +176,13 @@
       margin-top: 12px;
     }
     @media (max-width: 900px){ .tiles{grid-template-columns: 1fr;} }
+
     .tile{
-      border: 1px solid var(--line);
-      background: rgba(0,0,0,.16);
+      border: 1px solid rgba(11,16,32,.10);
+      background: rgba(255,255,255,.75);
       border-radius: 18px;
       padding: 18px;
-      min-height: 120px;
+      box-shadow: 0 10px 26px rgba(15,23,42,.06);
     }
     .tile h3{margin:0 0 8px; font-size: 16px;}
     .tile p{margin:0; color: var(--muted); line-height: 1.5; font-size: 14px;}
@@ -205,7 +191,7 @@
       margin-top: 34px;
       padding-top: 18px;
       border-top: 1px solid var(--line);
-      color: var(--muted);
+      color: rgba(11,16,32,.62);
       font-size: 13px;
       display:flex;
       justify-content:space-between;
@@ -215,6 +201,39 @@
 
     /* anchor offset for sticky header */
     .anchor{scroll-margin-top: 90px;}
+
+    /* Typewriter line */
+    .typewrap{
+      display:flex;
+      gap:8px;
+      align-items:baseline;
+      flex-wrap:wrap;
+    }
+    .type-label{
+      color: rgba(11,16,32,.62);
+      font-size: 15px;
+    }
+    .type{
+      font-weight: 720;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      white-space: nowrap;
+    }
+    .caret{
+      display:inline-block;
+      width: 10px;
+      transform: translateY(1px);
+      border-left: 2px solid rgba(11,16,32,.55);
+      height: 1.05em;
+      animation: blink 1s steps(1) infinite;
+    }
+    @keyframes blink { 50% { opacity: 0; } }
+
+    @media (prefers-reduced-motion: reduce){
+      .caret{animation:none;}
+    }
   </style>
 </head>
 
@@ -237,11 +256,21 @@
       <div class="grid">
         <div class="card">
           <div class="cardpad">
-            <div class="kicker"><span class="dot"></span> Bold + techy, without the corporate cringe</div>
+            <div class="kicker"><span class="dot"></span> Bright, clean, and a little techy</div>
+
             <h1>Write your main headline here.</h1>
+
             <p class="sub">
-              Write a 1–2 sentence description here. Keep it simple:
-              who you help + what outcome you create.
+              <span class="typewrap">
+                <span class="type-label">I help you</span>
+                <span class="type" id="typeTarget">build systems that scale</span>
+                <span class="caret" aria-hidden="true"></span>
+              </span>
+            </p>
+
+            <p class="sub" style="margin-top:-6px;">
+              Add a short supporting sentence here that stays constant (no animation). Example:
+              “Strategy + implementation for people who want real outcomes, fast.”
             </p>
 
             <div class="actions">
@@ -249,39 +278,33 @@
               <a class="btn" href="#services">See services</a>
             </div>
 
-            <div class="mini">Tip: keep the headline under ~10 words for maximum punch.</div>
+            <div class="mini">We’ll swap in your real wording next.</div>
 
-            <div class="stats">
-              <div class="stat"><b>Outcome 1</b><span>Example: Clear plan in 7 days</span></div>
-              <div class="stat"><b>Outcome 2</b><span>Example: Better leads</span></div>
-              <div class="stat"><b>Outcome 3</b><span>Example: Less chaos</span></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="card side">
-          <div class="cardpad">
-            <h2 style="margin:0 0 8px;">What you do (quick)</h2>
-            <p class="sub" style="font-size:15px; margin-bottom:12px;">
-              This right-side box is for a “snapshot” pitch. Short, concrete, confident.
-            </p>
-
-            <div class="chiprow">
+            <div class="chips">
               <span class="chip">Strategy</span>
               <span class="chip">Implementation</span>
               <span class="chip">Automation</span>
               <span class="chip">AI + Ops</span>
               <span class="chip">Training</span>
             </div>
+          </div>
+        </div>
 
-            <div style="margin-top:16px; padding-top:16px; border-top:1px solid var(--line);">
-              <div class="kicker" style="padding:10px 12px;">
-                <span class="dot"></span> Next step: book a quick intro call
-              </div>
-              <div class="actions" style="margin-top:12px;">
-                <a class="btn primary" href="#schedule">Schedule</a>
-                <a class="btn" href="#contact">Message</a>
-              </div>
+        <div class="card">
+          <div class="cardpad">
+            <h2 style="margin:0 0 8px;">Quick snapshot</h2>
+            <p class="sub" style="font-size:15px; margin-bottom:12px;">
+              Put a tight “who + outcome” pitch here. Two short sentences max.
+            </p>
+
+            <div class="tile" style="margin-top:12px;">
+              <h3 style="margin:0 0 6px;">Next step</h3>
+              <p>Book a short intro call — we’ll clarify your goal and the fastest path forward.</p>
+            </div>
+
+            <div class="actions" style="margin-top:12px;">
+              <a class="btn primary" href="#schedule">Schedule</a>
+              <a class="btn" href="#contact">Message</a>
             </div>
           </div>
         </div>
@@ -292,7 +315,7 @@
     <section id="services" class="anchor">
       <div class="section-title">
         <h2>Services</h2>
-        <div class="hint">3 is a magic number. Keep it tight.</div>
+        <div class="hint">Keep it simple + skimmable.</div>
       </div>
 
       <div class="tiles">
@@ -342,10 +365,10 @@
       <div class="card" style="margin-top:12px;">
         <div class="cardpad">
           <p class="sub" style="margin:0;">
-            Next step: you’ll paste your Calendly / Cal.com embed link here, and it will show right on the page.
+            Scheduler placeholder (we’ll swap this for your Calendly / Cal.com embed).
           </p>
-          <div style="margin-top:14px; border:1px dashed rgba(255,255,255,.22); border-radius:16px; padding:16px; color:var(--muted);">
-            Scheduler placeholder (we’ll swap this for your embed)
+          <div style="margin-top:14px; border:1px dashed rgba(11,16,32,.18); border-radius:16px; padding:16px; color:rgba(11,16,32,.62); background: rgba(255,255,255,.6);">
+            Scheduler will appear here
           </div>
         </div>
       </div>
@@ -376,7 +399,61 @@
   </div>
 
   <script>
+    // Footer year
     document.getElementById("y").textContent = new Date().getFullYear();
+
+    // Typewriter effect (subheading)
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const target = document.getElementById("typeTarget");
+
+    const phrases = [
+      "build systems that scale",
+      "turn chaos into a clear plan",
+      "ship cleaner processes, faster",
+      "automate the boring parts",
+      "get measurable outcomes"
+    ];
+
+    if (!prefersReducedMotion && target) {
+      let phraseIndex = 0;
+      let charIndex = 0;
+      let deleting = false;
+
+      const typeSpeed = 42;     // typing speed
+      const deleteSpeed = 26;   // deleting speed
+      const pauseEnd = 900;     // pause at end of phrase
+      const pauseStart = 220;   // pause before typing next
+
+      function tick() {
+        const current = phrases[phraseIndex];
+
+        if (!deleting) {
+          charIndex++;
+          target.textContent = current.slice(0, charIndex);
+
+          if (charIndex >= current.length) {
+            deleting = true;
+            setTimeout(tick, pauseEnd);
+            return;
+          }
+          setTimeout(tick, typeSpeed);
+        } else {
+          charIndex--;
+          target.textContent = current.slice(0, Math.max(0, charIndex));
+
+          if (charIndex <= 0) {
+            deleting = false;
+            phraseIndex = (phraseIndex + 1) % phrases.length;
+            setTimeout(tick, pauseStart);
+            return;
+          }
+          setTimeout(tick, deleteSpeed);
+        }
+      }
+
+      // start
+      tick();
+    }
   </script>
 </body>
 </html>
