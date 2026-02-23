@@ -6,6 +6,10 @@
 <title>Merlin Komenda</title>
 <meta name="description" content="I bring structure to growing teams so ideas turn into real results." />
 
+<!-- Google Calendar Appointment Scheduling (popup button) -->
+<link href="https://calendar.google.com/calendar/scheduling-button-script.css" rel="stylesheet">
+<script src="https://calendar.google.com/calendar/scheduling-button-script.js" async></script>
+
 <style>
 :root{
   --bg:#f3f4f8;
@@ -52,9 +56,6 @@ a{text-decoration:none;color:inherit}
 .navlinks{display:flex;gap:12px;flex-wrap:wrap}
 .navlinks a{font-size:14px;font-weight:650;padding:8px 10px;border-radius:999px}
 .navlinks a:hover{background:rgba(11,16,32,.05)}
-
-  <link href="https://calendar.google.com/calendar/scheduling-button-script.css" rel="stylesheet">
-<script src="https://calendar.google.com/calendar/scheduling-button-script.js" async></script>
 
 .hero{
   margin-top:42px;
@@ -231,6 +232,30 @@ section{margin-top:60px; scroll-margin-top: 110px;}
   font-size:13px;color:var(--muted);
   display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
 }
+
+/* Style Google's injected scheduling button to match your site */
+#schedule .calendar-scheduling-button{
+  padding:12px 16px !important;
+  border-radius:14px !important;
+  font-weight:700 !important;
+  border:1px solid var(--line) !important;
+  background:rgba(255,255,255,.85) !important;
+  color:var(--text) !important;
+  cursor:pointer !important;
+  transition:
+    background .25s ease,
+    color .25s ease,
+    transform .25s ease,
+    box-shadow .25s ease,
+    border-color .25s ease !important;
+}
+#schedule .calendar-scheduling-button:hover{
+  background:linear-gradient(135deg,var(--accent),var(--accent2)) !important;
+  color:#fff !important;
+  border-color:transparent !important;
+  transform:translateY(-2px) !important;
+  box-shadow:0 12px 28px rgba(124,58,237,.25) !important;
+}
 </style>
 </head>
 
@@ -256,11 +281,11 @@ section{margin-top:60px; scroll-margin-top: 110px;}
     <div class="heroInner">
       <div class="heroTag">
         <span class="pulse"></span>
-        AI enabled, customers at heart. 
+        AI enabled, customers at heart.
       </div>
 
       <h1>
-       Bringing innovation to teams<br>
+        Bringing innovation to teams<br>
         so ideas turn into real results.
       </h1>
 
@@ -392,7 +417,7 @@ section{margin-top:60px; scroll-margin-top: 110px;}
       </div>
 
       <div class="tile">
-        <h3>Knowledge system Build-outs</h3>
+        <h3>Knowledge system build-outs</h3>
         <p>Training videos, worksheets, resources, and internal documentation that teams actually use.</p>
       </div>
     </div>
@@ -433,34 +458,34 @@ section{margin-top:60px; scroll-margin-top: 110px;}
   </section>
 
   <!-- SCHEDULE -->
- <section id="schedule">
-  <div class="section-title">
-    <h2>Schedule</h2>
-    <div class="hint">Quick booking</div>
-  </div>
-
-  <div class="tile">
-    <p style="margin:0; color:var(--muted); font-size:14px; line-height:1.55;">
-      Book time that works for you. You’ll get a confirmation email right away.
-    </p>
-
-    <div style="margin-top:14px; display:flex; gap:12px; flex-wrap:wrap; align-items:center;">
-      <!-- Google turns this into the popup button -->
-      <a id="gcalScheduleBtn" class="btn" href="#" role="button">Book time</a>
-
-      <!-- Optional fallback link -->
-      <a class="btn" href="https://calendar.app.google/M9PeWcXz76KYQfvq9" target="_blank" rel="noopener">
-        Open in new tab
-      </a>
+  <section id="schedule">
+    <div class="section-title">
+      <h2>Schedule</h2>
+      <div class="hint">Quick booking</div>
     </div>
-  </div>
-</section>
+
+    <div class="tile">
+      <p style="margin:0; color:var(--muted); font-size:14px; line-height:1.55;">
+        Book time that works for you. You’ll get a confirmation email right away.
+      </p>
+
+      <div style="margin-top:14px; display:flex; gap:12px; flex-wrap:wrap; align-items:center;">
+        <!-- Google renders its popup button into this span -->
+        <span id="gcalScheduleBtn"></span>
+
+        <!-- Optional fallback link -->
+        <a class="btn" href="https://calendar.app.google/M9PeWcXz76KYQfvq9" target="_blank" rel="noopener">
+          Open in new tab
+        </a>
+      </div>
+    </div>
+  </section>
 
   <!-- CONTACT -->
   <section id="contact">
     <div class="section-title">
       <h2>Contact</h2>
-      <div class="hint">/div>
+      <div class="hint">Fastest way to reach me</div>
     </div>
     <div class="tile">
       <p>Email: <a href="mailto:merlin.komenda@gmail.com">merlin.komenda@gmail.com</a></p>
@@ -482,23 +507,23 @@ document.getElementById("y").textContent = new Date().getFullYear();
 
 const phrases = [
   "bring clarity to complex work.",
-  "design efficient systems teams.",
-  "flourish through collaboration",
-  "make AI useful inside real workflows.",
+  "design efficient systems teams can trust.",
+  "help people follow through.",
+  "make AI useful inside real workflows."
 ];
 
-const target = document.getElementById("typeTarget");
+const typeTarget = document.getElementById("typeTarget");
 let phraseIndex = 0;
 let charIndex = 0;
 let deleting = false;
 
 function tick(){
-  if(!target) return;
+  if(!typeTarget) return;
   const current = phrases[phraseIndex];
 
   if(!deleting){
     charIndex++;
-    target.textContent = current.slice(0,charIndex);
+    typeTarget.textContent = current.slice(0,charIndex);
     if(charIndex === current.length){
       deleting = true;
       setTimeout(tick,1100);
@@ -506,7 +531,7 @@ function tick(){
     }
   } else {
     charIndex--;
-    target.textContent = current.slice(0,charIndex);
+    typeTarget.textContent = current.slice(0,charIndex);
     if(charIndex === 0){
       deleting = false;
       phraseIndex = (phraseIndex+1)%phrases.length;
@@ -514,20 +539,34 @@ function tick(){
   }
   setTimeout(tick, deleting?30:45);
 }
-
 tick();
 
-  // Google Calendar scheduling popup button
-window.addEventListener("load", function () {
+/* Google Calendar scheduling popup button
+   Retry loop handles the async script loading late. */
+function initGcalBookingButton() {
   const target = document.getElementById("gcalScheduleBtn");
-  if (!target || !window.calendar || !calendar.schedulingButton) return;
+  if (!target) return false;
 
-  calendar.schedulingButton.load({
-    url: "https://calendar.google.com/calendar/appointments/schedules/AcZssZ3tm0zcHe0mk0Ub41XD5KOdu2ucvkVWE5EHZfbioUBXGmnPR4BmP-TU7azDel2O5kqI3wxARxJG?gv=true",
-    color: "#7c3aed", // match your purple accent
-    label: "Book time",
-    target: target
-  });
+  if (window.calendar && calendar.schedulingButton && typeof calendar.schedulingButton.load === "function") {
+    calendar.schedulingButton.load({
+      url: "https://calendar.google.com/calendar/appointments/schedules/AcZssZ3tm0zcHe0mk0Ub41XD5KOdu2ucvkVWE5EHZfbioUBXGmnPR4BmP-TU7azDel2O5kqI3wxARxJG?gv=true",
+      color: "#7c3aed",
+      label: "Book time",
+      target: target
+    });
+    return true;
+  }
+  return false;
+}
+
+window.addEventListener("load", () => {
+  if (initGcalBookingButton()) return;
+
+  let tries = 0;
+  const t = setInterval(() => {
+    tries += 1;
+    if (initGcalBookingButton() || tries >= 20) clearInterval(t);
+  }, 250);
 });
 </script>
 
