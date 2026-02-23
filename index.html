@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Merlin Komenda</title>
-<meta name="description" content="Innovative leader designing AI-enabled operational systems." />
+<meta name="description" content="I bring structure to growing teams so ideas turn into real results." />
 
 <style>
 :root{
@@ -50,7 +50,7 @@ a{text-decoration:none;color:inherit}
   box-shadow:0 10px 24px rgba(124,58,237,.25);
 }
 .navlinks{display:flex;gap:12px;flex-wrap:wrap}
-.navlinks a{font-size:14px;font-weight:600;padding:8px 10px;border-radius:999px}
+.navlinks a{font-size:14px;font-weight:650;padding:8px 10px;border-radius:999px}
 .navlinks a:hover{background:rgba(11,16,32,.05)}
 
 .hero{
@@ -77,24 +77,20 @@ a{text-decoration:none;color:inherit}
   position:relative;
   padding:48px 42px 52px;
 }
-
-@media(max-width:900px){
-  .heroInner{padding:34px 22px}
-}
+@media(max-width:900px){ .heroInner{padding:34px 22px} }
 
 .heroTag{
   display:inline-flex;align-items:center;gap:10px;
   padding:8px 14px;
   border-radius:999px;
   border:1px solid var(--line);
-  font-size:14px;font-weight:600;
+  font-size:14px;font-weight:650;
   background:rgba(255,255,255,.75);
 }
-
 .pulse{
   width:10px;height:10px;border-radius:999px;
   background:linear-gradient(135deg,var(--accent2),var(--accent));
-  box-shadow:0 0 16px rgba(124,58,237,.4);
+  box-shadow:0 0 16px rgba(124,58,237,.35);
 }
 
 h1{
@@ -109,15 +105,13 @@ h1{
   color:var(--muted);
   margin-bottom:12px;
 }
-
 .type{
-  font-weight:800;
+  font-weight:820;
   background:linear-gradient(135deg,var(--accent),var(--accent2));
   -webkit-background-clip:text;
   background-clip:text;
   color:transparent;
 }
-
 .caret{
   display:inline-block;
   border-left:2px solid rgba(11,16,32,.5);
@@ -130,13 +124,12 @@ h1{
 .heroSub{
   font-size:16px;
   color:var(--muted);
-  max-width:700px;
-  line-height:1.6;
+  max-width:760px;
+  line-height:1.65;
   margin-bottom:24px;
 }
 
-/* --- Button Styling --- */
-
+/* Buttons: neutral at rest, gradient on hover */
 .btn{
   padding:12px 16px;
   border-radius:14px;
@@ -152,7 +145,6 @@ h1{
     box-shadow .25s ease,
     border-color .25s ease;
 }
-
 .btn:hover{
   background:linear-gradient(135deg,var(--accent),var(--accent2));
   color:#fff;
@@ -160,16 +152,16 @@ h1{
   transform:translateY(-2px);
   box-shadow:0 12px 28px rgba(124,58,237,.25);
 }
-
 .btn:active{
   transform:translateY(0px);
   box-shadow:0 6px 14px rgba(124,58,237,.18);
 }
+.ctas{display:flex;gap:12px;flex-wrap:wrap}
 
-section{margin-top:60px}
+section{margin-top:60px; scroll-margin-top: 110px;}
 .section-title{
-  display:flex;justify-content:space-between;align-items:center;
-  margin-bottom:14px;
+  display:flex;justify-content:space-between;align-items:baseline;
+  margin-bottom:14px; gap:12px;
 }
 .section-title h2{font-size:20px;margin:0}
 .hint{font-size:13px;color:var(--muted)}
@@ -183,16 +175,58 @@ section{margin-top:60px}
   border:1px solid var(--line);
   background:rgba(255,255,255,.85);
 }
+.tile h3{margin:0 0 6px;font-size:16px}
+.tile p{margin:0;color:var(--muted);font-size:14px;line-height:1.55}
 
-.tile h3{margin:0 0 6px}
-.tile p{margin:0;color:var(--muted);font-size:14px;line-height:1.5}
+.list{
+  margin:10px 0 0;
+  padding-left: 18px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.6;
+}
+.list li{margin: 6px 0;}
+
+.smalllinks{display:flex;gap:12px;flex-wrap:wrap;margin-top:12px}
+.smalllinks a{border-bottom:1px solid rgba(11,16,32,.14);padding-bottom:2px}
+.smalllinks a:hover{border-bottom-color:rgba(11,16,32,.28)}
+
+/* KPI Row (Impact) */
+.kpiRow{
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap:14px;
+  margin-bottom:14px;
+}
+@media(max-width:900px){ .kpiRow{grid-template-columns:1fr;} }
+
+.kpiCard{
+  padding:18px;
+  border-radius:18px;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.85);
+}
+
+.kpiBig{
+  font-size:28px;
+  font-weight:900;
+  letter-spacing:-0.5px;
+  margin:0 0 6px;
+}
+
+.kpiSmall{
+  margin:0;
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.45;
+}
 
 .footer{
   margin-top:70px;
   padding-top:24px;
   border-top:1px solid var(--line);
   font-size:13px;color:var(--muted);
-  display:flex;justify-content:space-between;flex-wrap:wrap;
+  display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
 }
 </style>
 </head>
@@ -200,129 +234,237 @@ section{margin-top:60px}
 <body>
 <div class="wrap">
 
-<div class="nav">
-  <div class="brand">
-    <div class="mark"></div>
-    Merlin Komenda
-  </div>
-  <div class="navlinks">
-    <a href="#work">Work</a>
-        <a href="#writing">Work</a>
-  <a href="#schedule">Schedule</a>
-    <a href="#contact">Contact</a>
-  </div>
-</div>
-<div class="hero">
-  <div class="heroInner">
-    <div class="heroTag">
-      <span class="pulse"></span>
-      Innovative leader • Systems builder • Communicator
+  <div class="nav">
+    <div class="brand">
+      <div class="mark"></div>
+      Merlin Komenda
     </div>
-    <h1> I bring structure to growing teams<br> so ideas turn into real results.
-</h1>
+    <div class="navlinks">
+      <a href="#about">About</a>
+      <a href="#impact">Impact</a>
+      <a href="#track">Track record</a>
+      <a href="#career">Career summary</a>
+      <a href="#schedule">Schedule</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
 
-<div class="heroType">
-  I help teams
-  <span class="type" id="typeTarget">accelerate onboarding and scale impact</span>
-  <span class="caret"></span>
-</div>
+  <div class="hero">
+    <div class="heroInner">
+      <div class="heroTag">
+        <span class="pulse"></span>
+        Calm under pressure • Clear communicator • Systems builder
+      </div>
 
-    <div class="heroSub">
-      Director of Implementation focused on AI-enabled operations,
-      human+AI collaboration, and shipping work that actually sticks.
+      <h1>
+        I bring structure to growing teams<br>
+        so ideas turn into real results.
+      </h1>
+
+      <div class="heroType">
+        I help teams
+        <span class="type" id="typeTarget">bring clarity to complex work</span>
+        <span class="caret"></span>
+      </div>
+
+      <div class="heroSub">
+        Director of Implementation focused on AI-enabled operations, human+AI collaboration,
+        and shipping work that actually sticks.
+      </div>
+
+      <div class="ctas">
+        <a class="btn" href="#impact">See impact</a>
+        <a class="btn" href="#schedule">Schedule</a>
+        <a class="btn" href="/merlin-komenda-resume.pdf" target="_blank" rel="noopener">Resume</a>
+        <a class="btn" href="https://www.linkedin.com/in/merlin-komenda/" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-title">
+      <h2>About</h2>
+      <div class="hint">How I work</div>
     </div>
 
-    <div class="ctas">
-  <a class="btn primary" href="#schedule">Schedule</a>
-  <a class="btn" href="#contact">Reach out</a>
-  <a class="btn" href="/merlin-komenda-resume.pdf" target="_blank">Resume</a>
-  <a class="btn" href="#">LinkedIn</a>
-</div>
-  </div>
-</div>
+    <div class="grid">
+      <div class="tile">
+        <h3>What I do</h3>
+        <ul class="list">
+          <li>Implementation programs that keep onboarding calm, repeatable, and fast.</li>
+          <li>Professional services that turn scoped problems into shipped outcomes.</li>
+          <li>Enablement that turns needs into strengths through playbooks, adoption, and training.</li>
+          <li>Cross-functional execution that aligns teams, decisions, and delivery.</li>
+        </ul>
+      </div>
 
-<section id="talks">
-  <div class="section-title">
-    <h2>Talks</h2>
-    <div class="hint">Selected sessions</div>
-  </div>
-  <div class="grid">
+      <div class="tile">
+        <h3>How I show up</h3>
+        <ul class="list">
+          <li>Clarity first before speed.</li>
+          <li>Steady pace and clean decisions when things get tight.</li>
+          <li>Structure that helps capable people do their best work.</li>
+          <li>Systems that stick after the kickoff.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- IMPACT -->
+  <section id="impact">
+    <div class="section-title">
+      <h2>Impact</h2>
+      <div class="hint">Proof, not adjectives</div>
+    </div>
+
+    <div class="kpiRow">
+      <div class="kpiCard">
+        <p class="kpiBig">~30%</p>
+        <p class="kpiSmall">Time-to-live reduction and first customer usage in ~15 days.</p>
+      </div>
+      <div class="kpiCard">
+        <p class="kpiBig">60+</p>
+        <p class="kpiSmall">Implemented clients annually with programmatic outcomes.</p>
+      </div>
+      <div class="kpiCard">
+        <p class="kpiBig">75+</p>
+        <p class="kpiSmall">NPS across enterprise relationships.</p>
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="tile">
+        <h3>Recent measurable outcomes</h3>
+        <ul class="list">
+          <li>Time-to-live down ~30%, with first customer usage in ~15 days.</li>
+          <li>2× above average spend activity during onboarding.</li>
+          <li>Scalable platform setups enabling ~40% faster adoption.</li>
+          <li>Increased revenue generated during implementation by ~10%.</li>
+        </ul>
+      </div>
+
+      <div class="tile">
+        <h3>Operational credibility</h3>
+        <ul class="list">
+          <li>60+ implemented clients annually with programmatic outcomes.</li>
+          <li>NPS &gt; 75 across enterprise relationships.</li>
+          <li>Developed frameworks and resources to monitor success and drive improvements.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRACK RECORD -->
+  <section id="track">
+    <div class="section-title">
+      <h2>Track record</h2>
+      <div class="hint">What I’m known for</div>
+    </div>
+
+    <div class="grid">
+      <div class="tile">
+        <h3>SaaS implementation and onboarding</h3>
+        <p>Designing programs that optimize execution and integrate customers into existing workflows.</p>
+      </div>
+
+      <div class="tile">
+        <h3>Professional services design</h3>
+        <p>Building service frameworks anchored on integration, scalable setup, and training.</p>
+      </div>
+
+      <div class="tile">
+        <h3>Project leadership</h3>
+        <p>Roadmaps, timelines, stakeholder alignment, and customer trainings across project phases.</p>
+      </div>
+
+      <div class="tile">
+        <h3>Product enablement and testing</h3>
+        <p>Creating testing frameworks and reducing review effort by 35%+.</p>
+      </div>
+
+      <div class="tile">
+        <h3>People leadership</h3>
+        <p>Managing teams (2–6), onboarding, growth, and performance conversations.</p>
+      </div>
+
+      <div class="tile">
+        <h3>Knowledge systems</h3>
+        <p>Training videos, worksheets, resources, and internal documentation that teams actually use.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CAREER SUMMARY -->
+  <section id="career">
+    <div class="section-title">
+      <h2>Career summary</h2>
+      <div class="hint">Snapshot</div>
+    </div>
+
+    <div class="grid">
+      <div class="tile">
+        <h3>Zappi</h3>
+        <p>Implementation and professional services leadership, including frameworks, training, and delivery improvements.</p>
+      </div>
+
+      <div class="tile">
+        <h3>Bonterra</h3>
+        <p>Project and product enablement supporting discovery cycles, documentation, and launches.</p>
+      </div>
+
+      <div class="tile">
+        <h3>GiveGab</h3>
+        <p>Project management across complex, time-sensitive deliveries and customer training.</p>
+      </div>
+
+      <div class="tile">
+        <h3>Connect</h3>
+        <p>Email: <a href="mailto:merlin.komenda@gmail.com">merlin.komenda@gmail.com</a></p>
+        <div class="smalllinks">
+          <a href="/merlin-komenda-resume.pdf" target="_blank" rel="noopener">Resume</a>
+          <a href="https://www.linkedin.com/in/merlin-komenda/" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCHEDULE -->
+  <section id="schedule">
+    <div class="section-title">
+      <h2>Schedule</h2>
+      <div class="hint">Book time in 30 seconds</div>
+    </div>
+
+    <div class="tile" style="padding:0; overflow:hidden;">
+      <iframe
+        title="Schedule time with Merlin"
+        src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ3tm0zcHe0mk0Ub41XD5KOdu2ucvkVWE5EHZfbioUBXGmnPR4BmP-TU7azDel2O5kqI3wxARxJG"
+        style="width:100%; height:760px; border:0;"
+        loading="lazy"
+      ></iframe>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="section-title">
+      <h2>Contact</h2>
+      <div class="hint">Fastest way to reach me</div>
+    </div>
     <div class="tile">
-      <h3>Talk Title</h3>
-      <p>Description and link →</p>
+      <p>Email: <a href="mailto:merlin.komenda@gmail.com">merlin.komenda@gmail.com</a></p>
+      <div class="smalllinks">
+        <a href="/merlin-komenda-resume.pdf" target="_blank" rel="noopener">Resume</a>
+        <a href="https://www.linkedin.com/in/merlin-komenda/" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
     </div>
-    <div class="tile">
-      <h3>Talk Title</h3>
-      <p>Description and link →</p>
-    </div>
-  </div>
-</section>
+  </section>
 
-<section id="work">
-  <div class="section-title">
-    <h2>Work highlights</h2>
-    <div class="hint">Outcomes, not responsibilities</div>
+  <div class="footer">
+    <div>© <span id="y"></span> Merlin Komenda</div>
+    <div>Built on GitHub</div>
   </div>
-  <div class="grid">
-    <div class="tile">
-      <h3>Project</h3>
-      <p>Impact statement.</p>
-    </div>
-    <div class="tile">
-      <h3>Project</h3>
-      <p>Impact statement.</p>
-    </div>
-  </div>
-</section>
-
-<section id="writing">
-  <div class="section-title">
-    <h2>Writing</h2>
-    <div class="hint">Clarity signals leadership</div>
-  </div>
-  <div class="grid">
-    <div class="tile">
-      <h3>Post</h3>
-      <p>Title + link →</p>
-    </div>
-    <div class="tile">
-      <h3>Post</h3>
-      <p>Title + link →</p>
-    </div>
-  </div>
-</section>
-  
-<section id="schedule">
-  <div class="section-title">
-    <h2>Schedule</h2>
-    <div class="hint">Book time in 30 seconds</div>
-  </div>
-
-  <div class="tile" style="padding:0; overflow:hidden;">
-    <!-- Replace the src below with your Calendly / Cal.com embed link -->
-    <iframe
-      title="Schedule time with Merlin"
-      src="https://calendly.com/"
-      style="width:100%; height:760px; border:0;"
-      loading="lazy"
-    ></iframe>
-  </div>
-</section>
-  
-<section id="contact">
-  <div class="section-title">
-    <h2>Contact</h2>
-  </div>
-  <div class="tile">
-    <p>Email: <a href="mailto:you@example.com">you@example.com</a></p>
-  </div>
-</section>
-
-<div class="footer">
-  <a href="/merlin-komenda-resume.pdf" target="_blank">Resume</a>
-  <div>© <span id="y"></span> Merlin Komenda</div>
-  <div>Built on GitHub</div>
-</div>
 
 </div>
 
@@ -330,9 +472,9 @@ section{margin-top:60px}
 document.getElementById("y").textContent = new Date().getFullYear();
 
 const phrases = [
-  "find clarity in complex work",
-  "design systems they can rely on",
-  "grow",
+  "bring clarity to complex work",
+  "design systems teams can rely on",
+  "help people follow through",
   "make AI useful inside real workflows",
   "turn strategy into daily action"
 ];
@@ -343,6 +485,7 @@ let charIndex = 0;
 let deleting = false;
 
 function tick(){
+  if(!target) return;
   const current = phrases[phraseIndex];
 
   if(!deleting){
@@ -350,7 +493,7 @@ function tick(){
     target.textContent = current.slice(0,charIndex);
     if(charIndex === current.length){
       deleting = true;
-      setTimeout(tick,1000);
+      setTimeout(tick,1100);
       return;
     }
   } else {
