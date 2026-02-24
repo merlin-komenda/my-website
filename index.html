@@ -54,9 +54,40 @@ a{text-decoration:none;color:inherit}
   background:linear-gradient(135deg,var(--accent),var(--accent2));
   box-shadow:0 10px 24px rgba(124,58,237,.25);
 }
-.navlinks{display:flex;gap:12px;flex-wrap:wrap}
+.navlinks{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
 .navlinks a{font-size:14px;font-weight:650;padding:8px 10px;border-radius:999px}
 .navlinks a:hover{background:rgba(11,16,32,.05)}
+
+/* Mobile menu button (hidden on desktop) */
+.menuBtn{
+  display:none;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.85);
+  padding:10px 12px;
+  border-radius:999px;
+  font-weight:750;
+  cursor:pointer;
+}
+
+/* Collapsible menu panel (mobile only) */
+.mobileMenu{
+  display:none;
+  margin-top:10px;
+  padding:10px;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.85);
+  border-radius:18px;
+}
+.mobileMenu a{
+  display:block;
+  padding:10px 12px;
+  border-radius:12px;
+  font-weight:650;
+}
+.mobileMenu a:hover{background:rgba(11,16,32,.05)}
 
 .hero{
   margin-top:42px;
@@ -105,7 +136,7 @@ h1{
   letter-spacing:-1.2px;
 }
 
-/* --- Typewriter (stable on desktop + mobile; no jump, no clipping) --- */
+/* --- Typewriter --- */
 .heroType{
   font-size:20px;
   color:var(--muted);
@@ -113,21 +144,17 @@ h1{
   line-height: 1.6;
 }
 
-/* Holds the live typing text + a hidden ghost phrase to reserve space */
+/* Desktop/tablet: stable slot (no jump) */
 .typeSlot{
   position:relative;
   display:inline-block;
   vertical-align:bottom;
   white-space:nowrap;
 }
-
-/* This invisible text reserves width/height so the page doesn't reflow */
 .typeGhost{
   visibility:hidden;
   pointer-events:none;
 }
-
-/* Live typing sits on top of the ghost */
 .typeLive{
   position:absolute;
   left:0;
@@ -142,7 +169,6 @@ h1{
   background-clip:text;
   color:transparent;
 }
-
 .caret{
   display:inline-block;
   border-left:2px solid rgba(11,16,32,.5);
@@ -151,14 +177,6 @@ h1{
   animation:blink 1s steps(1) infinite;
 }
 @keyframes blink{50%{opacity:0}}
-
-/* If the screen is too narrow, allow wrap without bouncing */
-@media (max-width: 520px){
-  .heroType{ white-space: normal; }
-  .typeSlot{ white-space: normal; }
-  .typeGhost, .typeLive{ white-space: normal; }
-  .typeLive{ position: static; } /* stack naturally on very small screens */
-}
 
 .heroSub{
   font-size:16px;
@@ -267,18 +285,74 @@ section{margin-top:60px; scroll-margin-top: 110px;}
   font-size:13px;color:var(--muted);
   display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
 }
+
+/* --- Mobile cleanup --- */
+@media(max-width:720px){
+  /* Navbar becomes a compact header + accordion */
+  .nav{
+    flex-wrap:wrap;
+    gap:10px;
+    border-radius:22px;
+  }
+  .navlinks{
+    display:none; /* hide desktop links */
+  }
+  .menuBtn{
+    display:flex; /* show hamburger */
+  }
+  .mobileMenu{
+    display:none; /* toggled via JS */
+    width:100%;
+  }
+  .mobileMenu.open{
+    display:block;
+  }
+
+  /* Make hero a bit less massive on phones */
+  h1{ font-size:clamp(34px, 9vw, 48px); }
+  .heroType{ font-size:18px; }
+
+  /* On mobile, simplify typewriter to avoid alignment weirdness */
+  .typeSlot{
+    position:static;
+    display:inline;
+    white-space:normal;
+  }
+  .typeGhost{ display:none; }
+  .typeLive{
+    position:static;
+    white-space:normal;
+  }
+}
 </style>
 </head>
 
 <body>
 <div class="wrap">
 
-  <div class="nav">
+  <div class="nav" role="navigation" aria-label="Primary">
     <div class="brand">
       <div class="mark"></div>
       Merlin Komenda
     </div>
-    <div class="navlinks">
+
+    <!-- Desktop links -->
+    <div class="navlinks" aria-label="Desktop navigation">
+      <a href="#about">About</a>
+      <a href="#impact">Impact</a>
+      <a href="#track">Track record</a>
+      <a href="#career">Career summary</a>
+      <a href="#schedule">Schedule</a>
+      <a href="#contact">Contact</a>
+    </div>
+
+    <!-- Mobile menu toggle -->
+    <button class="menuBtn" id="menuBtn" type="button" aria-expanded="false" aria-controls="mobileMenu">
+      ☰ Menu
+    </button>
+
+    <!-- Mobile accordion menu -->
+    <div class="mobileMenu" id="mobileMenu">
       <a href="#about">About</a>
       <a href="#impact">Impact</a>
       <a href="#track">Track record</a>
@@ -303,7 +377,7 @@ section{margin-top:60px; scroll-margin-top: 110px;}
       <div class="heroType">
         I help teams
         <span class="typeSlot">
-          <!-- Longest phrase (reserves space to prevent layout shift) -->
+          <!-- Longest phrase (reserves space to prevent layout shift on desktop) -->
           <span class="typeGhost">design efficient systems teams can trust.</span>
 
           <span class="typeLive">
@@ -320,7 +394,7 @@ section{margin-top:60px; scroll-margin-top: 110px;}
       <div class="ctas">
         <a class="btn" href="#impact">See impact</a>
         <a class="btn" href="#schedule">Schedule</a>
-        <a class="btn" href="/Resume.pdf" target="_blank" rel="noopener">Resume</a>
+        <a class="btn" href="/merlin-komenda-resume.pdf" target="_blank" rel="noopener">Resume</a>
         <a class="btn" href="https://www.linkedin.com/in/merlin-komenda/" target="_blank" rel="noopener">LinkedIn</a>
       </div>
     </div>
@@ -467,7 +541,7 @@ section{margin-top:60px; scroll-margin-top: 110px;}
         <h3>Connect</h3>
         <p>Email: <a href="mailto:merlin.komenda@gmail.com">merlin.komenda@gmail.com</a></p>
         <div class="smalllinks">
-          <a href="/Resume.pdf" target="_blank" rel="noopener">Resume</a>
+          <a href="/merlin-komenda-resume.pdf" target="_blank" rel="noopener">Resume</a>
           <a href="https://www.linkedin.com/in/merlin-komenda/" target="_blank" rel="noopener">LinkedIn</a>
         </div>
       </div>
@@ -505,7 +579,7 @@ section{margin-top:60px; scroll-margin-top: 110px;}
     <div class="tile">
       <p>Email: <a href="mailto:merlin.komenda@gmail.com">merlin.komenda@gmail.com</a></p>
       <div class="smalllinks">
-        <a href="/Resume.pdf" target="_blank" rel="noopener">Resume</a>
+        <a href="/merlin-komenda-resume.pdf" target="_blank" rel="noopener">Resume</a>
         <a href="https://www.linkedin.com/in/merlin-komenda/" target="_blank" rel="noopener">LinkedIn</a>
       </div>
     </div>
@@ -520,6 +594,34 @@ section{margin-top:60px; scroll-margin-top: 110px;}
 <script>
 document.getElementById("y").textContent = new Date().getFullYear();
 
+/* Mobile accordion menu */
+(function(){
+  const btn = document.getElementById("menuBtn");
+  const menu = document.getElementById("mobileMenu");
+  if(!btn || !menu) return;
+
+  function closeMenu(){
+    menu.classList.remove("open");
+    btn.setAttribute("aria-expanded","false");
+  }
+
+  btn.addEventListener("click", function(){
+    const isOpen = menu.classList.toggle("open");
+    btn.setAttribute("aria-expanded", String(isOpen));
+  });
+
+  // Close after clicking a link
+  menu.querySelectorAll("a").forEach(a => {
+    a.addEventListener("click", closeMenu);
+  });
+
+  // Close on escape
+  window.addEventListener("keydown", (e) => {
+    if(e.key === "Escape") closeMenu();
+  });
+})();
+
+/* Typewriter */
 const phrases = [
   "bring clarity to complex work.",
   "design efficient systems teams can trust.",
@@ -556,7 +658,7 @@ function tick(){
 }
 tick();
 
-// Booking popup (controlled, no Google-injected styling)
+/* Booking popup */
 (function () {
   const btn = document.getElementById("openBookingPopup");
   const bookingUrl = "https://calendar.app.google/M9PeWcXz76KYQfvq9";
@@ -580,7 +682,6 @@ tick();
 
     const win = window.open(bookingUrl, "MerlinBooking", features);
     if (!win) {
-      // Popup blocked: fallback to new tab
       window.open(bookingUrl, "_blank", "noopener,noreferrer");
     }
   }
