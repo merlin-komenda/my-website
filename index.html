@@ -6,6 +6,11 @@
 <title>Merlin Komenda</title>
 <meta name="description" content="I bring structure to growing teams so ideas turn into real results." />
 
+<!-- Favicon -->
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="apple-touch-icon" href="/favicon.png">
+<meta name="theme-color" content="#7c3aed">
+
 <style>
 :root{
   --bg:#f3f4f8;
@@ -19,11 +24,7 @@
   --radius:26px;
   --max:1040px;
 }
-  
-<link rel="icon" href="/favicon.png">
-<link rel="apple-touch-icon" href="/favicon.png">
-<meta name="theme-color" content="#7c3aed">
-  
+
 *{box-sizing:border-box}
 html,body{margin:0;padding:0}
 body{
@@ -104,11 +105,33 @@ h1{
   letter-spacing:-1.2px;
 }
 
+/* --- Typewriter (no mobile jump) --- */
 .heroType{
   font-size:20px;
   color:var(--muted);
   margin-bottom:12px;
+  min-height: 1.6em;   /* reserve vertical space to prevent layout bounce */
+  line-height: 1.6;
 }
+.typeWrap{
+  display:inline-block;
+  min-width: 18ch;     /* reserve width so layout doesn’t shift */
+  white-space: nowrap;
+  vertical-align: bottom;
+}
+.typeWrap .type{
+  display:inline-block;
+  max-width: 28ch;     /* keep long phrases from wrapping */
+  overflow:hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media (max-width: 520px){
+  .typeWrap{ min-width: 14ch; }
+  .typeWrap .type{ max-width: 22ch; }
+}
+
 .type{
   font-weight:820;
   background:linear-gradient(135deg,var(--accent),var(--accent2));
@@ -232,30 +255,6 @@ section{margin-top:60px; scroll-margin-top: 110px;}
   font-size:13px;color:var(--muted);
   display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
 }
-
-/* Style Google's injected scheduling button to match your site */
-#schedule .calendar-scheduling-button{
-  padding:12px 16px !important;
-  border-radius:14px !important;
-  font-weight:700 !important;
-  border:1px solid var(--line) !important;
-  background:rgba(255,255,255,.85) !important;
-  color:var(--text) !important;
-  cursor:pointer !important;
-  transition:
-    background .25s ease,
-    color .25s ease,
-    transform .25s ease,
-    box-shadow .25s ease,
-    border-color .25s ease !important;
-}
-#schedule .calendar-scheduling-button:hover{
-  background:linear-gradient(135deg,var(--accent),var(--accent2)) !important;
-  color:#fff !important;
-  border-color:transparent !important;
-  transform:translateY(-2px) !important;
-  box-shadow:0 12px 28px rgba(124,58,237,.25) !important;
-}
 </style>
 </head>
 
@@ -291,8 +290,9 @@ section{margin-top:60px; scroll-margin-top: 110px;}
 
       <div class="heroType">
         I help teams
-        <span class="type" id="typeTarget">bring clarity to complex work</span>
-        <span class="caret"></span>
+        <span class="typeWrap">
+          <span class="type" id="typeTarget">bring clarity to complex work</span><span class="caret"></span>
+        </span>
       </div>
 
       <div class="heroSub">
@@ -470,14 +470,12 @@ section{margin-top:60px; scroll-margin-top: 110px;}
       </p>
 
       <div style="margin-top:14px; display:flex; gap:12px; flex-wrap:wrap; align-items:center;">
-  <button class="btn" type="button" id="openBookingPopup">
-    Book time
-  </button>
+        <button class="btn" type="button" id="openBookingPopup">Book time</button>
 
-  <a class="btn" href="https://calendar.app.google/M9PeWcXz76KYQfvq9" target="_blank" rel="noopener">
-    Open in new tab
-  </a>
-</div>
+        <a class="btn" href="https://calendar.app.google/M9PeWcXz76KYQfvq9" target="_blank" rel="noopener">
+          Open in new tab
+        </a>
+      </div>
     </div>
   </section>
 
