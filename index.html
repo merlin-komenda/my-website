@@ -105,31 +105,34 @@ h1{
   letter-spacing:-1.2px;
 }
 
-/* --- Typewriter (no mobile jump) --- */
+/* --- Typewriter (stable on desktop + mobile; no jump, no clipping) --- */
 .heroType{
   font-size:20px;
   color:var(--muted);
   margin-bottom:12px;
-  min-height: 1.6em;   /* reserve vertical space to prevent layout bounce */
   line-height: 1.6;
 }
-.typeWrap{
+
+/* Holds the live typing text + a hidden ghost phrase to reserve space */
+.typeSlot{
+  position:relative;
   display:inline-block;
-  min-width: 18ch;     /* reserve width so layout doesn’t shift */
-  white-space: nowrap;
-  vertical-align: bottom;
-}
-.typeWrap .type{
-  display:inline-block;
-  max-width: 28ch;     /* keep long phrases from wrapping */
-  overflow:hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  vertical-align:bottom;
+  white-space:nowrap;
 }
 
-@media (max-width: 520px){
-  .typeWrap{ min-width: 14ch; }
-  .typeWrap .type{ max-width: 22ch; }
+/* This invisible text reserves width/height so the page doesn't reflow */
+.typeGhost{
+  visibility:hidden;
+  pointer-events:none;
+}
+
+/* Live typing sits on top of the ghost */
+.typeLive{
+  position:absolute;
+  left:0;
+  top:0;
+  white-space:nowrap;
 }
 
 .type{
@@ -139,6 +142,7 @@ h1{
   background-clip:text;
   color:transparent;
 }
+
 .caret{
   display:inline-block;
   border-left:2px solid rgba(11,16,32,.5);
@@ -147,6 +151,14 @@ h1{
   animation:blink 1s steps(1) infinite;
 }
 @keyframes blink{50%{opacity:0}}
+
+/* If the screen is too narrow, allow wrap without bouncing */
+@media (max-width: 520px){
+  .heroType{ white-space: normal; }
+  .typeSlot{ white-space: normal; }
+  .typeGhost, .typeLive{ white-space: normal; }
+  .typeLive{ position: static; } /* stack naturally on very small screens */
+}
 
 .heroSub{
   font-size:16px;
@@ -290,8 +302,13 @@ section{margin-top:60px; scroll-margin-top: 110px;}
 
       <div class="heroType">
         I help teams
-        <span class="typeWrap">
-          <span class="type" id="typeTarget">bring clarity to complex work</span><span class="caret"></span>
+        <span class="typeSlot">
+          <!-- Longest phrase (reserves space to prevent layout shift) -->
+          <span class="typeGhost">design efficient systems teams can trust.</span>
+
+          <span class="typeLive">
+            <span class="type" id="typeTarget">bring clarity to complex work.</span><span class="caret"></span>
+          </span>
         </span>
       </div>
 
