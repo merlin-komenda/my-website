@@ -136,7 +136,40 @@ h1{
   letter-spacing:-1.2px;
 }
 
-/* --- Typewriter --- */
+/* --- High-status hero layout with headshot --- */
+.heroLayout{
+  display:grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  align-items:center;
+  gap:40px;
+}
+@media(max-width:900px){
+  .heroLayout{
+    grid-template-columns:1fr;
+    gap:22px;
+  }
+}
+
+.heroPhotoWrap{
+  display:flex;
+  justify-content:center;
+}
+.heroPhoto{
+  width:260px;
+  height:260px;
+  object-fit:cover;
+  border-radius:50%;
+  border:3px solid rgba(11,16,32,.08);
+  box-shadow:0 30px 60px rgba(15,23,42,.18);
+}
+@media(max-width:900px){
+  .heroPhoto{
+    width:200px;
+    height:200px;
+  }
+}
+
+/* --- Typewriter (stable on desktop) --- */
 .heroType{
   font-size:20px;
   color:var(--muted);
@@ -288,41 +321,29 @@ section{margin-top:60px; scroll-margin-top: 110px;}
 
 /* --- Mobile cleanup --- */
 @media(max-width:720px){
-  /* Navbar becomes a compact header + accordion */
+  /* Navbar becomes compact + accordion */
   .nav{
     flex-wrap:wrap;
     gap:10px;
     border-radius:22px;
   }
-  .navlinks{
-    display:none; /* hide desktop links */
-  }
-  .menuBtn{
-    display:flex; /* show hamburger */
-  }
-  .mobileMenu{
-    display:none; /* toggled via JS */
-    width:100%;
-  }
-  .mobileMenu.open{
-    display:block;
-  }
+  .navlinks{ display:none; }
+  .menuBtn{ display:flex; }
+  .mobileMenu{ width:100%; }
+  .mobileMenu.open{ display:block; }
 
-  /* Make hero a bit less massive on phones */
+  /* Hero scaling */
   h1{ font-size:clamp(34px, 9vw, 48px); }
   .heroType{ font-size:18px; }
 
-  /* On mobile, simplify typewriter to avoid alignment weirdness */
-  .typeSlot{
-    position:static;
-    display:inline;
-    white-space:normal;
-  }
+  /*
+    Mobile typewriter alignment fix:
+    Remove the "ghost overlay" technique on small screens to avoid baseline quirks.
+    The typewriter still animates; it just flows naturally.
+  */
+  .typeSlot{ position:static; display:inline; white-space:normal; }
   .typeGhost{ display:none; }
-  .typeLive{
-    position:static;
-    white-space:normal;
-  }
+  .typeLive{ position:static; white-space:normal; }
 }
 </style>
 </head>
@@ -364,38 +385,50 @@ section{margin-top:60px; scroll-margin-top: 110px;}
 
   <div class="hero">
     <div class="heroInner">
-      <div class="heroTag">
-        <span class="pulse"></span>
-        AI enabled, customers at heart.
-      </div>
+      <div class="heroLayout">
 
-      <h1>
-        Bringing innovation to teams<br>
-        so ideas turn into real results.
-      </h1>
+        <!-- Left: copy -->
+        <div>
+          <div class="heroTag">
+            <span class="pulse"></span>
+            AI enabled, customers at heart.
+          </div>
 
-      <div class="heroType">
-        I help teams
-        <span class="typeSlot">
-          <!-- Longest phrase (reserves space to prevent layout shift on desktop) -->
-          <span class="typeGhost">design efficient systems teams can trust.</span>
+          <h1>
+            Bringing innovation to teams<br>
+            so ideas turn into real results.
+          </h1>
 
-          <span class="typeLive">
-            <span class="type" id="typeTarget">bring clarity to complex work.</span><span class="caret"></span>
-          </span>
-        </span>
-      </div>
+          <div class="heroType">
+            I help teams
+            <span class="typeSlot">
+              <!-- Longest phrase (reserves space on desktop/tablet) -->
+              <span class="typeGhost">design efficient systems teams can trust.</span>
 
-      <div class="heroSub">
-        Global Director of Implementation focused on AI-enabled operations, human+AI collaboration,
-        and shipping work that actually sticks.
-      </div>
+              <span class="typeLive">
+                <span class="type" id="typeTarget">bring clarity to complex work.</span><span class="caret"></span>
+              </span>
+            </span>
+          </div>
 
-      <div class="ctas">
-        <a class="btn" href="#impact">Impact</a>
-        <a class="btn" href="#schedule">Schedule</a>
-        <a class="btn" href="/resume.pdf" target="_blank" rel="noopener">Resume</a>
-        <a class="btn" href="https://www.linkedin.com/in/merlin-komenda/" target="_blank" rel="noopener">LinkedIn</a>
+          <div class="heroSub">
+            Global Director of Implementation focused on AI-enabled operations, human+AI collaboration,
+            and shipping work that actually sticks.
+          </div>
+
+          <div class="ctas">
+            <a class="btn" href="#impact">See impact</a>
+            <a class="btn" href="#schedule">Schedule</a>
+            <a class="btn" href="/resume.pdf" target="_blank" rel="noopener">Resume</a>
+            <a class="btn" href="https://www.linkedin.com/in/merlin-komenda/" target="_blank" rel="noopener">LinkedIn</a>
+          </div>
+        </div>
+
+        <!-- Right: headshot -->
+        <div class="heroPhotoWrap">
+          <img src="/headshot.jpg" alt="Merlin Komenda" class="heroPhoto">
+        </div>
+
       </div>
     </div>
   </div>
@@ -610,15 +643,8 @@ document.getElementById("y").textContent = new Date().getFullYear();
     btn.setAttribute("aria-expanded", String(isOpen));
   });
 
-  // Close after clicking a link
-  menu.querySelectorAll("a").forEach(a => {
-    a.addEventListener("click", closeMenu);
-  });
-
-  // Close on escape
-  window.addEventListener("keydown", (e) => {
-    if(e.key === "Escape") closeMenu();
-  });
+  menu.querySelectorAll("a").forEach(a => a.addEventListener("click", closeMenu));
+  window.addEventListener("keydown", (e) => { if(e.key === "Escape") closeMenu(); });
 })();
 
 /* Typewriter */
@@ -681,9 +707,7 @@ tick();
     ].join(",");
 
     const win = window.open(bookingUrl, "MerlinBooking", features);
-    if (!win) {
-      window.open(bookingUrl, "_blank", "noopener,noreferrer");
-    }
+    if (!win) window.open(bookingUrl, "_blank", "noopener,noreferrer");
   }
 
   btn?.addEventListener("click", openPopup);
