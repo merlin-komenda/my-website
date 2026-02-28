@@ -12,6 +12,81 @@
 <meta name="theme-color" content="#7c3aed">
 
 <style>
+/* --- How I Think --- */
+
+.thinkWrap{
+  display:grid;
+  grid-template-columns:1.1fr 0.9fr;
+  gap:28px;
+}
+
+@media(max-width:900px){
+  .thinkWrap{
+    grid-template-columns:1fr;
+  }
+}
+
+.thinkCard{
+  padding:26px;
+  border-radius:20px;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.88);
+  position:relative;
+  overflow:hidden;
+}
+
+.thinkCard::before{
+  content:"";
+  position:absolute;
+  top:0;left:0;
+  width:100%;
+  height:4px;
+  background:linear-gradient(
+    135deg,
+    var(--accent),
+    var(--accent2)
+  );
+  opacity:.7;
+}
+
+.thinkIntro{
+  font-size:18px;
+  line-height:1.65;
+  margin-bottom:18px;
+  color:rgba(11,16,32,.82);
+}
+
+.thinkLoop{
+  padding-left:18px;
+  margin:0;
+}
+
+.thinkLoop li{
+  margin:10px 0;
+  color:var(--muted);
+  line-height:1.6;
+}
+
+.principles{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+
+.principle{
+  padding:14px 16px;
+  border-radius:14px;
+  background:rgba(11,16,32,.04);
+  font-weight:600;
+}
+
+.thinkCloser{
+  margin-top:18px;
+  font-weight:750;
+  letter-spacing:-0.2px;
+}
+  
+  
 :root{
   --bg:#f3f4f8;
   --paper:rgba(255,255,255,.84);
@@ -502,7 +577,49 @@ section{margin-top:60px; scroll-margin-top: 110px;}
       </div>
     </div>
   </section>
+<!-- HOW I THINK -->
+<section id="thinking">
+  <div class="section-title">
+    <h2>How I Think</h2>
+    <div class="hint">Operating model</div>
+  </div>
 
+  <div class="thinkWrap">
+
+    <!-- LEFT: LOOP -->
+    <div class="thinkCard">
+
+      <p class="thinkIntro">
+        Most problems look like people, process, or product.
+        They’re usually architecture.
+      </p>
+
+      <ul class="thinkLoop">
+        <li><strong>Clarify</strong> — what good means and who owns it</li>
+        <li><strong>Design</strong> — the smallest system that makes good repeatable</li>
+        <li><strong>Ship</strong> — deploy with training and guardrails</li>
+        <li><strong>Measure</strong> — signals that show if it’s working</li>
+      </ul>
+
+      <p class="thinkCloser">
+        If it only works when one person is “on,” it’s not a system.
+      </p>
+
+    </div>
+
+    <!-- RIGHT: PRINCIPLES -->
+    <div class="thinkCard principles">
+
+      <div class="principle">Structure beats intensity.</div>
+      <div class="principle">Clarity comes before speed.</div>
+      <div class="principle">Systems should survive turnover.</div>
+      <div class="principle">AI should reduce friction, not add noise.</div>
+
+    </div>
+
+  </div>
+</section>
+  
   <!-- IMPACT -->
   <section id="impact">
     <div class="section-title">
