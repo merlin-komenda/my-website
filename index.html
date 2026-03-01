@@ -533,6 +533,7 @@ section{margin-top:60px; scroll-margin-top: 110px;}
       <a href="#about">Where I help</a>
       <a href="#thinking">How I think</a>
       <a href="#impact">Results</a>
+      <a href="/experience/">Experience</a>
       <a href="#schedule">Schedule</a>
       <a href="#contact">Connect</a>
     </div>
@@ -831,6 +832,11 @@ document.getElementById("y").textContent = new Date().getFullYear();
 
   btn?.addEventListener("click", openPopup);
 })();
+<script>
+if (window.location.pathname === "/experience") {
+  window.location.replace("/experience/");
+}
+</script>
 </script>
 
 </body>
