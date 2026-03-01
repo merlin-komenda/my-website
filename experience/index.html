@@ -31,10 +31,11 @@ html,body{margin:0;padding:0}
 body{
   font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial;
   color:var(--text);
+
+  /* Calmer background for recruiter page */
   background:
-    radial-gradient(900px 600px at 10% 8%, rgba(124,58,237,.14), transparent 60%),
-    radial-gradient(900px 600px at 95% 0%, rgba(34,211,238,.12), transparent 55%),
-    radial-gradient(900px 600px at 75% 85%, rgba(255,77,141,.10), transparent 55%),
+    radial-gradient(900px 600px at 20% 0%, rgba(124,58,237,.06), transparent 60%),
+    radial-gradient(900px 600px at 90% 10%, rgba(34,211,238,.05), transparent 55%),
     var(--bg);
 }
 
@@ -111,7 +112,7 @@ a{text-decoration:none;color:inherit}
   background:
     repeating-linear-gradient(90deg, rgba(11,16,32,.05) 0px, rgba(11,16,32,.05) 1px, transparent 1px, transparent 80px),
     repeating-linear-gradient(0deg, rgba(11,16,32,.04) 0px, rgba(11,16,32,.04) 1px, transparent 1px, transparent 80px);
-  opacity:.18;
+  opacity:.14;
   pointer-events:none;
 }
 .headerInner{
@@ -149,6 +150,30 @@ h1{
   font-size:13px;
   font-weight:700;
   color:rgba(11,16,32,.78);
+}
+
+/* Quick Summary strip */
+.quickSummary{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  margin-top:18px;
+  padding:16px;
+  border-radius:18px;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.86);
+}
+.qsItem{
+  font-size:14px;
+  color:rgba(11,16,32,.78);
+  line-height:1.45;
+}
+.qsItem strong{
+  font-weight:850;
+  color:rgba(11,16,32,.92);
+}
+@media(max-width:720px){
+  .quickSummary{grid-template-columns:1fr;}
 }
 
 /* Buttons */
@@ -213,9 +238,12 @@ section{margin-top:44px; scroll-margin-top: 110px;}
   position:absolute;
   left:0; top:0;
   width:100%;
-  height:4px;
+
+  /* reduced visual noise */
+  height:2px;
+
   background:linear-gradient(135deg, rgba(124,58,237,.55), rgba(34,211,238,.45), rgba(255,77,141,.20));
-  opacity:.65;
+  opacity:.45;
 }
 .card h3{
   margin:0 0 8px;
@@ -306,10 +334,9 @@ hr.sep{
 
   <div class="nav" role="navigation" aria-label="Primary">
     <a href="/" class="brand">
-  <div class="mark"></div>
-  <span>Merlin Komenda</span>
-</a>
-    </div>
+      <div class="mark"></div>
+      <span>Merlin Komenda</span>
+    </a>
 
     <div class="navlinks" aria-label="Desktop navigation">
       <a href="/">Home</a>
@@ -340,6 +367,14 @@ hr.sep{
         A recruiter-friendly snapshot of scope, outcomes, and leadership.
         If you want the short “why Merlin” version, head back to the homepage.
       </p>
+
+      <!-- Quick Summary -->
+      <section class="quickSummary" aria-label="Quick summary">
+        <div class="qsItem"><strong>Focus:</strong> Systems, execution, scale</div>
+        <div class="qsItem"><strong>Strength:</strong> Calm under pressure</div>
+        <div class="qsItem"><strong>Style:</strong> Outcome-first, low-drama delivery</div>
+        <div class="qsItem"><strong>Tools:</strong> AI-enabled ops, enablement, playbooks</div>
+      </section>
 
       <div class="metaRow">
         <span class="chip">Execution + scaling</span>
@@ -478,7 +513,7 @@ hr.sep{
         <h3>AI-enabled operations</h3>
         <ul class="bullets">
           <li>Human + AI workflow design (augmentation vs automation)</li>
-          <li>Reducing friction in delivery/enablement/ops workflows</li>
+          <li>Reduccing friction in delivery/enablement/ops workflows</li>
           <li>Practical AI adoption: tools, guardrails, playbooks</li>
         </ul>
       </div>
