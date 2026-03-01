@@ -12,6 +12,7 @@
 <meta name="theme-color" content="#7c3aed">
 
 <style>
+
 :root{
   --bg:#f3f4f8;
   --paper:rgba(255,255,255,.84);
@@ -83,6 +84,16 @@ a{text-decoration:none;color:inherit}
 }
 @media(max-width:720px){
   .sectionNode::before{ display:none; }
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-weight:850;
+  letter-spacing:-0.2px;
+  text-decoration:none;
+  color:inherit;
 }
 
 /* --- Signature icon: loop mark --- */
@@ -512,9 +523,10 @@ section{margin-top:60px; scroll-margin-top: 110px;}
   <div class="blueprintRail" aria-hidden="true"></div>
 
   <div class="nav" role="navigation" aria-label="Primary">
-    <div class="brand">
-      <div class="mark"></div>
-      Merlin Komenda
+    <a href="/" class="brand">
+  <div class="mark"></div>
+  <span>Merlin Komenda</span>
+</a>
     </div>
 
     <div class="navlinks" aria-label="Desktop navigation">
