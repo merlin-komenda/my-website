@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zappi Implementation Overview</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --color-text-primary: #1a1a18;
+    --color-text-secondary: #5f5e5a;
+    --color-text-tertiary: #888780;
+    --color-background-primary: #ffffff;
+    --color-background-secondary: #f1efe8;
+    --color-border-tertiary: rgba(0,0,0,0.12);
+    --color-border-secondary: rgba(0,0,0,0.22);
+    --color-border-primary: rgba(0,0,0,0.32);
+    --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --border-radius-md: 8px;
+    --border-radius-lg: 12px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --color-text-primary: #e8e6de;
+      --color-text-secondary: #a8a69e;
+      --color-text-tertiary: #6e6d68;
+      --color-background-primary: #1c1c1a;
+      --color-background-secondary: #252523;
+      --color-border-tertiary: rgba(255,255,255,0.1);
+      --color-border-secondary: rgba(255,255,255,0.18);
+      --color-border-primary: rgba(255,255,255,0.28);
+    }
+  }
+  body {
+    font-family: var(--font-sans);
+    background: var(--color-background-primary);
+    color: var(--color-text-primary);
+    padding: 24px;
+    font-size: 14px;
+    line-height: 1.5;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .tabs { display: flex; gap: 2px; border-bottom: 0.5px solid var(--color-border-tertiary); margin-bottom: 1.5rem; }
+  .tab { font-size: 13px; padding: 8px 16px; cursor: pointer; color: var(--color-text-secondary); border-bottom: 2px solid transparent; margin-bottom: -0.5px; transition: all 0.15s; white-space: nowrap; background: none; border-top: none; border-left: none; border-right: none; }
+  .tab:hover { color: var(--color-text-primary); }
+  .tab.active { color: var(--color-text-primary); border-bottom-color: var(--color-text-primary); font-weight: 500; }
+  .view { display: none; }
+  .view.active { display: block; }
+
+  /* Impact */
+  .impact-header { margin-bottom: 1.5rem; }
+  .impact-header h2 { font-size: 15px; font-weight: 500; margin-bottom: 4px; }
+  .impact-header p { font-size: 13px; color: var(--color-text-secondary); line-height: 1.6; }
+  .metrics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin-bottom: 1.5rem; }
+  .metric-card { background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 14px 16px; }
+  .metric-label { font-size: 11px; color: var(--color-text-tertiary); text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 6px; }
+  .metric-value { font-size: 24px; font-weight: 500; line-height: 1; }
+  .metric-sub { font-size: 11px; color: var(--color-text-secondary); margin-top: 4px; }
+  .metric-delta { font-size: 11px; margin-top: 4px; font-weight: 500; color: #0f6e56; }
+  .impact-story { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 1.5rem; }
+  .story-card { border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-md); padding: 14px 16px; background: var(--color-background-primary); }
+  .story-card h3 { font-size: 12px; font-weight: 500; color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 8px; }
+  .story-card p { font-size: 13px; line-height: 1.6; }
+  .story-card strong { font-weight: 500; }
+  .source-note { font-size: 11px; color: var(--color-text-tertiary); padding-top: 0.75rem; border-top: 0.5px solid var(--color-border-tertiary); }
+
+  /* Journey */
+  .journey-header h2 { font-size: 15px; font-weight: 500; margin-bottom: 4px; }
+  .journey-header p { font-size: 13px; color: var(--color-text-secondary); line-height: 1.6; margin-bottom: 0.75rem; }
+  .legend { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 0.5px solid var(--color-border-tertiary); }
+  .legend-item { display: flex; align-items: center; gap: 5px; font-size: 11px; color: var(--color-text-secondary); }
+  .legend-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .legend-dash { font-size: 11px; color: var(--color-text-secondary); border: 0.5px dashed var(--color-border-secondary); border-radius: 4px; padding: 2px 6px; }
+  .jfilters { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 1rem; }
+  .jpill { font-size: 12px; padding: 3px 10px; border-radius: 20px; border: 0.5px solid var(--color-border-secondary); background: var(--color-background-primary); color: var(--color-text-secondary); cursor: pointer; transition: all 0.15s; white-space: nowrap; }
+  .jpill.active { background: var(--color-text-primary); color: var(--color-background-primary); border-color: var(--color-text-primary); }
+  .phase-row { margin-bottom: 1.25rem; }
+  .phase-hdr { display: flex; align-items: center; gap: 8px; margin-bottom: 0.5rem; }
+  .phase-num { width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 500; color: #fff; flex-shrink: 0; }
+  .phase-name { font-size: 13px; font-weight: 500; }
+  .phase-tag { font-size: 11px; color: var(--color-text-tertiary); margin-left: auto; }
+  .cards { display: flex; flex-direction: column; gap: 5px; padding-left: 30px; }
+  .jcard { border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-md); padding: 9px 12px; background: var(--color-background-primary); }
+  .jcard.recurring { border-style: dashed; }
+  .jcard-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; }
+  .jcard-name { font-size: 13px; font-weight: 500; flex: 1; }
+  .jcard-badges { display: flex; gap: 4px; flex-wrap: wrap; justify-content: flex-end; flex-shrink: 0; }
+  .bdg { font-size: 10px; padding: 2px 7px; border-radius: 10px; font-weight: 500; white-space: nowrap; }
+  .bdg-cx { background: #e6f1fb; color: #0c447c; }
+  .bdg-int { background: var(--color-background-secondary); color: var(--color-text-secondary); }
+  .bdg-stall { background: #fcebeb; color: #791f1f; }
+  .bdg-ai { background: #9fde97; color: #175034; }
+  .bdg-aic { background: #eaf3de; color: #27500a; }
+  .bdg-rec { background: #eeedfe; color: #3c3489; }
+  .jcard-note { font-size: 11px; color: var(--color-text-secondary); margin-top: 5px; border-top: 0.5px solid var(--color-border-tertiary); padding-top: 5px; line-height: 1.5; }
+
+  /* Effort */
+  .effort-header h2 { font-size: 15px; font-weight: 500; margin-bottom: 4px; }
+  .effort-header p { font-size: 13px; color: var(--color-text-secondary); line-height: 1.6; margin-bottom: 1rem; }
+  .effort-legend { display: flex; gap: 12px; margin-bottom: 1rem; flex-wrap: wrap; }
+  .el-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--color-text-secondary); }
+  .el-swatch { width: 12px; height: 12px; border-radius: 3px; flex-shrink: 0; }
+  .effort-rows { display: flex; flex-direction: column; gap: 6px; }
+  .erow { display: flex; align-items: center; gap: 10px; }
+  .erow-label { font-size: 12px; width: 220px; flex-shrink: 0; line-height: 1.4; }
+  .erow-bar-wrap { flex: 1; height: 22px; border-radius: 4px; overflow: hidden; background: var(--color-background-secondary); display: flex; }
+  .erow-seg { height: 100%; }
+  .erow-tag { font-size: 10px; color: var(--color-text-tertiary); width: 60px; text-align: right; flex-shrink: 0; }
+  .esection { font-size: 11px; font-weight: 500; color: var(--color-text-tertiary); text-transform: uppercase; letter-spacing: 0.04em; margin: 1.25rem 0 0.5rem; padding-top: 1rem; border-top: 0.5px solid var(--color-border-tertiary); }
+  .effort-callout { margin-top: 1.25rem; border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-md); padding: 12px 16px; background: var(--color-background-secondary); }
+  .effort-callout h3 { font-size: 12px; font-weight: 500; margin-bottom: 6px; }
+  .effort-callout p { font-size: 12px; color: var(--color-text-secondary); line-height: 1.6; }
+
+  /* AI */
+  .ai-header h2 { font-size: 15px; font-weight: 500; margin-bottom: 4px; }
+  .ai-header p { font-size: 13px; color: var(--color-text-secondary); line-height: 1.6; margin-bottom: 1.5rem; }
+  .ai-section-title { font-size: 11px; font-weight: 500; color: var(--color-text-tertiary); text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 0.75rem; padding-bottom: 0.5rem; border-bottom: 0.5px solid var(--color-border-tertiary); }
+  .ai-active-cards { display: flex; flex-direction: column; gap: 8px; margin-bottom: 2rem; }
+  .ai-card { border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-md); padding: 12px 14px; background: var(--color-background-primary); }
+  .ai-card-top { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+  .ai-card-dot { width: 8px; height: 8px; border-radius: 50%; background: #1D9E75; flex-shrink: 0; }
+  .ai-card-name { font-size: 13px; font-weight: 500; }
+  .ai-card-phase { font-size: 11px; color: var(--color-text-tertiary); margin-left: auto; white-space: nowrap; }
+  .ai-card-desc { font-size: 12px; color: var(--color-text-secondary); line-height: 1.6; }
+  .ai-card-detail { font-size: 11px; color: var(--color-text-tertiary); margin-top: 5px; padding-top: 5px; border-top: 0.5px solid var(--color-border-tertiary); line-height: 1.5; }
+  .ai-pipeline { display: flex; flex-direction: column; gap: 6px; }
+  .ai-pipe-item { display: flex; align-items: flex-start; gap: 10px; padding: 10px 12px; border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-md); background: var(--color-background-primary); }
+  .ai-pipe-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--color-border-primary); flex-shrink: 0; margin-top: 4px; }
+  .ai-pipe-name { font-size: 13px; font-weight: 500; margin-bottom: 2px; }
+  .ai-pipe-phase { font-size: 11px; color: var(--color-text-tertiary); line-height: 1.5; }
+
+  @media (max-width: 600px) {
+    .impact-story { grid-template-columns: 1fr; }
+    .erow-label { width: 140px; }
+    body { padding: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="tabs">
+  <button class="tab active" data-view="impact">Impact</button>
+  <button class="tab" data-view="journey">Customer journey</button>
+  <button class="tab" data-view="effort">Effort distribution</button>
+  <button class="tab" data-view="ai">AI in implementation</button>
+</div>
+
+<!-- IMPACT -->
+<div class="view active" id="view-impact">
+  <div class="impact-header">
+    <h2>What implementation delivers — 2025</h2>
+    <p>Implementation is a structured onboarding motion that turns new customers into confident, active Zappi users. Every new logo and business unit goes through it. The data below reflects 58 implementations completed in 2025.</p>
+  </div>
+  <div class="metrics-grid">
+    <div class="metric-card"><div class="metric-label">IMs completed</div><div class="metric-value">58</div><div class="metric-sub">New logos + BUs, 2025</div></div>
+    <div class="metric-card"><div class="metric-label">Avg. completion</div><div class="metric-value">44 days</div><div class="metric-delta">↓ from 74+ days in 2024</div></div>
+    <div class="metric-card"><div class="metric-label">Avg. effort per IM</div><div class="metric-value">24 hrs</div><div class="metric-sub">Per implementation</div></div>
+    <div class="metric-card"><div class="metric-label">Platform confidence</div><div class="metric-value">8.5/10</div><div class="metric-sub">Post-IM survey avg.</div></div>
+    <div class="metric-card"><div class="metric-label">Research spend during</div><div class="metric-value">$1M+</div><div class="metric-sub">Across 58 IMs</div></div>
+    <div class="metric-card"><div class="metric-label">Research spend after</div><div class="metric-value">$2.9M+</div><div class="metric-delta">↑ continued growth post-IM</div></div>
+  </div>
+  <div class="impact-story">
+    <div class="story-card"><h3>Speed to value</h3><p>Customers with an IM fee launched their first project <strong>35% faster</strong> than those without. IMs completed in 30–40 days realize the most long-term value.</p></div>
+    <div class="story-card"><h3>Adoption drives retention</h3><p>Customers who launch research during their IM grow <strong>2× faster</strong> in the first 9 months. Early usage is the strongest predictor of long-term spend.</p></div>
+    <div class="story-card"><h3>Confidence at handoff</h3><p>Post-IM surveys show a <strong>9/10 overall experience score</strong> and 8.5/10 platform confidence — the foundation for CSM to build on.</p></div>
+    <div class="story-card"><h3>Renewal correlation</h3><p>Customers who spend during IM spend <strong>more long-term</strong>, supporting top-ups and renewals. IM is the earliest signal of account health.</p></div>
+  </div>
+  <div class="source-note">Source: Zappi Implementation 2025 annual data. Avg. spend per IM: $19K. Ideal IM window: 30–40 days.</div>
+</div>
+
+<!-- JOURNEY -->
+<div class="view" id="view-journey">
+  <div class="journey-header">
+    <h2>The implementation journey — new logo</h2>
+    <p>From contract signed to CSM handoff. Zappi-led, typically 30–44 days. Every new logo goes through this motion.</p>
+  </div>
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot" style="background:#0c447c"></div>Customer-facing</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#888780"></div>Internal</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#791f1f"></div>Stall risk</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#175034"></div>AI-assisted today</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#3b6d11"></div>AI opportunity</div>
+    <div class="legend-dash">Dashed = recurring each phase</div>
+  </div>
+  <div class="jfilters">
+    <span class="jpill active" data-jf="all">All steps</span>
+    <span class="jpill" data-jf="cx">Customer-facing</span>
+    <span class="jpill" data-jf="stall">Stall risks</span>
+    <span class="jpill" data-jf="ai">AI-assisted</span>
+    <span class="jpill" data-jf="aic">AI opportunities</span>
+  </div>
+  <div id="journey-list"></div>
+</div>
+
+<!-- EFFORT -->
+<div class="view" id="view-effort">
+  <div class="effort-header">
+    <h2>Where effort goes — per implementation</h2>
+    <p>Average of 24 hours per IM. Bars show relative effort split by work type.</p>
+  </div>
+  <div class="effort-legend">
+    <div class="el-item"><div class="el-swatch" style="background:#175034"></div>AI-assisted today</div>
+    <div class="el-item"><div class="el-swatch" style="background:#639922"></div>AI opportunity</div>
+    <div class="el-item"><div class="el-swatch" style="background:#fac775"></div>Manual — high effort</div>
+    <div class="el-item"><div class="el-swatch" style="background:#d3d1c7"></div>Manual — low/medium effort</div>
+  </div>
+  <div class="esection">Pre-kickoff</div>
+  <div class="effort-rows">
+    <div class="erow"><div class="erow-label">Review sales materials / Gong</div><div class="erow-bar-wrap"><div class="erow-seg" style="width:60%;background:#175034"></div><div class="erow-seg" style="width:40%;background:#fac775"></div></div><div class="erow-tag">AI-assisted</div></div>
+    <div class="erow"><div class="erow-label">Kickoff prep (deck, platform, resources)</div><div class="erow-bar-wrap"><div class="erow-seg" style="width:30%;background:#639922"></div><div class="erow-seg" style="width:70%;background:#fac775"></div></div><div class="erow-tag">Opportunity</div></div>
+  </div>
+  <div class="esection">Kickoff & async setup</div>
+  <div class="effort-rows">
+    <div class="erow"><div class="erow-label">Customer kickoff call</div><div class="erow-bar-wrap"><div class="erow-seg" style="width:100%;background:#d3d1c7"></div></div><div class="erow-tag">Manual</div></div>
+    <div class="erow"><div class="erow-label">Custom audience design & build</div><div class="erow-bar-wrap"><div class="erow-seg" style="width:40%;background:#175034"></div><div class="erow-seg" style="width:60%;background:#fac775"></div></div><div class="erow-tag">AI-assisted</div></div>
+    <div class="erow"><div class="erow-label">Category request & case management</div><div class="erow-bar-wrap"><div class="erow-seg" style="width:100%;background:#fac775"></div></div><div class="erow-tag">Manual</div></div>
+    <div class="erow"><div class="erow-label">Platform configuration</div><div class="erow-bar-wrap"><div class="erow-seg" style="width:25%;background:#639922"></div><div class="erow-seg" style="width:75%;background:#d3d1c7"></div></div><div class="erow-tag">Opportunity</div></div>
+    <div class="erow"><div class="erow-label">SF record + Slack updates (×5 phases)</div><div class="erow-bar-wrap"><div class="erow-seg" style="width:70%;background:#175034"></div><div class="erow-seg" style="width:30%;background:#d3d1c7"></div></div><div class="erow-tag">AI-assisted</div></div>
+  </div>
+  <div class="esection">Training & launch</div>
+  <div class="effort-rows">
+    <div class="erow"><div class="erow-label">Training calls ×2</div><div class="erow-bar-wrap"><div class="erow-seg" style="width:100%;background:#d3d1c7"></div></div><div class="erow-tag">Manual</div></div>
+    <div class="erow"><div class="erow-label">Async training support & resources</div><div class="erow-bar-wrap"><div class="erow-seg" style="width:30%;background:#639922"></div><div class="erow-seg" style="width:70%;background:#d3d1c7"></div></div><div class="erow-tag">Opportunity</div></div>
+    <div class="erow"><div class="erow-label">Solution pairing & config checks</div><div class="erow-bar-wrap"><div class="erow-seg" style="width:20%;background:#639922"></div><div class="erow-seg" style="width:80%;background:#fac775"></div></div><div class="erow-tag">Opportunity</div></div>
+  </div>
+  <div class="esection">Handoff</div>
+  <div class="effort-rows">
+    <div class="erow"><div class="erow-label">SF record update (handover artifact)</div><div class="erow-bar-wrap"><div class="erow-seg" style="width:55%;background:#175034"></div><div class="erow-seg" style="width:45%;background:#fac775"></div></div><div class="erow-tag">AI-assisted</div></div>
+    <div class="erow"><div class="erow-label">Internal handoff meeting</div><div class="erow-bar-wrap"><div class="erow-seg" style="width:100%;background:#d3d1c7"></div></div><div class="erow-tag">Manual</div></div>
+  </div>
+  <div class="effort-callout">
+    <h3>The opportunity</h3>
+    <p>Of the ~24 hours per IM, the highest remaining manual burden concentrates in three areas: category request management (complex, multi-system, no AI assist yet), kickoff prep (strong templating candidate), and solution pairing (high back-and-forth, good candidate for guided recommendation). Audience work, status updates, and handover documentation are already AI-assisted.</p>
+  </div>
+</div>
+
+<!-- AI -->
+<div class="view" id="view-ai">
+  <div class="ai-header">
+    <h2>AI in implementation</h2>
+    <p>A living record of where we use AI today and where we're headed. Updated as we add new capabilities.</p>
+  </div>
+  <div class="ai-section-title">Active — what we use today</div>
+  <div class="ai-active-cards">
+    <div class="ai-card">
+      <div class="ai-card-top"><div class="ai-card-dot"></div><span class="ai-card-name">Sales materials & Gong summarization</span><span class="ai-card-phase">Phase 1 — Pre-kickoff</span></div>
+      <div class="ai-card-desc">Before every kickoff, AI synthesizes the account plan, sales notes, and Gong call recordings into a structured customer brief. Replaces manual review of scattered documents across SF, email, and Gong.</div>
+      <div class="ai-card-detail">Impact: faster kickoff prep, more consistent customer context, less time spent hunting information across systems.</div>
+    </div>
+    <div class="ai-card">
+      <div class="ai-card-top"><div class="ai-card-dot"></div><span class="ai-card-name">Account update GPT</span><span class="ai-card-phase">Phases 2–6 — recurring</span></div>
+      <div class="ai-card-desc">Takes call summaries from active implementation phases and produces a standardized update formatted for the customer's Slack channel. Removes the manual step of translating call notes into comms after every touchpoint.</div>
+      <div class="ai-card-detail">Impact: reduces the recurring status update burden across all five active phases. Improves consistency of what internal stakeholders receive after each milestone.</div>
+    </div>
+    <div class="ai-card">
+      <div class="ai-card-top"><div class="ai-card-dot"></div><span class="ai-card-name">Audience auditor</span><span class="ai-card-phase">Phase 3 — Async collaboration</span></div>
+      <div class="ai-card-desc">Accepts multiple customer audience files and assesses them for overlap and differences, then produces recommendations on how to synthesize them into a clean, non-redundant audience structure.</div>
+      <div class="ai-card-detail">Impact: directly addresses the highest-effort step in the IM. Reduces back-and-forth by giving customers a concrete recommendation rather than an open-ended conversation.</div>
+    </div>
+    <div class="ai-card">
+      <div class="ai-card-top"><div class="ai-card-dot"></div><span class="ai-card-name">Handover documentation</span><span class="ai-card-phase">Phase 7 — Handoff</span></div>
+      <div class="ai-card-desc">AI assists in drafting the robust SF record update at the end of implementation — summarizing platform configuration, audience and category decisions, training status, and research pipeline for the CSM.</div>
+      <div class="ai-card-detail">Impact: reduces the highest single manual burden at the close of every IM. Improves consistency of what CSMs receive at handoff.</div>
+    </div>
+  </div>
+  <div class="ai-section-title">Pipeline — what's coming</div>
+  <div class="ai-pipeline">
+    <div class="ai-pipe-item"><div class="ai-pipe-dot"></div><div><div class="ai-pipe-name">Tagging spreadsheet builder</div><div class="ai-pipe-phase">Phase 6 — Final check-in & optimization · Generates a customer-specific tagging spreadsheet with tag recommendations designed around their platform setup and research program.</div></div></div>
+    <div class="ai-pipe-item"><div class="ai-pipe-dot"></div><div><div class="ai-pipe-name">User training assessor</div><div class="ai-pipe-phase">Phase 4 — Training & enablement · Identifies gaps in what has been covered across training sessions and surfaces what the customer still needs to be trained on before handoff.</div></div></div>
+    <div class="ai-pipe-item"><div class="ai-pipe-dot"></div><div><div class="ai-pipe-name">Research pipeline graphic builder</div><div class="ai-pipe-phase">Phase 6 — Final check-in & optimization · Produces a branded, customer-colored graphic showing their confirmed research pipeline alongside potential next studies — visualizing what's locked vs. what may be coming.</div></div></div>
+    <div class="ai-pipe-item"><div class="ai-pipe-dot"></div><div><div class="ai-pipe-name">Kickoff deck & playbook personalization</div><div class="ai-pipe-phase">Phase 1 — Pre-kickoff</div></div></div>
+    <div class="ai-pipe-item"><div class="ai-pipe-dot"></div><div><div class="ai-pipe-name">Solution pairing guidance</div><div class="ai-pipe-phase">Phase 5 — First research launch</div></div></div>
+    <div class="ai-pipe-item"><div class="ai-pipe-dot"></div><div><div class="ai-pipe-name">Async training support & resource delivery</div><div class="ai-pipe-phase">Phase 4 — Training & enablement</div></div></div>
+  </div>
+</div>
+
+<script>
+document.querySelectorAll('.tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById('view-' + tab.dataset.view).classList.add('active');
+  });
+});
+
+const phases = [
+  {num:1,title:"Pre-kickoff",color:"#7F77DD",type:"Internal",steps:[
+    {name:"SF onboarding record created",cx:false,stall:false,ai:false,aic:false,rec:false,note:"NB submits IM request in SF at commit-to-buy. Creates the onboarding record and triggers the Slack notification — the starting gun for the entire IM."},
+    {name:"Account assignment (IM + CSM)",cx:false,stall:false,ai:false,aic:false,rec:false,note:"SLA: 5 business days from IM request. Assignment owner: Merlin."},
+    {name:"Review sales materials & Gong calls",cx:false,stall:false,ai:true,aic:false,rec:false,note:"AI-assisted today: Gong summaries and sales doc synthesis used to build customer context before kickoff. Replaces manual review across SF, email, and Gong."},
+    {name:"Kickoff prep — platform, deck, playbook",cx:false,stall:false,ai:false,aic:true,rec:false,note:"High manual effort. Deck tailored, platform prepped, Highspot playbook drafted, Slack channel created. Strong candidate for AI-assisted templating and personalization."},
+  ]},
+  {num:2,title:"Kickoff & alignment",color:"#D4537E",type:"Customer-facing",steps:[
+    {name:"Internal sync (IM + NB + CSM)",cx:false,stall:false,ai:false,aic:false,rec:false,note:"Align on strategy, value goals, and research pipeline before customer call."},
+    {name:"Customer kickoff call",cx:true,stall:false,ai:false,aic:false,rec:false,note:"1hr live. Goals, research alignment, solution mapping, platform preview, initial research pipeline discussion."},
+    {name:"SF record + Slack update",cx:false,stall:false,ai:true,aic:false,rec:true,note:"AI-assisted today: Account update GPT takes call summaries and generates a standardized Slack channel update. Recurring after every active phase."},
+  ]},
+  {num:3,title:"Async collaboration",color:"#BA7517",type:"Mixed",steps:[
+    {name:"Custom audience design & build",cx:true,stall:true,ai:true,aic:false,rec:false,note:"AI-assisted today: Audience auditor accepts multiple customer audience files, assesses overlap and differences, and recommends how to synthesize. Reduces back-and-forth on segmentation decisions significantly."},
+    {name:"Category request & case management",cx:false,stall:true,ai:false,aic:false,rec:false,note:"Form → email threads → SF cases. Customer inputs required. Can take 1–2 weeks. Complex multi-system coordination. No AI assist yet."},
+    {name:"Platform configuration (decision-gated)",cx:false,stall:false,ai:false,aic:true,rec:false,note:"Timing varies entirely by when the customer makes setup decisions. Tags, defaults, teamspaces, solution library. Not phase-fixed."},
+    {name:"User additions & permissions",cx:false,stall:true,ai:false,aic:false,rec:false,note:"Customer must provide final user list. Often incomplete at kickoff — requires chasing before training can be scoped."},
+    {name:"SF record + Slack update",cx:false,stall:false,ai:true,aic:false,rec:true,note:"AI-assisted today: Account update GPT generates standardized Slack update from milestone notes. Recurring after every active phase."},
+  ]},
+  {num:4,title:"Training & enablement",color:"#1D9E75",type:"Customer-facing",steps:[
+    {name:"Training call #1 — navigation & config",cx:true,stall:true,ai:false,aic:false,rec:false,note:"1hr live. Stall risk: getting the full customer team on the call is the #1 stall point. Recordings sent to absentees but retention suffers."},
+    {name:"Training call #2 — analysis & launch",cx:true,stall:true,ai:false,aic:false,rec:false,note:"1hr live. Analysis, interpreting results, launching first study. Research pipeline discussion continues here."},
+    {name:"Async support — recordings & resources",cx:true,stall:false,ai:false,aic:true,rec:false,note:"Sending recordings, Knowledge Base links, Highspot playbook. Reactive and time-consuming relative to value delivered."},
+    {name:"SF record + Slack update",cx:false,stall:false,ai:true,aic:false,rec:true,note:"AI-assisted today: Account update GPT generates standardized Slack update. Recurring after every active phase."},
+  ]},
+  {num:5,title:"First research launch",color:"#185FA5",type:"Customer-facing",steps:[
+    {name:"Solution pairing & config checks",cx:true,stall:true,ai:false,aic:true,rec:false,note:"Customer asks which solution fits their research need. High back-and-forth. Customers want demo reports and validation. Strong AI candidate for guided recommendation."},
+    {name:"Stimuli finalization",cx:true,stall:true,ai:false,aic:false,rec:false,note:"Customer-owned hard dependency. IM cannot proceed until stimuli are ready. No workaround."},
+    {name:"First study launch (customer self-serves)",cx:true,stall:false,ai:false,aic:false,rec:false,note:"Key proof-of-value moment and a handoff milestone trigger. Customer self-launches with IM on standby."},
+    {name:"SF record + Slack update",cx:false,stall:false,ai:true,aic:false,rec:true,note:"AI-assisted today: Account update GPT generates standardized Slack update. Recurring after every active phase."},
+  ]},
+  {num:6,title:"Final check-in & optimization",color:"#534AB7",type:"Customer-facing",steps:[
+    {name:"Tags, defaults & platform optimization finalized",cx:true,stall:false,ai:false,aic:false,rec:false,note:"Final home for outstanding platform config. Often where decisions made during training get implemented."},
+    {name:"Outstanding questions resolved",cx:true,stall:false,ai:false,aic:false,rec:false,note:"Ad hoc answers, final platform walk-through if needed."},
+    {name:"Post-IM survey",cx:true,stall:false,ai:false,aic:false,rec:false,note:"9/10 experience, 8.5/10 platform confidence. Important signal — currently collected, room to systematize action on results."},
+    {name:"SF record + Slack update",cx:false,stall:false,ai:true,aic:false,rec:true,note:"AI-assisted today: Account update GPT generates standardized Slack update. Recurring after every active phase."},
+  ]},
+  {num:7,title:"Internal handoff",color:"#444441",type:"Internal",steps:[
+    {name:"Robust SF record update (handover artifact)",cx:false,stall:false,ai:true,aic:false,rec:false,note:"AI-assisted today. Biggest manual burden — audiences, categories, config, pipeline, training status all documented. Built at end rather than accumulated throughout."},
+    {name:"Internal handoff meeting",cx:false,stall:false,ai:false,aic:false,rec:false,note:"IM walks account team through SF record. Happens for all accounts."},
+    {name:"SF record closed",cx:false,stall:false,ai:false,aic:false,rec:false,note:"Onboarding record formally closed. IM engagement ends."},
+  ]}
+];
+
+let jFilter = 'all';
+function renderJourney() {
+  const list = document.getElementById('journey-list');
+  list.innerHTML = '';
+  phases.forEach(ph => {
+    const filtered = ph.steps.filter(s => {
+      if (jFilter === 'all') return true;
+      if (jFilter === 'cx') return s.cx;
+      if (jFilter === 'stall') return s.stall;
+      if (jFilter === 'ai') return s.ai;
+      if (jFilter === 'aic') return s.aic;
+      return true;
+    });
+    if (filtered.length === 0) return;
+    const block = document.createElement('div');
+    block.className = 'phase-row';
+    block.innerHTML = `<div class="phase-hdr"><div class="phase-num" style="background:${ph.color}">${ph.num}</div><span class="phase-name">${ph.title}</span><span class="phase-tag">${ph.type}</span></div><div class="cards" id="jc-${ph.num}"></div>`;
+    list.appendChild(block);
+    const cards = block.querySelector(`#jc-${ph.num}`);
+    filtered.forEach(s => {
+      const div = document.createElement('div');
+      div.className = 'jcard' + (s.rec ? ' recurring' : '');
+      const cxB = s.cx ? '<span class="bdg bdg-cx">customer-facing</span>' : '<span class="bdg bdg-int">internal</span>';
+      const stallB = s.stall ? '<span class="bdg bdg-stall">stall risk</span>' : '';
+      const aiB = s.ai ? '<span class="bdg bdg-ai">AI-assisted</span>' : '';
+      const aicB = s.aic ? '<span class="bdg bdg-aic">AI opportunity</span>' : '';
+      const recB = s.rec ? '<span class="bdg bdg-rec">recurring</span>' : '';
+      div.innerHTML = `<div class="jcard-top"><span class="jcard-name">${s.name}</span><div class="jcard-badges">${cxB}${aiB}${aicB}${recB}${stallB}</div></div><div class="jcard-note">${s.note}</div>`;
+      cards.appendChild(div);
+    });
+  });
+}
+
+document.querySelectorAll('.jpill').forEach(pill => {
+  pill.addEventListener('click', () => {
+    document.querySelectorAll('.jpill').forEach(p => p.classList.remove('active'));
+    pill.classList.add('active');
+    jFilter = pill.dataset.jf;
+    renderJourney();
+  });
+});
+
+renderJourney();
+</script>
+</body>
+</html>
