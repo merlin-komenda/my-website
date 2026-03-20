@@ -1,0 +1,725 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Merlin Komenda</title>
+<meta name="description" content="Building what execution should look like." />
+
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="apple-touch-icon" href="/favicon.png">
+<meta name="theme-color" content="#1b2232">
+
+<style>
+:root{
+  --bg:#1b2232;
+  --surface:rgba(242,236,224,.04);
+  --surface2:rgba(242,236,224,.07);
+  --text:#f2ece0;
+  --muted:rgba(242,236,224,.58);
+  --muted2:rgba(242,236,224,.38);
+  --line:rgba(242,236,224,.09);
+  --accent:#c07a5a;
+  --accent-dim:rgba(192,122,90,.12);
+  --accent-border:rgba(192,122,90,.28);
+  --max:1040px;
+}
+
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial;
+  color:var(--text);
+  background:var(--bg);
+}
+.wrap{max-width:var(--max);margin:0 auto;padding:28px 20px 80px;}
+a{text-decoration:none;color:inherit}
+
+/* Nav */
+.nav{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:12px 18px;border:1px solid var(--line);border-radius:999px;
+  background:rgba(27,34,50,.92);backdrop-filter:blur(12px);
+  position:sticky;top:16px;z-index:10;
+}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:14px;text-decoration:none;color:var(--text);letter-spacing:-0.1px;}
+.mark{width:32px;height:32px;border-radius:9px;background:var(--accent);flex-shrink:0;}
+.navlinks{display:flex;gap:4px;flex-wrap:wrap;align-items:center}
+.navlinks a{font-size:13px;font-weight:500;padding:7px 11px;border-radius:999px;color:var(--muted);transition:color .15s,background .15s;}
+.navlinks a:hover{background:var(--surface2);color:var(--text);}
+.menuBtn{
+  display:none;align-items:center;justify-content:center;gap:8px;
+  border:1px solid var(--line);background:var(--surface);
+  padding:9px 14px;border-radius:999px;font-weight:600;font-size:13px;color:var(--text);cursor:pointer;
+}
+.mobileMenu{display:none;margin-top:10px;padding:8px;border:1px solid var(--line);background:rgba(27,34,50,.96);border-radius:16px;}
+.mobileMenu a{display:block;padding:10px 12px;border-radius:10px;font-weight:500;font-size:14px;color:var(--muted);}
+.mobileMenu a:hover{background:var(--surface2);color:var(--text);}
+.mobileMenu.open{display:block;}
+
+/* Hero */
+.hero{
+  margin-top:40px;
+  padding:64px 44px 0;
+  border-radius:20px;
+  border:1px solid var(--line);
+  background:rgba(242,236,224,.03);
+  overflow:hidden;
+}
+@media(max-width:900px){.hero{padding:40px 24px 0;}}
+
+.hero-eyebrow{
+  font-size:11px;font-weight:500;letter-spacing:1.6px;
+  text-transform:uppercase;color:rgba(242,236,224,.32);
+  margin-bottom:24px;display:flex;align-items:center;gap:10px;
+}
+.hero-eyebrow::before{content:"";width:24px;height:1px;background:rgba(242,236,224,.22);}
+
+/* Staggered headline */
+.hl-row{display:flex;align-items:flex-start;justify-content:space-between;gap:24px;}
+.hl-text{flex:1;}
+.hl-1{
+  font-family:Georgia,'Times New Roman',serif;
+  font-size:clamp(40px,6.5vw,72px);
+  line-height:.96;letter-spacing:-2.5px;
+  color:var(--text);display:block;
+}
+.hl-2{
+  font-family:Georgia,'Times New Roman',serif;
+  font-size:clamp(40px,6.5vw,72px);
+  line-height:.96;letter-spacing:-2.5px;
+  color:var(--accent);font-style:italic;
+  display:block;margin-left:clamp(28px,5vw,80px);
+}
+.hl-3{
+  font-family:Georgia,'Times New Roman',serif;
+  font-size:clamp(40px,6.5vw,72px);
+  line-height:.96;letter-spacing:-2.5px;
+  color:rgba(242,236,224,.18);
+  display:block;margin-left:clamp(14px,2.5vw,40px);
+}
+
+/* Photo pulled into headline */
+.hl-photo{flex-shrink:0;width:155px;margin-top:8px;}
+.photo-ring{
+  width:148px;height:148px;border-radius:50%;
+  border:1px solid var(--accent-border);
+  display:flex;align-items:center;justify-content:center;
+}
+.hero-photo{width:132px;height:132px;object-fit:cover;border-radius:50%;border:2px solid rgba(242,236,224,.08);}
+@media(max-width:900px){
+  .hl-photo{width:110px;}
+  .photo-ring{width:104px;height:104px;}
+  .hero-photo{width:90px;height:90px;}
+}
+
+/* Hero bottom */
+.hero-bottom{
+  display:grid;grid-template-columns:1.1fr 0.9fr;
+  gap:40px;padding:36px 0 52px;align-items:end;
+}
+@media(max-width:900px){.hero-bottom{grid-template-columns:1fr;gap:24px;}}
+.hero-sub{font-size:15px;color:var(--muted);line-height:1.75;max-width:420px;margin:0;}
+.hero-currently{
+  display:block;margin-top:14px;
+  font-size:12px;color:rgba(242,236,224,.30);
+  line-height:1.7;letter-spacing:.1px;
+}
+.hero-ctas{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;align-items:flex-end;padding-bottom:2px;}
+@media(max-width:900px){.hero-ctas{justify-content:flex-start;}}
+
+.btn{
+  padding:10px 18px;border-radius:9px;font-size:13px;font-weight:500;
+  border:1px solid var(--line);background:transparent;color:var(--text);
+  cursor:pointer;transition:background .2s,border-color .2s,color .2s,transform .2s;display:inline-block;
+}
+.btn:hover{background:var(--surface2);border-color:rgba(242,236,224,.18);}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff;}
+.btn.primary:hover{background:#d08a6a;border-color:#d08a6a;transform:translateY(-1px);}
+
+/* Ticker */
+.ticker-wrap{
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+  padding:11px 0;overflow:hidden;
+  background:rgba(192,122,90,.03);
+}
+.ticker-track{display:flex;animation:ticker 32s linear infinite;width:max-content;}
+.ticker-item{
+  font-size:11px;font-weight:500;letter-spacing:.7px;
+  text-transform:uppercase;color:rgba(242,236,224,.32);
+  padding:0 20px;white-space:nowrap;
+}
+.ticker-dot{color:var(--accent);margin:0 3px;}
+@keyframes ticker{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+
+/* Sections */
+section{margin-top:56px;scroll-margin-top:110px;}
+.sec-heading{
+  font-family:Georgia,'Times New Roman',serif;
+  font-size:20px;font-weight:700;color:var(--text);
+  letter-spacing:-0.2px;margin:0 0 32px;
+  display:flex;align-items:center;gap:14px;
+}
+.sec-heading::before{content:"";width:22px;height:2px;background:var(--accent);flex-shrink:0;}
+
+/* Where I help */
+.where-layout{display:grid;grid-template-columns:0.65fr 1.35fr;gap:48px;align-items:start;}
+@media(max-width:720px){.where-layout{grid-template-columns:1fr;}}
+.where-num{
+  font-family:Georgia,serif;font-size:100px;font-weight:700;
+  line-height:1;letter-spacing:-4px;
+  color:rgba(192,122,90,.09);margin-top:-10px;user-select:none;
+}
+.where-text{font-size:17px;line-height:1.8;color:rgba(242,236,224,.65);}
+.where-text p{margin:0 0 8px;}
+.where-hook{
+  display:block;margin-top:20px;
+  font-family:Georgia,'Times New Roman',serif;
+  font-size:16px;font-style:italic;
+  color:rgba(242,236,224,.78);line-height:1.65;
+  padding-left:16px;border-left:2px solid rgba(192,122,90,.45);
+}
+
+/* How I think */
+.think-pullquote{
+  font-family:Georgia,'Times New Roman',serif;
+  font-size:20px;line-height:1.55;
+  color:rgba(242,236,224,.72);
+  max-width:600px;margin-bottom:28px;
+  padding-left:20px;border-left:2px solid var(--accent);
+}
+.think-grid{
+  display:grid;grid-template-columns:1fr 1fr 1fr 1fr;
+  gap:1px;background:var(--line);
+}
+@media(max-width:720px){.think-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:480px){.think-grid{grid-template-columns:1fr;}}
+.think-item{padding:24px 20px;background:var(--bg);}
+.think-n{font-family:Georgia,serif;font-size:12px;color:var(--accent);margin-bottom:12px;display:block;}
+.think-title{font-size:14px;font-weight:600;color:var(--text);margin-bottom:5px;}
+.think-desc{font-size:12px;color:rgba(242,236,224,.38);line-height:1.55;}
+.principles-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px;}
+.princ{
+  padding:8px 14px;border-radius:999px;
+  border:1px solid rgba(192,122,90,.18);
+  background:rgba(192,122,90,.05);
+  font-size:12px;color:rgba(242,236,224,.55);font-style:italic;
+}
+
+/* Results — counting numbers */
+.results-grid{
+  display:grid;grid-template-columns:1fr 1fr 1fr;
+  gap:1px;background:var(--line);
+}
+@media(max-width:720px){.results-grid{grid-template-columns:1fr;}}
+.result-item{padding:36px 28px;background:var(--bg);}
+.result-num{
+  font-family:Georgia,serif;font-size:54px;font-weight:700;
+  color:var(--accent);line-height:1;
+  letter-spacing:-2px;margin-bottom:10px;display:block;
+}
+.result-label{font-size:13px;color:rgba(242,236,224,.38);line-height:1.55;}
+
+/* Schedule & Connect */
+.sec-h2{font-size:18px;font-weight:600;margin:0;letter-spacing:-0.1px;}
+.hint{font-size:13px;color:var(--muted2);}
+.section-title{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:14px;gap:12px;}
+.tile{padding:22px;border-radius:14px;border:1px solid var(--line);background:var(--surface);}
+.tile p{margin:0;color:var(--muted);font-size:14px;line-height:1.55;}
+.smalllinks{display:flex;gap:14px;flex-wrap:wrap;margin-top:12px;}
+.smalllinks a{font-size:14px;color:var(--muted);border-bottom:1px solid rgba(242,236,224,.18);padding-bottom:2px;transition:color .15s,border-color .15s;}
+.smalllinks a:hover{color:var(--text);border-color:rgba(242,236,224,.45);}
+
+/* Footer */
+.footer{
+  margin-top:70px;padding-top:24px;
+  border-top:1px solid var(--line);
+  font-size:11px;color:rgba(242,236,224,.20);
+  display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
+  letter-spacing:.3px;
+}
+.footer a{color:rgba(242,236,224,.20);}
+
+/* Mobile */
+@media(max-width:720px){
+  .nav{flex-wrap:wrap;gap:8px;border-radius:18px;}
+  .navlinks{display:none;}
+  .menuBtn{display:flex;}
+}
+
+/* Floating chat */
+.chat-fab{
+  position:fixed;bottom:28px;right:28px;z-index:1000;
+  display:flex;align-items:center;gap:10px;
+  padding:12px 20px;border-radius:999px;
+  background:var(--accent);border:none;cursor:pointer;
+  box-shadow:0 8px 32px rgba(192,122,90,.45);
+  color:#fff;font-size:13px;font-weight:600;
+  font-family:ui-sans-serif,system-ui,-apple-system,sans-serif;
+  transition:transform .2s,box-shadow .2s;
+}
+.chat-fab:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(192,122,90,.55);}
+.chat-fab-icon{width:18px;height:18px;flex-shrink:0;}
+.chat-fab-close{display:none;}
+.chat-panel{
+  position:fixed;bottom:90px;right:28px;z-index:999;
+  width:min(420px,calc(100vw - 40px));
+  border-radius:18px;background:#232b3e;
+  border:1px solid rgba(242,236,224,.10);
+  box-shadow:0 24px 80px rgba(0,0,0,.45);
+  overflow:hidden;display:none;flex-direction:column;
+  max-height:min(580px,calc(100vh - 140px));
+  font-family:ui-sans-serif,system-ui,-apple-system,sans-serif;
+}
+.chat-panel.open{display:flex;}
+.cp-header{
+  padding:16px 20px;border-bottom:1px solid rgba(242,236,224,.08);
+  display:flex;align-items:center;gap:12px;background:#1b2232;
+}
+.cp-avatar{width:36px;height:36px;border-radius:10px;background:var(--accent);flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+.cp-avatar svg{width:18px;height:18px;}
+.cp-name{font-size:14px;font-weight:600;color:#f2ece0;margin:0 0 2px;}
+.cp-status{font-size:11px;color:rgba(242,236,224,.45);margin:0;display:flex;align-items:center;gap:5px;}
+.cp-dot{width:6px;height:6px;border-radius:50%;background:#22c55e;display:inline-block;}
+.cp-close{margin-left:auto;background:none;border:none;cursor:pointer;color:rgba(242,236,224,.38);font-size:18px;line-height:1;padding:4px;}
+.cp-close:hover{color:rgba(242,236,224,.75);}
+.cp-messages{flex:1;overflow-y:auto;padding:16px 18px;display:flex;flex-direction:column;gap:12px;min-height:200px;}
+.cp-messages::-webkit-scrollbar{width:4px;}
+.cp-messages::-webkit-scrollbar-thumb{background:rgba(242,236,224,.15);border-radius:999px;}
+.cm{display:flex;gap:8px;align-items:flex-start;max-width:90%;}
+.cm.user{align-self:flex-end;flex-direction:row-reverse;}
+.cm.assistant{align-self:flex-start;}
+.cm-av{width:24px;height:24px;border-radius:7px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;}
+.cm.assistant .cm-av{background:var(--accent);color:#fff;}
+.cm.user .cm-av{background:rgba(242,236,224,.08);border:1px solid rgba(242,236,224,.12);color:rgba(242,236,224,.55);}
+.cm-bubble{padding:9px 13px;border-radius:12px;font-size:13px;line-height:1.6;}
+.cm.assistant .cm-bubble{background:rgba(242,236,224,.06);border:1px solid rgba(242,236,224,.08);color:#f2ece0;border-top-left-radius:3px;}
+.cm.user .cm-bubble{background:var(--accent);color:#fff;border-top-right-radius:3px;}
+.cm-bubble a{color:#22d3ee;text-decoration:underline;}
+.cp-typing{display:flex;gap:4px;padding:9px 13px;background:rgba(242,236,224,.06);border:1px solid rgba(242,236,224,.08);border-radius:12px;border-top-left-radius:3px;width:fit-content;}
+.cp-typing span{width:5px;height:5px;border-radius:50%;background:rgba(242,236,224,.5);animation:cpbounce 1.2s infinite;}
+.cp-typing span:nth-child(2){animation-delay:.2s;}
+.cp-typing span:nth-child(3){animation-delay:.4s;}
+@keyframes cpbounce{0%,60%,100%{transform:translateY(0);opacity:.4;}30%{transform:translateY(-4px);opacity:1;}}
+.cp-suggestions{padding:0 18px 10px;display:flex;flex-wrap:wrap;gap:6px;}
+.cp-sq{padding:5px 11px;border-radius:999px;border:1px solid rgba(242,236,224,.15);background:transparent;color:rgba(242,236,224,.55);font-size:11px;font-weight:500;font-family:inherit;cursor:pointer;transition:all .15s;white-space:nowrap;}
+.cp-sq:hover{background:rgba(192,122,90,.15);border-color:rgba(192,122,90,.35);color:var(--accent);}
+.cp-input-row{padding:10px 18px 14px;border-top:1px solid rgba(242,236,224,.08);display:flex;gap:8px;align-items:flex-end;}
+.cp-input{flex:1;padding:9px 13px;border-radius:10px;border:1px solid rgba(242,236,224,.15);background:rgba(242,236,224,.06);color:#f2ece0;font-size:13px;font-family:inherit;resize:none;outline:none;line-height:1.5;min-height:38px;max-height:100px;transition:border-color .15s;}
+.cp-input:focus{border-color:rgba(192,122,90,.5);}
+.cp-input::placeholder{color:rgba(242,236,224,.28);}
+.cp-send{width:34px;height:34px;border-radius:9px;background:var(--accent);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:opacity .15s,transform .15s;}
+.cp-send:hover{opacity:.88;transform:translateY(-1px);}
+.cp-send:disabled{opacity:.35;cursor:not-allowed;transform:none;}
+.cp-send svg{width:14px;height:14px;}
+.cp-footer{padding:0 18px 12px;font-size:10px;color:rgba(242,236,224,.25);text-align:center;}
+.cp-footer a{color:rgba(242,236,224,.35);}
+</style>
+
+<script type="text/javascript">
+(function(c,l,a,r,i,t,y){
+  c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+  t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+  y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+})(window, document, "clarity", "script", "vyrgo4rvfs");
+</script>
+</head>
+
+<body>
+<div class="wrap">
+
+  <div class="nav" role="navigation" aria-label="Primary">
+    <a href="/" class="brand"><div class="mark"></div><span>Merlin Komenda</span></a>
+    <div class="navlinks" aria-label="Desktop navigation">
+      <a href="#about">Where I help</a>
+      <a href="#thinking">How I think</a>
+      <a href="/experience/">Experience</a>
+      <a href="/projects/">Projects</a>
+      <a href="#contact">Connect</a>
+    </div>
+    <button class="menuBtn" id="menuBtn" type="button" aria-expanded="false" aria-controls="mobileMenu">☰ Menu</button>
+    <div class="mobileMenu" id="mobileMenu">
+      <a href="#about">Where I help</a>
+      <a href="#thinking">How I think</a>
+      <a href="/experience/">Experience</a>
+      <a href="/projects/">Projects</a>
+      <a href="#contact">Connect</a>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-eyebrow">Delmar, NY · Building what execution should look like</div>
+    <div class="hl-row">
+      <div class="hl-text">
+        <span class="hl-1">Scale your output.</span>
+        <span class="hl-2">Architect</span>
+        <span class="hl-3">outcomes.</span>
+      </div>
+      <div class="hl-photo">
+        <div class="photo-ring">
+          <img src="/headshot.jpg" alt="Merlin Komenda" class="hero-photo">
+        </div>
+      </div>
+    </div>
+    <div class="hero-bottom">
+      <div>
+        <p class="hero-sub">I redesign how organizations execute, replacing friction, heroics, and broken handoffs with systems that actually scale. Currently: Global Director of Implementation at Zappi.</p>
+        <span class="hero-currently">Home base: Delmar, NY · Wife, daughter (4), Suki, Bernie &amp; Warren</span>
+      </div>
+      <div class="hero-ctas">
+        <a class="btn primary" href="#thinking">How I think</a>
+        <a class="btn" href="#impact">Results</a>
+        <a class="btn" href="/resume.pdf" target="_blank" rel="noopener">Resume</a>
+        <a class="btn" href="https://www.linkedin.com/in/merlin-komenda/" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- TICKER -->
+  <div class="ticker-wrap">
+    <div class="ticker-track">
+      <span class="ticker-item">Systems architect<span class="ticker-dot">·</span></span>
+      <span class="ticker-item">AI-native operator<span class="ticker-dot">·</span></span>
+      <span class="ticker-item">Dad to a 4-year-old<span class="ticker-dot">·</span></span>
+      <span class="ticker-item">Clarity over complexity<span class="ticker-dot">·</span></span>
+      <span class="ticker-item">Dog dad to Suki<span class="ticker-dot">·</span></span>
+      <span class="ticker-item">60+ enterprise clients<span class="ticker-dot">·</span></span>
+      <span class="ticker-item">Structure beats intensity<span class="ticker-dot">·</span></span>
+      <span class="ticker-item">Cat dad to Bernie &amp; Warren<span class="ticker-dot">·</span></span>
+      <span class="ticker-item">Human + AI systems<span class="ticker-dot">·</span></span>
+      <span class="ticker-item">Outcomes over activity<span class="ticker-dot">·</span></span>
+      <span class="ticker-item">Early riser<span class="ticker-dot">·</span></span>
+      <span class="ticker-item">Implementation leader<span class="ticker-dot">·</span></span>
+      <span class="ticker-item">Systems architect<span class="ticker-dot">·</span></span>
+      <span class="ticker-item">AI-native operator<span class="ticker-dot">·</span></span>
+      <span class="ticker-item">Dad to a 4-year-old<span class="ticker-dot">·</span></span>
+      <span class="ticker-item">Clarity over complexity<span class="ticker-dot">·</span></span>
+      <span class="ticker-item">Dog dad to Suki<span class="ticker-dot">·</span></span>
+      <span class="ticker-item">60+ enterprise clients<span class="ticker-dot">·</span></span>
+      <span class="ticker-item">Structure beats intensity<span class="ticker-dot">·</span></span>
+      <span class="ticker-item">Cat dad to Bernie &amp; Warren<span class="ticker-dot">·</span></span>
+      <span class="ticker-item">Human + AI systems<span class="ticker-dot">·</span></span>
+      <span class="ticker-item">Outcomes over activity<span class="ticker-dot">·</span></span>
+      <span class="ticker-item">Early riser<span class="ticker-dot">·</span></span>
+      <span class="ticker-item">Implementation leader<span class="ticker-dot">·</span></span>
+    </div>
+  </div>
+
+  <!-- WHERE I HELP -->
+  <section id="about">
+    <div class="sec-heading">Where I help</div>
+    <div class="where-layout">
+      <div class="where-num">01</div>
+      <div class="where-text">
+        <p>Organizations often reach a point where growth starts creating friction.</p>
+        <p>Nothing is broken.</p>
+        <p>But execution stops scaling.</p>
+        <p>I help teams stop fighting their own growth.</p>
+        <span class="where-hook">I've spent my career inside the friction point, the gap between a company that's growing and a company that's executing.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW I THINK -->
+  <section id="thinking">
+    <div class="sec-heading">How I think</div>
+    <div class="think-pullquote">When execution gets messy, the problem isn't effort. The system has lost clarity.</div>
+    <div class="think-grid">
+      <div class="think-item">
+        <span class="think-n">01</span>
+        <div class="think-title">Align the outcome</div>
+        <div class="think-desc">What success actually looks like</div>
+      </div>
+      <div class="think-item">
+        <span class="think-n">02</span>
+        <div class="think-title">Define ownership</div>
+        <div class="think-desc">Who decides and what happens next</div>
+      </div>
+      <div class="think-item">
+        <span class="think-n">03</span>
+        <div class="think-title">Build scale</div>
+        <div class="think-desc">Progress without heroics</div>
+      </div>
+      <div class="think-item">
+        <span class="think-n">04</span>
+        <div class="think-title">Iterate</div>
+        <div class="think-desc">Adjust until results are predictable</div>
+      </div>
+    </div>
+    <div class="principles-row">
+      <span class="princ">Structure beats intensity.</span>
+      <span class="princ">Clarity comes before automation.</span>
+      <span class="princ">Systems should survive turnover.</span>
+    </div>
+  </section>
+
+  <!-- RESULTS -->
+  <section id="impact">
+    <div class="sec-heading">Results</div>
+    <div class="results-grid">
+      <div class="result-item">
+        <span class="result-num" data-target="30" data-prefix="~" data-suffix="%">~0%</span>
+        <span class="result-label">Time-to-live reduction. First customer usage in ~15 days.</span>
+      </div>
+      <div class="result-item">
+        <span class="result-num" data-target="60" data-suffix="+">0</span>
+        <span class="result-label">Implementations delivered annually with repeatable outcomes.</span>
+      </div>
+      <div class="result-item">
+        <span class="result-num" data-target="75" data-suffix="+">0</span>
+        <span class="result-label">NPS across enterprise relationships.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCHEDULE -->
+  <section id="schedule">
+    <div class="section-title">
+      <h2 class="sec-h2">Schedule</h2>
+      <div class="hint">Quick booking</div>
+    </div>
+    <div class="tile">
+      <p>Book time that works for you. You'll get a confirmation email right away.</p>
+      <div style="margin-top:14px;">
+        <button class="btn primary" type="button" id="openBookingPopup">Book time</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONNECT -->
+  <section id="contact">
+    <div class="section-title">
+      <h2 class="sec-h2">Connect</h2>
+      <div class="hint">Fastest way to reach me</div>
+    </div>
+    <div class="tile">
+      <p>Email: <a href="mailto:merlin.komenda@gmail.com" style="color:var(--accent);">merlin.komenda@gmail.com</a></p>
+      <div class="smalllinks">
+        <a href="/resume.pdf" target="_blank" rel="noopener">Resume</a>
+        <a href="https://www.linkedin.com/in/merlin-komenda/" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="footer">
+    <span>© <span id="y"></span> Merlin Komenda</span>
+    <span>42.6526° N, 73.7562° W</span>
+    <span><a href="mailto:merlin.komenda@gmail.com">merlin.komenda@gmail.com</a></span>
+  </div>
+
+</div>
+
+<!-- FLOATING CHAT BUTTON -->
+<button class="chat-fab" id="chatFab" aria-label="Ask Merlin">
+  <svg class="chat-fab-icon chat-fab-open" viewBox="0 0 24 24" fill="none">
+    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+  <svg class="chat-fab-icon chat-fab-close" viewBox="0 0 24 24" fill="none" style="display:none;">
+    <path d="M18 6L6 18M6 6l12 12" stroke="white" stroke-width="2" stroke-linecap="round"/>
+  </svg>
+  <span class="chat-fab-label">Ask Merlin</span>
+</button>
+
+<!-- CHAT PANEL -->
+<div class="chat-panel" id="chatPanel" role="dialog" aria-label="Ask Merlin">
+  <div class="cp-header">
+    <div class="cp-avatar">
+      <svg viewBox="0 0 24 24" fill="none">
+        <path d="M16.5 7.5a6.5 6.5 0 1 0 1.4 6.9" stroke="white" stroke-width="2.2" stroke-linecap="round"/>
+        <path d="M17.9 14.4l.9 2.9 2.7-1.3" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <div>
+      <p class="cp-name">Ask Merlin anything</p>
+      <p class="cp-status"><span class="cp-dot"></span>Usually responds instantly</p>
+    </div>
+    <button class="cp-close" id="chatClose" aria-label="Close">✕</button>
+  </div>
+  <div class="cp-messages" id="cpMessages"></div>
+  <div class="cp-suggestions" id="cpSuggestions">
+    <button class="cp-sq" onclick="cpAskSuggested(this)">What are you speaking about at Propel26?</button>
+    <button class="cp-sq" onclick="cpAskSuggested(this)">What kind of work do you take on?</button>
+    <button class="cp-sq" onclick="cpAskSuggested(this)">What does your background look like?</button>
+    <button class="cp-sq" onclick="cpAskSuggested(this)">How do you approach AI adoption?</button>
+    <button class="cp-sq" onclick="cpAskSuggested(this)">How can I reach you?</button>
+  </div>
+  <div class="cp-input-row">
+    <textarea class="cp-input" id="cpInput" placeholder="Ask me anything..." rows="1"></textarea>
+    <button class="cp-send" id="cpSend" onclick="cpSend()">
+      <svg viewBox="0 0 24 24" fill="none">
+        <path d="M22 2L11 13" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+  </div>
+  <div class="cp-footer">Powered by Claude · <a href="mailto:merlin.komenda@gmail.com">merlin.komenda@gmail.com</a></div>
+</div>
+
+<script>
+document.getElementById("y").textContent = new Date().getFullYear();
+
+/* Mobile menu */
+(function(){
+  const btn = document.getElementById("menuBtn");
+  const menu = document.getElementById("mobileMenu");
+  if(!btn||!menu) return;
+  function closeMenu(){ menu.classList.remove("open"); btn.setAttribute("aria-expanded","false"); }
+  btn.addEventListener("click", function(){ const o=menu.classList.toggle("open"); btn.setAttribute("aria-expanded",String(o)); });
+  menu.querySelectorAll("a").forEach(a=>a.addEventListener("click",closeMenu));
+  window.addEventListener("keydown",e=>{ if(e.key==="Escape") closeMenu(); });
+})();
+
+/* Booking popup */
+(function(){
+  const btn = document.getElementById("openBookingPopup");
+  const url = "https://calendar.app.google/M9PeWcXz76KYQfvq9";
+  function open(){
+    const w=Math.min(980,Math.floor(window.innerWidth*.92));
+    const h=Math.min(760,Math.floor(window.innerHeight*.88));
+    const l=Math.floor((window.screenX||0)+(window.innerWidth-w)/2);
+    const t=Math.floor((window.screenY||0)+(window.innerHeight-h)/2);
+    const f=[`width=${w}`,`height=${h}`,`left=${l}`,`top=${t}`,"resizable=yes","scrollbars=yes","noopener=yes","noreferrer=yes"].join(",");
+    const win=window.open(url,"MerlinBooking",f);
+    if(!win) window.open(url,"_blank","noopener,noreferrer");
+  }
+  btn?.addEventListener("click",open);
+})();
+
+/* Counting numbers */
+(function(){
+  const nums = document.querySelectorAll('.result-num[data-target]');
+  let triggered = false;
+  function countUp(){
+    nums.forEach(el=>{
+      const target = parseInt(el.dataset.target);
+      const prefix = el.dataset.prefix||'';
+      const suffix = el.dataset.suffix||'';
+      let val = 0;
+      const duration = 1800;
+      const step = 16;
+      const inc = target/(duration/step);
+      const timer = setInterval(()=>{
+        val += inc;
+        if(val >= target){ val=target; clearInterval(timer); }
+        el.textContent = prefix + Math.round(val) + suffix;
+      }, step);
+    });
+  }
+  const observer = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{ if(e.isIntersecting && !triggered){ triggered=true; countUp(); }});
+  },{threshold:0.3});
+  const grid = document.querySelector('.results-grid');
+  if(grid) observer.observe(grid);
+})();
+
+/* Floating chat */
+const CP_SYSTEM = `You are a friendly, conversational assistant representing Merlin Komenda on his professional portfolio website. Your job is to answer questions from recruiters, potential collaborators, and conference attendees about Merlin.
+
+Tone: Warm, confident, and direct. Third person ("Merlin is...") but friendly — like a well-briefed colleague who knows him well. No corporate speak. No hype. Accurate, grounded answers only.
+
+When you don't know something or the question is outside what you have context for, say: "Good question — that's one for Merlin himself. Drop him a line at merlin.komenda@gmail.com, he's pretty responsive."
+
+== WHO MERLIN IS ==
+Merlin Komenda is Global Director of Implementation at Zappi, an AI-powered consumer research platform. He builds AI-enabled operating models — the kind that make organizational growth predictable and repeatable rather than chaotic. His focus is on designing systems that work after the kickoff: clear ownership, AI in the right places, delivery that survives turnover. He's based in the Albany, NY area. Core philosophy: Structure beats intensity. Clarity before automation. Systems should survive turnover.
+
+== KEY RESULTS ==
+- ~30% reduction in time-to-live; first customer usage in ~15 days
+- 60+ implementations delivered annually with repeatable outcomes
+- ~40% faster adoption through scalable platform setup patterns
+- ~10% improvement in onboarding-generated revenue
+- NPS 75+ across enterprise relationships
+- Enterprise rollout across 60 people and 7 product verticals at a Fortune 500 company
+- Built AI-powered agent setup tool that cut deployment time from 20 hours to 8-10
+
+== PROPEL26 TALK ==
+Merlin is a confirmed speaker at Propel26 — the world's #1 conference for service delivery professionals, hosted by Rocketlane. San Francisco, May 13-14, 2026. Talk: "Design Before You Automate: The Implementation Discipline Behind AI That Actually Sticks." Core thesis: AI adoption fails less because of bad tooling and more because teams automate workflows that were never clearly designed. AI amplifies whatever system design already exists — good or bad. Three principles: (1) Start with the customer outcome. (2) Lead with expertise — shift from "customer builds, team reviews" to "team recommends, customer validates." (3) Let automation follow clarity. Results from Zappi's own redesign: 35% improvement in time-to-live, stable satisfaction, increased team capacity.
+
+== WORKING STYLE ==
+Outcome-first, low-drama delivery. Calm under pressure. Values clarity over complexity.
+
+== OPEN TO ==
+Speaking engagements and panels. Conversations with delivery leaders and systems thinkers. Recruiters exploring roles at the intersection of AI, implementation, and operations leadership.
+
+== CONTACT ==
+Email: merlin.komenda@gmail.com — LinkedIn: https://www.linkedin.com/in/merlin-komenda/
+
+== RULES ==
+Keep answers concise — 2-4 sentences for simple questions, a short paragraph for complex ones. Do not speculate on compensation or salary. If asked about job hunting directly, say he's open to the right conversations. Do not invent details not listed here.`;
+
+let cpHistory=[], cpLoading=false;
+
+(function(){
+  const fab=document.getElementById('chatFab');
+  const panel=document.getElementById('chatPanel');
+  const closeBtn=document.getElementById('chatClose');
+  const openIcon=fab.querySelector('.chat-fab-open');
+  const closeIcon=fab.querySelector('.chat-fab-close');
+  const label=fab.querySelector('.chat-fab-label');
+  let opened=false;
+  function openPanel(){
+    panel.classList.add('open');
+    openIcon.style.display='none';
+    closeIcon.style.display='block';
+    label.textContent='Close';
+    if(!opened){ opened=true; cpAddMsg('assistant',"Hey! I'm a quick way to learn more about Merlin — his background, what he's speaking about at Propel26, how he works, or how to get in touch. What would you like to know?"); }
+    document.getElementById('cpInput').focus();
+  }
+  function closePanel(){
+    panel.classList.remove('open');
+    openIcon.style.display='block';
+    closeIcon.style.display='none';
+    label.textContent='Ask Merlin';
+  }
+  fab.addEventListener('click',()=>panel.classList.contains('open')?closePanel():openPanel());
+  closeBtn.addEventListener('click',closePanel);
+  window.addEventListener('keydown',e=>{ if(e.key==='Escape') closePanel(); });
+})();
+
+function cpAddMsg(role,content){
+  const c=document.getElementById('cpMessages');
+  const w=document.createElement('div'); w.className='cm '+role;
+  const av=document.createElement('div'); av.className='cm-av'; av.textContent=role==='user'?'You':'MK';
+  const b=document.createElement('div'); b.className='cm-bubble';
+  b.innerHTML=content.replace(/\n/g,'<br>').replace(/\[([^\]]+)\]\((https?:\/\/[^\)]+)\)/g,'<a href="$2" target="_blank">$1</a>');
+  w.appendChild(av); w.appendChild(b); c.appendChild(w); c.scrollTop=c.scrollHeight;
+}
+function cpAddTyping(){
+  const c=document.getElementById('cpMessages');
+  const w=document.createElement('div'); w.className='cm assistant'; w.id='cpTyping';
+  const av=document.createElement('div'); av.className='cm-av'; av.textContent='MK';
+  const t=document.createElement('div'); t.className='cp-typing'; t.innerHTML='<span></span><span></span><span></span>';
+  w.appendChild(av); w.appendChild(t); c.appendChild(w); c.scrollTop=c.scrollHeight;
+}
+function cpRemoveTyping(){ const el=document.getElementById('cpTyping'); if(el) el.remove(); }
+function cpHideSuggestions(){ const el=document.getElementById('cpSuggestions'); if(el) el.style.display='none'; }
+function cpAskSuggested(btn){ cpHideSuggestions(); cpSendText(btn.textContent); }
+async function cpSend(){
+  const input=document.getElementById('cpInput');
+  const text=input.value.trim();
+  if(!text||cpLoading) return;
+  input.value=''; input.style.height='auto';
+  cpHideSuggestions(); cpSendText(text);
+}
+async function cpSendText(text){
+  if(cpLoading) return;
+  cpLoading=true; document.getElementById('cpSend').disabled=true;
+  cpAddMsg('user',text); cpHistory.push({role:'user',content:text}); cpAddTyping();
+  try {
+    const res=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,system:CP_SYSTEM,messages:cpHistory})});
+    const data=await res.json(); cpRemoveTyping();
+    if(data.content&&data.content[0]&&data.content[0].text){
+      const reply=data.content[0].text;
+      cpHistory.push({role:'assistant',content:reply}); cpAddMsg('assistant',reply);
+    } else { cpAddMsg('assistant',"Good question — that's one for Merlin himself. Drop him a line at merlin.komenda@gmail.com, he's pretty responsive."); }
+  } catch(e){ cpRemoveTyping(); cpAddMsg('assistant',"Good question — that's one for Merlin himself. Drop him a line at merlin.komenda@gmail.com, he's pretty responsive."); }
+  cpLoading=false; document.getElementById('cpSend').disabled=false;
+}
+const cpInput=document.getElementById('cpInput');
+cpInput.addEventListener('keydown',e=>{ if(e.key==='Enter'&&!e.shiftKey){ e.preventDefault(); cpSend(); }});
+cpInput.addEventListener('input',()=>{ cpInput.style.height='auto'; cpInput.style.height=Math.min(cpInput.scrollHeight,100)+'px'; });
+</script>
+
+</body>
+</html>
