@@ -1,0 +1,433 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Projects — Merlin Komenda</title>
+<meta name="description" content="AI systems, operational redesign, and the work behind the outcomes." />
+
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="apple-touch-icon" href="/favicon.png">
+<meta name="theme-color" content="#1b2232">
+
+<style>
+:root{
+  --bg:#1b2232;
+  --surface:rgba(242,236,224,.04);
+  --surface2:rgba(242,236,224,.07);
+  --text:#f2ece0;
+  --muted:rgba(242,236,224,.58);
+  --muted2:rgba(242,236,224,.38);
+  --line:rgba(242,236,224,.09);
+  --accent:#c07a5a;
+  --accent-dim:rgba(192,122,90,.12);
+  --accent-border:rgba(192,122,90,.28);
+  --max:1040px;
+}
+
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial;
+  color:var(--text);
+  background:var(--bg);
+}
+.wrap{max-width:var(--max);margin:0 auto;padding:28px 20px 80px;}
+a{text-decoration:none;color:inherit}
+
+/* Nav */
+.nav{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:12px 18px;border:1px solid var(--line);border-radius:999px;
+  background:rgba(27,34,50,.92);backdrop-filter:blur(12px);
+  position:sticky;top:16px;z-index:10;
+}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:14px;text-decoration:none;color:var(--text);}
+.mark{width:32px;height:32px;border-radius:9px;background:var(--accent);flex-shrink:0;}
+.navlinks{display:flex;gap:4px;flex-wrap:wrap;align-items:center}
+.navlinks a{font-size:13px;font-weight:500;padding:7px 11px;border-radius:999px;color:var(--muted);transition:color .15s,background .15s;}
+.navlinks a:hover{background:var(--surface2);color:var(--text);}
+.navlinks a.active{background:var(--accent-dim);color:var(--accent);}
+.menuBtn{
+  display:none;align-items:center;justify-content:center;gap:8px;
+  border:1px solid var(--line);background:var(--surface);
+  padding:9px 14px;border-radius:999px;font-weight:600;font-size:13px;color:var(--text);cursor:pointer;
+}
+.mobileMenu{display:none;margin-top:10px;padding:8px;border:1px solid var(--line);background:rgba(27,34,50,.96);border-radius:16px;}
+.mobileMenu a{display:block;padding:10px 12px;border-radius:10px;font-weight:500;font-size:14px;color:var(--muted);}
+.mobileMenu a:hover{background:var(--surface2);color:var(--text);}
+.mobileMenu.open{display:block;}
+
+/* Page header */
+.page-header{
+  margin-top:40px;padding:48px 44px 52px;
+  border-radius:20px;border:1px solid var(--line);
+  background:rgba(242,236,224,.03);
+}
+@media(max-width:720px){.page-header{padding:32px 24px 36px;}}
+.page-header h1{
+  font-family:Georgia,'Times New Roman',serif;
+  font-size:clamp(32px,5vw,52px);
+  line-height:.97;letter-spacing:-1px;
+  margin:0 0 12px;color:var(--text);
+}
+.page-header p{margin:0;color:var(--muted);font-size:15px;line-height:1.65;max-width:560px;}
+
+/* Section heading */
+.sec-heading{
+  font-family:Georgia,'Times New Roman',serif;
+  font-size:20px;font-weight:700;color:var(--text);
+  letter-spacing:-0.2px;margin:0 0 24px;
+  display:flex;align-items:center;gap:14px;
+}
+.sec-heading::before{content:"";width:22px;height:2px;background:var(--accent);flex-shrink:0;}
+.hint{font-size:13px;color:var(--muted2);}
+.section-title{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:20px;gap:12px;}
+
+section{margin-top:52px;}
+
+/* Project cards */
+.project-list{display:flex;flex-direction:column;gap:16px;}
+
+.project-card{
+  padding:30px 32px;border-radius:16px;
+  border:1px solid var(--line);
+  background:var(--surface);
+  position:relative;overflow:hidden;
+  transition:border-color .2s,transform .2s;
+}
+.project-card:hover{border-color:rgba(192,122,90,.25);transform:translateY(-2px);}
+.project-card::before{
+  content:"";position:absolute;left:0;top:0;
+  width:3px;height:100%;
+  background:var(--accent);
+  opacity:.6;
+}
+
+.card-top{
+  display:flex;align-items:flex-start;
+  justify-content:space-between;
+  gap:20px;margin-bottom:20px;flex-wrap:wrap;
+}
+.card-meta{display:flex;flex-direction:column;gap:6px;}
+.card-tag{
+  display:inline-flex;align-items:center;
+  padding:4px 10px;border-radius:999px;
+  background:var(--accent-dim);
+  border:1px solid var(--accent-border);
+  font-size:11px;font-weight:600;
+  color:var(--accent);letter-spacing:.3px;
+  width:fit-content;
+}
+.card-title{
+  font-family:Georgia,'Times New Roman',serif;
+  font-size:20px;font-weight:700;
+  letter-spacing:-0.3px;margin:0;
+  line-height:1.2;color:var(--text);
+}
+
+/* KPI cluster */
+.kpi-cluster{display:flex;gap:10px;flex-wrap:wrap;flex-shrink:0;}
+.kpi-pill{
+  padding:10px 16px;border-radius:12px;
+  background:rgba(192,122,90,.08);
+  border:1px solid var(--accent-border);
+  text-align:center;min-width:76px;
+}
+.kpi-pill .num{
+  font-family:Georgia,'Times New Roman',serif;
+  font-size:20px;font-weight:700;
+  color:var(--accent);display:block;
+  line-height:1;letter-spacing:-0.4px;
+}
+.kpi-pill .label{
+  font-size:11px;color:var(--muted);
+  display:block;margin-top:4px;line-height:1.3;
+}
+
+/* Narrative grid */
+.narrative{
+  display:grid;grid-template-columns:1fr 1fr 1fr;
+  gap:12px;
+}
+@media(max-width:720px){
+  .narrative{grid-template-columns:1fr;}
+  .card-top{flex-direction:column;}
+}
+
+.narrative-block{
+  padding:16px;border-radius:10px;
+  background:rgba(242,236,224,.03);
+  border:1px solid rgba(242,236,224,.06);
+}
+.narrative-block .n-label{
+  font-size:11px;font-weight:700;
+  letter-spacing:.8px;text-transform:uppercase;
+  color:var(--accent);margin-bottom:8px;display:block;
+}
+.narrative-block p{
+  margin:0;font-size:14px;
+  line-height:1.6;color:var(--muted);
+}
+
+/* Impact log */
+.impact-log{
+  border-radius:16px;border:1px solid var(--line);
+  background:var(--surface);overflow:hidden;
+}
+.log-entry{
+  display:grid;grid-template-columns:110px 1fr;
+  gap:16px;padding:16px 22px;
+  border-bottom:1px solid var(--line);
+  align-items:baseline;
+  transition:background .15s;
+}
+.log-entry:last-child{border-bottom:none;}
+.log-entry:hover{background:var(--surface2);}
+.log-date{
+  font-size:12px;font-weight:600;
+  color:var(--accent);letter-spacing:.2px;white-space:nowrap;
+}
+.log-text{font-size:14px;line-height:1.6;color:var(--muted);}
+.log-text strong{font-weight:600;color:var(--text);}
+
+@media(max-width:600px){
+  .log-entry{grid-template-columns:1fr;gap:4px;}
+  .project-card{padding:22px 20px;}
+}
+
+/* Back link */
+.back-link{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:14px;color:var(--muted2);margin-top:40px;
+  transition:color .15s;
+}
+.back-link:hover{color:var(--muted);}
+
+/* Footer */
+.footer{
+  margin-top:70px;padding-top:24px;
+  border-top:1px solid var(--line);
+  font-size:13px;color:var(--muted2);
+  display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
+}
+.footer a{color:var(--muted2);}
+.footer a:hover{color:var(--muted);}
+
+@media(max-width:720px){
+  .nav{flex-wrap:wrap;gap:8px;border-radius:18px;}
+  .navlinks{display:none;}
+  .menuBtn{display:flex;}
+}
+</style>
+</head>
+
+<body>
+<div class="wrap">
+
+  <div class="nav" role="navigation" aria-label="Primary">
+    <a href="/" class="brand"><div class="mark"></div><span>Merlin Komenda</span></a>
+    <div class="navlinks" aria-label="Desktop navigation">
+      <a href="/#about">Where I help</a>
+      <a href="/#thinking">How I think</a>
+      <a href="/#impact">Results</a>
+      <a href="/experience/">Experience</a>
+      <a href="/projects/" class="active">Projects</a>
+      <a href="/#schedule">Schedule</a>
+      <a href="/#contact">Connect</a>
+    </div>
+    <button class="menuBtn" id="menuBtn" type="button" aria-expanded="false" aria-controls="mobileMenu">☰ Menu</button>
+    <div class="mobileMenu" id="mobileMenu">
+      <a href="/#about">Where I help</a>
+      <a href="/#thinking">How I think</a>
+      <a href="/#impact">Results</a>
+      <a href="/experience/">Experience</a>
+      <a href="/projects/" class="active">Projects</a>
+      <a href="/#schedule">Schedule</a>
+      <a href="/#contact">Connect</a>
+    </div>
+  </div>
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <h1>Projects that<br>moved the needle.</h1>
+    <p>Real work, real outcomes. Client names anonymized — the systems and results speak for themselves.</p>
+  </div>
+
+  <!-- PROJECT CARDS -->
+  <section>
+    <div class="section-title">
+      <div class="sec-heading">Case studies</div>
+      <div class="hint">Problem → approach → outcome</div>
+    </div>
+
+    <div class="project-list">
+
+      <!-- PROJECT 1 -->
+      <div class="project-card">
+        <div class="card-top">
+          <div class="card-meta">
+            <span class="card-tag">AI Systems</span>
+            <h2 class="card-title">AI Agent Setup Automation</h2>
+          </div>
+          <div class="kpi-cluster">
+            <div class="kpi-pill">
+              <span class="num">60%</span>
+              <span class="label">Setup time<br>reduction</span>
+            </div>
+            <div class="kpi-pill">
+              <span class="num">20→8h</span>
+              <span class="label">Hours per<br>deployment</span>
+            </div>
+          </div>
+        </div>
+        <div class="narrative">
+          <div class="narrative-block">
+            <span class="n-label">The problem</span>
+            <p>Launching AI-powered Marketing Agents required manually reviewing and categorizing large volumes of client files — a 20-hour process that created a bottleneck before any customer value was delivered.</p>
+          </div>
+          <div class="narrative-block">
+            <span class="n-label">What I built</span>
+            <p>Designed and built a custom GPT that ingests client files at scale, recommends the appropriate agent association, and generates agent-ready content summaries — including translating visual assets into structured text for faster processing.</p>
+          </div>
+          <div class="narrative-block">
+            <span class="n-label">The outcome</span>
+            <p>Setup time dropped from ~20 hours to 8–10. That compression reduced internal delivery cost and cut customer lead time — accelerating time-to-value on a flagship AI product for every new deployment.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- PROJECT 2 -->
+      <div class="project-card">
+        <div class="card-top">
+          <div class="card-meta">
+            <span class="card-tag">Operational Design</span>
+            <h2 class="card-title">Pricing & Scope Defense Through Measurement</h2>
+          </div>
+          <div class="kpi-cluster">
+            <div class="kpi-pill">
+              <span class="num">↑</span>
+              <span class="label">Pricing<br>leverage gained</span>
+            </div>
+            <div class="kpi-pill">
+              <span class="num">0→1</span>
+              <span class="label">Visibility into<br>effort trends</span>
+            </div>
+          </div>
+        </div>
+        <div class="narrative">
+          <div class="narrative-block">
+            <span class="n-label">The problem</span>
+            <p>No visibility into where internal effort actually went — which meant no defensible basis for PS pricing, no data for scope conversations, and no way to identify where cost was quietly accumulating month over month.</p>
+          </div>
+          <div class="narrative-block">
+            <span class="n-label">What I built</span>
+            <p>Conducted an internal audit to define what needed to be measured and why. Designed a tracking framework from scratch, calibrated for accuracy, and built the measurement system that captured effort at enough granularity to surface real trends.</p>
+          </div>
+          <div class="narrative-block">
+            <span class="n-label">The outcome</span>
+            <p>Identified hidden effort sinks growing month-over-month. Provided the data foundation that defended scope in client conversations and justified price increases that previously lacked any supporting evidence.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- PROJECT 3 -->
+      <div class="project-card">
+        <div class="card-top">
+          <div class="card-meta">
+            <span class="card-tag">AI Adoption Architecture</span>
+            <h2 class="card-title">Enterprise AI Integration — Fortune 500 Rollout</h2>
+          </div>
+          <div class="kpi-cluster">
+            <div class="kpi-pill">
+              <span class="num">60</span>
+              <span class="label">People<br>enabled</span>
+            </div>
+            <div class="kpi-pill">
+              <span class="num">7</span>
+              <span class="label">Product<br>verticals</span>
+            </div>
+          </div>
+        </div>
+        <div class="narrative">
+          <div class="narrative-block">
+            <span class="n-label">The problem</span>
+            <p>A major enterprise customer needed more than platform access — they needed a way to embed AI-driven insight into an active product innovation cycle across a complex, multi-vertical organization.</p>
+          </div>
+          <div class="narrative-block">
+            <span class="n-label">What I designed</span>
+            <p>Oversaw full platform configuration, then designed the integration model: a custom training program with best practices, workflow guidance, and a repeatable usage structure for incorporating AI into weekly product development across 7 verticals.</p>
+          </div>
+          <div class="narrative-block">
+            <span class="n-label">The outcome</span>
+            <p>60-person rollout that wasn't a one-time training — it launched an ongoing operational rhythm. Became the internal template for what enterprise AI-first customer enablement looks like at scale.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- IMPACT LOG -->
+  <section>
+    <div class="section-title">
+      <div class="sec-heading">Impact log</div>
+      <div class="hint">Running record — updated as work ships</div>
+    </div>
+
+    <div class="impact-log">
+
+      <!-- ADD NEW ENTRIES AT THE TOP. FORMAT:
+      <div class="log-entry">
+        <span class="log-date">Mon YYYY</span>
+        <span class="log-text"><strong>One-line result.</strong> Brief context if needed.</span>
+      </div>
+      -->
+
+      <div class="log-entry">
+        <span class="log-date">Mar 2026</span>
+        <span class="log-text"><strong>Enterprise AI rollout completed across 7 product verticals.</strong> 60-person training established repeatable AI usage model for largest AI-first customer.</span>
+      </div>
+      <div class="log-entry">
+        <span class="log-date">2025</span>
+        <span class="log-text"><strong>Built GPT-powered agent setup tool.</strong> Reduced deployment time from 20 hours to 8–10, compressing customer lead time across all new AI product launches.</span>
+      </div>
+      <div class="log-entry">
+        <span class="log-date">2025</span>
+        <span class="log-text"><strong>Measurement framework enabled first defensible pricing increase.</strong> Effort tracking surfaced hidden cost drivers and gave scope conversations a factual foundation for the first time.</span>
+      </div>
+      <div class="log-entry">
+        <span class="log-date">Ongoing</span>
+        <span class="log-text"><strong>60+ clients implemented annually</strong> with repeatable delivery rhythms. NPS holding above 75 across enterprise relationships.</span>
+      </div>
+
+    </div>
+  </section>
+
+  <a href="/" class="back-link">← Back to home</a>
+
+  <div class="footer">
+    <div>© <span id="y"></span> Merlin Komenda</div>
+    <div><a href="mailto:merlin.komenda@gmail.com">merlin.komenda@gmail.com</a></div>
+  </div>
+
+</div>
+
+<script>
+document.getElementById("y").textContent = new Date().getFullYear();
+(function(){
+  const btn = document.getElementById("menuBtn");
+  const menu = document.getElementById("mobileMenu");
+  if(!btn || !menu) return;
+  function closeMenu(){ menu.classList.remove("open"); btn.setAttribute("aria-expanded","false"); }
+  btn.addEventListener("click", function(){
+    const isOpen = menu.classList.toggle("open");
+    btn.setAttribute("aria-expanded", String(isOpen));
+  });
+  menu.querySelectorAll("a").forEach(a => a.addEventListener("click", closeMenu));
+  window.addEventListener("keydown", (e) => { if(e.key === "Escape") closeMenu(); });
+})();
+</script>
+
+</body>
+</html>
