@@ -170,6 +170,18 @@ section{margin-top:52px;}
   line-height:1.6;color:var(--muted);
 }
 
+/* Project mockup visuals */
+.project-mockup{
+  width:100%;height:180px;
+  border-radius:10px;
+  margin-bottom:24px;
+  overflow:hidden;
+  border:1px solid rgba(242,236,224,.07);
+  background:#151c2c;
+  position:relative;
+}
+.project-mockup svg{width:100%;height:100%;}
+
 /* Impact log */
 .impact-log{
   border-radius:16px;border:1px solid var(--line);
@@ -220,20 +232,6 @@ section{margin-top:52px;}
   .menuBtn{display:flex;}
 }
 </style>
-<script type="text/javascript">
-    (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "vyrgo4rvfs");
-</script>
-  <script type="text/javascript">
-    (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "vyrgo4rvfs");
-</script>
 </head>
 
 <body>
@@ -275,6 +273,76 @@ section{margin-top:52px;}
 
       <!-- PROJECT 1 -->
       <div class="project-card">
+
+        <!-- Mockup: file ingestion pipeline -->
+        <div class="project-mockup">
+          <svg viewBox="0 0 800 180" xmlns="http://www.w3.org/2000/svg">
+            <!-- Background grid -->
+            <defs>
+              <pattern id="g1" width="40" height="40" patternUnits="userSpaceOnUse">
+                <path d="M40 0H0V40" fill="none" stroke="rgba(242,236,224,.04)" stroke-width="1"/>
+              </pattern>
+            </defs>
+            <rect width="800" height="180" fill="#151c2c"/>
+            <rect width="800" height="180" fill="url(#g1)"/>
+
+            <!-- File nodes (left) -->
+            <g opacity="0.9">
+              <rect x="40" y="30" width="72" height="52" rx="6" fill="rgba(192,122,90,.12)" stroke="rgba(192,122,90,.35)" stroke-width="1"/>
+              <rect x="48" y="40" width="44" height="4" rx="2" fill="rgba(192,122,90,.6)"/>
+              <rect x="48" y="50" width="36" height="3" rx="2" fill="rgba(242,236,224,.2)"/>
+              <rect x="48" y="58" width="40" height="3" rx="2" fill="rgba(242,236,224,.2)"/>
+              <rect x="48" y="66" width="28" height="3" rx="2" fill="rgba(242,236,224,.2)"/>
+              <text x="76" y="96" font-family="Georgia,serif" font-size="10" fill="rgba(192,122,90,.7)" text-anchor="middle">PDF</text>
+
+              <rect x="40" y="100" width="72" height="52" rx="6" fill="rgba(192,122,90,.08)" stroke="rgba(192,122,90,.25)" stroke-width="1"/>
+              <rect x="48" y="110" width="44" height="4" rx="2" fill="rgba(192,122,90,.4)"/>
+              <rect x="48" y="120" width="36" height="3" rx="2" fill="rgba(242,236,224,.15)"/>
+              <rect x="48" y="128" width="40" height="3" rx="2" fill="rgba(242,236,224,.15)"/>
+              <rect x="48" y="136" width="28" height="3" rx="2" fill="rgba(242,236,224,.15)"/>
+              <text x="76" y="166" font-family="Georgia,serif" font-size="10" fill="rgba(192,122,90,.5)" text-anchor="middle">IMG</text>
+            </g>
+
+            <!-- Arrows -->
+            <line x1="116" y1="56" x2="200" y2="88" stroke="rgba(192,122,90,.4)" stroke-width="1.5" stroke-dasharray="4,3"/>
+            <line x1="116" y1="126" x2="200" y2="92" stroke="rgba(192,122,90,.3)" stroke-width="1.5" stroke-dasharray="4,3"/>
+
+            <!-- GPT processor (center) -->
+            <rect x="200" y="60" width="120" height="60" rx="10" fill="rgba(192,122,90,.18)" stroke="rgba(192,122,90,.55)" stroke-width="1.5"/>
+            <text x="260" y="86" font-family="Georgia,serif" font-size="13" fill="#f2ece0" text-anchor="middle" font-weight="700">GPT</text>
+            <text x="260" y="103" font-family="ui-sans-serif,sans-serif" font-size="9" fill="rgba(242,236,224,.5)" text-anchor="middle">Processing</text>
+
+            <!-- Arrow out -->
+            <line x1="320" y1="90" x2="400" y2="90" stroke="rgba(192,122,90,.4)" stroke-width="1.5" stroke-dasharray="4,3"/>
+            <polygon points="400,86 408,90 400,94" fill="rgba(192,122,90,.6)"/>
+
+            <!-- Output cards (right) -->
+            <rect x="415" y="35" width="140" height="44" rx="8" fill="rgba(242,236,224,.05)" stroke="rgba(242,236,224,.12)" stroke-width="1"/>
+            <rect x="425" y="45" width="60" height="3" rx="2" fill="rgba(192,122,90,.5)"/>
+            <rect x="425" y="53" width="110" height="3" rx="2" fill="rgba(242,236,224,.2)"/>
+            <rect x="425" y="61" width="90" height="3" rx="2" fill="rgba(242,236,224,.15)"/>
+            <text x="555" y="48" font-family="ui-sans-serif,sans-serif" font-size="9" fill="rgba(192,122,90,.7)" text-anchor="end">Agent A</text>
+
+            <rect x="415" y="90" width="140" height="44" rx="8" fill="rgba(242,236,224,.05)" stroke="rgba(242,236,224,.12)" stroke-width="1"/>
+            <rect x="425" y="100" width="60" height="3" rx="2" fill="rgba(192,122,90,.5)"/>
+            <rect x="425" y="108" width="110" height="3" rx="2" fill="rgba(242,236,224,.2)"/>
+            <rect x="425" y="116" width="90" height="3" rx="2" fill="rgba(242,236,224,.15)"/>
+            <text x="555" y="103" font-family="ui-sans-serif,sans-serif" font-size="9" fill="rgba(192,122,90,.7)" text-anchor="end">Agent B</text>
+
+            <!-- KPI badges -->
+            <rect x="610" y="55" width="80" height="30" rx="6" fill="rgba(192,122,90,.15)" stroke="rgba(192,122,90,.4)" stroke-width="1"/>
+            <text x="650" y="67" font-family="Georgia,serif" font-size="14" fill="#c07a5a" text-anchor="middle" font-weight="700">20→8h</text>
+            <text x="650" y="79" font-family="ui-sans-serif,sans-serif" font-size="8" fill="rgba(242,236,224,.4)" text-anchor="middle">per deploy</text>
+
+            <rect x="610" y="95" width="80" height="30" rx="6" fill="rgba(192,122,90,.10)" stroke="rgba(192,122,90,.3)" stroke-width="1"/>
+            <text x="650" y="107" font-family="Georgia,serif" font-size="14" fill="#c07a5a" text-anchor="middle" font-weight="700">60%</text>
+            <text x="650" y="119" font-family="ui-sans-serif,sans-serif" font-size="8" fill="rgba(242,236,224,.4)" text-anchor="middle">time saved</text>
+
+            <!-- Label -->
+            <text x="40" y="172" font-family="ui-sans-serif,sans-serif" font-size="9" fill="rgba(242,236,224,.2)" letter-spacing="1">AI AGENT SETUP PIPELINE</text>
+          </svg>
+        </div>
+
         <div class="card-top">
           <div class="card-meta">
             <span class="card-tag">AI Systems</span>
@@ -309,6 +377,77 @@ section{margin-top:52px;}
 
       <!-- PROJECT 2 -->
       <div class="project-card">
+
+        <!-- Mockup: effort tracking dashboard -->
+        <div class="project-mockup">
+          <svg viewBox="0 0 800 180" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <pattern id="g2" width="40" height="40" patternUnits="userSpaceOnUse">
+                <path d="M40 0H0V40" fill="none" stroke="rgba(242,236,224,.04)" stroke-width="1"/>
+              </pattern>
+            </defs>
+            <rect width="800" height="180" fill="#151c2c"/>
+            <rect width="800" height="180" fill="url(#g2)"/>
+
+            <!-- Chart area -->
+            <rect x="40" y="20" width="420" height="140" rx="8" fill="rgba(242,236,224,.03)" stroke="rgba(242,236,224,.08)" stroke-width="1"/>
+
+            <!-- Y axis labels -->
+            <text x="55" y="48" font-family="ui-sans-serif,sans-serif" font-size="8" fill="rgba(242,236,224,.25)" text-anchor="middle">40h</text>
+            <text x="55" y="88" font-family="ui-sans-serif,sans-serif" font-size="8" fill="rgba(242,236,224,.25)" text-anchor="middle">20h</text>
+            <text x="55" y="128" font-family="ui-sans-serif,sans-serif" font-size="8" fill="rgba(242,236,224,.25)" text-anchor="middle">0h</text>
+
+            <!-- Grid lines -->
+            <line x1="68" y1="45" x2="450" y2="45" stroke="rgba(242,236,224,.06)" stroke-width="1"/>
+            <line x1="68" y1="85" x2="450" y2="85" stroke="rgba(242,236,224,.06)" stroke-width="1"/>
+            <line x1="68" y1="125" x2="450" y2="125" stroke="rgba(242,236,224,.06)" stroke-width="1"/>
+
+            <!-- Bars - effort by category, growing trend visible -->
+            <rect x="80" y="95" width="28" height="30" rx="3" fill="rgba(192,122,90,.3)"/>
+            <rect x="120" y="88" width="28" height="37" rx="3" fill="rgba(192,122,90,.35)"/>
+            <rect x="160" y="78" width="28" height="47" rx="3" fill="rgba(192,122,90,.45)"/>
+            <rect x="200" y="68" width="28" height="57" rx="3" fill="rgba(192,122,90,.55)"/>
+            <rect x="240" y="55" width="28" height="70" rx="3" fill="rgba(192,122,90,.65)"/>
+            <rect x="280" y="48" width="28" height="77" rx="3" fill="rgba(192,122,90,.75)"/>
+
+            <!-- Highlight bar -->
+            <rect x="320" y="38" width="28" height="87" rx="3" fill="#c07a5a"/>
+            <text x="334" y="32" font-family="ui-sans-serif,sans-serif" font-size="8" fill="#c07a5a" text-anchor="middle">↑ sink</text>
+
+            <rect x="360" y="42" width="28" height="83" rx="3" fill="rgba(192,122,90,.6)"/>
+            <rect x="400" y="45" width="28" height="80" rx="3" fill="rgba(192,122,90,.5)"/>
+
+            <!-- X labels -->
+            <text x="94" y="142" font-family="ui-sans-serif,sans-serif" font-size="7" fill="rgba(242,236,224,.2)" text-anchor="middle">Jan</text>
+            <text x="134" y="142" font-family="ui-sans-serif,sans-serif" font-size="7" fill="rgba(242,236,224,.2)" text-anchor="middle">Feb</text>
+            <text x="174" y="142" font-family="ui-sans-serif,sans-serif" font-size="7" fill="rgba(242,236,224,.2)" text-anchor="middle">Mar</text>
+            <text x="214" y="142" font-family="ui-sans-serif,sans-serif" font-size="7" fill="rgba(242,236,224,.2)" text-anchor="middle">Apr</text>
+            <text x="254" y="142" font-family="ui-sans-serif,sans-serif" font-size="7" fill="rgba(242,236,224,.2)" text-anchor="middle">May</text>
+            <text x="294" y="142" font-family="ui-sans-serif,sans-serif" font-size="7" fill="rgba(242,236,224,.2)" text-anchor="middle">Jun</text>
+            <text x="334" y="142" font-family="ui-sans-serif,sans-serif" font-size="7" fill="rgba(242,236,224,.2)" text-anchor="middle">Jul</text>
+            <text x="374" y="142" font-family="ui-sans-serif,sans-serif" font-size="7" fill="rgba(242,236,224,.2)" text-anchor="middle">Aug</text>
+            <text x="414" y="142" font-family="ui-sans-serif,sans-serif" font-size="7" fill="rgba(242,236,224,.2)" text-anchor="middle">Sep</text>
+
+            <!-- Right panel - insight cards -->
+            <rect x="480" y="20" width="280" height="60" rx="8" fill="rgba(242,236,224,.04)" stroke="rgba(242,236,224,.08)" stroke-width="1"/>
+            <text x="496" y="40" font-family="ui-sans-serif,sans-serif" font-size="9" fill="rgba(242,236,224,.4)">Hidden effort sink identified</text>
+            <rect x="496" y="48" width="180" height="3" rx="2" fill="rgba(192,122,90,.4)"/>
+            <rect x="496" y="55" width="140" height="3" rx="2" fill="rgba(242,236,224,.12)"/>
+            <text x="748" y="38" font-family="Georgia,serif" font-size="16" fill="#c07a5a" text-anchor="end" font-weight="700">+34%</text>
+            <text x="748" y="50" font-family="ui-sans-serif,sans-serif" font-size="8" fill="rgba(242,236,224,.25)" text-anchor="end">MoM growth</text>
+
+            <rect x="480" y="90" width="130" height="50" rx="8" fill="rgba(192,122,90,.10)" stroke="rgba(192,122,90,.3)" stroke-width="1"/>
+            <text x="496" y="108" font-family="ui-sans-serif,sans-serif" font-size="9" fill="rgba(242,236,224,.5)">Pricing leverage</text>
+            <text x="496" y="124" font-family="Georgia,serif" font-size="16" fill="#c07a5a" font-weight="700">Gained</text>
+
+            <rect x="622" y="90" width="138" height="50" rx="8" fill="rgba(242,236,224,.04)" stroke="rgba(242,236,224,.08)" stroke-width="1"/>
+            <text x="638" y="108" font-family="ui-sans-serif,sans-serif" font-size="9" fill="rgba(242,236,224,.5)">Visibility</text>
+            <text x="638" y="124" font-family="Georgia,serif" font-size="16" fill="#c07a5a" font-weight="700">0 → 1</text>
+
+            <text x="40" y="172" font-family="ui-sans-serif,sans-serif" font-size="9" fill="rgba(242,236,224,.2)" letter-spacing="1">EFFORT TRACKING FRAMEWORK</text>
+          </svg>
+        </div>
+
         <div class="card-top">
           <div class="card-meta">
             <span class="card-tag">Operational Design</span>
@@ -343,6 +482,74 @@ section{margin-top:52px;}
 
       <!-- PROJECT 3 -->
       <div class="project-card">
+
+        <!-- Mockup: enterprise rollout org chart -->
+        <div class="project-mockup">
+          <svg viewBox="0 0 800 180" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <pattern id="g3" width="40" height="40" patternUnits="userSpaceOnUse">
+                <path d="M40 0H0V40" fill="none" stroke="rgba(242,236,224,.04)" stroke-width="1"/>
+              </pattern>
+            </defs>
+            <rect width="800" height="180" fill="#151c2c"/>
+            <rect width="800" height="180" fill="url(#g3)"/>
+
+            <!-- Central node -->
+            <rect x="330" y="20" width="140" height="44" rx="8" fill="rgba(192,122,90,.2)" stroke="rgba(192,122,90,.6)" stroke-width="1.5"/>
+            <text x="400" y="38" font-family="Georgia,serif" font-size="12" fill="#f2ece0" text-anchor="middle" font-weight="700">AI Platform</text>
+            <text x="400" y="54" font-family="ui-sans-serif,sans-serif" font-size="9" fill="rgba(242,236,224,.5)" text-anchor="middle">60 people · 7 verticals</text>
+
+            <!-- Connector lines -->
+            <line x1="370" y1="64" x2="120" y2="100" stroke="rgba(192,122,90,.25)" stroke-width="1"/>
+            <line x1="385" y1="64" x2="240" y2="100" stroke="rgba(192,122,90,.25)" stroke-width="1"/>
+            <line x1="400" y1="64" x2="360" y2="100" stroke="rgba(192,122,90,.25)" stroke-width="1"/>
+            <line x1="415" y1="64" x2="480" y2="100" stroke="rgba(192,122,90,.25)" stroke-width="1"/>
+            <line x1="430" y1="64" x2="600" y2="100" stroke="rgba(192,122,90,.25)" stroke-width="1"/>
+            <line x1="440" y1="64" x2="700" y2="100" stroke="rgba(192,122,90,.25)" stroke-width="1"/>
+            <line x1="350" y1="64" x2="40" y2="100" stroke="rgba(192,122,90,.2)" stroke-width="1"/>
+
+            <!-- Vertical nodes -->
+            <rect x="20" y="100" width="80" height="36" rx="6" fill="rgba(242,236,224,.05)" stroke="rgba(242,236,224,.12)" stroke-width="1"/>
+            <text x="60" y="114" font-family="ui-sans-serif,sans-serif" font-size="8" fill="rgba(242,236,224,.5)" text-anchor="middle">Snacks</text>
+            <text x="60" y="126" font-family="ui-sans-serif,sans-serif" font-size="7" fill="rgba(192,122,90,.6)" text-anchor="middle">V1</text>
+
+            <rect x="110" y="100" width="80" height="36" rx="6" fill="rgba(242,236,224,.05)" stroke="rgba(242,236,224,.12)" stroke-width="1"/>
+            <text x="150" y="114" font-family="ui-sans-serif,sans-serif" font-size="8" fill="rgba(242,236,224,.5)" text-anchor="middle">Paint</text>
+            <text x="150" y="126" font-family="ui-sans-serif,sans-serif" font-size="7" fill="rgba(192,122,90,.6)" text-anchor="middle">V2</text>
+
+            <rect x="200" y="100" width="80" height="36" rx="6" fill="rgba(242,236,224,.05)" stroke="rgba(242,236,224,.12)" stroke-width="1"/>
+            <text x="240" y="114" font-family="ui-sans-serif,sans-serif" font-size="8" fill="rgba(242,236,224,.5)" text-anchor="middle">Hardware</text>
+            <text x="240" y="126" font-family="ui-sans-serif,sans-serif" font-size="7" fill="rgba(192,122,90,.6)" text-anchor="middle">V3</text>
+
+            <rect x="320" y="100" width="80" height="36" rx="6" fill="rgba(192,122,90,.12)" stroke="rgba(192,122,90,.35)" stroke-width="1"/>
+            <text x="360" y="114" font-family="ui-sans-serif,sans-serif" font-size="8" fill="rgba(242,236,224,.7)" text-anchor="middle">Home</text>
+            <text x="360" y="126" font-family="ui-sans-serif,sans-serif" font-size="7" fill="rgba(192,122,90,.8)" text-anchor="middle">V4</text>
+
+            <rect x="440" y="100" width="80" height="36" rx="6" fill="rgba(242,236,224,.05)" stroke="rgba(242,236,224,.12)" stroke-width="1"/>
+            <text x="480" y="114" font-family="ui-sans-serif,sans-serif" font-size="8" fill="rgba(242,236,224,.5)" text-anchor="middle">Industrial</text>
+            <text x="480" y="126" font-family="ui-sans-serif,sans-serif" font-size="7" fill="rgba(192,122,90,.6)" text-anchor="middle">V5</text>
+
+            <rect x="560" y="100" width="80" height="36" rx="6" fill="rgba(242,236,224,.05)" stroke="rgba(242,236,224,.12)" stroke-width="1"/>
+            <text x="600" y="114" font-family="ui-sans-serif,sans-serif" font-size="8" fill="rgba(242,236,224,.5)" text-anchor="middle">Auto</text>
+            <text x="600" y="126" font-family="ui-sans-serif,sans-serif" font-size="7" fill="rgba(192,122,90,.6)" text-anchor="middle">V6</text>
+
+            <rect x="660" y="100" width="80" height="36" rx="6" fill="rgba(242,236,224,.05)" stroke="rgba(242,236,224,.12)" stroke-width="1"/>
+            <text x="700" y="114" font-family="ui-sans-serif,sans-serif" font-size="8" fill="rgba(242,236,224,.5)" text-anchor="middle">Pro</text>
+            <text x="700" y="126" font-family="ui-sans-serif,sans-serif" font-size="7" fill="rgba(192,122,90,.6)" text-anchor="middle">V7</text>
+
+            <!-- People count indicators -->
+            <text x="60" y="150" font-family="ui-sans-serif,sans-serif" font-size="8" fill="rgba(242,236,224,.25)" text-anchor="middle">9 people</text>
+            <text x="150" y="150" font-family="ui-sans-serif,sans-serif" font-size="8" fill="rgba(242,236,224,.25)" text-anchor="middle">8 people</text>
+            <text x="240" y="150" font-family="ui-sans-serif,sans-serif" font-size="8" fill="rgba(242,236,224,.25)" text-anchor="middle">9 people</text>
+            <text x="360" y="150" font-family="ui-sans-serif,sans-serif" font-size="8" fill="rgba(192,122,90,.6)" text-anchor="middle">9 people</text>
+            <text x="480" y="150" font-family="ui-sans-serif,sans-serif" font-size="8" fill="rgba(242,236,224,.25)" text-anchor="middle">8 people</text>
+            <text x="600" y="150" font-family="ui-sans-serif,sans-serif" font-size="8" fill="rgba(242,236,224,.25)" text-anchor="middle">8 people</text>
+            <text x="700" y="150" font-family="ui-sans-serif,sans-serif" font-size="8" fill="rgba(242,236,224,.25)" text-anchor="middle">9 people</text>
+
+            <text x="40" y="172" font-family="ui-sans-serif,sans-serif" font-size="9" fill="rgba(242,236,224,.2)" letter-spacing="1">ENTERPRISE ROLLOUT STRUCTURE</text>
+          </svg>
+        </div>
+
         <div class="card-top">
           <div class="card-meta">
             <span class="card-tag">AI Adoption Architecture</span>
