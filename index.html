@@ -29,13 +29,12 @@
 html,body{margin:0;padding:0}
 body{
   font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial;
-  color:var(--text);
-  background:var(--bg);
+  color:var(--text);background:var(--bg);
 }
 .wrap{max-width:var(--max);margin:0 auto;padding:28px 20px 80px;}
 a{text-decoration:none;color:inherit}
 
-/* Nav */
+/* Nav — pill, sticky */
 .nav{
   display:flex;justify-content:space-between;align-items:center;
   padding:12px 18px;border:1px solid var(--line);border-radius:999px;
@@ -57,77 +56,32 @@ a{text-decoration:none;color:inherit}
 .mobileMenu a:hover{background:var(--surface2);color:var(--text);}
 .mobileMenu.open{display:block;}
 
-/* Hero */
-.hero{
-  margin-top:40px;
-  padding:64px 44px 0;
-  border-radius:20px;
-  border:1px solid var(--line);
-  background:rgba(242,236,224,.03);
-  overflow:hidden;
+/* Hero — open, no container */
+.hero-open{
+  padding:72px 0 64px;
+  border-bottom:1px solid var(--line);
+  display:grid;grid-template-columns:1fr 220px;
+  gap:40px;align-items:center;
 }
-@media(max-width:900px){.hero{padding:40px 24px 0;}}
+@media(max-width:900px){
+  .hero-open{grid-template-columns:1fr;gap:32px;padding:52px 0 48px;}
+}
 
 .hero-eyebrow{
   font-size:11px;font-weight:500;letter-spacing:1.6px;
-  text-transform:uppercase;color:rgba(242,236,224,.32);
-  margin-bottom:24px;display:flex;align-items:center;gap:10px;
+  text-transform:uppercase;color:rgba(242,236,224,.28);
+  margin-bottom:20px;
 }
-.hero-eyebrow::before{content:"";width:24px;height:1px;background:rgba(242,236,224,.22);}
 
 /* Staggered headline */
-.hl-row{display:flex;align-items:flex-start;justify-content:space-between;gap:24px;}
-.hl-text{flex:1;}
-.hl-1{
-  font-family:Georgia,'Times New Roman',serif;
-  font-size:clamp(40px,6.5vw,72px);
-  line-height:.96;letter-spacing:-2.5px;
-  color:var(--text);display:block;
-}
-.hl-2{
-  font-family:Georgia,'Times New Roman',serif;
-  font-size:clamp(40px,6.5vw,72px);
-  line-height:.96;letter-spacing:-2.5px;
-  color:var(--accent);font-style:italic;
-  display:block;margin-left:clamp(28px,5vw,80px);
-}
-.hl-3{
-  font-family:Georgia,'Times New Roman',serif;
-  font-size:clamp(40px,6.5vw,72px);
-  line-height:.96;letter-spacing:-2.5px;
-  color:rgba(242,236,224,.18);
-  display:block;margin-left:clamp(14px,2.5vw,40px);
-}
+.hl-1{font-family:Georgia,'Times New Roman',serif;font-size:clamp(40px,6.5vw,70px);line-height:.96;letter-spacing:-2.5px;color:var(--text);display:block;}
+.hl-2{font-family:Georgia,'Times New Roman',serif;font-size:clamp(40px,6.5vw,70px);line-height:.96;letter-spacing:-2.5px;color:var(--accent);font-style:italic;display:block;margin-left:clamp(28px,5vw,72px);}
+.hl-3{font-family:Georgia,'Times New Roman',serif;font-size:clamp(40px,6.5vw,70px);line-height:.96;letter-spacing:-2.5px;color:rgba(242,236,224,.16);display:block;margin-left:clamp(14px,2.5vw,36px);}
 
-/* Photo pulled into headline */
-.hl-photo{flex-shrink:0;width:240px;margin-top:8px;}
-.photo-ring{
-  width:240px;height:240px;border-radius:50%;
-  border:1px solid var(--accent-border);
-  display:flex;align-items:center;justify-content:center;
-}
-.hero-photo{width:220px;height:220px;object-fit:cover;border-radius:50%;border:2px solid rgba(242,236,224,.08);}
-@media(max-width:900px){
-  .hl-photo{width:160px;}
-  .photo-ring{width:160px;height:160px;}
-  .hero-photo{width:144px;height:144px;}
-}
+.hero-sub{margin-top:28px;font-size:15px;color:rgba(242,236,224,.52);line-height:1.75;max-width:440px;}
+.hero-currently{display:block;margin-top:12px;font-size:12px;color:rgba(242,236,224,.26);line-height:1.7;}
 
-/* Hero bottom */
-.hero-bottom{
-  display:grid;grid-template-columns:1.1fr 0.9fr;
-  gap:40px;padding:36px 0 52px;align-items:end;
-}
-@media(max-width:900px){.hero-bottom{grid-template-columns:1fr;gap:24px;}}
-.hero-sub{font-size:15px;color:var(--muted);line-height:1.75;max-width:420px;margin:0;}
-.hero-currently{
-  display:block;margin-top:14px;
-  font-size:12px;color:rgba(242,236,224,.30);
-  line-height:1.7;letter-spacing:.1px;
-}
-.hero-ctas{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;align-items:flex-end;padding-bottom:2px;}
-@media(max-width:900px){.hero-ctas{justify-content:flex-start;}}
-
+.ctas{display:flex;gap:8px;margin-top:24px;flex-wrap:wrap;}
 .btn{
   padding:10px 18px;border-radius:9px;font-size:13px;font-weight:500;
   border:1px solid var(--line);background:transparent;color:var(--text);
@@ -137,116 +91,123 @@ a{text-decoration:none;color:inherit}
 .btn.primary{background:var(--accent);border-color:var(--accent);color:#fff;}
 .btn.primary:hover{background:#d08a6a;border-color:#d08a6a;transform:translateY(-1px);}
 
+/* Photo */
+.photo-wrap{display:flex;justify-content:center;align-items:center;}
+.photo-ring{
+  width:220px;height:220px;border-radius:50%;
+  border:1px solid var(--accent-border);
+  display:flex;align-items:center;justify-content:center;
+}
+.hero-photo{width:200px;height:200px;object-fit:cover;border-radius:50%;border:2px solid rgba(242,236,224,.06);}
+@media(max-width:900px){
+  .photo-ring{width:160px;height:160px;}
+  .hero-photo{width:144px;height:144px;}
+}
+
 /* Ticker */
-.ticker-wrap{
-  border-top:1px solid var(--line);
-  border-bottom:1px solid var(--line);
-  padding:11px 0;overflow:hidden;
-  background:rgba(192,122,90,.03);
-}
+.ticker-wrap{border-bottom:1px solid var(--line);padding:11px 0;overflow:hidden;}
 .ticker-track{display:flex;animation:ticker 32s linear infinite;width:max-content;}
-.ticker-item{
-  font-size:11px;font-weight:500;letter-spacing:.7px;
-  text-transform:uppercase;color:rgba(242,236,224,.32);
-  padding:0 20px;white-space:nowrap;
-}
+.ticker-item{font-size:11px;font-weight:500;letter-spacing:.7px;text-transform:uppercase;color:rgba(242,236,224,.28);padding:0 20px;white-space:nowrap;}
 .ticker-dot{color:var(--accent);margin:0 3px;}
 @keyframes ticker{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
 
-/* Sections */
-section{margin-top:56px;scroll-margin-top:110px;}
-.sec-heading{
-  font-family:Georgia,'Times New Roman',serif;
-  font-size:20px;font-weight:700;color:var(--text);
-  letter-spacing:-0.2px;margin:0 0 32px;
-  display:flex;align-items:center;gap:14px;
+/* Open sections — no cards, just lines and space */
+.open-section{padding:64px 0;border-bottom:1px solid var(--line);scroll-margin-top:110px;}
+
+.section-label{
+  font-size:11px;font-weight:600;letter-spacing:1.5px;
+  text-transform:uppercase;color:var(--accent);
+  margin-bottom:40px;display:flex;align-items:center;gap:12px;
 }
-.sec-heading::before{content:"";width:22px;height:2px;background:var(--accent);flex-shrink:0;}
+.section-label::before{content:"";width:20px;height:1px;background:var(--accent);}
 
 /* Where I help */
-.where-layout{display:grid;grid-template-columns:0.65fr 1.35fr;gap:48px;align-items:start;}
+.where-layout{display:grid;grid-template-columns:180px 1fr;gap:48px;align-items:start;}
 @media(max-width:720px){.where-layout{grid-template-columns:1fr;}}
-.where-num{
-  font-family:Georgia,serif;font-size:100px;font-weight:700;
-  line-height:1;letter-spacing:-4px;
-  color:rgba(192,122,90,.09);margin-top:-10px;user-select:none;
+.where-ghost{
+  font-family:Georgia,serif;font-size:96px;font-weight:700;
+  color:rgba(192,122,90,.08);line-height:1;letter-spacing:-4px;
+  margin-top:-8px;user-select:none;
 }
-.where-text{font-size:17px;line-height:1.8;color:rgba(242,236,224,.65);}
-.where-text p{margin:0 0 8px;}
+.where-prose{font-size:18px;line-height:1.85;color:rgba(242,236,224,.62);}
+.where-prose p{margin:0 0 6px;}
 .where-hook{
   display:block;margin-top:20px;
   font-family:Georgia,'Times New Roman',serif;
   font-size:16px;font-style:italic;
-  color:rgba(242,236,224,.78);line-height:1.65;
-  padding-left:16px;border-left:2px solid rgba(192,122,90,.45);
+  color:rgba(242,236,224,.75);line-height:1.65;
+  padding-left:14px;border-left:1px solid rgba(192,122,90,.4);
 }
 
-/* How I think */
+/* How I think — open grid with line dividers */
 .think-pullquote{
   font-family:Georgia,'Times New Roman',serif;
   font-size:20px;line-height:1.55;
-  color:rgba(242,236,224,.72);
-  max-width:600px;margin-bottom:28px;
-  padding-left:20px;border-left:2px solid var(--accent);
+  color:rgba(242,236,224,.68);max-width:560px;
+  margin-bottom:36px;padding-left:18px;
+  border-left:2px solid var(--accent);
 }
-.think-grid{
-  display:grid;grid-template-columns:1fr 1fr 1fr 1fr;
-  gap:1px;background:var(--line);
+.think-open{display:grid;grid-template-columns:1fr 1fr;gap:0;}
+@media(max-width:720px){.think-open{grid-template-columns:1fr;}}
+.think-row{
+  padding:20px 0;
+  border-bottom:1px solid rgba(242,236,224,.06);
+  display:grid;grid-template-columns:28px 1fr;gap:16px;align-items:start;
 }
-@media(max-width:720px){.think-grid{grid-template-columns:1fr 1fr;}}
-@media(max-width:480px){.think-grid{grid-template-columns:1fr;}}
-.think-item{padding:24px 20px;background:var(--bg);}
-.think-n{font-family:Georgia,serif;font-size:12px;color:var(--accent);margin-bottom:12px;display:block;}
-.think-title{font-size:14px;font-weight:600;color:var(--text);margin-bottom:5px;}
-.think-desc{font-size:12px;color:rgba(242,236,224,.38);line-height:1.55;}
-.principles-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px;}
-.princ{
-  padding:8px 14px;border-radius:999px;
-  border:1px solid rgba(192,122,90,.18);
-  background:rgba(192,122,90,.05);
-  font-size:12px;color:rgba(242,236,224,.55);font-style:italic;
+.think-row:nth-child(odd){padding-right:32px;}
+.think-row:nth-child(even){padding-left:32px;border-left:1px solid rgba(242,236,224,.06);}
+@media(max-width:720px){
+  .think-row:nth-child(odd){padding-right:0;}
+  .think-row:nth-child(even){padding-left:0;border-left:none;}
 }
+.think-n{font-family:Georgia,serif;font-size:12px;color:var(--accent);margin-top:2px;}
+.think-title{font-size:14px;font-weight:600;color:var(--text);margin-bottom:4px;}
+.think-desc{font-size:13px;color:rgba(242,236,224,.36);line-height:1.5;}
 
-/* Results — counting numbers */
-.results-grid{
-  display:grid;grid-template-columns:1fr 1fr 1fr;
-  gap:1px;background:var(--line);
+.principles-open{display:flex;flex-direction:column;margin-top:28px;}
+.princ-open{
+  padding:14px 0;border-bottom:1px solid rgba(242,236,224,.06);
+  font-size:14px;font-style:italic;color:rgba(242,236,224,.48);
+  display:flex;align-items:center;gap:12px;
 }
-@media(max-width:720px){.results-grid{grid-template-columns:1fr;}}
-.result-item{padding:36px 28px;background:var(--bg);}
+.princ-open:last-child{border-bottom:none;}
+.princ-open::before{content:"";width:6px;height:6px;border-radius:50%;background:rgba(192,122,90,.4);flex-shrink:0;}
+
+/* Results — open numbers with line dividers */
+.results-open{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;}
+@media(max-width:720px){.results-open{grid-template-columns:1fr;gap:32px;}}
+.result-open{padding:0 40px 0 0;}
+.result-open+.result-open{padding:0 40px 0 40px;border-left:1px solid var(--line);}
+.result-open:last-child{padding:0 0 0 40px;}
+@media(max-width:720px){
+  .result-open{padding:0!important;border-left:none!important;}
+}
 .result-num{
-  font-family:Georgia,serif;font-size:54px;font-weight:700;
+  font-family:Georgia,serif;font-size:52px;font-weight:700;
   color:var(--accent);line-height:1;
-  letter-spacing:-2px;margin-bottom:10px;display:block;
+  letter-spacing:-2px;margin-bottom:8px;display:block;
 }
-.result-label{font-size:13px;color:rgba(242,236,224,.38);line-height:1.55;}
+.result-label{font-size:13px;color:rgba(242,236,224,.35);line-height:1.5;}
 
-/* Schedule & Connect */
-.sec-h2{font-size:18px;font-weight:600;margin:0;letter-spacing:-0.1px;}
-.hint{font-size:13px;color:var(--muted2);}
-.section-title{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:14px;gap:12px;}
-.tile{padding:22px;border-radius:14px;border:1px solid var(--line);background:var(--surface);}
-.tile p{margin:0;color:var(--muted);font-size:14px;line-height:1.55;}
+/* Schedule & Connect — open */
+.open-row{display:grid;grid-template-columns:1fr 1fr;gap:64px;padding:64px 0;}
+@media(max-width:720px){.open-row{grid-template-columns:1fr;gap:40px;padding:40px 0;}}
+.open-block{}
+.open-block-label{font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);margin-bottom:16px;display:flex;align-items:center;gap:12px;}
+.open-block-label::before{content:"";width:20px;height:1px;background:var(--accent);}
+.open-block p{font-size:14px;color:var(--muted);line-height:1.6;margin:0 0 14px;}
 .smalllinks{display:flex;gap:14px;flex-wrap:wrap;margin-top:12px;}
 .smalllinks a{font-size:14px;color:var(--muted);border-bottom:1px solid rgba(242,236,224,.18);padding-bottom:2px;transition:color .15s,border-color .15s;}
 .smalllinks a:hover{color:var(--text);border-color:rgba(242,236,224,.45);}
 
 /* Footer */
 .footer{
-  margin-top:70px;padding-top:24px;
-  border-top:1px solid var(--line);
-  font-size:11px;color:rgba(242,236,224,.20);
+  padding-top:24px;border-top:1px solid var(--line);
+  font-size:11px;color:rgba(242,236,224,.18);
   display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
   letter-spacing:.3px;
 }
-.footer a{color:rgba(242,236,224,.20);}
-
-/* Mobile */
-@media(max-width:720px){
-  .nav{flex-wrap:wrap;gap:8px;border-radius:18px;}
-  .navlinks{display:none;}
-  .menuBtn{display:flex;}
-}
+.footer a{color:rgba(242,236,224,.18);}
 
 /* Floating chat */
 .chat-fab{
@@ -273,10 +234,7 @@ section{margin-top:56px;scroll-margin-top:110px;}
   font-family:ui-sans-serif,system-ui,-apple-system,sans-serif;
 }
 .chat-panel.open{display:flex;}
-.cp-header{
-  padding:16px 20px;border-bottom:1px solid rgba(242,236,224,.08);
-  display:flex;align-items:center;gap:12px;background:#1b2232;
-}
+.cp-header{padding:16px 20px;border-bottom:1px solid rgba(242,236,224,.08);display:flex;align-items:center;gap:12px;background:#1b2232;}
 .cp-avatar{width:36px;height:36px;border-radius:10px;background:var(--accent);flex-shrink:0;display:flex;align-items:center;justify-content:center;}
 .cp-avatar svg{width:18px;height:18px;}
 .cp-name{font-size:14px;font-weight:600;color:#f2ece0;margin:0 0 2px;}
@@ -315,6 +273,13 @@ section{margin-top:56px;scroll-margin-top:110px;}
 .cp-send svg{width:14px;height:14px;}
 .cp-footer{padding:0 18px 12px;font-size:10px;color:rgba(242,236,224,.25);text-align:center;}
 .cp-footer a{color:rgba(242,236,224,.35);}
+
+/* Mobile */
+@media(max-width:720px){
+  .nav{flex-wrap:wrap;gap:8px;border-radius:18px;}
+  .navlinks{display:none;}
+  .menuBtn{display:flex;}
+}
 </style>
 
 <script type="text/javascript">
@@ -349,30 +314,24 @@ section{margin-top:56px;scroll-margin-top:110px;}
   </div>
 
   <!-- HERO -->
-  <div class="hero">
-    <div class="hero-eyebrow">Delmar, NY · Building what execution should look like</div>
-    <div class="hl-row">
-      <div class="hl-text">
-        <span class="hl-1">Scale your output.</span>
-        <span class="hl-2">Architect</span>
-        <span class="hl-3">outcomes.</span>
-      </div>
-      <div class="hl-photo">
-        <div class="photo-ring">
-          <img src="/headshot.jpg" alt="Merlin Komenda" class="hero-photo">
-        </div>
-      </div>
-    </div>
-    <div class="hero-bottom">
-      <div>
-        <p class="hero-sub">I redesign how organizations execute, replacing friction, heroics, and broken handoffs with systems that actually scale. Currently: Global Director of Implementation at Zappi.</p>
-        <span class="hero-currently">Home base: Delmar, NY · Wife, daughter (4), Suki, Bernie &amp; Warren</span>
-      </div>
-      <div class="hero-ctas">
+  <div class="hero-open">
+    <div>
+      <div class="hero-eyebrow">Delmar, NY · Building what execution should look like</div>
+      <span class="hl-1">Scale your output.</span>
+      <span class="hl-2">Architect</span>
+      <span class="hl-3">outcomes.</span>
+      <p class="hero-sub">I redesign how organizations execute, replacing friction, heroics, and broken handoffs with systems that actually scale. Currently: Global Director of Implementation at Zappi.</p>
+      <span class="hero-currently">Home base: Delmar, NY · Wife, daughter (4), Suki, Bernie &amp; Warren</span>
+      <div class="ctas">
         <a class="btn primary" href="#thinking">How I think</a>
         <a class="btn" href="#impact">Results</a>
         <a class="btn" href="/resume.pdf" target="_blank" rel="noopener">Resume</a>
         <a class="btn" href="https://www.linkedin.com/in/merlin-komenda/" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+    <div class="photo-wrap">
+      <div class="photo-ring">
+        <img src="/headshot.jpg" alt="Merlin Komenda" class="hero-photo">
       </div>
     </div>
   </div>
@@ -408,100 +367,86 @@ section{margin-top:56px;scroll-margin-top:110px;}
   </div>
 
   <!-- WHERE I HELP -->
-  <section id="about">
-    <div class="sec-heading">Where I help</div>
+  <div class="open-section" id="about">
+    <div class="section-label">Where I help</div>
     <div class="where-layout">
-      <div class="where-num">01</div>
-      <div class="where-text">
-        <p>Organizations often reach a point where growth starts creating friction.</p>
-        <p>Nothing is broken.</p>
-        <p>But execution stops scaling.</p>
-        <p>I help teams stop fighting their own growth.</p>
+      <div class="where-ghost">01</div>
+      <div>
+        <div class="where-prose">
+          <p>Organizations often reach a point where growth starts creating friction.</p>
+          <p>Nothing is broken.</p>
+          <p>But execution stops scaling.</p>
+          <p>I help teams stop fighting their own growth.</p>
+        </div>
         <span class="where-hook">I've spent my career inside the friction point, the gap between a company that's growing and a company that's executing.</span>
       </div>
     </div>
-  </section>
+  </div>
 
   <!-- HOW I THINK -->
-  <section id="thinking">
-    <div class="sec-heading">How I think</div>
+  <div class="open-section" id="thinking">
+    <div class="section-label">How I think</div>
     <div class="think-pullquote">When execution gets messy, the problem isn't effort. The system has lost clarity.</div>
-    <div class="think-grid">
-      <div class="think-item">
+    <div class="think-open">
+      <div class="think-row">
         <span class="think-n">01</span>
-        <div class="think-title">Align the outcome</div>
-        <div class="think-desc">What success actually looks like</div>
+        <div><div class="think-title">Align the outcome</div><div class="think-desc">What success actually looks like</div></div>
       </div>
-      <div class="think-item">
+      <div class="think-row">
         <span class="think-n">02</span>
-        <div class="think-title">Define ownership</div>
-        <div class="think-desc">Who decides and what happens next</div>
+        <div><div class="think-title">Define ownership</div><div class="think-desc">Who decides and what happens next</div></div>
       </div>
-      <div class="think-item">
+      <div class="think-row">
         <span class="think-n">03</span>
-        <div class="think-title">Build scale</div>
-        <div class="think-desc">Progress without heroics</div>
+        <div><div class="think-title">Build scale</div><div class="think-desc">Progress without heroics</div></div>
       </div>
-      <div class="think-item">
+      <div class="think-row">
         <span class="think-n">04</span>
-        <div class="think-title">Iterate</div>
-        <div class="think-desc">Adjust until results are predictable</div>
+        <div><div class="think-title">Iterate</div><div class="think-desc">Adjust until results are predictable</div></div>
       </div>
     </div>
-    <div class="principles-row">
-      <span class="princ">Structure beats intensity.</span>
-      <span class="princ">Clarity comes before automation.</span>
-      <span class="princ">Systems should survive turnover.</span>
+    <div class="principles-open">
+      <div class="princ-open">Structure beats intensity.</div>
+      <div class="princ-open">Clarity comes before automation.</div>
+      <div class="princ-open">Systems should survive turnover.</div>
     </div>
-  </section>
+  </div>
 
   <!-- RESULTS -->
-  <section id="impact">
-    <div class="sec-heading">Results</div>
-    <div class="results-grid">
-      <div class="result-item">
+  <div class="open-section" id="impact">
+    <div class="section-label">Results</div>
+    <div class="results-open">
+      <div class="result-open">
         <span class="result-num" data-target="30" data-prefix="~" data-suffix="%">~0%</span>
         <span class="result-label">Time-to-live reduction. First customer usage in ~15 days.</span>
       </div>
-      <div class="result-item">
+      <div class="result-open">
         <span class="result-num" data-target="60" data-suffix="+">0</span>
         <span class="result-label">Implementations delivered annually with repeatable outcomes.</span>
       </div>
-      <div class="result-item">
+      <div class="result-open">
         <span class="result-num" data-target="75" data-suffix="+">0</span>
         <span class="result-label">NPS across enterprise relationships.</span>
       </div>
     </div>
-  </section>
+  </div>
 
-  <!-- SCHEDULE -->
-  <section id="schedule">
-    <div class="section-title">
-      <h2 class="sec-h2">Schedule</h2>
-      <div class="hint">Quick booking</div>
-    </div>
-    <div class="tile">
+  <!-- SCHEDULE + CONNECT -->
+  <div class="open-row">
+    <div class="open-block" id="schedule">
+      <div class="open-block-label">Schedule</div>
       <p>Book time that works for you. You'll get a confirmation email right away.</p>
-      <div style="margin-top:14px;">
-        <button class="btn primary" type="button" id="openBookingPopup">Book time</button>
-      </div>
+      <button class="btn primary" type="button" id="openBookingPopup">Book time</button>
     </div>
-  </section>
-
-  <!-- CONNECT -->
-  <section id="contact">
-    <div class="section-title">
-      <h2 class="sec-h2">Connect</h2>
-      <div class="hint">Fastest way to reach me</div>
-    </div>
-    <div class="tile">
+    <div class="open-block" id="contact">
+      <div class="open-block-label">Connect</div>
       <p>Email: <a href="mailto:merlin.komenda@gmail.com" style="color:var(--accent);">merlin.komenda@gmail.com</a></p>
       <div class="smalllinks">
         <a href="/resume.pdf" target="_blank" rel="noopener">Resume</a>
         <a href="https://www.linkedin.com/in/merlin-komenda/" target="_blank" rel="noopener">LinkedIn</a>
       </div>
     </div>
-  </section>
+  </div>
 
   <div class="footer">
     <span>© <span id="y"></span> Merlin Komenda</span>
@@ -511,7 +456,7 @@ section{margin-top:56px;scroll-margin-top:110px;}
 
 </div>
 
-<!-- FLOATING CHAT BUTTON -->
+<!-- FLOATING CHAT -->
 <button class="chat-fab" id="chatFab" aria-label="Ask Merlin">
   <svg class="chat-fab-icon chat-fab-open" viewBox="0 0 24 24" fill="none">
     <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -522,7 +467,6 @@ section{margin-top:56px;scroll-margin-top:110px;}
   <span class="chat-fab-label">Ask Merlin</span>
 </button>
 
-<!-- CHAT PANEL -->
 <div class="chat-panel" id="chatPanel" role="dialog" aria-label="Ask Merlin">
   <div class="cp-header">
     <div class="cp-avatar">
@@ -560,21 +504,19 @@ section{margin-top:56px;scroll-margin-top:110px;}
 <script>
 document.getElementById("y").textContent = new Date().getFullYear();
 
-/* Mobile menu */
 (function(){
-  const btn = document.getElementById("menuBtn");
-  const menu = document.getElementById("mobileMenu");
+  const btn=document.getElementById("menuBtn");
+  const menu=document.getElementById("mobileMenu");
   if(!btn||!menu) return;
   function closeMenu(){ menu.classList.remove("open"); btn.setAttribute("aria-expanded","false"); }
-  btn.addEventListener("click", function(){ const o=menu.classList.toggle("open"); btn.setAttribute("aria-expanded",String(o)); });
+  btn.addEventListener("click",function(){ const o=menu.classList.toggle("open"); btn.setAttribute("aria-expanded",String(o)); });
   menu.querySelectorAll("a").forEach(a=>a.addEventListener("click",closeMenu));
   window.addEventListener("keydown",e=>{ if(e.key==="Escape") closeMenu(); });
 })();
 
-/* Booking popup */
 (function(){
-  const btn = document.getElementById("openBookingPopup");
-  const url = "https://calendar.app.google/M9PeWcXz76KYQfvq9";
+  const btn=document.getElementById("openBookingPopup");
+  const url="https://calendar.app.google/M9PeWcXz76KYQfvq9";
   function open(){
     const w=Math.min(980,Math.floor(window.innerWidth*.92));
     const h=Math.min(760,Math.floor(window.innerHeight*.88));
@@ -587,35 +529,31 @@ document.getElementById("y").textContent = new Date().getFullYear();
   btn?.addEventListener("click",open);
 })();
 
-/* Counting numbers */
 (function(){
-  const nums = document.querySelectorAll('.result-num[data-target]');
-  let triggered = false;
+  const nums=document.querySelectorAll('.result-num[data-target]');
+  let triggered=false;
   function countUp(){
     nums.forEach(el=>{
-      const target = parseInt(el.dataset.target);
-      const prefix = el.dataset.prefix||'';
-      const suffix = el.dataset.suffix||'';
-      let val = 0;
-      const duration = 1800;
-      const step = 16;
-      const inc = target/(duration/step);
-      const timer = setInterval(()=>{
-        val += inc;
-        if(val >= target){ val=target; clearInterval(timer); }
-        el.textContent = prefix + Math.round(val) + suffix;
-      }, step);
+      const target=parseInt(el.dataset.target);
+      const prefix=el.dataset.prefix||'';
+      const suffix=el.dataset.suffix||'';
+      let val=0;
+      const inc=target/(1800/16);
+      const timer=setInterval(()=>{
+        val+=inc;
+        if(val>=target){ val=target; clearInterval(timer); }
+        el.textContent=prefix+Math.round(val)+suffix;
+      },16);
     });
   }
-  const observer = new IntersectionObserver(entries=>{
-    entries.forEach(e=>{ if(e.isIntersecting && !triggered){ triggered=true; countUp(); }});
+  const observer=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{ if(e.isIntersecting&&!triggered){ triggered=true; countUp(); }});
   },{threshold:0.3});
-  const grid = document.querySelector('.results-grid');
+  const grid=document.querySelector('.results-open');
   if(grid) observer.observe(grid);
 })();
 
-/* Floating chat */
-const CP_SYSTEM = `You are a friendly, conversational assistant representing Merlin Komenda on his professional portfolio website. Your job is to answer questions from recruiters, potential collaborators, and conference attendees about Merlin.
+const CP_SYSTEM=`You are a friendly, conversational assistant representing Merlin Komenda on his professional portfolio website. Your job is to answer questions from recruiters, potential collaborators, and conference attendees about Merlin.
 
 Tone: Warm, confident, and direct. Third person ("Merlin is...") but friendly — like a well-briefed colleague who knows him well. No corporate speak. No hype. Accurate, grounded answers only.
 
@@ -634,7 +572,7 @@ Merlin Komenda is Global Director of Implementation at Zappi, an AI-powered cons
 - Built AI-powered agent setup tool that cut deployment time from 20 hours to 8-10
 
 == PROPEL26 TALK ==
-Merlin is a confirmed speaker at Propel26 — the world's #1 conference for service delivery professionals, hosted by Rocketlane. San Francisco, May 13-14, 2026. Talk: "Design Before You Automate: The Implementation Discipline Behind AI That Actually Sticks." Core thesis: AI adoption fails less because of bad tooling and more because teams automate workflows that were never clearly designed. AI amplifies whatever system design already exists — good or bad. Three principles: (1) Start with the customer outcome. (2) Lead with expertise — shift from "customer builds, team reviews" to "team recommends, customer validates." (3) Let automation follow clarity. Results from Zappi's own redesign: 35% improvement in time-to-live, stable satisfaction, increased team capacity.
+Merlin is a confirmed speaker at Propel26 — the world's #1 conference for service delivery professionals, hosted by Rocketlane. San Francisco, May 13-14, 2026. Talk: "Design Before You Automate: The Implementation Discipline Behind AI That Actually Sticks." Core thesis: AI adoption fails less because of bad tooling and more because teams automate workflows that were never clearly designed. AI amplifies whatever system design already exists — good or bad. Three principles: (1) Start with the customer outcome. (2) Lead with expertise. (3) Let automation follow clarity. Results from Zappi's own redesign: 35% improvement in time-to-live, stable satisfaction, increased team capacity.
 
 == WORKING STYLE ==
 Outcome-first, low-drama delivery. Calm under pressure. Values clarity over complexity.
@@ -648,7 +586,7 @@ Email: merlin.komenda@gmail.com — LinkedIn: https://www.linkedin.com/in/merlin
 == RULES ==
 Keep answers concise — 2-4 sentences for simple questions, a short paragraph for complex ones. Do not speculate on compensation or salary. If asked about job hunting directly, say he's open to the right conversations. Do not invent details not listed here.`;
 
-let cpHistory=[], cpLoading=false;
+let cpHistory=[],cpLoading=false;
 
 (function(){
   const fab=document.getElementById('chatFab');
