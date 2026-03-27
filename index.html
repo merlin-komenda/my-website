@@ -6,6 +6,9 @@
 <title>Merlin Komenda</title>
 <meta name="description" content="Building what execution should look like." />
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="icon" type="image/png" href="/favicon.png">
 <link rel="apple-touch-icon" href="/favicon.png">
 <meta name="theme-color" content="#1b2232">
@@ -67,7 +70,7 @@ a{text-decoration:none;color:inherit}
   .hero-open{grid-template-columns:1fr;gap:32px;padding:52px 0 48px;}
 }
 
-.hero-eyebrow{
+.hero-eyebrow{font-family:'IBM Plex Mono',monospace;
   font-size:11px;font-weight:500;letter-spacing:1.6px;
   text-transform:uppercase;color:rgba(242,236,224,.28);
   margin-bottom:20px;
@@ -79,7 +82,7 @@ a{text-decoration:none;color:inherit}
 .hl-3{font-family:Georgia,'Times New Roman',serif;font-size:clamp(40px,6.5vw,70px);line-height:.96;letter-spacing:-2.5px;color:rgba(242,236,224,.16);display:block;margin-left:clamp(14px,2.5vw,36px);}
 
 .hero-sub{margin-top:28px;font-size:15px;color:rgba(242,236,224,.52);line-height:1.75;max-width:440px;}
-.hero-currently{display:block;margin-top:12px;font-size:12px;color:rgba(242,236,224,.26);line-height:1.7;}
+.hero-currently{display:block;margin-top:12px;font-size:12px;font-family:'IBM Plex Mono',monospace;color:rgba(242,236,224,.26);line-height:1.7;}
 
 .ctas{display:flex;gap:8px;margin-top:24px;flex-wrap:wrap;}
 .btn{
@@ -114,7 +117,7 @@ a{text-decoration:none;color:inherit}
 /* Open sections — no cards, just lines and space */
 .open-section{padding:64px 0;border-bottom:1px solid var(--line);scroll-margin-top:110px;}
 
-.section-label{
+.section-label{font-family:'IBM Plex Mono',monospace;
   font-size:11px;font-weight:600;letter-spacing:1.5px;
   text-transform:uppercase;color:var(--accent);
   margin-bottom:40px;display:flex;align-items:center;gap:12px;
@@ -160,7 +163,7 @@ a{text-decoration:none;color:inherit}
   .think-row:nth-child(odd){padding-right:0;}
   .think-row:nth-child(even){padding-left:0;border-left:none;}
 }
-.think-n{font-family:Georgia,serif;font-size:12px;color:var(--accent);margin-top:2px;}
+.think-n{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--accent);margin-top:2px;}
 .think-title{font-size:14px;font-weight:600;color:var(--text);margin-bottom:4px;}
 .think-desc{font-size:13px;color:rgba(242,236,224,.36);line-height:1.5;}
 
@@ -388,19 +391,19 @@ a{text-decoration:none;color:inherit}
     <div class="think-open">
       <div class="think-row">
         <span class="think-n">01</span>
-        <div><div class="think-title">Align the outcome</div><div class="think-desc">What success actually looks like</div></div>
+        <div><div class="think-title">Align the outcome</div><div class="think-desc">Name the metric before any work starts.</div></div>
       </div>
       <div class="think-row">
         <span class="think-n">02</span>
-        <div><div class="think-title">Define ownership</div><div class="think-desc">Who decides and what happens next</div></div>
+        <div><div class="think-title">Define ownership</div><div class="think-desc">One person decides. Everyone else executes or escalates.</div></div>
       </div>
       <div class="think-row">
         <span class="think-n">03</span>
-        <div><div class="think-title">Build scale</div><div class="think-desc">Progress without heroics</div></div>
+        <div><div class="think-title">Build scale</div><div class="think-desc">The system works without you in the room.</div></div>
       </div>
       <div class="think-row">
         <span class="think-n">04</span>
-        <div><div class="think-title">Iterate</div><div class="think-desc">Adjust until results are predictable</div></div>
+        <div><div class="think-title">Iterate</div><div class="think-desc">Ship, measure, adjust. Repeat until it holds.</div></div>
       </div>
     </div>
     <div class="principles-open">
