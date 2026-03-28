@@ -6,6 +6,9 @@
 <title>Experience — Merlin Komenda</title>
 <meta name="description" content="Merlin Komenda — Experience, impact, and leadership snapshot." />
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="icon" type="image/png" href="/favicon.png">
 <link rel="apple-touch-icon" href="/favicon.png">
 <meta name="theme-color" content="#1b2232">
@@ -13,16 +16,18 @@
 <style>
 :root{
   --bg:#1b2232;
-  --surface:rgba(242,236,224,.04);
-  --surface2:rgba(242,236,224,.07);
+  --surface:rgba(242,236,224,.05);
+  --surface2:rgba(242,236,224,.09);
   --text:#f2ece0;
-  --muted:rgba(242,236,224,.58);
-  --muted2:rgba(242,236,224,.38);
-  --line:rgba(242,236,224,.09);
-  --accent:#c07a5a;
-  --accent-dim:rgba(192,122,90,.12);
-  --accent-border:rgba(192,122,90,.28);
-  --max:1040px;
+  --muted:rgba(242,236,224,.72);
+  --muted2:rgba(242,236,224,.52);
+  --line:rgba(242,236,224,.13);
+  --accent:#d4896a;
+  --accent-dim:rgba(212,137,106,.14);
+  --accent-border:rgba(212,137,106,.38);
+  --teal:#4ecdc4;
+  --teal-dim:rgba(78,205,196,.12);
+  --max:1200px;
 }
 
 *{box-sizing:border-box}
@@ -30,6 +35,11 @@ html,body{margin:0;padding:0}
 body{
   font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial;
   color:var(--text);background:var(--bg);
+  background-image:
+    radial-gradient(ellipse 70% 55% at 75% -5%, rgba(212,137,106,.22) 0%, transparent 60%),
+    radial-gradient(ellipse 55% 45% at 5% 85%, rgba(78,205,196,.10) 0%, transparent 55%),
+    radial-gradient(ellipse 40% 35% at 50% 50%, rgba(212,137,106,.04) 0%, transparent 70%);
+  background-attachment:fixed;
 }
 .wrap{max-width:var(--max);margin:0 auto;padding:28px 20px 80px;}
 a{text-decoration:none;color:inherit}
@@ -69,17 +79,18 @@ a{text-decoration:none;color:inherit}
 
 .header-ghost{
   position:absolute;right:-20px;top:-30px;
-  font-family:Georgia,serif;font-size:200px;font-weight:700;
-  color:rgba(192,122,90,.06);line-height:1;
+  font-family:'IBM Plex Mono',monospace;font-size:200px;font-weight:700;
+  color:rgba(212,137,106,.10);line-height:1;
   letter-spacing:-8px;pointer-events:none;user-select:none;
 }
 
 .header-eyebrow{
-  font-size:11px;font-weight:500;letter-spacing:1.6px;
-  text-transform:uppercase;color:rgba(242,236,224,.32);
+  font-size:12px;font-weight:600;letter-spacing:2px;
+  text-transform:uppercase;color:var(--teal);
   margin-bottom:20px;display:flex;align-items:center;gap:10px;
+  font-family:'IBM Plex Mono',monospace;
 }
-.header-eyebrow::before{content:"";width:24px;height:1px;background:rgba(242,236,224,.22);}
+.header-eyebrow::before{content:"";width:28px;height:1px;background:var(--teal);}
 
 .page-header h1{
   font-family:Georgia,'Times New Roman',serif;
@@ -123,8 +134,17 @@ a{text-decoration:none;color:inherit}
   cursor:pointer;transition:background .2s,border-color .2s,transform .2s;display:inline-block;
 }
 .btn:hover{background:var(--surface2);border-color:rgba(242,236,224,.18);}
-.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff;}
-.btn.primary:hover{background:#d08a6a;border-color:#d08a6a;transform:translateY(-1px);}
+.btn.primary{
+  padding:12px 28px;font-size:14px;font-weight:600;
+  background:linear-gradient(135deg,#d4896a 0%,#e09a7a 100%);
+  border-color:transparent;color:#fff;
+  box-shadow:0 4px 20px rgba(212,137,106,.4);
+}
+.btn.primary:hover{
+  background:linear-gradient(135deg,#e09a7a 0%,#ecaa8a 100%);
+  box-shadow:0 6px 28px rgba(212,137,106,.55);
+  transform:translateY(-2px);
+}
 
 /* Sections */
 section{margin-top:52px;scroll-margin-top:110px;}
@@ -134,7 +154,7 @@ section{margin-top:52px;scroll-margin-top:110px;}
   letter-spacing:-0.2px;margin:0 0 28px;
   display:flex;align-items:center;gap:14px;
 }
-.sec-heading::before{content:"";width:22px;height:2px;background:var(--accent);flex-shrink:0;}
+.sec-heading::before{content:"";width:28px;height:2px;background:var(--teal);flex-shrink:0;}
 .hint{font-size:13px;color:var(--muted2);}
 .section-title{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:14px;gap:12px;}
 .sec-h2{font-size:18px;font-weight:600;margin:0;}
@@ -226,11 +246,11 @@ section{margin-top:52px;scroll-margin-top:110px;}
 .footer{
   margin-top:70px;padding-top:24px;
   border-top:1px solid var(--line);
-  font-size:11px;color:rgba(242,236,224,.20);
+  font-size:11px;color:rgba(242,236,224,.32);
   display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
-  letter-spacing:.3px;
+  letter-spacing:.5px;font-family:'IBM Plex Mono',monospace;
 }
-.footer a{color:rgba(242,236,224,.20);}
+.footer a{color:rgba(242,236,224,.32);}
 
 /* Floating chat */
 .chat-fab{
