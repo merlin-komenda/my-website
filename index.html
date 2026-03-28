@@ -33,6 +33,10 @@ html,body{margin:0;padding:0}
 body{
   font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial;
   color:var(--text);background:var(--bg);
+  background-image:
+    radial-gradient(ellipse 80% 50% at 70% -10%, rgba(192,122,90,.13) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 40% at 10% 80%, rgba(192,122,90,.06) 0%, transparent 55%);
+  background-attachment:fixed;
 }
 .wrap{max-width:var(--max);margin:0 auto;padding:28px 20px 80px;}
 a{text-decoration:none;color:inherit}
@@ -91,8 +95,17 @@ a{text-decoration:none;color:inherit}
   cursor:pointer;transition:background .2s,border-color .2s,color .2s,transform .2s;display:inline-block;
 }
 .btn:hover{background:var(--surface2);border-color:rgba(242,236,224,.18);}
-.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff;}
-.btn.primary:hover{background:#d08a6a;border-color:#d08a6a;transform:translateY(-1px);}
+.btn.primary{
+  padding:12px 28px;font-size:14px;font-weight:600;
+  background:linear-gradient(135deg,#c07a5a 0%,#d4906a 100%);
+  border-color:transparent;color:#fff;
+  box-shadow:0 4px 20px rgba(192,122,90,.4);
+}
+.btn.primary:hover{
+  background:linear-gradient(135deg,#d08a6a 0%,#e0a07a 100%);
+  box-shadow:0 6px 28px rgba(192,122,90,.55);
+  transform:translateY(-2px);
+}
 
 /* Photo */
 .photo-wrap{display:flex;justify-content:center;align-items:center;}
@@ -103,14 +116,19 @@ a{text-decoration:none;color:inherit}
 }
 
 /* Ticker */
-.ticker-wrap{border-bottom:1px solid var(--line);padding:11px 0;overflow:hidden;}
+.ticker-wrap{
+  border-bottom:1px solid var(--line);padding:13px 0;overflow:hidden;
+  -webkit-mask-image:linear-gradient(to right,transparent 0%,black 8%,black 92%,transparent 100%);
+  mask-image:linear-gradient(to right,transparent 0%,black 8%,black 92%,transparent 100%);
+}
 .ticker-track{display:flex;animation:ticker 32s linear infinite;width:max-content;}
-.ticker-item{font-size:11px;font-weight:500;letter-spacing:.7px;text-transform:uppercase;color:rgba(242,236,224,.28);padding:0 20px;white-space:nowrap;}
+.ticker-item{font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:rgba(242,236,224,.52);padding:0 20px;white-space:nowrap;}
 .ticker-dot{color:var(--accent);margin:0 3px;}
 @keyframes ticker{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
 
 /* Open sections — no cards, just lines and space */
 .open-section{padding:64px 0;border-bottom:1px solid var(--line);scroll-margin-top:110px;}
+.open-section:nth-child(even){background:rgba(242,236,224,.025);margin:0 -20px;padding-left:20px;padding-right:20px;}
 
 .section-label{font-family:'IBM Plex Mono',monospace;
   font-size:11px;font-weight:600;letter-spacing:1.5px;
@@ -272,6 +290,10 @@ a{text-decoration:none;color:inherit}
 .cp-footer{padding:0 18px 12px;font-size:10px;color:rgba(242,236,224,.25);text-align:center;}
 .cp-footer a{color:rgba(242,236,224,.35);}
 
+/* Scroll animations */
+.fade-up{opacity:0;transform:translateY(24px);transition:opacity .55s ease,transform .55s ease;}
+.fade-up.visible{opacity:1;transform:translateY(0);}
+
 /* Mobile */
 @media(max-width:720px){
   .nav{flex-wrap:wrap;gap:8px;border-radius:18px;}
@@ -364,7 +386,7 @@ a{text-decoration:none;color:inherit}
   </div>
 
   <!-- WHERE I HELP -->
-  <div class="open-section" id="about">
+  <div class="open-section fade-up" id="about">
     <div class="section-label">Where I help</div>
     <div class="where-layout">
       <div class="where-ghost">01</div>
@@ -379,7 +401,7 @@ a{text-decoration:none;color:inherit}
   </div>
 
   <!-- HOW I THINK -->
-  <div class="open-section" id="thinking">
+  <div class="open-section fade-up" id="thinking">
     <div class="section-label">How I think</div>
     <div class="think-pullquote">When execution gets messy, the problem isn't effort. The system has lost clarity.</div>
     <div class="think-open">
@@ -408,7 +430,7 @@ a{text-decoration:none;color:inherit}
   </div>
 
   <!-- RESULTS -->
-  <div class="open-section" id="impact">
+  <div class="open-section fade-up" id="impact">
     <div class="section-label">Results</div>
     <div class="results-open">
       <div class="result-open">
@@ -427,7 +449,7 @@ a{text-decoration:none;color:inherit}
   </div>
 
   <!-- SCHEDULE + CONNECT -->
-  <div class="open-row">
+  <div class="open-row fade-up">
     <div class="open-block" id="schedule">
       <div class="open-block-label">Schedule</div>
       <p>Book time that works for you. You'll get a confirmation email right away.</p>
@@ -498,6 +520,14 @@ a{text-decoration:none;color:inherit}
 
 <script>
 document.getElementById("y").textContent = new Date().getFullYear();
+
+(function(){
+  const els=document.querySelectorAll('.fade-up');
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); }});
+  },{threshold:0.08});
+  els.forEach(el=>obs.observe(el));
+})();
 
 (function(){
   const btn=document.getElementById("menuBtn");
