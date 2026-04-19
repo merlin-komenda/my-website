@@ -112,6 +112,9 @@ section{margin-top:52px;}
   background:var(--accent);
   opacity:.6;
 }
+.project-card.card-4::before{
+  background:linear-gradient(135deg, rgba(124,58,237,.45), rgba(255,77,141,.45), rgba(34,211,238,.30));
+}
 
 .card-top{
   display:flex;align-items:flex-start;
@@ -250,18 +253,18 @@ section{margin-top:52px;}
   <div class="nav" role="navigation" aria-label="Primary">
     <a href="/" class="brand"><div class="mark"></div><span>Merlin Komenda</span></a>
     <div class="navlinks" aria-label="Desktop navigation">
-      <a href="/#about">Where I help</a>
-      <a href="/#thinking">How I think</a>
+      <a href="/">Home</a>
       <a href="/experience/">Experience</a>
       <a href="/projects/" class="active">Projects</a>
+      <a href="/#schedule">Schedule</a>
       <a href="/#contact">Connect</a>
     </div>
     <button class="menuBtn" id="menuBtn" type="button" aria-expanded="false" aria-controls="mobileMenu">☰ Menu</button>
     <div class="mobileMenu" id="mobileMenu">
-      <a href="/#about">Where I help</a>
-      <a href="/#thinking">How I think</a>
+      <a href="/">Home</a>
       <a href="/experience/">Experience</a>
       <a href="/projects/" class="active">Projects</a>
+      <a href="/#schedule">Schedule</a>
       <a href="/#contact">Connect</a>
     </div>
   </div>
@@ -592,6 +595,129 @@ section{margin-top:52px;}
         </div>
       </div>
 
+
+      <!-- PROJECT 4 -->
+      <div class="project-card card-4">
+
+        <div class="project-mockup">
+          <svg viewBox="0 0 800 180" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <pattern id="g4" width="40" height="40" patternUnits="userSpaceOnUse">
+                <path d="M40 0H0V40" fill="none" stroke="rgba(242,236,224,.04)" stroke-width="1"/>
+              </pattern>
+            </defs>
+            <rect width="800" height="180" fill="#151c2c"/>
+            <rect width="800" height="180" fill="url(#g4)"/>
+
+            <!-- Phase 1: Kickoff (active) -->
+            <rect x="15" y="62" width="86" height="50" rx="8" fill="rgba(34,211,238,.10)" stroke="rgba(34,211,238,.50)" stroke-width="1.5"/>
+            <text x="58" y="82" font-family="ui-sans-serif,sans-serif" font-size="8" fill="rgba(34,211,238,.65)" text-anchor="middle" font-weight="700" letter-spacing=".5">PHASE 1</text>
+            <text x="58" y="98" font-family="ui-sans-serif,sans-serif" font-size="11" fill="#22d3ee" text-anchor="middle" font-weight="600">Kickoff</text>
+            <rect x="37" y="44" width="42" height="14" rx="7" fill="rgba(34,211,238,.18)" stroke="rgba(34,211,238,.4)" stroke-width="1"/>
+            <text x="58" y="55" font-family="ui-sans-serif,sans-serif" font-size="8" fill="#22d3ee" text-anchor="middle" font-weight="700">✦ AI Live</text>
+
+            <!-- Arrow 1→2 -->
+            <line x1="101" y1="87" x2="110" y2="87" stroke="rgba(34,211,238,.4)" stroke-width="1.5"/>
+            <polygon points="109,83 113,87 109,91" fill="rgba(34,211,238,.55)"/>
+
+            <!-- Phase 2: Status (active) -->
+            <rect x="113" y="62" width="86" height="50" rx="8" fill="rgba(34,211,238,.10)" stroke="rgba(34,211,238,.50)" stroke-width="1.5"/>
+            <text x="156" y="82" font-family="ui-sans-serif,sans-serif" font-size="8" fill="rgba(34,211,238,.65)" text-anchor="middle" font-weight="700" letter-spacing=".5">PHASE 2</text>
+            <text x="156" y="98" font-family="ui-sans-serif,sans-serif" font-size="11" fill="#22d3ee" text-anchor="middle" font-weight="600">Status</text>
+            <rect x="135" y="44" width="42" height="14" rx="7" fill="rgba(34,211,238,.18)" stroke="rgba(34,211,238,.4)" stroke-width="1"/>
+            <text x="156" y="55" font-family="ui-sans-serif,sans-serif" font-size="8" fill="#22d3ee" text-anchor="middle" font-weight="700">✦ AI Live</text>
+
+            <!-- Arrow 2→3 -->
+            <line x1="199" y1="87" x2="208" y2="87" stroke="rgba(34,211,238,.4)" stroke-width="1.5"/>
+            <polygon points="207,83 211,87 207,91" fill="rgba(34,211,238,.55)"/>
+
+            <!-- Phase 3: Audience (active) -->
+            <rect x="211" y="62" width="86" height="50" rx="8" fill="rgba(34,211,238,.10)" stroke="rgba(34,211,238,.50)" stroke-width="1.5"/>
+            <text x="254" y="82" font-family="ui-sans-serif,sans-serif" font-size="8" fill="rgba(34,211,238,.65)" text-anchor="middle" font-weight="700" letter-spacing=".5">PHASE 3</text>
+            <text x="254" y="98" font-family="ui-sans-serif,sans-serif" font-size="11" fill="#22d3ee" text-anchor="middle" font-weight="600">Audience</text>
+            <rect x="233" y="44" width="42" height="14" rx="7" fill="rgba(34,211,238,.18)" stroke="rgba(34,211,238,.4)" stroke-width="1"/>
+            <text x="254" y="55" font-family="ui-sans-serif,sans-serif" font-size="8" fill="#22d3ee" text-anchor="middle" font-weight="700">✦ AI Live</text>
+
+            <!-- Arrow 3→4 -->
+            <line x1="297" y1="87" x2="306" y2="87" stroke="rgba(34,211,238,.4)" stroke-width="1.5"/>
+            <polygon points="305,83 309,87 305,91" fill="rgba(34,211,238,.55)"/>
+
+            <!-- Phase 4: Handover (active) -->
+            <rect x="309" y="62" width="86" height="50" rx="8" fill="rgba(34,211,238,.10)" stroke="rgba(34,211,238,.50)" stroke-width="1.5"/>
+            <text x="352" y="82" font-family="ui-sans-serif,sans-serif" font-size="8" fill="rgba(34,211,238,.65)" text-anchor="middle" font-weight="700" letter-spacing=".5">PHASE 4</text>
+            <text x="352" y="98" font-family="ui-sans-serif,sans-serif" font-size="11" fill="#22d3ee" text-anchor="middle" font-weight="600">Handover</text>
+            <rect x="331" y="44" width="42" height="14" rx="7" fill="rgba(34,211,238,.18)" stroke="rgba(34,211,238,.4)" stroke-width="1"/>
+            <text x="352" y="55" font-family="ui-sans-serif,sans-serif" font-size="8" fill="#22d3ee" text-anchor="middle" font-weight="700">✦ AI Live</text>
+
+            <!-- Arrow 4→5 (transition, dashed) -->
+            <line x1="395" y1="87" x2="404" y2="87" stroke="rgba(242,236,224,.18)" stroke-width="1.5" stroke-dasharray="3,3"/>
+            <polygon points="403,83 407,87 403,91" fill="rgba(242,236,224,.25)"/>
+
+            <!-- Phase 5: Stabilize (future) -->
+            <rect x="407" y="62" width="86" height="50" rx="8" fill="rgba(242,236,224,.03)" stroke="rgba(242,236,224,.10)" stroke-width="1"/>
+            <text x="450" y="82" font-family="ui-sans-serif,sans-serif" font-size="8" fill="rgba(242,236,224,.25)" text-anchor="middle" font-weight="700" letter-spacing=".5">PHASE 5</text>
+            <text x="450" y="98" font-family="ui-sans-serif,sans-serif" font-size="11" fill="rgba(242,236,224,.3)" text-anchor="middle" font-weight="600">Stabilize</text>
+
+            <!-- Arrow 5→6 -->
+            <line x1="493" y1="87" x2="502" y2="87" stroke="rgba(242,236,224,.10)" stroke-width="1" stroke-dasharray="3,3"/>
+            <polygon points="501,83 505,87 501,91" fill="rgba(242,236,224,.15)"/>
+
+            <!-- Phase 6: Review (future) -->
+            <rect x="505" y="62" width="86" height="50" rx="8" fill="rgba(242,236,224,.03)" stroke="rgba(242,236,224,.10)" stroke-width="1"/>
+            <text x="548" y="82" font-family="ui-sans-serif,sans-serif" font-size="8" fill="rgba(242,236,224,.25)" text-anchor="middle" font-weight="700" letter-spacing=".5">PHASE 6</text>
+            <text x="548" y="98" font-family="ui-sans-serif,sans-serif" font-size="11" fill="rgba(242,236,224,.3)" text-anchor="middle" font-weight="600">Review</text>
+
+            <!-- Arrow 6→7 -->
+            <line x1="591" y1="87" x2="600" y2="87" stroke="rgba(242,236,224,.10)" stroke-width="1" stroke-dasharray="3,3"/>
+            <polygon points="599,83 603,87 599,91" fill="rgba(242,236,224,.15)"/>
+
+            <!-- Phase 7: Scale (future) -->
+            <rect x="603" y="62" width="86" height="50" rx="8" fill="rgba(242,236,224,.03)" stroke="rgba(242,236,224,.10)" stroke-width="1"/>
+            <text x="646" y="82" font-family="ui-sans-serif,sans-serif" font-size="8" fill="rgba(242,236,224,.25)" text-anchor="middle" font-weight="700" letter-spacing=".5">PHASE 7</text>
+            <text x="646" y="98" font-family="ui-sans-serif,sans-serif" font-size="11" fill="rgba(242,236,224,.3)" text-anchor="middle" font-weight="600">Scale</text>
+
+            <!-- KPI panel -->
+            <rect x="704" y="48" width="82" height="86" rx="10" fill="rgba(34,211,238,.07)" stroke="rgba(34,211,238,.28)" stroke-width="1"/>
+            <text x="745" y="80" font-family="Georgia,serif" font-size="26" fill="#22d3ee" text-anchor="middle" font-weight="700">4/7</text>
+            <text x="745" y="96" font-family="ui-sans-serif,sans-serif" font-size="8" fill="rgba(242,236,224,.5)" text-anchor="middle">phases tooled</text>
+            <text x="745" y="116" font-family="ui-sans-serif,sans-serif" font-size="8" fill="rgba(34,211,238,.65)" text-anchor="middle">● in production</text>
+
+            <text x="15" y="168" font-family="ui-sans-serif,sans-serif" font-size="9" fill="rgba(242,236,224,.2)" letter-spacing="1">IMPLEMENTATION PIPELINE · AI-TOOLED PHASES HIGHLIGHTED</text>
+          </svg>
+        </div>
+
+        <div class="card-top">
+          <div class="card-meta">
+            <span class="card-tag">AI Systems Design</span>
+            <h2 class="card-title">Phase-Mapped AI Integration — Implementation Operating Model</h2>
+          </div>
+          <div class="kpi-cluster">
+            <div class="kpi-pill">
+              <span class="num">4/7</span>
+              <span class="label">Phases<br>covered</span>
+            </div>
+            <div class="kpi-pill">
+              <span class="num">Live</span>
+              <span class="label">In<br>production</span>
+            </div>
+          </div>
+        </div>
+        <div class="narrative">
+          <div class="narrative-block">
+            <span class="n-label">The problem</span>
+            <p>Implementation runs on repeatable phases — but the highest-friction moments (kickoff prep, status updates, audience structuring, handover documentation) were still being handled manually, every time, at every account.</p>
+          </div>
+          <div class="narrative-block">
+            <span class="n-label">What I designed</span>
+            <p>Mapped AI assistance to the specific friction points across a 7-phase implementation methodology. Built and deployed four tools — each targeting a distinct phase — and established a pipeline structure for future additions as new friction points are identified.</p>
+          </div>
+          <div class="narrative-block">
+            <span class="n-label">The outcome</span>
+            <p>Four of seven implementation phases now have active AI tooling in production. Recurring admin at each touchpoint is handled by the system. New capabilities are added against a defined methodology rather than as one-off fixes.</p>
+          </div>
+        </div>
+      </div>
+
     </div>
   </section>
 
@@ -612,7 +738,11 @@ section{margin-top:52px;}
       -->
 
       <div class="log-entry">
-        <span class="log-date">Mar 2026</span>
+        <span class="log-date">Spring 2026</span>
+        <span class="log-text"><strong>Phase-mapped AI system deployed across implementation methodology.</strong> 4 of 7 phases now have active tooling in production, with a structured pipeline for future additions.</span>
+      </div>
+      <div class="log-entry">
+        <span class="log-date">Spring 2026</span>
         <span class="log-text"><strong>Enterprise AI rollout completed across 7 product verticals.</strong> 60-person training established repeatable AI usage model for largest AI-first customer.</span>
       </div>
       <div class="log-entry">
