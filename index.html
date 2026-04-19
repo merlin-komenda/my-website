@@ -493,51 +493,9 @@ a{text-decoration:none;color:inherit}
 
 </div>
 
-<!-- FLOATING CHAT -->
-<button class="chat-fab" id="chatFab" aria-label="Ask Merlin">
-  <svg class="chat-fab-icon chat-fab-open" viewBox="0 0 24 24" fill="none">
-    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  </svg>
-  <svg class="chat-fab-icon chat-fab-close" viewBox="0 0 24 24" fill="none" style="display:none;">
-    <path d="M18 6L6 18M6 6l12 12" stroke="white" stroke-width="2" stroke-linecap="round"/>
-  </svg>
-  <span class="chat-fab-label">Ask Merlin</span>
-</button>
+<!-- Chat widget injected by script below -->
 
-<div class="chat-panel" id="chatPanel" role="dialog" aria-label="Ask Merlin">
-  <div class="cp-header">
-    <div class="cp-avatar">
-      <svg viewBox="0 0 24 24" fill="none">
-        <path d="M16.5 7.5a6.5 6.5 0 1 0 1.4 6.9" stroke="white" stroke-width="2.2" stroke-linecap="round"/>
-        <path d="M17.9 14.4l.9 2.9 2.7-1.3" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    </div>
-    <div>
-      <p class="cp-name">Ask Merlin anything</p>
-      <p class="cp-status"><span class="cp-dot"></span>Usually responds instantly</p>
-    </div>
-    <button class="cp-close" id="chatClose" aria-label="Close">✕</button>
-  </div>
-  <div class="cp-messages" id="cpMessages"></div>
-  <div class="cp-suggestions" id="cpSuggestions">
-    <button class="cp-sq" onclick="cpAskSuggested(this)">What are you speaking about at Propel26?</button>
-    <button class="cp-sq" onclick="cpAskSuggested(this)">What kind of work do you take on?</button>
-    <button class="cp-sq" onclick="cpAskSuggested(this)">What does your background look like?</button>
-    <button class="cp-sq" onclick="cpAskSuggested(this)">How do you approach AI adoption?</button>
-    <button class="cp-sq" onclick="cpAskSuggested(this)">How can I reach you?</button>
-  </div>
-  <div class="cp-input-row">
-    <textarea class="cp-input" id="cpInput" placeholder="Ask me anything..." rows="1"></textarea>
-    <button class="cp-send" id="cpSend" onclick="cpSend()">
-      <svg viewBox="0 0 24 24" fill="none">
-        <path d="M22 2L11 13" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    </button>
-  </div>
-  <div class="cp-footer">Powered by Claude · <a href="mailto:merlin.komenda@gmail.com">merlin.komenda@gmail.com</a></div>
-</div>
-
+<script src="/context.js"></script>
 <script>
 document.getElementById("y").textContent = new Date().getFullYear();
 
@@ -598,110 +556,228 @@ document.getElementById("y").textContent = new Date().getFullYear();
   if(grid) observer.observe(grid);
 })();
 
-const CP_SYSTEM=`You are a friendly, conversational assistant representing Merlin Komenda on his professional portfolio website. Your job is to answer questions from recruiters, potential collaborators, and conference attendees about Merlin.
+// ── Ask Merlin Chat Widget ──────────────────────────────────────────
+(function () {
+  // State
+  let cpHistory = [];
+  let visitorType = null;
+  let isOpen = false;
 
-Tone: Warm, confident, and direct. Third person ("Merlin is...") but friendly — like a well-briefed colleague who knows him well. No corporate speak. No hype. Accurate, grounded answers only.
+  // Suggested questions
+  const SUGGESTED = [
+    "What does Merlin speak about at Propel26?",
+    "What has he built?",
+    "Is he open to conversations?"
+  ];
 
-When you don't know something or the question is outside what you have context for, say: "Good question — that's one for Merlin himself. Drop him a line at merlin.komenda@gmail.com, he's pretty responsive."
+  // Build widget HTML
+  const widget = document.createElement('div');
+  widget.id = 'cpWidget';
+  widget.innerHTML = `
+    <button id="cpBtn" aria-label="Chat with Merlin's assistant" style="
+      position:fixed;bottom:28px;right:28px;z-index:1000;
+      background:#c2692a;color:#fff;border:none;border-radius:999px;
+      padding:13px 20px;font-size:14px;font-weight:750;cursor:pointer;
+      box-shadow:0 8px 24px rgba(194,105,42,.35);
+      transition:transform .2s ease,box-shadow .2s ease;">
+      Ask Merlin
+    </button>
+    <div id="cpPane" style="
+      display:none;position:fixed;bottom:84px;right:28px;z-index:999;
+      width:360px;max-width:calc(100vw - 40px);
+      border-radius:20px;border:1px solid rgba(11,16,32,.10);
+      background:#fff;box-shadow:0 25px 70px rgba(15,23,42,.14);
+      flex-direction:column;overflow:hidden;font-family:inherit;">
+      <div style="padding:16px 18px 12px;border-bottom:1px solid rgba(11,16,32,.08);">
+        <div style="font-weight:800;font-size:15px;">Ask Merlin</div>
+        <div style="font-size:12px;color:rgba(11,16,32,.5);margin-top:2px;">Powered by Claude · Usually instant</div>
+      </div>
+      <div id="cpMessages" style="
+        padding:14px 16px;flex:1;overflow-y:auto;
+        max-height:340px;display:flex;flex-direction:column;gap:10px;
+        font-size:14px;line-height:1.55;"></div>
+      <div id="cpSuggested" style="padding:0 12px 10px;display:flex;flex-wrap:wrap;gap:6px;"></div>
+      <div id="cpLeadCapture" style="display:none;padding:10px 14px 14px;border-top:1px solid rgba(11,16,32,.08);">
+        <div style="font-size:13px;color:rgba(11,16,32,.7);margin-bottom:8px;">Want to stay updated on Merlin's work?</div>
+        <div style="display:flex;gap:8px;">
+          <input id="cpEmailInput" type="email" placeholder="your@email.com" style="
+            flex:1;padding:9px 12px;border-radius:10px;
+            border:1px solid rgba(11,16,32,.15);font-size:13px;outline:none;"/>
+          <button id="cpEmailSubmit" style="
+            padding:9px 14px;border-radius:10px;background:#c2692a;
+            color:#fff;border:none;font-size:13px;font-weight:750;cursor:pointer;">Save</button>
+        </div>
+      </div>
+      <div style="padding:10px 14px 14px;border-top:1px solid rgba(11,16,32,.08);display:flex;gap:8px;">
+        <input id="cpInput" placeholder="Ask anything..." style="
+          flex:1;padding:10px 14px;border-radius:12px;
+          border:1px solid rgba(11,16,32,.12);font-size:14px;outline:none;"/>
+        <button id="cpSend" style="
+          padding:10px 16px;border-radius:12px;background:#c2692a;
+          color:#fff;border:none;font-weight:750;font-size:14px;cursor:pointer;">→</button>
+      </div>
+    </div>`;
+  document.body.appendChild(widget);
 
-== WHO MERLIN IS ==
-Merlin Komenda is Global Director of Implementation at Zappi, an AI-powered consumer research platform. He builds AI-enabled operating models — the kind that make organizational growth predictable and repeatable rather than chaotic. His focus is on designing systems that work after the kickoff: clear ownership, AI in the right places, delivery that survives turnover. He's based in the Albany, NY area. Core philosophy: Structure beats intensity. Clarity before automation. Systems should survive turnover.
+  const btn = document.getElementById('cpBtn');
+  const pane = document.getElementById('cpPane');
+  const msgs = document.getElementById('cpMessages');
+  const input = document.getElementById('cpInput');
+  const sendBtn = document.getElementById('cpSend');
+  const suggestedEl = document.getElementById('cpSuggested');
+  const leadCapture = document.getElementById('cpLeadCapture');
+  const emailInput = document.getElementById('cpEmailInput');
+  const emailSubmit = document.getElementById('cpEmailSubmit');
 
-== KEY RESULTS ==
-- ~30% reduction in time-to-live; first customer usage in ~15 days
-- 60+ implementations delivered annually with repeatable outcomes
-- ~40% faster adoption through scalable platform setup patterns
-- ~10% improvement in onboarding-generated revenue
-- NPS 75+ across enterprise relationships
-- Enterprise rollout across 60 people and 7 product verticals at a Fortune 500 company
-- Built AI-powered agent setup tool that cut deployment time from 20 hours to 8-10
+  // Toggle pane
+  btn.addEventListener('click', () => {
+    isOpen = !isOpen;
+    pane.style.display = isOpen ? 'flex' : 'none';
+    if (isOpen && cpHistory.length === 0) initChat();
+  });
 
-== PROPEL26 TALK ==
-Merlin is a confirmed speaker at Propel26 — the world's #1 conference for service delivery professionals, hosted by Rocketlane. San Francisco, May 13-14, 2026. Talk: "Design Before You Automate: The Implementation Discipline Behind AI That Actually Sticks." Core thesis: AI adoption fails less because of bad tooling and more because teams automate workflows that were never clearly designed. AI amplifies whatever system design already exists — good or bad. Three principles: (1) Start with the customer outcome. (2) Lead with expertise. (3) Let automation follow clarity. Results from Zappi's own redesign: 35% improvement in time-to-live, stable satisfaction, increased team capacity.
-
-== WORKING STYLE ==
-Outcome-first, low-drama delivery. Calm under pressure. Values clarity over complexity.
-
-== OPEN TO ==
-Speaking engagements and panels. Conversations with delivery leaders and systems thinkers. Recruiters exploring roles at the intersection of AI, implementation, and operations leadership.
-
-== CONTACT ==
-Email: merlin.komenda@gmail.com — LinkedIn: https://www.linkedin.com/in/merlin-komenda/
-
-== RULES ==
-Keep answers concise — 2-4 sentences for simple questions, a short paragraph for complex ones. Do not speculate on compensation or salary. If asked about job hunting directly, say he's open to the right conversations. Do not invent details not listed here.`;
-
-let cpHistory=[],cpLoading=false;
-
-(function(){
-  const fab=document.getElementById('chatFab');
-  const panel=document.getElementById('chatPanel');
-  const closeBtn=document.getElementById('chatClose');
-  const openIcon=fab.querySelector('.chat-fab-open');
-  const closeIcon=fab.querySelector('.chat-fab-close');
-  const label=fab.querySelector('.chat-fab-label');
-  let opened=false;
-  function openPanel(){
-    panel.classList.add('open');
-    openIcon.style.display='none';
-    closeIcon.style.display='block';
-    label.textContent='Close';
-    if(!opened){ opened=true; cpAddMsg('assistant',"Hey! I'm a quick way to learn more about Merlin — his background, what he's speaking about at Propel26, how he works, or how to get in touch. What would you like to know?"); }
-    document.getElementById('cpInput').focus();
+  function initChat() {
+    addMessage('bot', "Hi! I'm a quick way to learn about Merlin. Before I answer — are you a recruiter, a fellow practitioner, or just curious?");
+    renderVisitorButtons();
   }
-  function closePanel(){
-    panel.classList.remove('open');
-    openIcon.style.display='block';
-    closeIcon.style.display='none';
-    label.textContent='Ask Merlin';
+
+  function renderVisitorButtons() {
+    suggestedEl.innerHTML = '';
+    [['Recruiter', 'blue'], ['Practitioner', 'green'], ['Just curious', 'gray']].forEach(([label, color]) => {
+      const b = document.createElement('button');
+      b.textContent = label;
+      b.style.cssText = `padding:6px 12px;border-radius:999px;border:1px solid rgba(11,16,32,.15);
+        background:#fff;font-size:12px;font-weight:700;cursor:pointer;`;
+      b.addEventListener('click', () => {
+        visitorType = label;
+        suggestedEl.innerHTML = '';
+        addMessage('user', label);
+        const response = label === 'Recruiter'
+          ? "Got it — I'll keep things relevant to Merlin's background and experience. What would you like to know?"
+          : label === 'Practitioner'
+          ? "Great — I'll focus on the systems and delivery work. What are you curious about?"
+          : "No problem — ask me anything. What brings you here?";
+        addMessage('bot', response);
+        renderSuggested();
+        if (label === 'Recruiter' || label === 'Practitioner') {
+          setTimeout(() => { leadCapture.style.display = 'block'; }, 2000);
+        }
+      });
+      suggestedEl.appendChild(b);
+    });
   }
-  fab.addEventListener('click',()=>panel.classList.contains('open')?closePanel():openPanel());
-  closeBtn.addEventListener('click',closePanel);
-  window.addEventListener('keydown',e=>{ if(e.key==='Escape') closePanel(); });
+
+  function renderSuggested() {
+    suggestedEl.innerHTML = '';
+    SUGGESTED.forEach(q => {
+      const b = document.createElement('button');
+      b.textContent = q;
+      b.style.cssText = `padding:6px 12px;border-radius:999px;border:1px solid rgba(11,16,32,.12);
+        background:rgba(11,16,32,.03);font-size:12px;font-weight:650;cursor:pointer;text-align:left;`;
+      b.addEventListener('click', () => {
+        suggestedEl.innerHTML = '';
+        sendMessage(q);
+      });
+      suggestedEl.appendChild(b);
+    });
+  }
+
+  function addMessage(role, text) {
+    const div = document.createElement('div');
+    div.style.cssText = role === 'user'
+      ? 'align-self:flex-end;background:#c2692a;color:#fff;padding:9px 13px;border-radius:14px 14px 4px 14px;max-width:80%;'
+      : 'align-self:flex-start;background:rgba(11,16,32,.05);padding:9px 13px;border-radius:14px 14px 14px 4px;max-width:85%;';
+    div.textContent = text;
+    msgs.appendChild(div);
+    msgs.scrollTop = msgs.scrollHeight;
+    return div;
+  }
+
+  async function sendMessage(text) {
+    if (!text.trim()) return;
+    input.value = '';
+    addMessage('user', text);
+    cpHistory.push({ role: 'user', content: text });
+
+    const typing = addMessage('bot', '...');
+
+    try {
+      const res = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          model: 'claude-sonnet-4-20250514',
+          max_tokens: 1000,
+          system: CP_SYSTEM,
+          messages: cpHistory
+        })
+      });
+      const data = await res.json();
+      const reply = data?.content?.[0]?.text || "I hit a snag — try again in a moment.";
+      typing.textContent = reply;
+      cpHistory.push({ role: 'assistant', content: reply });
+
+      // Handoff trigger detection
+      const handoffPhrases = ["that's one for merlin", "reach him at", "one for merlin directly"];
+      if (handoffPhrases.some(p => reply.toLowerCase().includes(p))) {
+        setTimeout(() => showHandoffCapture(text), 800);
+      }
+
+    } catch (e) {
+      typing.textContent = "Something went wrong — please try again.";
+    }
+  }
+
+  function showHandoffCapture(originalQuestion) {
+    const div = document.createElement('div');
+    div.style.cssText = 'align-self:flex-start;background:rgba(194,105,42,.07);border:1px solid rgba(194,105,42,.2);padding:10px 13px;border-radius:14px;max-width:90%;font-size:13px;';
+    div.innerHTML = `<div style="font-weight:750;margin-bottom:6px;">Want Merlin to follow up directly?</div>
+      <div style="display:flex;gap:6px;margin-top:6px;">
+        <input id="handoffEmail" type="email" placeholder="your@email.com" style="flex:1;padding:7px 10px;border-radius:8px;border:1px solid rgba(11,16,32,.15);font-size:12px;outline:none;"/>
+        <button id="handoffSubmit" style="padding:7px 12px;border-radius:8px;background:#c2692a;color:#fff;border:none;font-size:12px;font-weight:750;cursor:pointer;">Send</button>
+      </div>`;
+    msgs.appendChild(div);
+    msgs.scrollTop = msgs.scrollHeight;
+
+    div.querySelector('#handoffSubmit').addEventListener('click', async () => {
+      const email = div.querySelector('#handoffEmail').value.trim();
+      if (!email) return;
+      await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          action: 'handoff_request',
+          question: originalQuestion,
+          visitorType: visitorType || 'Other',
+          contactEmail: email
+        })
+      });
+      div.innerHTML = '<div style="color:rgba(11,16,32,.6);">Got it — Merlin will be in touch.</div>';
+    });
+  }
+
+  // Lead capture submit
+  emailSubmit.addEventListener('click', async () => {
+    const email = emailInput.value.trim();
+    if (!email) return;
+    await fetch('/api/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        action: 'capture_lead',
+        email,
+        visitorType: visitorType || 'Other',
+        source: cpHistory.some(m => m.content?.toLowerCase().includes('propel')) ? 'Propel26 interest' : 'General contact',
+        message: cpHistory.find(m => m.role === 'user')?.content || ''
+      })
+    });
+    leadCapture.innerHTML = '<div style="font-size:13px;color:rgba(11,16,32,.5);padding:4px 0;">Thanks — you\'re on the list.</div>';
+  });
+
+  input.addEventListener('keydown', e => { if (e.key === 'Enter') sendMessage(input.value); });
+  sendBtn.addEventListener('click', () => sendMessage(input.value));
+
 })();
-
-function cpAddMsg(role,content){
-  const c=document.getElementById('cpMessages');
-  const w=document.createElement('div'); w.className='cm '+role;
-  const av=document.createElement('div'); av.className='cm-av'; av.textContent=role==='user'?'You':'MK';
-  const b=document.createElement('div'); b.className='cm-bubble';
-  b.innerHTML=content.replace(/\n/g,'<br>').replace(/\[([^\]]+)\]\((https?:\/\/[^\)]+)\)/g,'<a href="$2" target="_blank">$1</a>');
-  w.appendChild(av); w.appendChild(b); c.appendChild(w); c.scrollTop=c.scrollHeight;
-}
-function cpAddTyping(){
-  const c=document.getElementById('cpMessages');
-  const w=document.createElement('div'); w.className='cm assistant'; w.id='cpTyping';
-  const av=document.createElement('div'); av.className='cm-av'; av.textContent='MK';
-  const t=document.createElement('div'); t.className='cp-typing'; t.innerHTML='<span></span><span></span><span></span>';
-  w.appendChild(av); w.appendChild(t); c.appendChild(w); c.scrollTop=c.scrollHeight;
-}
-function cpRemoveTyping(){ const el=document.getElementById('cpTyping'); if(el) el.remove(); }
-function cpHideSuggestions(){ const el=document.getElementById('cpSuggestions'); if(el) el.style.display='none'; }
-function cpAskSuggested(btn){ cpHideSuggestions(); cpSendText(btn.textContent); }
-async function cpSend(){
-  const input=document.getElementById('cpInput');
-  const text=input.value.trim();
-  if(!text||cpLoading) return;
-  input.value=''; input.style.height='auto';
-  cpHideSuggestions(); cpSendText(text);
-}
-async function cpSendText(text){
-  if(cpLoading) return;
-  cpLoading=true; document.getElementById('cpSend').disabled=true;
-  cpAddMsg('user',text); cpHistory.push({role:'user',content:text}); cpAddTyping();
-  try {
-    const res=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,system:CP_SYSTEM,messages:cpHistory})});
-    const data=await res.json(); cpRemoveTyping();
-    if(data.content&&data.content[0]&&data.content[0].text){
-      const reply=data.content[0].text;
-      cpHistory.push({role:'assistant',content:reply}); cpAddMsg('assistant',reply);
-    } else { cpAddMsg('assistant',"Good question — that's one for Merlin himself. Drop him a line at merlin.komenda@gmail.com, he's pretty responsive."); }
-  } catch(e){ cpRemoveTyping(); cpAddMsg('assistant',"Good question — that's one for Merlin himself. Drop him a line at merlin.komenda@gmail.com, he's pretty responsive."); }
-  cpLoading=false; document.getElementById('cpSend').disabled=false;
-}
-const cpInput=document.getElementById('cpInput');
-cpInput.addEventListener('keydown',e=>{ if(e.key==='Enter'&&!e.shiftKey){ e.preventDefault(); cpSend(); }});
-cpInput.addEventListener('input',()=>{ cpInput.style.height='auto'; cpInput.style.height=Math.min(cpInput.scrollHeight,100)+'px'; });
 </script>
 
 </body>
