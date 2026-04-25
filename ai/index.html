@@ -1,0 +1,797 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>AI — Merlin Komenda</title>
+<meta name="description" content="How I think about AI — where it belongs, what I've built, and where the line should actually go." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="apple-touch-icon" href="/favicon.png">
+<meta name="theme-color" content="#1b2232">
+
+<script type="text/javascript">
+(function(c,l,a,r,i,t,y){
+  c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+  t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+  y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+})(window, document, "clarity", "script", "vyrgo4rvfs");
+</script>
+
+<style>
+:root{
+  --bg:#1b2232;
+  --surface:rgba(242,236,224,.05);
+  --surface2:rgba(242,236,224,.09);
+  --text:#f2ece0;
+  --muted:rgba(242,236,224,.72);
+  --muted2:rgba(242,236,224,.52);
+  --line:rgba(242,236,224,.13);
+  --accent:#d4896a;
+  --accent-dim:rgba(212,137,106,.14);
+  --accent-border:rgba(212,137,106,.38);
+  --teal:#4ecdc4;
+  --teal-dim:rgba(78,205,196,.12);
+  --max:1200px;
+}
+
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial;
+  color:var(--text);background:var(--bg);
+  background-image:
+    radial-gradient(ellipse 70% 55% at 75% -5%, rgba(212,137,106,.22) 0%, transparent 60%),
+    radial-gradient(ellipse 55% 45% at 5% 85%, rgba(78,205,196,.10) 0%, transparent 55%),
+    radial-gradient(ellipse 40% 35% at 50% 50%, rgba(212,137,106,.04) 0%, transparent 70%);
+  background-attachment:fixed;
+}
+.wrap{max-width:var(--max);margin:0 auto;padding:28px 20px 80px;}
+a{text-decoration:none;color:inherit}
+
+/* Nav */
+.nav{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:12px 18px;border:1px solid var(--line);border-radius:999px;
+  background:rgba(27,34,50,.92);backdrop-filter:blur(12px);
+  position:sticky;top:16px;z-index:10;
+}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:14px;text-decoration:none;color:var(--text);letter-spacing:-0.1px;}
+.mark{width:32px;height:32px;border-radius:9px;background:var(--accent);flex-shrink:0;}
+.navlinks{display:flex;gap:4px;flex-wrap:wrap;align-items:center}
+.navlinks a{font-size:13px;font-weight:500;padding:7px 11px;border-radius:999px;color:var(--muted);transition:color .15s,background .15s;}
+.navlinks a:hover{background:var(--surface2);color:var(--text);}
+.navlinks a.active{background:var(--accent-dim);color:var(--accent);}
+.menuBtn{
+  display:none;align-items:center;justify-content:center;gap:8px;
+  border:1px solid var(--line);background:var(--surface);
+  padding:9px 14px;border-radius:999px;font-weight:600;font-size:13px;color:var(--text);cursor:pointer;
+}
+.mobileMenu{display:none;margin-top:10px;padding:8px;border:1px solid var(--line);background:rgba(27,34,50,.96);border-radius:16px;}
+.mobileMenu a{display:block;padding:10px 12px;border-radius:10px;font-weight:500;font-size:14px;color:var(--muted);}
+.mobileMenu a:hover{background:var(--surface2);color:var(--text);}
+.mobileMenu.open{display:block;}
+
+/* Page header */
+.page-header{
+  margin-top:40px;padding:48px 44px 52px;
+  border-radius:20px;border:1px solid var(--line);
+  background:rgba(242,236,224,.03);
+}
+@media(max-width:720px){.page-header{padding:32px 24px 36px;}}
+.page-header h1{
+  font-family:Georgia,'Times New Roman',serif;
+  font-size:clamp(32px,5vw,56px);
+  line-height:.97;letter-spacing:-1.5px;
+  margin:0 0 16px;color:var(--text);
+}
+.page-header p{margin:0;color:var(--muted);font-size:15px;line-height:1.65;max-width:580px;}
+
+/* Section heading */
+.sec-heading{
+  font-family:Georgia,'Times New Roman',serif;
+  font-size:20px;font-weight:700;color:var(--text);
+  letter-spacing:-0.2px;margin:0 0 24px;
+  display:flex;align-items:center;gap:14px;
+}
+.sec-heading::before{content:"";width:28px;height:2px;background:var(--teal);flex-shrink:0;}
+.hint{font-size:13px;color:var(--muted2);}
+.section-title{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:20px;gap:12px;}
+
+section{margin-top:52px;}
+
+/* Cards */
+.card-base{
+  padding:28px 30px;border-radius:16px;
+  border:1px solid var(--line);
+  background:var(--surface);
+}
+
+/* Point of view — full-width statement card */
+.pov-card{
+  padding:48px 44px 52px;border-radius:20px;
+  border:1px solid var(--line);
+  background:rgba(242,236,224,.04);
+  position:relative;overflow:hidden;
+}
+@media(max-width:720px){.pov-card{padding:32px 24px 36px;}}
+.pov-card::before{
+  content:"";position:absolute;left:0;top:0;
+  width:3px;height:100%;
+  background:linear-gradient(180deg,var(--accent) 0%,var(--teal) 100%);
+  opacity:.7;
+}
+.pov-ghost{
+  position:absolute;right:-10px;top:-20px;
+  font-family:'IBM Plex Mono',monospace;font-size:200px;font-weight:700;
+  color:rgba(212,137,106,.06);line-height:1;
+  letter-spacing:-8px;pointer-events:none;user-select:none;
+}
+.pov-label{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;
+  color:var(--teal);margin-bottom:20px;
+  display:flex;align-items:center;gap:10px;
+}
+.pov-label::before{content:"";width:28px;height:1px;background:var(--teal);}
+.pov-headline{
+  font-family:Georgia,'Times New Roman',serif;
+  font-size:clamp(36px,5vw,60px);
+  line-height:1.0;letter-spacing:-2px;
+  margin:0 0 28px;color:var(--text);
+}
+.pov-body{font-size:17px;line-height:1.85;color:var(--muted);max-width:680px;}
+.pov-body p{margin:0 0 18px;}
+.pov-body p:last-child{margin:0;}
+.accent-phrase{color:var(--accent);font-weight:600;}
+
+/* Framework — two column */
+.framework-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:0;
+  border-radius:16px;overflow:hidden;
+  border:1px solid var(--line);
+}
+@media(max-width:720px){.framework-grid{grid-template-columns:1fr;}}
+.fw-col{padding:32px 32px 36px;}
+.fw-col:first-child{border-right:1px solid var(--line);}
+@media(max-width:720px){.fw-col:first-child{border-right:none;border-bottom:1px solid var(--line);}}
+.fw-col-header{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  margin-bottom:20px;display:flex;align-items:center;gap:10px;
+}
+.fw-col-header::before{content:"";width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.fw-human .fw-col-header{color:var(--teal);}
+.fw-human .fw-col-header::before{background:var(--teal);}
+.fw-ai .fw-col-header{color:var(--accent);}
+.fw-ai .fw-col-header::before{background:var(--accent);}
+.fw-pills{display:flex;flex-wrap:wrap;gap:8px;}
+.fw-pill{
+  padding:7px 14px;border-radius:999px;
+  font-size:13px;font-weight:500;line-height:1.3;
+}
+.fw-human .fw-pill{
+  background:var(--teal-dim);border:1px solid rgba(78,205,196,.25);color:var(--teal);
+}
+.fw-ai .fw-pill{
+  background:var(--accent-dim);border:1px solid var(--accent-border);color:var(--accent);
+}
+.fw-footnote{
+  grid-column:1/-1;
+  padding:16px 32px;border-top:1px solid var(--line);
+  background:rgba(242,236,224,.02);
+  font-family:Georgia,'Times New Roman',serif;
+  font-size:14px;font-style:italic;color:var(--muted2);
+  line-height:1.6;
+}
+
+/* Pipeline cards */
+.pipeline-grid{display:flex;flex-direction:column;gap:16px;}
+
+.p-card{
+  padding:24px 26px;border-radius:14px;
+  border:1px solid var(--line);
+  background:var(--surface);
+  position:relative;overflow:hidden;
+  transition:border-color .2s,transform .2s;
+}
+.p-card:hover{border-color:rgba(192,122,90,.25);transform:translateY(-2px);}
+.p-card::before{
+  content:"";position:absolute;left:0;top:0;
+  width:3px;height:100%;opacity:.7;
+}
+.p-card.state-active::before{background:var(--accent);}
+.p-card.state-progress::before{background:var(--teal);}
+.p-card.state-exploring::before{background:rgba(242,236,224,.15);}
+
+.p-card.state-progress{border-style:dashed;}
+.p-card.state-exploring{background:rgba(242,236,224,.025);border-style:dotted;}
+
+.p-card-row{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap;}
+.p-card-meta{flex:1;min-width:0;}
+
+.p-card-tag{
+  display:inline-flex;align-items:center;
+  padding:3px 10px;border-radius:999px;
+  font-size:11px;font-weight:600;letter-spacing:.3px;
+  margin-bottom:8px;width:fit-content;
+}
+.tag-active{background:var(--accent-dim);border:1px solid var(--accent-border);color:var(--accent);}
+.tag-progress{background:var(--teal-dim);border:1px solid rgba(78,205,196,.25);color:var(--teal);}
+.tag-exploring{background:var(--surface2);border:1px solid var(--line);color:var(--muted2);}
+
+.p-card-title{
+  font-family:Georgia,'Times New Roman',serif;
+  font-size:16px;font-weight:700;color:var(--text);
+  margin:0 0 8px;line-height:1.25;
+}
+.p-card.state-exploring .p-card-title{font-style:italic;color:var(--muted);}
+.p-card-desc{font-size:14px;line-height:1.6;color:var(--muted);margin:0;}
+
+/* State group headers */
+.state-group{margin-bottom:36px;}
+.state-group:last-child{margin-bottom:0;}
+.state-label-row{
+  display:flex;align-items:center;gap:10px;margin-bottom:14px;
+  font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;
+  letter-spacing:2px;text-transform:uppercase;
+}
+.state-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.dot-active{background:var(--accent);}
+.dot-progress{background:var(--teal);outline:1.5px dashed rgba(78,205,196,.4);outline-offset:2px;}
+.dot-exploring{background:transparent;border:1.5px dotted var(--muted2);}
+.state-label-active{color:var(--accent);}
+.state-label-progress{color:var(--teal);}
+.state-label-exploring{color:var(--muted2);}
+
+.state-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;}
+
+/* Impact log */
+.impact-log{
+  border-radius:16px;border:1px solid var(--line);
+  background:var(--surface);overflow:hidden;
+}
+.log-entry{
+  display:grid;grid-template-columns:110px 1fr;
+  gap:16px;padding:16px 22px;
+  border-bottom:1px solid var(--line);
+  align-items:baseline;
+  transition:background .15s, border-left-color .15s;
+  border-left:3px solid transparent;
+}
+.log-entry:last-child{border-bottom:none;}
+.log-entry:hover{background:var(--surface2);border-left-color:var(--accent);}
+.log-date{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:12px;font-weight:600;
+  color:var(--accent);letter-spacing:.2px;white-space:nowrap;
+}
+.log-text{font-size:14px;line-height:1.6;color:var(--muted);}
+.log-text strong{font-weight:600;color:var(--text);}
+@media(max-width:600px){.log-entry{grid-template-columns:1fr;gap:4px;}}
+
+/* Open question */
+.question-block{
+  max-width:680px;
+}
+.open-question{
+  font-family:Georgia,'Times New Roman',serif;
+  font-size:clamp(18px,2.2vw,23px);
+  line-height:1.65;color:var(--muted);
+  font-style:italic;margin:0 0 40px;
+  padding-left:22px;border-left:3px solid var(--accent);
+}
+.ghost-btns{display:flex;flex-direction:column;gap:10px;margin-bottom:32px;}
+.ghost-btn{
+  padding:12px 22px;border-radius:9px;
+  border:1px solid var(--line);
+  background:transparent;color:var(--muted);
+  font-size:14px;font-weight:500;font-family:inherit;
+  cursor:pointer;text-decoration:none;display:inline-block;
+  transition:background .2s,border-color .2s,color .2s;
+  width:fit-content;
+}
+.ghost-btn:hover{
+  background:var(--accent-dim);border-color:var(--accent-border);color:var(--accent);
+}
+.linkedin-line{font-size:13px;color:var(--muted2);line-height:1.6;margin:0;}
+.linkedin-line a{
+  color:var(--muted2);border-bottom:1px solid rgba(242,236,224,.18);padding-bottom:1px;
+  transition:color .15s,border-color .15s;
+}
+.linkedin-line a:hover{color:var(--muted);border-color:rgba(242,236,224,.45);}
+
+/* Back link */
+.back-link{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:14px;color:var(--muted2);margin-top:40px;
+  transition:color .15s;
+}
+.back-link:hover{color:var(--muted);}
+
+/* Footer */
+.footer{
+  margin-top:70px;padding-top:24px;
+  border-top:1px solid var(--line);
+  font-size:11px;color:rgba(242,236,224,.32);
+  display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
+  letter-spacing:.5px;font-family:'IBM Plex Mono',monospace;
+}
+.footer a{color:rgba(242,236,224,.32);}
+.footer a:hover{color:var(--muted);}
+
+/* Scroll animations */
+.fade-up{opacity:0;transform:translateY(24px);transition:opacity .55s ease,transform .55s ease;}
+.fade-up.visible{opacity:1;transform:translateY(0);}
+
+/* Chat widget */
+.chat-fab{
+  position:fixed;bottom:28px;right:28px;z-index:1000;
+  display:flex;align-items:center;gap:10px;
+  padding:12px 20px;border-radius:999px;
+  background:#c07a5a;border:none;cursor:pointer;
+  box-shadow:0 8px 32px rgba(192,122,90,.45);
+  color:#fff;font-size:13px;font-weight:600;
+  font-family:ui-sans-serif,system-ui,-apple-system,sans-serif;
+  transition:transform .2s,box-shadow .2s;
+}
+.chat-fab:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(192,122,90,.55);}
+.chat-fab-icon{width:18px;height:18px;flex-shrink:0;}
+.chat-fab-close{display:none;}
+.chat-panel{
+  position:fixed;bottom:90px;right:28px;z-index:999;
+  width:min(420px,calc(100vw - 40px));
+  border-radius:18px;background:#232b3e;
+  border:1px solid rgba(242,236,224,.10);
+  box-shadow:0 24px 80px rgba(0,0,0,.45);
+  overflow:hidden;display:none;flex-direction:column;
+  max-height:min(580px,calc(100vh - 140px));
+  font-family:ui-sans-serif,system-ui,-apple-system,sans-serif;
+}
+.chat-panel.open{display:flex;}
+.cp-header{padding:16px 20px;border-bottom:1px solid rgba(242,236,224,.08);display:flex;align-items:center;gap:12px;background:#1b2232;}
+.cp-avatar{width:36px;height:36px;border-radius:10px;background:#c07a5a;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+.cp-avatar svg{width:18px;height:18px;}
+.cp-name{font-size:14px;font-weight:600;color:#f2ece0;margin:0 0 2px;}
+.cp-status{font-size:11px;color:rgba(242,236,224,.45);margin:0;display:flex;align-items:center;gap:5px;}
+.cp-dot{width:6px;height:6px;border-radius:50%;background:#22c55e;display:inline-block;}
+.cp-close{margin-left:auto;background:none;border:none;cursor:pointer;color:rgba(242,236,224,.38);font-size:18px;line-height:1;padding:4px;}
+.cp-close:hover{color:rgba(242,236,224,.75);}
+.cp-messages{flex:1;overflow-y:auto;padding:16px 18px;display:flex;flex-direction:column;gap:12px;min-height:200px;}
+.cp-messages::-webkit-scrollbar{width:4px;}
+.cp-messages::-webkit-scrollbar-thumb{background:rgba(242,236,224,.15);border-radius:999px;}
+.cm{display:flex;gap:8px;align-items:flex-start;max-width:90%;}
+.cm.user{align-self:flex-end;flex-direction:row-reverse;}
+.cm.assistant{align-self:flex-start;}
+.cm-av{width:24px;height:24px;border-radius:7px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;}
+.cm.assistant .cm-av{background:#c07a5a;color:#fff;}
+.cm.user .cm-av{background:rgba(242,236,224,.08);border:1px solid rgba(242,236,224,.12);color:rgba(242,236,224,.55);}
+.cm-bubble{padding:9px 13px;border-radius:12px;font-size:13px;line-height:1.6;}
+.cm.assistant .cm-bubble{background:rgba(242,236,224,.06);border:1px solid rgba(242,236,224,.08);color:#f2ece0;border-top-left-radius:3px;}
+.cm.user .cm-bubble{background:#c07a5a;color:#fff;border-top-right-radius:3px;}
+.cp-typing{display:flex;gap:4px;padding:9px 13px;background:rgba(242,236,224,.06);border:1px solid rgba(242,236,224,.08);border-radius:12px;border-top-left-radius:3px;width:fit-content;}
+.cp-typing span{width:5px;height:5px;border-radius:50%;background:rgba(242,236,224,.5);animation:cpbounce 1.2s infinite;}
+.cp-typing span:nth-child(2){animation-delay:.2s;}
+.cp-typing span:nth-child(3){animation-delay:.4s;}
+@keyframes cpbounce{0%,60%,100%{transform:translateY(0);opacity:.4;}30%{transform:translateY(-4px);opacity:1;}}
+.cp-suggestions{padding:0 18px 10px;display:flex;flex-wrap:wrap;gap:6px;}
+.cp-sq{padding:5px 11px;border-radius:999px;border:1px solid rgba(242,236,224,.15);background:transparent;color:rgba(242,236,224,.55);font-size:11px;font-weight:500;font-family:inherit;cursor:pointer;transition:all .15s;white-space:nowrap;}
+.cp-sq:hover{background:rgba(192,122,90,.15);border-color:rgba(192,122,90,.35);color:#c07a5a;}
+.cp-input-row{padding:10px 18px 14px;border-top:1px solid rgba(242,236,224,.08);display:flex;gap:8px;align-items:flex-end;}
+.cp-input{flex:1;padding:9px 13px;border-radius:10px;border:1px solid rgba(242,236,224,.15);background:rgba(242,236,224,.06);color:#f2ece0;font-size:13px;font-family:inherit;resize:none;outline:none;line-height:1.5;min-height:38px;max-height:100px;transition:border-color .15s;}
+.cp-input:focus{border-color:rgba(192,122,90,.5);}
+.cp-input::placeholder{color:rgba(242,236,224,.28);}
+.cp-send{width:34px;height:34px;border-radius:9px;background:#c07a5a;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:opacity .15s,transform .15s;}
+.cp-send:hover{opacity:.88;transform:translateY(-1px);}
+.cp-send:disabled{opacity:.35;cursor:not-allowed;transform:none;}
+.cp-send svg{width:14px;height:14px;}
+.cp-footer{padding:0 18px 12px;font-size:10px;color:rgba(242,236,224,.25);text-align:center;}
+.cp-footer a{color:rgba(242,236,224,.35);}
+
+@media(max-width:720px){
+  .nav{flex-wrap:wrap;gap:8px;border-radius:18px;}
+  .navlinks{display:none;}
+  .menuBtn{display:flex;}
+}
+</style>
+</head>
+
+<body>
+<div class="wrap">
+
+  <div class="nav" role="navigation" aria-label="Primary">
+    <a href="/" class="brand"><div class="mark"></div><span>Merlin Komenda</span></a>
+    <div class="navlinks" aria-label="Desktop navigation">
+      <a href="/">Home</a>
+      <a href="/experience/">Experience</a>
+      <a href="/projects/">Projects</a>
+      <a href="/ai/" class="active">AI</a>
+      <a href="/#contact">Connect</a>
+    </div>
+    <button class="menuBtn" id="menuBtn" type="button" aria-expanded="false" aria-controls="mobileMenu">☰ Menu</button>
+    <div class="mobileMenu" id="mobileMenu">
+      <a href="/">Home</a>
+      <a href="/experience/">Experience</a>
+      <a href="/projects/">Projects</a>
+      <a href="/ai/" class="active">AI</a>
+      <a href="/#contact">Connect</a>
+    </div>
+  </div>
+
+  <!-- PAGE HEADER -->
+  <div class="page-header fade-up" style="margin-top:40px;">
+    <h1>AI works where you<br>design it to.</h1>
+    <p>Most AI adoption fails not because the technology doesn't work, but because nobody did the design work first. Here's how I think about it — and what I've built.</p>
+  </div>
+
+  <!-- ── SECTION 1: POINT OF VIEW ─────────────────────────── -->
+  <section class="fade-up">
+    <div class="section-title">
+      <div class="sec-heading">Point of view</div>
+    </div>
+
+    <div class="pov-card">
+      <div class="pov-ghost" aria-hidden="true">01</div>
+      <div class="pov-label">The position</div>
+      <div class="pov-body">
+        <p>Most AI adoption doesn't fail because the technology doesn't work. It fails because nobody did the design work first. Effort shifts somewhere less visible and gets called efficiency. Outcomes quietly drift to match what the AI can deliver rather than what the work actually requires. I've seen both happen — and neither shows up on a dashboard until it's already embedded.</p>
+        <p>The real work is deciding what stays human before you touch the tools. Relationship. Judgment. Accountability. Context that can't be captured in a prompt. Get that boundary wrong and you haven't automated anything — <span class="accent-phrase">you've just moved the problem.</span></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SECTION 2: WHERE THE LINE BELONGS ────────────────── -->
+  <section class="fade-up" id="the-line">
+    <div class="section-title">
+      <div class="sec-heading">Where the line belongs</div>
+    </div>
+
+    <div class="framework-grid">
+      <div class="fw-col fw-human">
+        <div class="fw-col-header">Stays human</div>
+        <div class="fw-pills">
+          <span class="fw-pill">Relationship building and trust</span>
+          <span class="fw-pill">Complex training and enablement</span>
+          <span class="fw-pill">Account and customer management</span>
+          <span class="fw-pill">Opportunity identification</span>
+          <span class="fw-pill">Strategic brainstorming</span>
+          <span class="fw-pill">Final decision making</span>
+          <span class="fw-pill">Contextual judgment — reading the room, the relationship, the moment</span>
+        </div>
+      </div>
+      <div class="fw-col fw-ai">
+        <div class="fw-col-header">Built for AI</div>
+        <div class="fw-pills">
+          <span class="fw-pill">Research and synthesis</span>
+          <span class="fw-pill">Pattern recognition</span>
+          <span class="fw-pill">Assumption validation</span>
+          <span class="fw-pill">Idea stress-testing</span>
+          <span class="fw-pill">Iterative problem solving</span>
+          <span class="fw-pill">Repetitive and readable tasks</span>
+          <span class="fw-pill">Documentation and summarization</span>
+          <span class="fw-pill">Information synthesis across sources</span>
+        </div>
+      </div>
+      <div class="fw-footnote">The line isn't always a handoff. Sometimes AI runs alongside the human work without replacing it.</div>
+    </div>
+  </section>
+
+  <!-- ── SECTION 3: THE PIPELINE ───────────────────────────── -->
+  <section class="fade-up" id="pipeline">
+    <div class="section-title">
+      <div class="sec-heading">AI in practice</div>
+      <div class="hint">What's running, what's being built</div>
+    </div>
+
+    <!-- Active -->
+    <div class="state-group">
+      <div class="state-label-row state-label-active">
+        <span class="state-dot dot-active"></span>Active — What's running
+      </div>
+      <div class="state-cards">
+        <div class="p-card state-active">
+          <span class="p-card-tag tag-active">Synthesis</span>
+          <h3 class="p-card-title">Pre-kickoff Intelligence Brief</h3>
+          <p class="p-card-desc">AI ingests account notes and call recordings to produce a structured customer brief before every kickoff. Replaces manual document hunting.</p>
+        </div>
+        <div class="p-card state-active">
+          <span class="p-card-tag tag-active">Documentation</span>
+          <h3 class="p-card-title">Account Update Generator</h3>
+          <p class="p-card-desc">Takes call summaries and produces formatted stakeholder updates after every implementation touchpoint.</p>
+        </div>
+        <div class="p-card state-active">
+          <span class="p-card-tag tag-active">Pattern Recognition</span>
+          <h3 class="p-card-title">Audience Auditor</h3>
+          <p class="p-card-desc">Accepts multiple audience files, identifies overlap and redundancy, produces a consolidation recommendation.</p>
+        </div>
+        <div class="p-card state-active">
+          <span class="p-card-tag tag-active">Summarization</span>
+          <h3 class="p-card-title">Handover Documentation</h3>
+          <p class="p-card-desc">AI drafts the end-of-implementation record for clean handoff — platform config, decisions made, training status, research pipeline.</p>
+        </div>
+        <div class="p-card state-active">
+          <span class="p-card-tag tag-active">Generation</span>
+          <h3 class="p-card-title">Custom Spreadsheet Builder</h3>
+          <p class="p-card-desc">Produces customer-specific structured spreadsheets built around their platform setup and program design.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- In Progress -->
+    <div class="state-group">
+      <div class="state-label-row state-label-progress">
+        <span class="state-dot dot-progress"></span>In Progress — Being built
+      </div>
+      <div class="state-cards">
+        <div class="p-card state-progress">
+          <span class="p-card-tag tag-progress">Synthesis + Project Intelligence</span>
+          <h3 class="p-card-title">Per-Customer AI Agents</h3>
+          <p class="p-card-desc">Custom agents that connect call recordings, manage project trackers, and surface to-dos — giving each implementation its own persistent AI layer that knows the account.</p>
+        </div>
+        <div class="p-card state-progress">
+          <span class="p-card-tag tag-progress">Analysis</span>
+          <h3 class="p-card-title">Training Gap Assessor</h3>
+          <p class="p-card-desc">Identifies coverage gaps across training sessions and surfaces what still needs to be addressed before handoff.</p>
+        </div>
+        <div class="p-card state-progress">
+          <span class="p-card-tag tag-progress">Generation</span>
+          <h3 class="p-card-title">Kickoff Deck Personalization</h3>
+          <p class="p-card-desc">Customer-specific deck generation from a templated base.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Exploring -->
+    <div class="state-group">
+      <div class="state-label-row state-label-exploring">
+        <span class="state-dot dot-exploring"></span>Exploring — Next frontier
+      </div>
+      <div class="state-cards">
+        <div class="p-card state-exploring">
+          <span class="p-card-tag tag-exploring">Recommendation</span>
+          <h3 class="p-card-title">Solution Pairing Guidance</h3>
+          <p class="p-card-desc">Guided AI recommendation for research approach based on customer goals and platform setup.</p>
+        </div>
+        <div class="p-card state-exploring">
+          <span class="p-card-tag tag-exploring">Generation</span>
+          <h3 class="p-card-title">Research Pipeline Visualizer</h3>
+          <p class="p-card-desc">Branded graphic showing confirmed and potential research program — what's locked vs. what's coming.</p>
+        </div>
+        <div class="p-card state-exploring">
+          <span class="p-card-tag tag-exploring">Delivery</span>
+          <h3 class="p-card-title">Async Training Support</h3>
+          <p class="p-card-desc">AI-delivered resources and guidance between live training sessions.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SECTION 4: RUNNING LOG ────────────────────────────── -->
+  <section class="fade-up" id="log">
+    <div class="section-title">
+      <div class="sec-heading">What I'm building</div>
+      <div class="hint">Updated as work ships</div>
+    </div>
+
+    <div class="impact-log">
+      <div class="log-entry">
+        <span class="log-date">Apr 2026</span>
+        <span class="log-text"><strong>Built merlinkomenda.com via Claude Code.</strong> Full site architecture, deployment pipeline, serverless functions, and ongoing infrastructure — no agency, no developer. Claude Code as the build partner throughout.</span>
+      </div>
+      <div class="log-entry">
+        <span class="log-date">Apr 2026</span>
+        <span class="log-text"><strong>Deployed interactive leadership reporting suite.</strong> Live dashboards connected directly to data sources — giving senior leadership self-serve access to annual, quarterly, and monthly performance data. Replaced static reporting with an always-available analysis layer.</span>
+      </div>
+      <div class="log-entry">
+        <span class="log-date">Mar 2026</span>
+        <span class="log-text"><strong>Built autonomous multi-agent system.</strong> A network of AI agents that communicate and operate independently without human triggering. Always running. Built to explore the boundaries of agent autonomy and inter-agent coordination.</span>
+      </div>
+      <div class="log-entry">
+        <span class="log-date">Ongoing</span>
+        <span class="log-text"><strong>Per-customer AI agents in development.</strong> Building account-specific agents that synthesize call recordings, manage project trackers, and surface next steps — giving each implementation its own persistent AI layer.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SECTION 5: OPEN QUESTION ──────────────────────────── -->
+  <section class="fade-up" id="open-question">
+    <div class="section-title">
+      <div class="sec-heading">What I'm still working out</div>
+    </div>
+
+    <div class="question-block">
+      <p class="open-question">My default is to protect the nature of the work from AI reshaping it. But I'm less sure that's always right. Some processes are outdated and AI just makes that impossible to ignore. I haven't fully resolved when redesign is the right call versus resistance — and that's what I want to think through with people doing this work.</p>
+
+      <div class="ghost-btns">
+        <a class="ghost-btn" href="mailto:merlin.komenda@gmail.com?subject=Building%20something%20similar%20%E2%80%94%20let's%20compare%20notes">Building something similar?</a>
+        <a class="ghost-btn" href="mailto:merlin.komenda@gmail.com?subject=Pushing%20back%20on%20your%20AI%20framework">Disagree with where I've drawn the line?</a>
+        <a class="ghost-btn" href="mailto:merlin.komenda@gmail.com?subject=AI%20adoption%20problem%20%E2%80%94%20worth%20a%20conversation%3F">Working on an AI adoption problem and want to think it through?</a>
+      </div>
+
+      <p class="linkedin-line">I think out loud on LinkedIn — <a href="https://www.linkedin.com/in/merlin-komenda/" target="_blank" rel="noopener">follow the thinking there.</a></p>
+    </div>
+  </section>
+
+  <a href="/" class="back-link">← Back to home</a>
+
+  <div class="footer">
+    <span>© <span id="y"></span> Merlin Komenda</span>
+    <span>42.6526° N, 73.7562° W</span>
+    <span><a href="mailto:merlin.komenda@gmail.com">merlin.komenda@gmail.com</a></span>
+  </div>
+
+</div>
+
+<!-- FLOATING CHAT -->
+<button class="chat-fab" id="chatFab" aria-label="Ask Merlin">
+  <svg class="chat-fab-icon chat-fab-open" viewBox="0 0 24 24" fill="none">
+    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+  <svg class="chat-fab-icon chat-fab-close" viewBox="0 0 24 24" fill="none" style="display:none;">
+    <path d="M18 6L6 18M6 6l12 12" stroke="white" stroke-width="2" stroke-linecap="round"/>
+  </svg>
+  <span class="chat-fab-label">Ask Merlin</span>
+</button>
+
+<div class="chat-panel" id="chatPanel" role="dialog" aria-label="Ask Merlin">
+  <div class="cp-header">
+    <div class="cp-avatar">
+      <svg viewBox="0 0 24 24" fill="none">
+        <path d="M16.5 7.5a6.5 6.5 0 1 0 1.4 6.9" stroke="white" stroke-width="2.2" stroke-linecap="round"/>
+        <path d="M17.9 14.4l.9 2.9 2.7-1.3" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <div>
+      <p class="cp-name">Ask Merlin anything</p>
+      <p class="cp-status"><span class="cp-dot"></span>Usually responds instantly</p>
+    </div>
+    <button class="cp-close" id="chatClose" aria-label="Close">✕</button>
+  </div>
+  <div class="cp-messages" id="cpMessages"></div>
+  <div class="cp-suggestions" id="cpSuggestions">
+    <button class="cp-sq" onclick="cpAskSuggested(this)">What are you speaking about at Propel26?</button>
+    <button class="cp-sq" onclick="cpAskSuggested(this)">What kind of work do you take on?</button>
+    <button class="cp-sq" onclick="cpAskSuggested(this)">How do you approach AI adoption?</button>
+    <button class="cp-sq" onclick="cpAskSuggested(this)">How can I reach you?</button>
+  </div>
+  <div class="cp-input-row">
+    <textarea class="cp-input" id="cpInput" placeholder="Ask me anything..." rows="1"></textarea>
+    <button class="cp-send" id="cpSend" onclick="cpSend()">
+      <svg viewBox="0 0 24 24" fill="none">
+        <path d="M22 2L11 13" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+  </div>
+  <div class="cp-footer">Powered by Claude · <a href="mailto:merlin.komenda@gmail.com">merlin.komenda@gmail.com</a></div>
+</div>
+
+<script>
+document.getElementById("y").textContent = new Date().getFullYear();
+
+(function(){
+  const els=document.querySelectorAll('.fade-up');
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); }});
+  },{threshold:0.06});
+  els.forEach(el=>obs.observe(el));
+})();
+
+(function(){
+  const btn=document.getElementById("menuBtn");
+  const menu=document.getElementById("mobileMenu");
+  if(!btn||!menu) return;
+  function closeMenu(){ menu.classList.remove("open"); btn.setAttribute("aria-expanded","false"); }
+  btn.addEventListener("click",function(){ const o=menu.classList.toggle("open"); btn.setAttribute("aria-expanded",String(o)); });
+  menu.querySelectorAll("a").forEach(a=>a.addEventListener("click",closeMenu));
+  window.addEventListener("keydown",e=>{ if(e.key==="Escape") closeMenu(); });
+})();
+
+const CP_SYSTEM=`You are a friendly, conversational assistant representing Merlin Komenda on his professional portfolio website. Your job is to answer questions from recruiters, potential collaborators, and conference attendees about Merlin.
+
+Tone: Warm, confident, and direct. Third person ("Merlin is...") but friendly — like a well-briefed colleague who knows him well. No corporate speak. No hype. Accurate, grounded answers only.
+
+When you don't know something or the question is outside what you have context for, say: "Good question — that's one for Merlin himself. Drop him a line at merlin.komenda@gmail.com, he's pretty responsive."
+
+== WHO MERLIN IS ==
+Merlin Komenda is Global Director of Implementation at Zappi, an AI-powered consumer research platform. He builds AI-enabled operating models — the kind that make organizational growth predictable and repeatable rather than chaotic. His focus is on designing systems that work after the kickoff: clear ownership, AI in the right places, delivery that survives turnover. He's based in the Albany, NY area. Core philosophy: Structure beats intensity. Clarity before automation. Systems should survive turnover.
+
+== KEY RESULTS ==
+- ~30% reduction in time-to-live; first customer usage in ~15 days
+- 60+ implementations delivered annually with repeatable outcomes
+- ~40% faster adoption through scalable platform setup patterns
+- ~10% improvement in onboarding-generated revenue
+- NPS 75+ across enterprise relationships
+- Enterprise rollout across 60 people and 7 product verticals at a Fortune 500 company
+- Built AI-powered agent setup tool that cut deployment time from 20 hours to 8-10
+
+== PROPEL26 TALK ==
+Merlin is a confirmed speaker at Propel26 — the world's #1 conference for service delivery professionals, hosted by Rocketlane. San Francisco, May 13-14, 2026. Talk: "Design Before You Automate: The Implementation Discipline Behind AI That Actually Sticks." Core thesis: AI adoption fails less because of bad tooling and more because teams automate workflows that were never clearly designed.
+
+== OPEN TO ==
+Speaking engagements and panels. Conversations with delivery leaders and systems thinkers. Recruiters exploring roles at the intersection of AI, implementation, and operations leadership.
+
+== CONTACT ==
+Email: merlin.komenda@gmail.com — LinkedIn: https://www.linkedin.com/in/merlin-komenda/
+
+== RULES ==
+Keep answers concise — 2-4 sentences for simple questions, a short paragraph for complex ones. Do not speculate on compensation. Do not invent details not listed here.`;
+
+let cpHistory=[],cpLoading=false;
+
+(function(){
+  const fab=document.getElementById('chatFab');
+  const panel=document.getElementById('chatPanel');
+  const closeBtn=document.getElementById('chatClose');
+  const openIcon=fab.querySelector('.chat-fab-open');
+  const closeIcon=fab.querySelector('.chat-fab-close');
+  const label=fab.querySelector('.chat-fab-label');
+  let opened=false;
+  function openPanel(){
+    panel.classList.add('open');
+    openIcon.style.display='none';
+    closeIcon.style.display='block';
+    label.textContent='Close';
+    if(!opened){ opened=true; cpAddMsg('assistant',"Hey! I'm a quick way to learn more about Merlin — his background, what he's speaking about at Propel26, how he works, or how to get in touch. What would you like to know?"); }
+    document.getElementById('cpInput').focus();
+  }
+  function closePanel(){
+    panel.classList.remove('open');
+    openIcon.style.display='block';
+    closeIcon.style.display='none';
+    label.textContent='Ask Merlin';
+  }
+  fab.addEventListener('click',()=>panel.classList.contains('open')?closePanel():openPanel());
+  closeBtn.addEventListener('click',closePanel);
+  window.addEventListener('keydown',e=>{ if(e.key==='Escape') closePanel(); });
+})();
+
+function cpAddMsg(role,content){
+  const c=document.getElementById('cpMessages');
+  const w=document.createElement('div'); w.className='cm '+role;
+  const av=document.createElement('div'); av.className='cm-av'; av.textContent=role==='user'?'You':'MK';
+  const b=document.createElement('div'); b.className='cm-bubble';
+  b.innerHTML=content.replace(/\n/g,'<br>').replace(/\[([^\]]+)\]\((https?:\/\/[^\)]+)\)/g,'<a href="$2" target="_blank">$1</a>');
+  w.appendChild(av); w.appendChild(b); c.appendChild(w); c.scrollTop=c.scrollHeight;
+}
+function cpAddTyping(){
+  const c=document.getElementById('cpMessages');
+  const w=document.createElement('div'); w.className='cm assistant'; w.id='cpTyping';
+  const av=document.createElement('div'); av.className='cm-av'; av.textContent='MK';
+  const t=document.createElement('div'); t.className='cp-typing'; t.innerHTML='<span></span><span></span><span></span>';
+  w.appendChild(av); w.appendChild(t); c.appendChild(w); c.scrollTop=c.scrollHeight;
+}
+function cpRemoveTyping(){ const el=document.getElementById('cpTyping'); if(el) el.remove(); }
+function cpHideSuggestions(){ const el=document.getElementById('cpSuggestions'); if(el) el.style.display='none'; }
+function cpAskSuggested(btn){ cpHideSuggestions(); cpSendText(btn.textContent); }
+async function cpSend(){
+  const input=document.getElementById('cpInput');
+  const text=input.value.trim();
+  if(!text||cpLoading) return;
+  input.value=''; input.style.height='auto';
+  cpHideSuggestions(); cpSendText(text);
+}
+async function cpSendText(text){
+  if(cpLoading) return;
+  cpLoading=true; document.getElementById('cpSend').disabled=true;
+  cpAddMsg('user',text); cpHistory.push({role:'user',content:text}); cpAddTyping();
+  try {
+    const res=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,system:CP_SYSTEM,messages:cpHistory})});
+    const data=await res.json(); cpRemoveTyping();
+    if(data.content&&data.content[0]&&data.content[0].text){
+      const reply=data.content[0].text;
+      cpHistory.push({role:'assistant',content:reply}); cpAddMsg('assistant',reply);
+    } else { cpAddMsg('assistant',"Good question — that's one for Merlin himself. Drop him a line at merlin.komenda@gmail.com, he's pretty responsive."); }
+  } catch(e){ cpRemoveTyping(); cpAddMsg('assistant',"Good question — that's one for Merlin himself. Drop him a line at merlin.komenda@gmail.com, he's pretty responsive."); }
+  cpLoading=false; document.getElementById('cpSend').disabled=false;
+}
+const cpInput=document.getElementById('cpInput');
+cpInput.addEventListener('keydown',e=>{ if(e.key==='Enter'&&!e.shiftKey){ e.preventDefault(); cpSend(); }});
+cpInput.addEventListener('input',()=>{ cpInput.style.height='auto'; cpInput.style.height=Math.min(cpInput.scrollHeight,100)+'px'; });
+</script>
+
+</body>
+</html>
