@@ -88,7 +88,7 @@ a{text-decoration:none;color:inherit}
   line-height:.97;letter-spacing:-1.5px;
   margin:0 0 16px;color:var(--text);
 }
-.page-header p{margin:0;color:var(--muted);font-size:15px;line-height:1.65;max-width:580px;}
+.page-header p{margin:0;color:var(--muted);font-size:15px;line-height:1.65;max-width:600px;}
 
 /* Section heading */
 .sec-heading{
@@ -99,97 +99,119 @@ a{text-decoration:none;color:inherit}
 }
 .sec-heading::before{content:"";width:28px;height:2px;background:var(--teal);flex-shrink:0;}
 .hint{font-size:13px;color:var(--muted2);}
-.section-title{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:20px;gap:12px;}
+.section-title{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:20px;gap:12px;flex-wrap:wrap;}
 
 section{margin-top:52px;}
 
-/* Cards */
-.card-base{
-  padding:28px 30px;border-radius:16px;
-  border:1px solid var(--line);
-  background:var(--surface);
+/* Case study blocks */
+.case-blocks{display:flex;flex-direction:column;gap:1px;border-radius:16px;overflow:hidden;border:1px solid var(--line);}
+.case-block{
+  padding:28px 32px;background:rgba(242,236,224,.03);
+  border-bottom:1px solid var(--line);
 }
-
-/* Point of view — full-width statement card */
-.pov-card{
-  padding:48px 44px 52px;border-radius:20px;
-  border:1px solid var(--line);
-  background:rgba(242,236,224,.04);
-  position:relative;overflow:hidden;
-}
-@media(max-width:720px){.pov-card{padding:32px 24px 36px;}}
-.pov-card::before{
-  content:"";position:absolute;left:0;top:0;
-  width:3px;height:100%;
-  background:linear-gradient(180deg,var(--accent) 0%,var(--teal) 100%);
-  opacity:.7;
-}
-.pov-ghost{
-  position:absolute;right:-10px;top:-20px;
-  font-family:'IBM Plex Mono',monospace;font-size:200px;font-weight:700;
-  color:rgba(212,137,106,.06);line-height:1;
-  letter-spacing:-8px;pointer-events:none;user-select:none;
-}
-.pov-label{
+.case-block:last-child{border-bottom:none;}
+.case-block-label{
   font-family:'IBM Plex Mono',monospace;
-  font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;
-  color:var(--teal);margin-bottom:20px;
+  font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  color:var(--teal);margin-bottom:12px;
   display:flex;align-items:center;gap:10px;
 }
-.pov-label::before{content:"";width:28px;height:1px;background:var(--teal);}
-.pov-headline{
-  font-family:Georgia,'Times New Roman',serif;
-  font-size:clamp(36px,5vw,60px);
-  line-height:1.0;letter-spacing:-2px;
-  margin:0 0 28px;color:var(--text);
-}
-.pov-body{font-size:17px;line-height:1.85;color:var(--muted);max-width:680px;}
-.pov-body p{margin:0 0 18px;}
-.pov-body p:last-child{margin:0;}
-.accent-phrase{color:var(--accent);font-weight:600;}
+.case-block-label::before{content:"";width:20px;height:1px;background:var(--teal);}
+.case-block p{margin:0;font-size:15px;line-height:1.7;color:var(--muted);}
 
-/* Framework — two column */
-.framework-grid{
-  display:grid;grid-template-columns:1fr 1fr;gap:0;
-  border-radius:16px;overflow:hidden;
-  border:1px solid var(--line);
+/* KPI strip */
+.kpi-strip{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:1px;background:var(--line);
+  border-radius:14px;overflow:hidden;margin-top:16px;
 }
-@media(max-width:720px){.framework-grid{grid-template-columns:1fr;}}
-.fw-col{padding:32px 32px 36px;}
-.fw-col:first-child{border-right:1px solid var(--line);}
-@media(max-width:720px){.fw-col:first-child{border-right:none;border-bottom:1px solid var(--line);}}
-.fw-col-header{
+@media(max-width:600px){.kpi-strip{grid-template-columns:1fr;}}
+.kpi-cell{padding:28px 32px;background:var(--bg);}
+.kpi-num{
+  font-family:Georgia,'Times New Roman',serif;
+  font-size:52px;font-weight:700;
+  color:var(--accent);line-height:1;
+  letter-spacing:-2px;margin-bottom:8px;display:block;
+}
+.kpi-label{font-size:13px;color:rgba(242,236,224,.45);line-height:1.5;}
+
+/* Framework — numbered principles */
+.framework-list{display:flex;flex-direction:column;gap:1px;border-radius:16px;overflow:hidden;border:1px solid var(--line);}
+.framework-item{
+  display:grid;grid-template-columns:56px 1fr;
+  gap:0;background:rgba(242,236,224,.03);
+  border-bottom:1px solid var(--line);
+  transition:background .15s;
+}
+.framework-item:last-child{border-bottom:none;}
+.framework-item:hover{background:rgba(242,236,224,.06);}
+.framework-num{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:13px;font-weight:700;color:var(--accent);
+  padding:28px 0 28px 28px;
+  display:flex;align-items:flex-start;
+  line-height:1;
+}
+.framework-body{padding:28px 32px 28px 0;}
+.framework-title{
+  font-family:Georgia,'Times New Roman',serif;
+  font-size:17px;font-weight:700;color:var(--text);
+  margin:0 0 8px;line-height:1.3;
+}
+.framework-sub{font-size:14px;line-height:1.65;color:var(--muted2);margin:0;font-style:italic;}
+@media(max-width:600px){
+  .framework-item{grid-template-columns:1fr;}
+  .framework-num{padding:24px 24px 0 24px;}
+  .framework-body{padding:8px 24px 24px 24px;}
+}
+
+/* Where the line belongs — two columns */
+.line-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:0;border-radius:16px;overflow:hidden;border:1px solid var(--line);
+}
+@media(max-width:720px){.line-grid{grid-template-columns:1fr;}}
+.line-col{padding:32px;}
+.line-col:first-child{border-right:1px solid var(--line);}
+@media(max-width:720px){.line-col:first-child{border-right:none;border-bottom:1px solid var(--line);}}
+.line-col-header{
   font-family:'IBM Plex Mono',monospace;
   font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
   margin-bottom:20px;display:flex;align-items:center;gap:10px;
 }
-.fw-col-header::before{content:"";width:8px;height:8px;border-radius:50%;flex-shrink:0;}
-.fw-human .fw-col-header{color:var(--teal);}
-.fw-human .fw-col-header::before{background:var(--teal);}
-.fw-ai .fw-col-header{color:var(--accent);}
-.fw-ai .fw-col-header::before{background:var(--accent);}
-.fw-pills{display:flex;flex-wrap:wrap;gap:8px;}
-.fw-pill{
-  padding:7px 14px;border-radius:999px;
-  font-size:13px;font-weight:500;line-height:1.3;
-}
-.fw-human .fw-pill{
-  background:var(--teal-dim);border:1px solid rgba(78,205,196,.25);color:var(--teal);
-}
-.fw-ai .fw-pill{
-  background:var(--accent-dim);border:1px solid var(--accent-border);color:var(--accent);
-}
-.fw-footnote{
-  grid-column:1/-1;
-  padding:16px 32px;border-top:1px solid var(--line);
-  background:rgba(242,236,224,.02);
+.line-col-header::before{content:"";width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.col-human .line-col-header{color:var(--teal);}
+.col-human .line-col-header::before{background:var(--teal);}
+.col-ai .line-col-header{color:var(--accent);}
+.col-ai .line-col-header::before{background:var(--accent);}
+.pill-group{display:flex;flex-wrap:wrap;gap:8px;}
+.pill{padding:7px 14px;border-radius:999px;font-size:13px;font-weight:500;line-height:1.3;}
+.col-human .pill{background:var(--teal-dim);border:1px solid rgba(78,205,196,.25);color:var(--teal);}
+.col-ai .pill{background:var(--accent-dim);border:1px solid var(--accent-border);color:var(--accent);}
+.line-footnote{
+  border-top:1px solid var(--line);
+  padding:16px 32px;background:rgba(242,236,224,.02);
   font-family:Georgia,'Times New Roman',serif;
   font-size:14px;font-style:italic;color:var(--muted2);
   line-height:1.6;
+  grid-column:1/-1;
 }
 
 /* Pipeline cards */
-.pipeline-grid{display:flex;flex-direction:column;gap:16px;}
+.state-group{margin-bottom:36px;}
+.state-group:last-child{margin-bottom:0;}
+.state-label-row{
+  display:flex;align-items:center;gap:10px;margin-bottom:14px;
+  font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:700;
+  letter-spacing:2px;text-transform:uppercase;
+}
+.state-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.dot-active{background:var(--accent);}
+.dot-progress{background:var(--teal);outline:1.5px dashed rgba(78,205,196,.4);outline-offset:2px;}
+.label-active{color:var(--accent);}
+.label-progress{color:var(--teal);}
+
+.state-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;}
 
 .p-card{
   padding:24px 26px;border-radius:14px;
@@ -204,16 +226,10 @@ section{margin-top:52px;}
   width:3px;height:100%;opacity:.7;
 }
 .p-card.state-active::before{background:var(--accent);}
-.p-card.state-progress::before{background:var(--teal);}
-.p-card.state-exploring::before{background:rgba(242,236,224,.15);}
-
 .p-card.state-progress{border-style:dashed;}
-.p-card.state-exploring{background:rgba(242,236,224,.025);border-style:dotted;}
+.p-card.state-progress::before{background:var(--teal);}
 
-.p-card-row{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap;}
-.p-card-meta{flex:1;min-width:0;}
-
-.p-card-tag{
+.p-tag{
   display:inline-flex;align-items:center;
   padding:3px 10px;border-radius:999px;
   font-size:11px;font-weight:600;letter-spacing:.3px;
@@ -221,33 +237,13 @@ section{margin-top:52px;}
 }
 .tag-active{background:var(--accent-dim);border:1px solid var(--accent-border);color:var(--accent);}
 .tag-progress{background:var(--teal-dim);border:1px solid rgba(78,205,196,.25);color:var(--teal);}
-.tag-exploring{background:var(--surface2);border:1px solid var(--line);color:var(--muted2);}
 
-.p-card-title{
+.p-title{
   font-family:Georgia,'Times New Roman',serif;
-  font-size:16px;font-weight:700;color:var(--text);
+  font-size:15px;font-weight:700;color:var(--text);
   margin:0 0 8px;line-height:1.25;
 }
-.p-card.state-exploring .p-card-title{font-style:italic;color:var(--muted);}
-.p-card-desc{font-size:14px;line-height:1.6;color:var(--muted);margin:0;}
-
-/* State group headers */
-.state-group{margin-bottom:36px;}
-.state-group:last-child{margin-bottom:0;}
-.state-label-row{
-  display:flex;align-items:center;gap:10px;margin-bottom:14px;
-  font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;
-  letter-spacing:2px;text-transform:uppercase;
-}
-.state-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
-.dot-active{background:var(--accent);}
-.dot-progress{background:var(--teal);outline:1.5px dashed rgba(78,205,196,.4);outline-offset:2px;}
-.dot-exploring{background:transparent;border:1.5px dotted var(--muted2);}
-.state-label-active{color:var(--accent);}
-.state-label-progress{color:var(--teal);}
-.state-label-exploring{color:var(--muted2);}
-
-.state-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;}
+.p-desc{font-size:13px;line-height:1.6;color:var(--muted);margin:0;}
 
 /* Impact log */
 .impact-log{
@@ -274,30 +270,25 @@ section{margin-top:52px;}
 @media(max-width:600px){.log-entry{grid-template-columns:1fr;gap:4px;}}
 
 /* Open question */
-.question-block{
-  max-width:680px;
-}
 .open-question{
   font-family:Georgia,'Times New Roman',serif;
-  font-size:clamp(18px,2.2vw,23px);
-  line-height:1.65;color:var(--muted);
-  font-style:italic;margin:0 0 40px;
+  font-size:clamp(16px,2vw,20px);
+  line-height:1.75;color:var(--muted);
+  margin:0 0 36px;max-width:680px;
   padding-left:22px;border-left:3px solid var(--accent);
 }
-.ghost-btns{display:flex;flex-direction:column;gap:10px;margin-bottom:32px;}
+.ghost-btns{display:flex;flex-direction:column;align-items:flex-start;gap:10px;margin-bottom:28px;}
 .ghost-btn{
-  padding:12px 22px;border-radius:9px;
+  padding:11px 20px;border-radius:9px;
   border:1px solid var(--line);
   background:transparent;color:var(--muted);
   font-size:14px;font-weight:500;font-family:inherit;
   cursor:pointer;text-decoration:none;display:inline-block;
   transition:background .2s,border-color .2s,color .2s;
-  width:fit-content;
 }
-.ghost-btn:hover{
-  background:var(--accent-dim);border-color:var(--accent-border);color:var(--accent);
-}
-.linkedin-line{font-size:13px;color:var(--muted2);line-height:1.6;margin:0;}
+.ghost-btn:hover{background:var(--accent-dim);border-color:var(--accent-border);color:var(--accent);}
+
+.linkedin-line{font-size:13px;color:var(--muted2);margin:0;}
 .linkedin-line a{
   color:var(--muted2);border-bottom:1px solid rgba(242,236,224,.18);padding-bottom:1px;
   transition:color .15s,border-color .15s;
@@ -422,65 +413,115 @@ section{margin-top:52px;}
   </div>
 
   <!-- PAGE HEADER -->
-  <div class="page-header fade-up" style="margin-top:40px;">
+  <div class="page-header fade-up">
     <h1>AI works where you<br>design it to.</h1>
-    <p>Most AI adoption fails not because the technology doesn't work, but because nobody did the design work first. Here's how I think about it — and what I've built.</p>
+    <p>Most AI adoption doesn't fail because the technology doesn't work. It fails because nobody did the design work first. Here's the framework I built — and what's running because of it.</p>
   </div>
 
-  <!-- ── SECTION 1: POINT OF VIEW ─────────────────────────── -->
+  <!-- ── CASE STUDY ─────────────────────────────────────────── -->
   <section class="fade-up">
     <div class="section-title">
-      <div class="sec-heading">Point of view</div>
+      <div class="sec-heading">Case study</div>
+      <div class="hint">Zappi's implementation redesign</div>
     </div>
 
-    <div class="pov-card">
-      <div class="pov-ghost" aria-hidden="true">01</div>
-      <div class="pov-label">The position</div>
-      <div class="pov-body">
-        <p>Most AI adoption doesn't fail because the technology doesn't work. It fails because nobody did the design work first. Effort shifts somewhere less visible and gets called efficiency. Outcomes quietly drift to match what the AI can deliver rather than what the work actually requires. I've seen both happen — and neither shows up on a dashboard until it's already embedded.</p>
-        <p>The real work is deciding what stays human before you touch the tools. Relationship. Judgment. Accountability. Context that can't be captured in a prompt. Get that boundary wrong and you haven't automated anything — <span class="accent-phrase">you've just moved the problem.</span></p>
+    <div class="case-blocks">
+      <div class="case-block">
+        <div class="case-block-label">What I inherited</div>
+        <p>A delivery motion built around heroics and tribal knowledge. Each implementation ran differently depending on who owned it. Time-to-value was slow, quality was inconsistent, and AI tooling was being bolted onto a process that had never been clearly designed. The technology wasn't the problem — the foundation was.</p>
+      </div>
+      <div class="case-block">
+        <div class="case-block-label">What changed</div>
+        <p>I rebuilt the implementation methodology from the customer outcome back. Defined what each phase was responsible for delivering. Shifted from "customer builds, team reviews" to "team recommends, customer validates." Removed steps that only existed because a better approach hadn't been available. Established ownership at every handoff.</p>
+      </div>
+      <div class="case-block">
+        <div class="case-block-label">Where AI came in</div>
+        <p>Only after the process was clear. AI was applied to specific synthesis inflection points — pre-kickoff briefing, account update generation, audience analysis, handover documentation. Each tool targets a real friction point in a defined phase. None of them are compensating for unclear process design.</p>
+      </div>
+    </div>
+
+    <div class="kpi-strip">
+      <div class="kpi-cell">
+        <span class="kpi-num">15 days</span>
+        <span class="kpi-label">Time to first value — down from 30. The gain came from design discipline, not automation alone.</span>
+      </div>
+      <div class="kpi-cell">
+        <span class="kpi-num">~30%</span>
+        <span class="kpi-label">Reduction in time to live across implementations, with stable satisfaction and increased team capacity.</span>
       </div>
     </div>
   </section>
 
-  <!-- ── SECTION 2: WHERE THE LINE BELONGS ────────────────── -->
-  <section class="fade-up" id="the-line">
+  <!-- ── FRAMEWORK ──────────────────────────────────────────── -->
+  <section class="fade-up">
+    <div class="section-title">
+      <div class="sec-heading">The framework</div>
+      <div class="hint">Three principles, in order</div>
+    </div>
+
+    <div class="framework-list">
+      <div class="framework-item">
+        <div class="framework-num">01</div>
+        <div class="framework-body">
+          <div class="framework-title">Start with customer outcomes</div>
+          <p class="framework-sub">What is each step in the process actually responsible for delivering — and does the customer know that too?</p>
+        </div>
+      </div>
+      <div class="framework-item">
+        <div class="framework-num">02</div>
+        <div class="framework-body">
+          <div class="framework-title">Lead with expertise</div>
+          <p class="framework-sub">Shift from "customer builds, team reviews" to "team recommends, customer validates." The team should be the expert in the room, not a facilitator.</p>
+        </div>
+      </div>
+      <div class="framework-item">
+        <div class="framework-num">03</div>
+        <div class="framework-body">
+          <div class="framework-title">Let automation follow clarity</div>
+          <p class="framework-sub">Remove unnecessary steps first. Then apply AI at the points where synthesis is genuinely the bottleneck — not to mask process problems.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── WHERE THE LINE BELONGS ─────────────────────────────── -->
+  <section class="fade-up">
     <div class="section-title">
       <div class="sec-heading">Where the line belongs</div>
     </div>
 
-    <div class="framework-grid">
-      <div class="fw-col fw-human">
-        <div class="fw-col-header">Stays human</div>
-        <div class="fw-pills">
-          <span class="fw-pill">Relationship building and trust</span>
-          <span class="fw-pill">Complex training and enablement</span>
-          <span class="fw-pill">Account and customer management</span>
-          <span class="fw-pill">Opportunity identification</span>
-          <span class="fw-pill">Strategic brainstorming</span>
-          <span class="fw-pill">Final decision making</span>
-          <span class="fw-pill">Contextual judgment — reading the room, the relationship, the moment</span>
+    <div class="line-grid">
+      <div class="line-col col-human">
+        <div class="line-col-header">Stays human</div>
+        <div class="pill-group">
+          <span class="pill">Relationship building and trust</span>
+          <span class="pill">Complex training and enablement</span>
+          <span class="pill">Account and customer management</span>
+          <span class="pill">Opportunity identification</span>
+          <span class="pill">Strategic brainstorming</span>
+          <span class="pill">Final decision making</span>
+          <span class="pill">Contextual judgment — reading the room, the relationship, the moment</span>
         </div>
       </div>
-      <div class="fw-col fw-ai">
-        <div class="fw-col-header">Built for AI</div>
-        <div class="fw-pills">
-          <span class="fw-pill">Research and synthesis</span>
-          <span class="fw-pill">Pattern recognition</span>
-          <span class="fw-pill">Assumption validation</span>
-          <span class="fw-pill">Idea stress-testing</span>
-          <span class="fw-pill">Iterative problem solving</span>
-          <span class="fw-pill">Repetitive and readable tasks</span>
-          <span class="fw-pill">Documentation and summarization</span>
-          <span class="fw-pill">Information synthesis across sources</span>
+      <div class="line-col col-ai">
+        <div class="line-col-header">Built for AI</div>
+        <div class="pill-group">
+          <span class="pill">Research and synthesis</span>
+          <span class="pill">Pattern recognition</span>
+          <span class="pill">Assumption validation</span>
+          <span class="pill">Idea stress-testing</span>
+          <span class="pill">Iterative problem solving</span>
+          <span class="pill">Repetitive and readable tasks</span>
+          <span class="pill">Documentation and summarization</span>
+          <span class="pill">Information synthesis across sources</span>
         </div>
       </div>
-      <div class="fw-footnote">The line isn't always a handoff. Sometimes AI runs alongside the human work without replacing it.</div>
+      <div class="line-footnote">The line isn't always a handoff. Sometimes AI runs alongside the human work without replacing it.</div>
     </div>
   </section>
 
-  <!-- ── SECTION 3: THE PIPELINE ───────────────────────────── -->
-  <section class="fade-up" id="pipeline">
+  <!-- ── AI IN PRACTICE ─────────────────────────────────────── -->
+  <section class="fade-up">
     <div class="section-title">
       <div class="sec-heading">AI in practice</div>
       <div class="hint">What's running, what's being built</div>
@@ -488,89 +529,65 @@ section{margin-top:52px;}
 
     <!-- Active -->
     <div class="state-group">
-      <div class="state-label-row state-label-active">
+      <div class="state-label-row label-active">
         <span class="state-dot dot-active"></span>Active — What's running
       </div>
       <div class="state-cards">
         <div class="p-card state-active">
-          <span class="p-card-tag tag-active">Synthesis</span>
-          <h3 class="p-card-title">Pre-kickoff Intelligence Brief</h3>
-          <p class="p-card-desc">AI ingests account notes and call recordings to produce a structured customer brief before every kickoff. Replaces manual document hunting.</p>
+          <span class="p-tag tag-active">Synthesis</span>
+          <div class="p-title">Pre-kickoff Intelligence Brief</div>
+          <p class="p-desc">AI ingests account notes and call recordings to produce a structured customer brief before every kickoff. Replaces manual document hunting.</p>
         </div>
         <div class="p-card state-active">
-          <span class="p-card-tag tag-active">Documentation</span>
-          <h3 class="p-card-title">Account Update Generator</h3>
-          <p class="p-card-desc">Takes call summaries and produces formatted stakeholder updates after every implementation touchpoint.</p>
+          <span class="p-tag tag-active">Documentation</span>
+          <div class="p-title">Account Update Generator</div>
+          <p class="p-desc">Takes call summaries and produces formatted stakeholder updates after every implementation touchpoint.</p>
         </div>
         <div class="p-card state-active">
-          <span class="p-card-tag tag-active">Pattern Recognition</span>
-          <h3 class="p-card-title">Audience Auditor</h3>
-          <p class="p-card-desc">Accepts multiple audience files, identifies overlap and redundancy, produces a consolidation recommendation.</p>
+          <span class="p-tag tag-active">Pattern Recognition</span>
+          <div class="p-title">Audience Auditor</div>
+          <p class="p-desc">Accepts multiple audience files, identifies overlap and redundancy, produces a consolidation recommendation.</p>
         </div>
         <div class="p-card state-active">
-          <span class="p-card-tag tag-active">Summarization</span>
-          <h3 class="p-card-title">Handover Documentation</h3>
-          <p class="p-card-desc">AI drafts the end-of-implementation record for clean handoff — platform config, decisions made, training status, research pipeline.</p>
+          <span class="p-tag tag-active">Summarization</span>
+          <div class="p-title">Handover Documentation</div>
+          <p class="p-desc">AI drafts the end-of-implementation record for clean handoff — platform config, decisions made, training status, research pipeline.</p>
         </div>
         <div class="p-card state-active">
-          <span class="p-card-tag tag-active">Generation</span>
-          <h3 class="p-card-title">Custom Spreadsheet Builder</h3>
-          <p class="p-card-desc">Produces customer-specific structured spreadsheets built around their platform setup and program design.</p>
+          <span class="p-tag tag-active">Generation</span>
+          <div class="p-title">Custom Spreadsheet Builder</div>
+          <p class="p-desc">Produces customer-specific structured spreadsheets built around their platform setup and program design.</p>
         </div>
       </div>
     </div>
 
     <!-- In Progress -->
     <div class="state-group">
-      <div class="state-label-row state-label-progress">
+      <div class="state-label-row label-progress">
         <span class="state-dot dot-progress"></span>In Progress — Being built
       </div>
       <div class="state-cards">
         <div class="p-card state-progress">
-          <span class="p-card-tag tag-progress">Synthesis + Project Intelligence</span>
-          <h3 class="p-card-title">Per-Customer AI Agents</h3>
-          <p class="p-card-desc">Custom agents that connect call recordings, manage project trackers, and surface to-dos — giving each implementation its own persistent AI layer that knows the account.</p>
+          <span class="p-tag tag-progress">Synthesis + Project Intelligence</span>
+          <div class="p-title">Per-Customer AI Agents</div>
+          <p class="p-desc">Custom agents that connect call recordings, manage project trackers, and surface to-dos — giving each implementation its own persistent AI layer that knows the account.</p>
         </div>
         <div class="p-card state-progress">
-          <span class="p-card-tag tag-progress">Analysis</span>
-          <h3 class="p-card-title">Training Gap Assessor</h3>
-          <p class="p-card-desc">Identifies coverage gaps across training sessions and surfaces what still needs to be addressed before handoff.</p>
+          <span class="p-tag tag-progress">Analysis</span>
+          <div class="p-title">Training Gap Assessor</div>
+          <p class="p-desc">Identifies coverage gaps across training sessions and surfaces what still needs to be addressed before handoff.</p>
         </div>
         <div class="p-card state-progress">
-          <span class="p-card-tag tag-progress">Generation</span>
-          <h3 class="p-card-title">Kickoff Deck Personalization</h3>
-          <p class="p-card-desc">Customer-specific deck generation from a templated base.</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Exploring -->
-    <div class="state-group">
-      <div class="state-label-row state-label-exploring">
-        <span class="state-dot dot-exploring"></span>Exploring — Next frontier
-      </div>
-      <div class="state-cards">
-        <div class="p-card state-exploring">
-          <span class="p-card-tag tag-exploring">Recommendation</span>
-          <h3 class="p-card-title">Solution Pairing Guidance</h3>
-          <p class="p-card-desc">Guided AI recommendation for research approach based on customer goals and platform setup.</p>
-        </div>
-        <div class="p-card state-exploring">
-          <span class="p-card-tag tag-exploring">Generation</span>
-          <h3 class="p-card-title">Research Pipeline Visualizer</h3>
-          <p class="p-card-desc">Branded graphic showing confirmed and potential research program — what's locked vs. what's coming.</p>
-        </div>
-        <div class="p-card state-exploring">
-          <span class="p-card-tag tag-exploring">Delivery</span>
-          <h3 class="p-card-title">Async Training Support</h3>
-          <p class="p-card-desc">AI-delivered resources and guidance between live training sessions.</p>
+          <span class="p-tag tag-progress">Generation</span>
+          <div class="p-title">Kickoff Deck Personalization</div>
+          <p class="p-desc">Customer-specific deck generation from a templated base.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ── SECTION 4: RUNNING LOG ────────────────────────────── -->
-  <section class="fade-up" id="log">
+  <!-- ── RUNNING LOG ─────────────────────────────────────────── -->
+  <section class="fade-up">
     <div class="section-title">
       <div class="sec-heading">What I'm building</div>
       <div class="hint">Updated as work ships</div>
@@ -596,23 +613,21 @@ section{margin-top:52px;}
     </div>
   </section>
 
-  <!-- ── SECTION 5: OPEN QUESTION ──────────────────────────── -->
-  <section class="fade-up" id="open-question">
+  <!-- ── OPEN QUESTION ──────────────────────────────────────── -->
+  <section class="fade-up">
     <div class="section-title">
       <div class="sec-heading">What I'm still working out</div>
     </div>
 
-    <div class="question-block">
-      <p class="open-question">My default is to protect the nature of the work from AI reshaping it. But I'm less sure that's always right. Some processes are outdated and AI just makes that impossible to ignore. I haven't fully resolved when redesign is the right call versus resistance — and that's what I want to think through with people doing this work.</p>
+    <p class="open-question">Most AI adoption asks: how do we support this process with AI? That's the wrong place to stop. The better question: which of our current practices only exist because a better approach was too expensive to build? AI doesn't just make existing processes faster. Sometimes it makes them avoidable. I'm working out which defaults that invalidates — and I want to think through it with people doing this work.</p>
 
-      <div class="ghost-btns">
-        <a class="ghost-btn" href="mailto:merlin.komenda@gmail.com?subject=Building%20something%20similar%20%E2%80%94%20let's%20compare%20notes">Building something similar?</a>
-        <a class="ghost-btn" href="mailto:merlin.komenda@gmail.com?subject=Pushing%20back%20on%20your%20AI%20framework">Disagree with where I've drawn the line?</a>
-        <a class="ghost-btn" href="mailto:merlin.komenda@gmail.com?subject=AI%20adoption%20problem%20%E2%80%94%20worth%20a%20conversation%3F">Working on an AI adoption problem and want to think it through?</a>
-      </div>
-
-      <p class="linkedin-line">I think out loud on LinkedIn — <a href="https://www.linkedin.com/in/merlin-komenda/" target="_blank" rel="noopener">follow the thinking there.</a></p>
+    <div class="ghost-btns">
+      <a class="ghost-btn" href="mailto:merlin.komenda@gmail.com?subject=Building%20something%20similar%20%E2%80%94%20let's%20compare%20notes">Building something similar?</a>
+      <a class="ghost-btn" href="mailto:merlin.komenda@gmail.com?subject=Pushing%20back%20on%20your%20AI%20framework">Disagree with where I've drawn the line?</a>
+      <a class="ghost-btn" href="mailto:merlin.komenda@gmail.com?subject=AI%20adoption%20problem%20%E2%80%94%20worth%20a%20conversation%3F">Working on an AI adoption problem and want to think it through?</a>
     </div>
+
+    <p class="linkedin-line">I think out loud on LinkedIn — <a href="https://www.linkedin.com/in/merlin-komenda/" target="_blank" rel="noopener">follow the thinking there.</a></p>
   </section>
 
   <a href="/" class="back-link">← Back to home</a>
@@ -700,13 +715,11 @@ When you don't know something or the question is outside what you have context f
 Merlin Komenda is Global Director of Implementation at Zappi, an AI-powered consumer research platform. He builds AI-enabled operating models — the kind that make organizational growth predictable and repeatable rather than chaotic. His focus is on designing systems that work after the kickoff: clear ownership, AI in the right places, delivery that survives turnover. He's based in the Albany, NY area. Core philosophy: Structure beats intensity. Clarity before automation. Systems should survive turnover.
 
 == KEY RESULTS ==
-- ~30% reduction in time-to-live; first customer usage in ~15 days
+- ~30% reduction in time-to-live; first customer usage in ~15 days (down from 30)
 - 60+ implementations delivered annually with repeatable outcomes
 - ~40% faster adoption through scalable platform setup patterns
 - ~10% improvement in onboarding-generated revenue
 - NPS 75+ across enterprise relationships
-- Enterprise rollout across 60 people and 7 product verticals at a Fortune 500 company
-- Built AI-powered agent setup tool that cut deployment time from 20 hours to 8-10
 
 == PROPEL26 TALK ==
 Merlin is a confirmed speaker at Propel26 — the world's #1 conference for service delivery professionals, hosted by Rocketlane. San Francisco, May 13-14, 2026. Talk: "Design Before You Automate: The Implementation Discipline Behind AI That Actually Sticks." Core thesis: AI adoption fails less because of bad tooling and more because teams automate workflows that were never clearly designed.
