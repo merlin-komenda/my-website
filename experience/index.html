@@ -15,7 +15,8 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Inter:wght@900&display=swap" rel="stylesheet">
+<script src="/mk-logo.js"></script>
 <link rel="icon" type="image/png" href="/favicon.png">
 <link rel="apple-touch-icon" href="/favicon.png">
 <meta name="theme-color" content="#1b2232">
@@ -59,7 +60,7 @@ a{text-decoration:none;color:inherit}
   position:sticky;top:16px;z-index:10;
 }
 .brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:14px;text-decoration:none;color:var(--text);letter-spacing:-0.1px;}
-.mark{width:32px;height:32px;border-radius:9px;background:var(--accent);flex-shrink:0;}
+.mark{width:32px;height:32px;flex-shrink:0;}
 .navlinks{display:flex;gap:4px;flex-wrap:wrap;align-items:center}
 .navlinks a{font-size:13px;font-weight:500;padding:7px 11px;border-radius:999px;color:var(--muted);transition:color .15s,background .15s;}
 .navlinks a:hover{background:var(--surface2);color:var(--text);}
@@ -345,7 +346,7 @@ section{margin-top:52px;scroll-margin-top:110px;}
 <div class="wrap">
 
   <div class="nav" role="navigation" aria-label="Primary">
-    <a href="/" class="brand"><div class="mark"></div><span>Merlin Komenda</span></a>
+    <a href="/" class="brand"><div class="mark" id="mk-nav"></div><span>Merlin Komenda</span></a>
     <div class="navlinks" aria-label="Desktop navigation">
       <a href="/#about">Where I help</a>
       <a href="/#thinking">How I think</a>
@@ -675,6 +676,7 @@ section{margin-top:52px;scroll-margin-top:110px;}
 
 <script>
 document.getElementById("y").textContent = new Date().getFullYear();
+MKLogo.compact('mk-nav', { size: 32 });
 
 /* Mobile menu */
 (function(){
