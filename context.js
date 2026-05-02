@@ -27,22 +27,29 @@ Core philosophy: Structure beats intensity. Clarity before automation. Systems s
 - Built AI-powered agent setup tool that cut deployment time from 20 hours to 8–10
 - Phase-mapped AI system deployed across 4 of 7 implementation phases, with a structured pipeline for future additions
 
-== AI TOOLS BUILT ==
-Four active AI tools deployed across Zappi's implementation methodology:
-1. Sales materials & Gong summarization (Pre-kickoff) — AI synthesizes account plan, sales notes, and Gong call recordings into a structured customer brief before every kickoff. Replaces manual review of scattered documents across SF, email, and Gong.
-2. Account Update GPT (Phases 2–6, recurring) — Takes call summaries from active implementation phases and produces a standardized update formatted for the customer's Slack channel. Removes the manual step of translating call notes into comms after every touchpoint.
-3. Audience Auditor (Phase 3) — Accepts multiple customer audience files, assesses them for overlap and differences, and produces recommendations on how to synthesize them into a clean, non-redundant audience structure.
-4. Handover documentation (Phase 7) — AI assists in drafting the robust SF record update at the end of implementation — summarizing platform configuration, audience and category decisions, training status, and research pipeline for the CSM.
-Pipeline (coming): Tagging spreadsheet builder (Phase 6) and User training assessor (Phase 4).
+== AI TOOLS BUILT (Zappi Implementation) ==
+Five active AI tools deployed across Zappi's implementation methodology:
+1. Pre-kickoff Intelligence Brief (Pre-kickoff) — AI synthesizes account notes and Gong call recordings into a structured customer brief before every kickoff. Replaces manual document hunting across SF, email, and Gong.
+2. Account Update Generator (Phases 2–6, recurring) — Takes call summaries and produces standardized stakeholder updates formatted for the customer's Slack channel after every touchpoint.
+3. Audience Auditor (Phase 3) — Accepts multiple audience files, identifies overlap and redundancy, produces a consolidation recommendation.
+4. Handover Documentation (Phase 7) — AI drafts the end-of-implementation record — platform config, decisions made, training status, research pipeline — for clean CSM handoff.
+5. Custom Spreadsheet Builder (Phase 6) — Produces customer-specific structured spreadsheets built around their platform setup and program design.
+
+In Progress: Per-Customer AI Agents (account-specific agents connecting call recordings, project trackers, and to-dos — each implementation gets its own persistent AI layer), Training Gap Assessor, Kickoff Deck Personalization.
 
 == SALES → IMPLEMENTATION HANDOFF FRAMEWORK ==
 Built a standardized, AI-supported framework to improve quality and consistency of handoffs from Sales to Implementation. Includes a structured intake template for Sales, an AI transformation layer that converts raw inputs into structured outputs, and a standardized format aligned with Implementation needs. Live and in use.
 
+== PERSONAL PROJECTS ==
+- Built merlinkomenda.com via Claude Code (Apr 2026) — full site architecture, deployment pipeline, serverless functions, and ongoing infrastructure. No agency, no developer. Claude Code as the build partner throughout.
+- Deployed interactive leadership reporting suite (Apr 2026) — live dashboards connected directly to data sources, replacing static reporting with an always-available analysis layer for senior leadership.
+- Built autonomous multi-agent system (Mar 2026) — a network of AI agents that communicate and operate independently without human triggering. Built to explore the boundaries of agent autonomy and inter-agent coordination.
+
 == EXPERIENCE ==
-- Zappi — Global Director of Implementation (2023–Present)
-- Zappi — Customer Expertise Manager (2021–2023)
-- Bonterra — Senior Project Manager, Operations (2020–2021)
-- GiveGab — Project Manager (2018–2020)
+- Zappi — Global Director of Implementation (Sep 2024–Present)
+- Zappi — Customer Expertise Manager (Jul 2023–Aug 2024)
+- Bonterra — Senior Project Manager, Operations (Jul 2022–Jun 2023)
+- GiveGab — Project Manager (Sep 2018–Mar 2021)
 - GiveGab — Customer Success (2016–2018)
 
 == PROPEL26 TALK ==
