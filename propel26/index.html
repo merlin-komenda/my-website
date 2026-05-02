@@ -1,0 +1,600 @@
+<!doctype html>
+<html lang="en">
+<head>
+<script type="text/javascript">
+  (function(c,l,a,r,i,t,y){
+    c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+    t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+    y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+  })(window, document, "clarity", "script", "vyrgo4rvfs");
+</script>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Design Before You Automate — Merlin Komenda · Propel26</title>
+<meta name="description" content="Three principles for building implementation functions that are ready for AI — from Merlin Komenda's Propel26 talk." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@900&display=swap" rel="stylesheet">
+<script src="/mk-logo.js"></script>
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="apple-touch-icon" href="/favicon.png">
+<meta name="theme-color" content="#1b2232">
+
+<style>
+:root{
+  --bg:#1b2232;
+  --surface:rgba(242,236,224,.05);
+  --surface2:rgba(242,236,224,.09);
+  --text:#f2ece0;
+  --muted:rgba(242,236,224,.72);
+  --muted2:rgba(242,236,224,.52);
+  --line:rgba(242,236,224,.13);
+  --accent:#d4896a;
+  --accent-dim:rgba(212,137,106,.14);
+  --accent-border:rgba(212,137,106,.38);
+  --teal:#4ecdc4;
+  --teal-dim:rgba(78,205,196,.12);
+  --max:1200px;
+}
+
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial;
+  color:var(--text);background:var(--bg);
+  background-image:
+    radial-gradient(ellipse 70% 55% at 75% -5%, rgba(212,137,106,.22) 0%, transparent 60%),
+    radial-gradient(ellipse 55% 45% at 5% 85%, rgba(78,205,196,.10) 0%, transparent 55%),
+    radial-gradient(ellipse 40% 35% at 50% 50%, rgba(212,137,106,.04) 0%, transparent 70%);
+  background-attachment:fixed;
+}
+.wrap{max-width:var(--max);margin:0 auto;padding:28px 20px 80px;}
+a{text-decoration:none;color:inherit}
+
+/* Nav — pill, sticky */
+.nav{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:12px 18px;border:1px solid var(--line);border-radius:999px;
+  background:rgba(27,34,50,.92);backdrop-filter:blur(12px);
+  position:sticky;top:16px;z-index:10;
+}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:14px;text-decoration:none;color:var(--text);letter-spacing:-0.1px;}
+.mark{width:32px;height:32px;flex-shrink:0;}
+.navlinks{display:flex;gap:4px;flex-wrap:wrap;align-items:center}
+.navlinks a{font-size:13px;font-weight:500;padding:7px 11px;border-radius:999px;color:var(--muted);transition:color .15s,background .15s;}
+.navlinks a:hover{background:var(--surface2);color:var(--text);}
+.menuBtn{
+  display:none;align-items:center;justify-content:center;gap:8px;
+  border:1px solid var(--line);background:var(--surface);
+  padding:9px 14px;border-radius:999px;font-weight:600;font-size:13px;color:var(--text);cursor:pointer;
+}
+.mobileMenu{display:none;margin-top:10px;padding:8px;border:1px solid var(--line);background:rgba(27,34,50,.96);border-radius:16px;}
+.mobileMenu a{display:block;padding:10px 12px;border-radius:10px;font-weight:500;font-size:14px;color:var(--muted);}
+.mobileMenu a:hover{background:var(--surface2);color:var(--text);}
+.mobileMenu.open{display:block;}
+
+/* Page header */
+.page-header{
+  margin-top:40px;
+  padding:64px 44px 56px;
+  border-radius:20px;border:1px solid var(--line);
+  background:rgba(242,236,224,.03);
+  position:relative;overflow:hidden;
+}
+@media(max-width:900px){.page-header{padding:40px 24px 44px;}}
+
+.header-eyebrow{
+  font-size:12px;font-weight:600;letter-spacing:2px;
+  text-transform:uppercase;color:var(--teal);
+  margin-bottom:20px;display:flex;align-items:center;gap:10px;
+  font-family:'IBM Plex Mono',monospace;
+}
+.header-eyebrow::before{content:"";width:28px;height:1px;background:var(--teal);}
+
+.page-header h1{
+  font-family:Georgia,'Times New Roman',serif;
+  font-size:clamp(36px,5vw,58px);
+  line-height:.97;letter-spacing:-1.5px;
+  margin:0 0 16px;color:var(--text);
+  position:relative;
+}
+.page-header h1 em{color:var(--accent);font-style:normal;}
+.page-header .sub{
+  margin:0 0 36px;color:var(--muted);
+  line-height:1.65;max-width:580px;font-size:15px;
+  position:relative;
+}
+
+/* Stats block */
+.kpi-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:1px;background:var(--line);
+  border-radius:14px;overflow:hidden;
+  margin-bottom:20px;
+}
+@media(max-width:720px){.kpi-grid{grid-template-columns:1fr;}}
+.kpi-item{padding:28px 24px;background:var(--bg);}
+.kpi-num{
+  font-family:Georgia,serif;font-size:40px;font-weight:700;
+  color:var(--accent);line-height:1;
+  letter-spacing:-1.5px;margin-bottom:8px;display:flex;align-items:center;gap:8px;
+}
+.kpi-arrow{font-size:22px;color:var(--teal);letter-spacing:0;}
+.kpi-label{font-size:13px;color:rgba(242,236,224,.38);line-height:1.5;}
+.stats-note{font-size:13px;color:var(--muted2);font-style:italic;}
+
+/* Sections */
+section{margin-top:52px;scroll-margin-top:110px;}
+.sec-heading{
+  font-family:Georgia,'Times New Roman',serif;
+  font-size:20px;font-weight:700;color:var(--text);
+  letter-spacing:-0.2px;margin:0 0 28px;
+  display:flex;align-items:center;gap:14px;
+}
+.sec-heading::before{content:"";width:28px;height:2px;background:var(--teal);flex-shrink:0;}
+
+.resource-meta{
+  display:flex;align-items:flex-start;justify-content:space-between;
+  gap:16px;margin-bottom:20px;flex-wrap:wrap;
+}
+.resource-eyebrow{
+  font-size:11px;font-weight:600;letter-spacing:2px;
+  text-transform:uppercase;color:var(--teal);
+  font-family:'IBM Plex Mono',monospace;
+}
+.copy-btn{
+  background:var(--surface);border:1px solid var(--line);border-radius:999px;
+  color:var(--muted2);font-family:inherit;
+  font-size:11px;font-weight:500;letter-spacing:.5px;
+  padding:6px 14px;cursor:pointer;
+  transition:color .15s,border-color .15s,background .15s;
+  white-space:nowrap;flex-shrink:0;
+}
+.copy-btn:hover{color:var(--muted);border-color:rgba(242,236,224,.22);background:var(--surface2);}
+.copy-btn.copied{color:var(--teal);border-color:rgba(78,205,196,.3);background:var(--teal-dim);}
+
+/* Cards */
+.card{padding:22px;border-radius:14px;border:1px solid var(--line);background:var(--surface);}
+.card+.card{margin-top:12px;}
+.card-eyebrow{
+  font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--teal);font-family:'IBM Plex Mono',monospace;
+  margin-bottom:10px;
+}
+.card h3{margin:0 0 10px;font-size:15px;font-weight:600;color:var(--text);}
+.card p{margin:0 0 8px;color:var(--muted);font-size:14px;line-height:1.6;}
+.card p:last-child{margin-bottom:0;}
+.bullets{margin:6px 0;padding-left:18px;color:var(--muted);font-size:14px;line-height:1.6;}
+.bullets li{margin:6px 0;}
+
+/* Callout / pull quote */
+.callout{
+  margin:14px 0;padding:12px 16px;
+  border-left:2px solid var(--teal);border-radius:0 8px 8px 0;
+  background:var(--teal-dim);
+  font-size:14px;color:var(--muted);line-height:1.65;font-style:italic;
+}
+
+/* Stance pair */
+.stance-grid{display:flex;flex-direction:column;gap:8px;margin:12px 0;}
+.stance{display:flex;gap:12px;align-items:flex-start;padding:12px 14px;border-radius:10px;font-size:13px;line-height:1.55;}
+.stance.waiting{border:1px solid var(--line);background:var(--surface);}
+.stance.leading{border:1px solid var(--accent-border);background:var(--accent-dim);}
+.stance-arrow{font-weight:600;flex-shrink:0;margin-top:1px;}
+.stance.waiting .stance-arrow{color:var(--muted2);}
+.stance.leading .stance-arrow{color:var(--accent);}
+.stance strong{color:var(--text);}
+
+/* Filter block */
+.filter-block{
+  padding:22px;border-radius:14px;border:1px solid var(--line);background:var(--surface);
+  margin-bottom:12px;
+}
+.filter-block h3{margin:0 0 10px;font-size:15px;font-weight:600;color:var(--text);}
+.filter-row{display:flex;gap:12px;align-items:flex-start;padding:8px 0;font-size:14px;color:var(--muted);line-height:1.6;}
+.filter-row+.filter-row{border-top:1px solid rgba(242,236,224,.06);}
+.filter-row-arrow{color:var(--teal);flex-shrink:0;font-family:'IBM Plex Mono',monospace;font-size:13px;margin-top:2px;}
+hr.soft{border:none;border-top:1px solid var(--line);margin:14px 0;}
+
+/* Three-tier grid */
+.tiers-label{
+  font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;
+  color:var(--teal);font-family:'IBM Plex Mono',monospace;
+  margin-bottom:14px;display:flex;align-items:center;gap:10px;
+}
+.tiers-label::before{content:"";width:28px;height:1px;background:var(--teal);}
+.tiers-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:24px;}
+@media(max-width:720px){.tiers-grid{grid-template-columns:1fr;}}
+.tier-card{
+  padding:22px;border-radius:14px;
+  border:1px solid var(--line);background:var(--surface);
+  display:flex;flex-direction:column;gap:0;
+}
+.tier-card.ai-driven{border-top:2px solid rgba(78,205,196,.5);}
+.tier-card.ai-assist{border-top:2px solid rgba(212,137,106,.5);}
+.tier-card.human-only{border-top:2px solid rgba(160,210,160,.45);}
+.tier-name{font-size:15px;font-weight:600;color:var(--text);margin-bottom:4px;}
+.tier-tagline{font-size:12px;color:var(--muted2);font-family:'IBM Plex Mono',monospace;margin-bottom:12px;}
+.tier-desc{font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:14px;}
+.tier-examples{
+  font-size:12px;color:rgba(242,236,224,.38);line-height:1.55;
+  padding-top:12px;border-top:1px solid var(--line);margin-top:auto;
+}
+.tier-examples strong{
+  display:block;margin-bottom:4px;
+  font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;
+  color:rgba(242,236,224,.28);font-family:'IBM Plex Mono',monospace;
+}
+
+/* Team exercise */
+.exercise-list{list-style:none;padding:0;margin:10px 0 0;display:flex;flex-direction:column;gap:8px;}
+.exercise-list li{display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--muted);line-height:1.55;}
+.exercise-list .arr{color:var(--accent);flex-shrink:0;font-weight:600;}
+.exercise-close{
+  margin-top:16px;padding-top:14px;border-top:1px solid var(--line);
+  font-size:13px;color:var(--muted2);font-style:italic;
+}
+
+/* Closing */
+.closing-text{font-size:15px;line-height:1.75;color:var(--muted);max-width:580px;margin-bottom:24px;}
+.closing-links{display:flex;gap:12px;flex-wrap:wrap;}
+.btn{
+  padding:10px 18px;border-radius:9px;font-size:13px;font-weight:500;
+  border:1px solid var(--line);background:transparent;color:var(--text);
+  cursor:pointer;transition:background .2s,border-color .2s,transform .2s;display:inline-block;
+}
+.btn:hover{background:var(--surface2);border-color:rgba(242,236,224,.18);}
+.btn.primary{
+  padding:12px 28px;font-size:14px;font-weight:600;
+  background:linear-gradient(135deg,#c07a5a 0%,#d4906a 100%);
+  border-color:transparent;color:#fff;
+  box-shadow:0 4px 20px rgba(192,122,90,.4);
+}
+.btn.primary:hover{
+  background:linear-gradient(135deg,#d08a6a 0%,#e0a07a 100%);
+  box-shadow:0 6px 28px rgba(192,122,90,.55);
+  transform:translateY(-2px);
+}
+.btn.ghost{color:var(--muted);font-size:13px;}
+.btn.ghost:hover{color:var(--text);}
+
+/* Footer */
+.footer{
+  margin-top:70px;padding-top:24px;
+  border-top:1px solid var(--line);
+  font-size:11px;color:rgba(242,236,224,.32);
+  display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
+  letter-spacing:.5px;font-family:'IBM Plex Mono',monospace;
+}
+.footer a{color:rgba(242,236,224,.32);}
+
+/* Mobile */
+@media(max-width:720px){
+  .nav{flex-wrap:wrap;gap:8px;border-radius:18px;}
+  .navlinks{display:none;}
+  .menuBtn{display:flex;}
+}
+</style>
+</head>
+
+<body>
+<div class="wrap">
+
+  <div class="nav" role="navigation" aria-label="Primary">
+    <a href="/" class="brand"><div class="mark" id="mk-nav"></div><span>Merlin Komenda</span></a>
+    <div class="navlinks" aria-label="Desktop navigation">
+      <a href="/#about">Where I help</a>
+      <a href="/#thinking">How I think</a>
+      <a href="/experience/">Experience</a>
+      <a href="/projects/">Projects</a>
+      <a href="/ai/">AI</a>
+      <a href="/#contact">Connect</a>
+    </div>
+    <button class="menuBtn" id="menuBtn" type="button" aria-expanded="false" aria-controls="mobileMenu">☰ Menu</button>
+    <div class="mobileMenu" id="mobileMenu">
+      <a href="/#about">Where I help</a>
+      <a href="/#thinking">How I think</a>
+      <a href="/experience/">Experience</a>
+      <a href="/projects/">Projects</a>
+      <a href="/ai/">AI</a>
+      <a href="/#contact">Connect</a>
+    </div>
+  </div>
+
+  <!-- Above the fold -->
+  <div class="page-header">
+    <div class="header-eyebrow">Propel 2026 · San Francisco · Talk Resources</div>
+    <h1>Design Before You <em>Automate</em></h1>
+    <p class="sub">Three principles for building implementation functions that are ready for AI — from my Propel26 talk.</p>
+
+    <div class="kpi-grid">
+      <div class="kpi-item">
+        <div class="kpi-num">30 <span class="kpi-arrow">→</span> 15</div>
+        <div class="kpi-label">Time to first value (days)</div>
+      </div>
+      <div class="kpi-item">
+        <div class="kpi-num">9/10</div>
+        <div class="kpi-label">Customer experience score</div>
+      </div>
+      <div class="kpi-item">
+        <div class="kpi-num">30%</div>
+        <div class="kpi-label">Time to live — reduced</div>
+      </div>
+    </div>
+
+    <p class="stats-note">These came from redesigning the process before we touched automation.</p>
+  </div>
+
+  <!-- Resource 1 -->
+  <section>
+    <div class="resource-meta">
+      <div>
+        <div class="resource-eyebrow">Resource 1</div>
+      </div>
+      <button class="copy-btn" id="copy-btn-1" onclick="copyResource(1)">Copy to clipboard</button>
+    </div>
+    <div class="sec-heading">Are you removing customer burden, or managing it?</div>
+
+    <div class="card">
+      <div class="card-eyebrow">Step 1 — Who is this step designed for?</div>
+      <p>Pull up any step in your implementation process. Run it through these questions.</p>
+      <ul class="bullets">
+        <li>Is the customer being asked to figure something out you already know?</li>
+        <li>Is the customer waiting on guidance they should have received proactively?</li>
+        <li>If this step failed, who would feel it most — you or them?</li>
+      </ul>
+      <p>If the honest answer is that the step protects your execution more than it delivers their outcome, that's your first signal.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-eyebrow">Step 2 — What outcome is this step responsible for?</div>
+      <div class="callout">The question to ask: What's the customer outcome we're driving for?</div>
+      <p>Not what the step produces internally. Not what gets checked off. What does the customer feel, know, or become able to do because this step happened? If you can't answer that clearly, the step isn't designed for the customer yet.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-eyebrow">Step 3 — Apply the 100% burden test</div>
+      <p>Assume you have to absorb everything currently sitting with the customer. All of it. Then ask:</p>
+      <ul class="bullets">
+        <li>How would we solve this if it was entirely our responsibility?</li>
+        <li>Where could we pre-build, pre-answer, or pre-solve instead of waiting?</li>
+        <li>Where are we project managing when we should be advising?</li>
+      </ul>
+      <p>Walk it back only where you genuinely can't solve it yet. That gap is your build list.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-eyebrow">Step 4 — Check your stance</div>
+      <p>In your kickoffs and touchpoints, which describes how you show up?</p>
+      <div class="stance-grid">
+        <div class="stance waiting">
+          <span class="stance-arrow">→</span>
+          <span><strong>"What do you need from us?"</strong> You're waiting. The customer is carrying the burden of direction.</span>
+        </div>
+        <div class="stance leading">
+          <span class="stance-arrow">→</span>
+          <span><strong>"Here's what we think you should do, and here's why"</strong> You're leading. The expertise is yours to give.</span>
+        </div>
+      </div>
+      <p style="margin-top:12px;">The shift from coordinator to advisor changes what customers expect — and what they trust you with.</p>
+    </div>
+  </section>
+
+  <!-- Resource 2 -->
+  <section>
+    <div class="resource-meta">
+      <div>
+        <div class="resource-eyebrow">Resource 2</div>
+      </div>
+      <button class="copy-btn" id="copy-btn-2" onclick="copyResource(2)">Copy to clipboard</button>
+    </div>
+    <div class="sec-heading">Before you automate anything, place it.</div>
+
+    <div class="card" style="margin-bottom:12px;">
+      <p>Most teams introduce AI to processes before they understand what those processes are actually doing. The result is faster confusion, not faster outcomes. Use this to assess where each part of your implementation belongs.</p>
+    </div>
+
+    <div class="filter-block">
+      <h3>The starting filter: internal or external?</h3>
+      <p style="font-size:14px;color:var(--muted);margin:0 0 14px;">The first question isn't "can AI do this?" — the answer to that is almost always yes. The question is: does this moment require human presence?</p>
+
+      <p style="font-size:14px;font-weight:600;color:var(--text);margin:0 0 10px;">Is this customer-facing?</p>
+      <p style="font-size:14px;color:var(--muted);margin:0 0 10px;">Is the value of this moment in the expertise delivered, or just the information transferred?</p>
+      <div class="filter-row">
+        <span class="filter-row-arrow">→</span>
+        <span>If it's expertise, trust-building, confidence, or relationship — keep it human. Automating here degrades the outcome — not because AI can't do it, but because the customer needs to feel the expertise, not just receive it. Live training, decision validation, executive alignment — these are accountability tools, retention drivers, relationship builders. Protect them.</span>
+      </div>
+      <div class="filter-row">
+        <span class="filter-row-arrow">→</span>
+        <span>If it's information transfer that follows a known pattern — move to the next filter.</span>
+      </div>
+
+      <hr class="soft">
+
+      <p style="font-size:14px;font-weight:600;color:var(--text);margin:0 0 10px;">Is this internal and repeatable?</p>
+      <p style="font-size:14px;color:var(--muted);margin:0 0 10px;">Does it require interpretation of new information, or application of known information?</p>
+      <div class="filter-row">
+        <span class="filter-row-arrow">→</span>
+        <span>If it's the same process every time and human judgment isn't adding value — automate it. Free the human for work that needs them.</span>
+      </div>
+    </div>
+
+    <div class="tiers-label">The three tiers</div>
+    <div class="tiers-grid">
+      <div class="tier-card ai-driven">
+        <div class="tier-name">AI Driven</div>
+        <div class="tier-tagline">Operational. Repeatable. Internal.</div>
+        <div class="tier-desc">Consistency matters more than judgment. The human executing this isn't adding value — they're running a pattern AI can run better.</div>
+        <div class="tier-examples">
+          <strong>Examples</strong>
+          Handoff documentation. Automated customer program V1 builds. Milestone update generation.
+        </div>
+      </div>
+      <div class="tier-card ai-assist">
+        <div class="tier-name">AI Assistance</div>
+        <div class="tier-tagline">Multiplying expertise.</div>
+        <div class="tier-desc">Human judgment drives the outcome. AI extends the reach or quality of that judgment. The human stays accountable for the output.</div>
+        <div class="tier-examples">
+          <strong>Examples</strong>
+          Auto-building tailored worksheets. Processing customer documentation. Expanding expertise recommendations.
+        </div>
+      </div>
+      <div class="tier-card human-only">
+        <div class="tier-name">Human Only</div>
+        <div class="tier-tagline">Presence is the point.</div>
+        <div class="tier-desc">The human is the product. The customer needs to feel the expertise, not just receive it.</div>
+        <div class="tier-examples">
+          <strong>Examples</strong>
+          Live training sessions. Validating customer decisions. Building confidence at critical moments.
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-eyebrow">Run this with your team</div>
+      <p>List your top 10 implementation activities. Place each one: AI Driven, AI Assistance, or Human Only?</p>
+      <ul class="exercise-list">
+        <li><span class="arr">→</span><span>Where humans are doing AI Driven work — first automation opportunity</span></li>
+        <li><span class="arr">→</span><span>Where Human Only work has already been automated — first quality risk</span></li>
+        <li><span class="arr">→</span><span>Where AI Assistance could extend your team but hasn't — next build priority</span></li>
+      </ul>
+      <p class="exercise-close">Efficiency followed. We didn't chase it. We earned it.</p>
+    </div>
+  </section>
+
+  <!-- Closing -->
+  <section>
+    <p class="closing-text">These frameworks came out of rebuilding Zappi's implementation function from the ground up — starting with customer outcomes, not internal efficiency. If you want to go deeper or talk through how this applies to your team, find me on LinkedIn.</p>
+    <div class="closing-links">
+      <a class="btn primary" href="https://www.linkedin.com/in/merlin-komenda/" target="_blank" rel="noopener noreferrer">Connect on LinkedIn</a>
+      <a class="btn ghost" href="/">← Back to merlin-komenda.com</a>
+    </div>
+  </section>
+
+  <div class="footer">
+    <span>© <span id="y"></span> Merlin Komenda</span>
+    <span>42.6526° N, 73.7562° W</span>
+    <span><a href="mailto:merlin.komenda@gmail.com">merlin.komenda@gmail.com</a></span>
+  </div>
+
+</div>
+
+<script>
+document.getElementById("y").textContent = new Date().getFullYear();
+MKLogo.compact('mk-nav', { size: 32 });
+
+(function(){
+  const btn=document.getElementById("menuBtn");
+  const menu=document.getElementById("mobileMenu");
+  if(!btn||!menu) return;
+  function closeMenu(){ menu.classList.remove("open"); btn.setAttribute("aria-expanded","false"); }
+  btn.addEventListener("click",function(){ const o=menu.classList.toggle("open"); btn.setAttribute("aria-expanded",String(o)); });
+  menu.querySelectorAll("a").forEach(a=>a.addEventListener("click",closeMenu));
+  window.addEventListener("keydown",e=>{ if(e.key==="Escape") closeMenu(); });
+})();
+
+const resource1Text = `Are you removing customer burden, or managing it?
+
+Pull up any step in your implementation process. Run it through these questions.
+
+Step 1 — Who is this step designed for?
+- Is the customer being asked to figure something out you already know?
+- Is the customer waiting on guidance they should have received proactively?
+- If this step failed, who would feel it most — you or them?
+
+If the honest answer is that the step protects your execution more than it delivers their outcome, that's your first signal.
+
+Step 2 — What outcome is this step responsible for?
+
+The question to ask: What's the customer outcome we're driving for?
+
+Not what the step produces internally. Not what gets checked off. What does the customer feel, know, or become able to do because this step happened? If you can't answer that clearly, the step isn't designed for the customer yet.
+
+Step 3 — Apply the 100% burden test
+
+Assume you have to absorb everything currently sitting with the customer. All of it. Then ask:
+- How would we solve this if it was entirely our responsibility?
+- Where could we pre-build, pre-answer, or pre-solve instead of waiting?
+- Where are we project managing when we should be advising?
+
+Walk it back only where you genuinely can't solve it yet. That gap is your build list.
+
+Step 4 — Check your stance
+
+In your kickoffs and touchpoints, which describes how you show up?
+
+"What do you need from us?" — You're waiting. The customer is carrying the burden of direction.
+"Here's what we think you should do, and here's why" — You're leading. The expertise is yours to give.
+
+The shift from coordinator to advisor changes what customers expect — and what they trust you with.`;
+
+const resource2Text = `Before you automate anything, place it.
+
+Most teams introduce AI to processes before they understand what those processes are actually doing. The result is faster confusion, not faster outcomes. Use this to assess where each part of your implementation belongs.
+
+The starting filter: internal or external?
+
+The first question isn't "can AI do this?" — the answer to that is almost always yes. The question is: does this moment require human presence?
+
+Is this customer-facing?
+
+Is the value of this moment in the expertise delivered, or just the information transferred?
+
+If it's expertise, trust-building, confidence, or relationship — keep it human. Automating here degrades the outcome — not because AI can't do it, but because the customer needs to feel the expertise, not just receive it. Live training, decision validation, executive alignment — these are accountability tools, retention drivers, relationship builders. Protect them.
+
+If it's information transfer that follows a known pattern — move to the next filter.
+
+Is this internal and repeatable?
+
+Does it require interpretation of new information, or application of known information?
+
+If it's the same process every time and human judgment isn't adding value — automate it. Free the human for work that needs them.
+
+---
+
+THE THREE TIERS
+
+AI Driven
+Operational. Repeatable. Internal.
+Consistency matters more than judgment. The human executing this isn't adding value — they're running a pattern AI can run better.
+Examples: Handoff documentation. Automated customer program V1 builds. Milestone update generation.
+
+AI Assistance
+Multiplying expertise.
+Human judgment drives the outcome. AI extends the reach or quality of that judgment. The human stays accountable for the output.
+Examples: Auto-building tailored worksheets. Processing customer documentation. Expanding expertise recommendations.
+
+Human Only
+Presence is the point.
+The human is the product. The customer needs to feel the expertise, not just receive it.
+Examples: Live training sessions. Validating customer decisions. Building confidence at critical moments.
+
+---
+
+Run this with your team:
+
+List your top 10 implementation activities. Place each one: AI Driven, AI Assistance, or Human Only?
+
+Where humans are doing AI Driven work — first automation opportunity
+Where Human Only work has already been automated — first quality risk
+Where AI Assistance could extend your team but hasn't — next build priority
+
+Efficiency followed. We didn't chase it. We earned it.`;
+
+function copyResource(n) {
+  const text = n === 1 ? resource1Text : resource2Text;
+  const btn = document.getElementById('copy-btn-' + n);
+  navigator.clipboard.writeText(text).then(() => {
+    btn.textContent = 'Copied';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = 'Copy to clipboard';
+      btn.classList.remove('copied');
+    }, 2000);
+  });
+}
+</script>
+
+</body>
+</html>
