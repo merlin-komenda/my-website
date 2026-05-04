@@ -788,8 +788,10 @@ section{margin-top:52px;}
   <a href="/" class="back-link">← Back to home</a>
 
   <div class="footer">
-    <div>© <span id="y"></span> Merlin Komenda</div>
-    <div><a href="mailto:merlin.komenda@gmail.com">merlin.komenda@gmail.com</a></div>
+    <span>© <span id="y"></span> Merlin Komenda</span>
+    <span>42.6526° N, 73.7562° W</span>
+    <span><a href="/resume.pdf" target="_blank" rel="noopener">Resume</a></span>
+    <span><a href="mailto:merlin.komenda@gmail.com">merlin.komenda@gmail.com</a></span>
   </div>
 
 </div>
@@ -1185,7 +1187,7 @@ async function cpSendText(text){
       method:'POST',
       headers:{'Content-Type':'application/json'},
       body: JSON.stringify({
-        model:'claude-sonnet-4-20250514',
+        model:'claude-haiku-4-5-20251001',
         max_tokens:1000,
         system: CP_SYSTEM,
         messages: cpHistory

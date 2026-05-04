@@ -395,7 +395,7 @@ section{margin-top:52px;}
 <div class="wrap">
 
   <div class="nav" role="navigation" aria-label="Primary">
-    <a href="/" class="brand"><div class="mark"></div><span>Merlin Komenda</span></a>
+    <a href="/" class="brand"><div class="mark" id="mk-nav"></div><span>Merlin Komenda</span></a>
     <div class="navlinks" aria-label="Desktop navigation">
       <a href="/experience/">Experience</a>
       <a href="/projects/">Projects</a>
@@ -415,7 +415,7 @@ section{margin-top:52px;}
 
   <!-- PAGE HEADER -->
   <div class="page-header fade-up">
-    <h1>AI works where you<br>design it to.</h1>
+    <h1>AI works where you <br>design it to.</h1>
     <p>Most AI adoption doesn't fail because the technology doesn't work. It fails because nobody did the design work first. Here's the framework I built — and what's running because of it.</p>
   </div>
 
@@ -636,6 +636,7 @@ section{margin-top:52px;}
   <div class="footer">
     <span>© <span id="y"></span> Merlin Komenda</span>
     <span>42.6526° N, 73.7562° W</span>
+    <span><a href="/resume.pdf" target="_blank" rel="noopener">Resume</a></span>
     <span><a href="mailto:merlin.komenda@gmail.com">merlin.komenda@gmail.com</a></span>
   </div>
 
@@ -847,7 +848,7 @@ async function cpSendText(text){
   cpLoading=true; document.getElementById('cpSend').disabled=true;
   cpAddMsg('user',text); cpHistory.push({role:'user',content:text}); cpAddTyping();
   try {
-    const res=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,system:CP_SYSTEM,messages:cpHistory})});
+    const res=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-haiku-4-5-20251001',max_tokens:1000,system:CP_SYSTEM,messages:cpHistory})});
     const data=await res.json(); cpRemoveTyping();
     if(data.content&&data.content[0]&&data.content[0].text){
       const reply=data.content[0].text;

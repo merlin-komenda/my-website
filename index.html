@@ -405,7 +405,6 @@ a{text-decoration:none;color:inherit}
       <div class="ctas">
         <a class="btn primary" href="#thinking">How I think</a>
         <a class="btn" href="#impact">Results</a>
-        <a class="btn" href="/resume.pdf" target="_blank" rel="noopener">Resume</a>
         <a class="btn" href="https://www.linkedin.com/in/merlin-komenda/" target="_blank" rel="noopener">LinkedIn</a>
       </div>
     </div>
@@ -547,6 +546,7 @@ a{text-decoration:none;color:inherit}
   <div class="footer">
     <span>© <span id="y"></span> Merlin Komenda</span>
     <span>42.6526° N, 73.7562° W</span>
+    <span><a href="/resume.pdf" target="_blank" rel="noopener">Resume</a></span>
     <span><a href="mailto:merlin.komenda@gmail.com">merlin.komenda@gmail.com</a></span>
   </div>
 
@@ -765,7 +765,7 @@ document.getElementById("y").textContent = new Date().getFullYear();
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          model: 'claude-sonnet-4-20250514',
+          model: 'claude-haiku-4-5-20251001',
           max_tokens: 1000,
           system: CP_SYSTEM,
           messages: cpHistory
