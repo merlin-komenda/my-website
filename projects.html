@@ -1141,7 +1141,11 @@ function cpAddMsg(role, content){
   w.appendChild(av);
   w.appendChild(b);
   c.appendChild(w);
-  c.scrollTop = c.scrollHeight;
+  if (role === 'assistant') {
+    requestAnimationFrame(() => { c.scrollTop += w.getBoundingClientRect().top - c.getBoundingClientRect().top; });
+  } else {
+    c.scrollTop = c.scrollHeight;
+  }
 }
 
 function cpAddTyping(){

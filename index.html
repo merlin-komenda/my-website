@@ -774,6 +774,7 @@ document.getElementById("y").textContent = new Date().getFullYear();
       const data = await res.json();
       const reply = data?.content?.[0]?.text || "I hit a snag — try again in a moment.";
       typing.textContent = reply;
+      requestAnimationFrame(() => { msgs.scrollTop += typing.getBoundingClientRect().top - msgs.getBoundingClientRect().top; });
       cpHistory.push({ role: 'assistant', content: reply });
 
       // Handoff trigger detection

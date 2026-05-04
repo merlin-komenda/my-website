@@ -824,7 +824,8 @@ function cpAddMsg(role,content){
   const av=document.createElement('div'); av.className='cm-av'; av.textContent=role==='user'?'You':'MK';
   const b=document.createElement('div'); b.className='cm-bubble';
   b.innerHTML=content.replace(/\n/g,'<br>').replace(/\[([^\]]+)\]\((https?:\/\/[^\)]+)\)/g,'<a href="$2" target="_blank">$1</a>');
-  w.appendChild(av); w.appendChild(b); c.appendChild(w); c.scrollTop=c.scrollHeight;
+  w.appendChild(av); w.appendChild(b); c.appendChild(w);
+  if(role==='assistant'){requestAnimationFrame(()=>{c.scrollTop+=w.getBoundingClientRect().top-c.getBoundingClientRect().top;});}else{c.scrollTop=c.scrollHeight;}
 }
 function cpAddTyping(){
   const c=document.getElementById('cpMessages');
