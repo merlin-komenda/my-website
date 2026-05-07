@@ -821,19 +821,28 @@ document.getElementById("y").textContent = new Date().getFullYear();
   // Lead capture submit
   emailSubmit.addEventListener('click', async () => {
     const email = emailInput.value.trim();
-    if (!email) return;
-    await fetch('/api/chat', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        action: 'capture_lead',
-        email,
-        visitorType: visitorType || 'Other',
-        source: cpHistory.some(m => m.content?.toLowerCase().includes('propel')) ? 'Propel26 interest' : 'General contact',
-        message: cpHistory.find(m => m.role === 'user')?.content || ''
-      })
-    });
-    leadCapture.innerHTML = '<div style="font-size:13px;color:rgba(11,16,32,.5);padding:4px 0;">Thanks — you\'re on the list.</div>';
+    if (!email || emailSubmit.disabled) return;
+    emailSubmit.disabled = true;
+    emailSubmit.textContent = 'Saving…';
+    emailSubmit.style.opacity = '0.6';
+    try {
+      await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          action: 'capture_lead',
+          email,
+          visitorType: visitorType || 'Other',
+          source: cpHistory.some(m => m.content?.toLowerCase().includes('propel')) ? 'Propel26 interest' : 'General contact',
+          message: cpHistory.find(m => m.role === 'user')?.content || ''
+        })
+      });
+      leadCapture.innerHTML = '<div style="font-size:13px;color:rgba(242,236,224,.5);padding:4px 0;">Thanks — you\'re on the list.</div>';
+    } catch (e) {
+      emailSubmit.disabled = false;
+      emailSubmit.textContent = 'Save';
+      emailSubmit.style.opacity = '1';
+    }
   });
 
   input.addEventListener('keydown', e => { if (e.key === 'Enter') sendMessage(input.value); });
