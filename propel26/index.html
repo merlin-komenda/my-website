@@ -305,7 +305,7 @@ hr.soft{border:none;border-top:1px solid var(--line);margin:14px 0;}
   <div class="page-header">
     <div class="header-eyebrow">Propel 2026 · San Francisco · Talk Resources</div>
     <h1>Design Before You <em>Automate</em></h1>
-    <p class="sub">Three principles for building implementation functions that are ready for AI — from my Propel26 talk.</p>
+    <p class="sub">Most implementation functions weren't designed for the customer. They were designed for the team running them. That's where it breaks — and it's also where AI adoption stalls. These are the three principles I used to fix it.</p>
 
     <div class="kpi-grid">
       <div class="kpi-item">
@@ -322,7 +322,7 @@ hr.soft{border:none;border-top:1px solid var(--line);margin:14px 0;}
       </div>
     </div>
 
-    <p class="stats-note">These came from redesigning the process before we touched automation.</p>
+    <p class="stats-note">These didn't come from adding AI. They came from fixing the design before we touched automation.</p>
   </div>
 
   <!-- Resource 1 -->
@@ -333,22 +333,23 @@ hr.soft{border:none;border-top:1px solid var(--line);margin:14px 0;}
       </div>
       <button class="copy-btn" id="copy-btn-1" onclick="copyResource(1)">Copy to clipboard</button>
     </div>
-    <div class="sec-heading">Are you removing customer burden, or managing it?</div>
+    <div class="resource-eyebrow" style="margin-bottom:10px;">Principle 2: Lead with Expertise</div>
+    <div class="sec-heading">Are you removing customer burden — or just managing it?</div>
 
     <div class="card">
-      <div class="card-eyebrow">Step 1 — Who is this step designed for?</div>
+      <div class="card-eyebrow">Step 1 — Who is this step actually designed for?</div>
       <p>Pull up any step in your implementation process. Run it through these questions.</p>
       <ul class="bullets">
         <li>Is the customer being asked to figure something out you already know?</li>
-        <li>Is the customer waiting on guidance they should have received proactively?</li>
+        <li>Are they waiting on guidance that should have been given proactively?</li>
         <li>If this step failed, who would feel it most — you or them?</li>
       </ul>
-      <p>If the honest answer is that the step protects your execution more than it delivers their outcome, that's your first signal.</p>
+      <p>If the honest answer is that the step protects your execution more than it delivers their outcome, that's your first signal. All the right effort, wrong starting point.</p>
     </div>
 
     <div class="card">
       <div class="card-eyebrow">Step 2 — What outcome is this step responsible for?</div>
-      <div class="callout">The question to ask: What's the customer outcome we're driving for?</div>
+      <div class="callout">The question we asked every single piece of our process: What's the customer outcome we're driving for?</div>
       <p>Not what the step produces internally. Not what gets checked off. What does the customer feel, know, or become able to do because this step happened? If you can't answer that clearly, the step isn't designed for the customer yet.</p>
     </div>
 
@@ -369,14 +370,14 @@ hr.soft{border:none;border-top:1px solid var(--line);margin:14px 0;}
       <div class="stance-grid">
         <div class="stance waiting">
           <span class="stance-arrow">→</span>
-          <span><strong>"What do you need from us?"</strong> You're waiting. The customer is carrying the burden of direction.</span>
+          <span><strong>"What do you want to do?"</strong> / <strong>"Here's this cool feature, how do you want to use it?"</strong> / <strong>"Can you fill out this spreadsheet?"</strong> — You're waiting. The customer is carrying the burden of direction.</span>
         </div>
         <div class="stance leading">
           <span class="stance-arrow">→</span>
-          <span><strong>"Here's what we think you should do, and here's why"</strong> You're leading. The expertise is yours to give.</span>
+          <span><strong>"We recommend…"</strong> / <strong>"Based on your use-case, you should…"</strong> / <strong>"Here is the next step for you."</strong> — You're leading. The expertise is yours to give.</span>
         </div>
       </div>
-      <p style="margin-top:12px;">The shift from coordinator to advisor changes what customers expect — and what they trust you with.</p>
+      <p style="margin-top:12px;">That shift — from coordinator to advisor — is the whole game. It changes what customers expect, and what they trust you with.</p>
     </div>
   </section>
 
@@ -388,38 +389,49 @@ hr.soft{border:none;border-top:1px solid var(--line);margin:14px 0;}
       </div>
       <button class="copy-btn" id="copy-btn-2" onclick="copyResource(2)">Copy to clipboard</button>
     </div>
+    <div class="resource-eyebrow" style="margin-bottom:4px;">Principle 3: Let Automation follow Clarity</div>
+    <p style="font-size:14px;color:var(--muted2);margin:0 0 16px;font-style:italic;">Is human presence the superpower this moment needs?</p>
     <div class="sec-heading">Before you automate anything, place it.</div>
 
     <div class="card" style="margin-bottom:12px;">
-      <p>Most teams introduce AI to processes before they understand what those processes are actually doing. The result is faster confusion, not faster outcomes. Use this to assess where each part of your implementation belongs.</p>
+      <p>Most teams introduce AI before they understand what their processes are actually doing. The result isn't efficiency — it's faster confusion. The thing is, AI didn't find its home in our implementation until we knew our process well enough to know where it didn't belong. Here's the filter we used.</p>
     </div>
 
     <div class="filter-block">
-      <h3>The starting filter: internal or external?</h3>
-      <p style="font-size:14px;color:var(--muted);margin:0 0 14px;">The first question isn't "can AI do this?" — the answer to that is almost always yes. The question is: does this moment require human presence?</p>
-
-      <p style="font-size:14px;font-weight:600;color:var(--text);margin:0 0 10px;">Is this customer-facing?</p>
-      <p style="font-size:14px;color:var(--muted);margin:0 0 10px;">Is the value of this moment in the expertise delivered, or just the information transferred?</p>
+      <p style="font-size:14px;font-weight:600;color:var(--text);margin:0 0 8px;">START HERE: Is it customer-facing?</p>
       <div class="filter-row">
         <span class="filter-row-arrow">→</span>
-        <span>If it's expertise, trust-building, confidence, or relationship — keep it human. Automating here degrades the outcome — not because AI can't do it, but because the customer needs to feel the expertise, not just receive it. Live training, decision validation, executive alignment — these are accountability tools, retention drivers, relationship builders. Protect them.</span>
+        <span>If not — it's a candidate for automation.</span>
       </div>
       <div class="filter-row">
         <span class="filter-row-arrow">→</span>
-        <span>If it's information transfer that follows a known pattern — move to the next filter.</span>
+        <span>If yes — keep it human for now.</span>
       </div>
 
       <hr class="soft">
 
-      <p style="font-size:14px;font-weight:600;color:var(--text);margin:0 0 10px;">Is this internal and repeatable?</p>
-      <p style="font-size:14px;color:var(--muted);margin:0 0 10px;">Does it require interpretation of new information, or application of known information?</p>
+      <p style="font-size:14px;font-weight:600;color:var(--text);margin:0 0 8px;">THEN ASK: Is it high effort and repeated?</p>
+      <p style="font-size:14px;color:var(--muted);margin:0 0 8px;">Is it tackled regularly and costs significant effort?</p>
       <div class="filter-row">
         <span class="filter-row-arrow">→</span>
-        <span>If it's the same process every time and human judgment isn't adding value — automate it. Free the human for work that needs them.</span>
+        <span>If yes — assist with AI. Avoid direct automation.</span>
+      </div>
+
+      <hr class="soft">
+
+      <p style="font-size:14px;font-weight:600;color:var(--text);margin:0 0 8px;">LAST: Is it accurately defined?</p>
+      <p style="font-size:14px;color:var(--muted);margin:0 0 8px;">Can you define success for this process?</p>
+      <div class="filter-row">
+        <span class="filter-row-arrow">→</span>
+        <span>If yes — it's ready for automation.</span>
+      </div>
+      <div class="filter-row">
+        <span class="filter-row-arrow">→</span>
+        <span>If no — design first.</span>
       </div>
     </div>
 
-    <div class="tiers-label">The three tiers</div>
+    <div class="tiers-label">AI found its home. Here's where each piece landed.</div>
     <div class="tiers-grid">
       <div class="tier-card ai-driven">
         <div class="tier-name">AI Driven</div>
@@ -454,17 +466,29 @@ hr.soft{border:none;border-top:1px solid var(--line);margin:14px 0;}
       <div class="card-eyebrow">Run this with your team</div>
       <p>List your top 10 implementation activities. Place each one: AI Driven, AI Assistance, or Human Only?</p>
       <ul class="exercise-list">
-        <li><span class="arr">→</span><span>Where humans are doing AI Driven work — first automation opportunity</span></li>
-        <li><span class="arr">→</span><span>Where Human Only work has already been automated — first quality risk</span></li>
-        <li><span class="arr">→</span><span>Where AI Assistance could extend your team but hasn't — next build priority</span></li>
+        <li><span class="arr">→</span> <span>Where humans are doing AI Driven work — that's your first automation opportunity</span></li>
+        <li><span class="arr">→</span> <span>Where Human Only work has already been automated — that's your first quality risk</span></li>
+        <li><span class="arr">→</span> <span>Where AI Assistance could extend your team but hasn't — that's your next build priority</span></li>
       </ul>
       <p class="exercise-close">Efficiency followed. We didn't chase it. We earned it.</p>
+    </div>
+
+    <div class="card" style="margin-top:12px;">
+      <div class="card-eyebrow">How I audit my own design</div>
+      <ul class="bullets">
+        <li>Is value proven by data?</li>
+        <li>Are timelines predictable?</li>
+        <li>Can this process be explained to everyone — internally and to customers?</li>
+        <li>Are customers driving their own completion?</li>
+        <li>Is your human and AI split intentional? Do you know your superpowers?</li>
+      </ul>
     </div>
   </section>
 
   <!-- Closing -->
   <section>
-    <p class="closing-text">These frameworks came out of rebuilding Zappi's implementation function from the ground up — starting with customer outcomes, not internal efficiency. If you want to go deeper or talk through how this applies to your team, find me on LinkedIn.</p>
+    <p class="closing-text">AI amplifies what you give it. If your process isn't clear, you're just making the confusion faster.</p>
+    <p class="closing-text">This came from 18 months of rebuilding Zappi's implementation function from scratch — starting with customer outcomes, not internal efficiency. If you want to go deeper or talk through how this applies to your team, find me on LinkedIn.</p>
     <div class="closing-links">
       <a class="btn primary" href="/ai/">See how I think about AI</a>
       <a class="btn" href="https://www.linkedin.com/in/merlin-komenda/" target="_blank" rel="noopener noreferrer">Connect on LinkedIn</a>
@@ -581,20 +605,21 @@ MKLogo.compact('mk-nav', { size: 32 });
   window.addEventListener("keydown",e=>{ if(e.key==="Escape") closeMenu(); });
 })();
 
-const resource1Text = `Are you removing customer burden, or managing it?
+const resource1Text = `Principle 2: Lead with Expertise
+Are you removing customer burden — or just managing it?
 
 Pull up any step in your implementation process. Run it through these questions.
 
-Step 1 — Who is this step designed for?
+Step 1 — Who is this step actually designed for?
 - Is the customer being asked to figure something out you already know?
-- Is the customer waiting on guidance they should have received proactively?
+- Are they waiting on guidance that should have been given proactively?
 - If this step failed, who would feel it most — you or them?
 
-If the honest answer is that the step protects your execution more than it delivers their outcome, that's your first signal.
+If the honest answer is that the step protects your execution more than it delivers their outcome, that's your first signal. All the right effort, wrong starting point.
 
 Step 2 — What outcome is this step responsible for?
 
-The question to ask: What's the customer outcome we're driving for?
+The question we asked every single piece of our process: What's the customer outcome we're driving for?
 
 Not what the step produces internally. Not what gets checked off. What does the customer feel, know, or become able to do because this step happened? If you can't answer that clearly, the step isn't designed for the customer yet.
 
@@ -611,36 +636,35 @@ Step 4 — Check your stance
 
 In your kickoffs and touchpoints, which describes how you show up?
 
-"What do you need from us?" — You're waiting. The customer is carrying the burden of direction.
-"Here's what we think you should do, and here's why" — You're leading. The expertise is yours to give.
+"What do you want to do?" / "Here's this cool feature, how do you want to use it?" / "Can you fill out this spreadsheet?" — You're waiting. The customer is carrying the burden of direction.
 
-The shift from coordinator to advisor changes what customers expect — and what they trust you with.`;
+"We recommend…" / "Based on your use-case, you should…" / "Here is the next step for you." — You're leading. The expertise is yours to give.
 
-const resource2Text = `Before you automate anything, place it.
+That shift — from coordinator to advisor — is the whole game. It changes what customers expect, and what they trust you with.`;
 
-Most teams introduce AI to processes before they understand what those processes are actually doing. The result is faster confusion, not faster outcomes. Use this to assess where each part of your implementation belongs.
+const resource2Text = `Principle 3: Let Automation follow Clarity
+Is human presence the superpower this moment needs?
 
-The starting filter: internal or external?
+Before you automate anything, place it.
 
-The first question isn't "can AI do this?" — the answer to that is almost always yes. The question is: does this moment require human presence?
+Most teams introduce AI before they understand what their processes are actually doing. The result isn't efficiency — it's faster confusion. The thing is, AI didn't find its home in our implementation until we knew our process well enough to know where it didn't belong. Here's the filter we used.
 
-Is this customer-facing?
+START HERE: Is it customer-facing?
+If not — it's a candidate for automation.
+If yes — keep it human for now.
 
-Is the value of this moment in the expertise delivered, or just the information transferred?
+THEN ASK: Is it high effort and repeated?
+Is it tackled regularly and costs significant effort?
+If yes — assist with AI. Avoid direct automation.
 
-If it's expertise, trust-building, confidence, or relationship — keep it human. Automating here degrades the outcome — not because AI can't do it, but because the customer needs to feel the expertise, not just receive it. Live training, decision validation, executive alignment — these are accountability tools, retention drivers, relationship builders. Protect them.
-
-If it's information transfer that follows a known pattern — move to the next filter.
-
-Is this internal and repeatable?
-
-Does it require interpretation of new information, or application of known information?
-
-If it's the same process every time and human judgment isn't adding value — automate it. Free the human for work that needs them.
+LAST: Is it accurately defined?
+Can you define success for this process?
+If yes — it's ready for automation.
+If no — design first.
 
 ---
 
-THE THREE TIERS
+AI FOUND ITS HOME. HERE'S WHERE EACH PIECE LANDED.
 
 AI Driven
 Operational. Repeatable. Internal.
@@ -663,11 +687,20 @@ Run this with your team:
 
 List your top 10 implementation activities. Place each one: AI Driven, AI Assistance, or Human Only?
 
-Where humans are doing AI Driven work — first automation opportunity
-Where Human Only work has already been automated — first quality risk
-Where AI Assistance could extend your team but hasn't — next build priority
+Where humans are doing AI Driven work — that's your first automation opportunity
+Where Human Only work has already been automated — that's your first quality risk
+Where AI Assistance could extend your team but hasn't — that's your next build priority
 
-Efficiency followed. We didn't chase it. We earned it.`;
+Efficiency followed. We didn't chase it. We earned it.
+
+---
+
+How I audit my own design:
+- Is value proven by data?
+- Are timelines predictable?
+- Can this process be explained to everyone — internally and to customers?
+- Are customers driving their own completion?
+- Is your human and AI split intentional? Do you know your superpowers?`;
 
 function copyResource(n) {
   const text = n === 1 ? resource1Text : resource2Text;
