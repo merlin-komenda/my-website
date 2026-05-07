@@ -16,7 +16,7 @@ function isRateLimited(ip) {
 }
 
 async function writeToNotion(databaseId, properties) {
-  await fetch('https://api.notion.com/v1/pages', {
+  const res = await fetch('https://api.notion.com/v1/pages', {
     method: 'POST',
     headers: {
       'Authorization': `Bearer ${process.env.NOTION_API_KEY}`,
@@ -28,6 +28,11 @@ async function writeToNotion(databaseId, properties) {
       properties
     })
   });
+  if (!res.ok) {
+    const body = await res.text();
+    console.error(`Notion write failed: ${res.status} ${body}`);
+    throw new Error(`Notion error ${res.status}: ${body}`);
+  }
 }
 
 module.exports = async function handler(req, res) {
