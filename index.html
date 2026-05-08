@@ -141,7 +141,7 @@ a{text-decoration:none;color:inherit}
 .btn:hover{background:var(--surface2);border-color:rgba(242,236,224,.18);}
 .btn.primary{
   padding:12px 28px;font-size:14px;font-weight:600;
-  background:linear-gradient(135deg,#c07a5a 0%,#d4906a 100%);
+  background:linear-gradient(135deg,#d4896a 0%,#e09a7a 100%);
   border-color:transparent;color:#fff;
   box-shadow:0 4px 20px rgba(192,122,90,.4);
 }
@@ -346,13 +346,6 @@ a{text-decoration:none;color:inherit}
 }
 </style>
 
-<script type="text/javascript">
-(function(c,l,a,r,i,t,y){
-  c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-  t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-  y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-})(window, document, "clarity", "script", "vyrgo4rvfs");
-</script>
 </head>
 
 <body>
@@ -364,7 +357,7 @@ a{text-decoration:none;color:inherit}
       <a href="/experience/">Experience</a>
       <a href="/projects/">Projects</a>
       <a href="/ai/">AI</a>
-      <a href="/propel26"style="color:var(--accent);border:1px solid var(--accent-border);border-radius:999px;">Propel ↗</a>
+      <a href="/propel26" style="color:var(--accent);border:1px solid var(--accent-border);border-radius:999px;">Propel ↗</a>
       <a href="#contact">Connect</a>
     </div>
     <button class="menuBtn" id="menuBtn" type="button" aria-expanded="false" aria-controls="mobileMenu">☰ Menu</button>
@@ -372,7 +365,7 @@ a{text-decoration:none;color:inherit}
       <a href="/experience/">Experience</a>
       <a href="/projects/">Projects</a>
       <a href="/ai/">AI</a>
-      <a href="/propel26"style="color:var(--accent);">Propel ↗</a>
+      <a href="/propel26" style="color:var(--accent);">Propel ↗</a>
       <a href="#contact">Connect</a>
     </div>
   </div>
@@ -528,7 +521,7 @@ a{text-decoration:none;color:inherit}
   <div class="open-row fade-up">
     <div class="open-block" id="schedule">
       <div class="open-block-label">Schedule</div>
-      <p>Let's chat! Book a time that works for you.</p>
+      <p>If a conversation makes sense, here's how to get on the calendar.</p>
       <button class="btn primary" type="button" id="openBookingPopup">Book time</button>
     </div>
     <div class="open-block" id="contact">
@@ -635,7 +628,7 @@ document.getElementById("y").textContent = new Date().getFullYear();
   widget.innerHTML = `
     <button id="cpBtn" aria-label="Chat with Merlin's assistant" style="
       position:fixed;bottom:28px;right:28px;z-index:1000;
-      background:#c2692a;color:#fff;border:none;border-radius:999px;
+      background:#d4896a;color:#fff;border:none;border-radius:999px;
       padding:13px 20px;font-size:14px;font-weight:750;cursor:pointer;
       box-shadow:0 8px 24px rgba(194,105,42,.35);
       transition:transform .2s ease,box-shadow .2s ease;">
@@ -662,7 +655,7 @@ document.getElementById("y").textContent = new Date().getFullYear();
           border:1px solid rgba(242,236,224,.15);background:rgba(242,236,224,.06);
           color:#f2ece0;font-size:14px;outline:none;"/>
         <button id="cpSend" style="
-          padding:10px 16px;border-radius:12px;background:#c2692a;
+          padding:10px 16px;border-radius:12px;background:#d4896a;
           color:#fff;border:none;font-weight:750;font-size:14px;cursor:pointer;">→</button>
       </div>
     </div>`;
@@ -729,7 +722,7 @@ document.getElementById("y").textContent = new Date().getFullYear();
   function addMessage(role, text) {
     const div = document.createElement('div');
     div.style.cssText = role === 'user'
-      ? 'align-self:flex-end;background:#c2692a;color:#fff;padding:9px 13px;border-radius:14px 14px 4px 14px;max-width:80%;'
+      ? 'align-self:flex-end;background:#d4896a;color:#fff;padding:9px 13px;border-radius:14px 14px 4px 14px;max-width:80%;'
       : 'align-self:flex-start;background:rgba(242,236,224,.06);border:1px solid rgba(242,236,224,.08);color:#f2ece0;padding:9px 13px;border-radius:14px 14px 14px 4px;max-width:85%;';
     div.textContent = text;
     msgs.appendChild(div);
@@ -779,7 +772,7 @@ document.getElementById("y").textContent = new Date().getFullYear();
     div.innerHTML = `<div style="font-weight:750;margin-bottom:6px;">Want Merlin to follow up directly?</div>
       <div style="display:flex;gap:6px;margin-top:6px;">
         <input id="handoffEmail" type="email" placeholder="your@email.com" style="flex:1;padding:7px 10px;border-radius:8px;border:1px solid rgba(11,16,32,.15);font-size:12px;outline:none;"/>
-        <button id="handoffSubmit" style="padding:7px 12px;border-radius:8px;background:#c2692a;color:#fff;border:none;font-size:12px;font-weight:750;cursor:pointer;">Send</button>
+        <button id="handoffSubmit" style="padding:7px 12px;border-radius:8px;background:#d4896a;color:#fff;border:none;font-size:12px;font-weight:750;cursor:pointer;">Send</button>
       </div>`;
     msgs.appendChild(div);
     msgs.scrollTop = msgs.scrollHeight;

@@ -248,7 +248,7 @@ hr.soft{border:none;border-top:1px solid var(--line);margin:14px 0;}
 .btn:hover{background:var(--surface2);border-color:rgba(242,236,224,.18);}
 .btn.primary{
   padding:12px 28px;font-size:14px;font-weight:600;
-  background:linear-gradient(135deg,#c07a5a 0%,#d4906a 100%);
+  background:linear-gradient(135deg,#d4896a 0%,#e09a7a 100%);
   border-color:transparent;color:#fff;
   box-shadow:0 4px 20px rgba(192,122,90,.4);
 }
@@ -506,13 +506,13 @@ hr.soft{border:none;border-top:1px solid var(--line);margin:14px 0;}
 </div>
 
 <style>
-.chat-fab{position:fixed;bottom:28px;right:28px;z-index:1000;display:flex;align-items:center;gap:10px;padding:12px 20px;border-radius:999px;background:#c07a5a;border:none;cursor:pointer;box-shadow:0 8px 32px rgba(192,122,90,.45);color:#fff;font-size:13px;font-weight:600;font-family:ui-sans-serif,system-ui,-apple-system,sans-serif;transition:transform .2s,box-shadow .2s;}
+.chat-fab{position:fixed;bottom:28px;right:28px;z-index:1000;display:flex;align-items:center;gap:10px;padding:12px 20px;border-radius:999px;background:#d4896a;border:none;cursor:pointer;box-shadow:0 8px 32px rgba(192,122,90,.45);color:#fff;font-size:13px;font-weight:600;font-family:ui-sans-serif,system-ui,-apple-system,sans-serif;transition:transform .2s,box-shadow .2s;}
 .chat-fab:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(192,122,90,.55);}
 .chat-fab-icon{width:18px;height:18px;flex-shrink:0;}
 .chat-panel{position:fixed;bottom:90px;right:28px;z-index:999;width:min(420px,calc(100vw - 40px));border-radius:18px;background:#232b3e;border:1px solid rgba(242,236,224,.10);box-shadow:0 24px 80px rgba(0,0,0,.45);overflow:hidden;display:none;flex-direction:column;max-height:min(580px,calc(100vh - 140px));font-family:ui-sans-serif,system-ui,-apple-system,sans-serif;}
 .chat-panel.open{display:flex;}
 .cp-header{padding:16px 20px;border-bottom:1px solid rgba(242,236,224,.08);display:flex;align-items:center;gap:12px;background:#1b2232;}
-.cp-avatar{width:36px;height:36px;border-radius:10px;background:#c07a5a;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+.cp-avatar{width:36px;height:36px;border-radius:10px;background:#d4896a;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
 .cp-avatar svg{width:18px;height:18px;}
 .cp-name{font-size:14px;font-weight:600;color:#f2ece0;margin:0 0 2px;}
 .cp-status{font-size:11px;color:rgba(242,236,224,.45);margin:0;display:flex;align-items:center;gap:5px;}
@@ -526,11 +526,11 @@ hr.soft{border:none;border-top:1px solid var(--line);margin:14px 0;}
 .cm.user{align-self:flex-end;flex-direction:row-reverse;}
 .cm.assistant{align-self:flex-start;}
 .cm-av{width:24px;height:24px;border-radius:7px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;}
-.cm.assistant .cm-av{background:#c07a5a;color:#fff;}
+.cm.assistant .cm-av{background:#d4896a;color:#fff;}
 .cm.user .cm-av{background:rgba(242,236,224,.08);border:1px solid rgba(242,236,224,.12);color:rgba(242,236,224,.55);}
 .cm-bubble{padding:9px 13px;border-radius:12px;font-size:13px;line-height:1.6;}
 .cm.assistant .cm-bubble{background:rgba(242,236,224,.06);border:1px solid rgba(242,236,224,.08);color:#f2ece0;border-top-left-radius:3px;}
-.cm.user .cm-bubble{background:#c07a5a;color:#fff;border-top-right-radius:3px;}
+.cm.user .cm-bubble{background:#d4896a;color:#fff;border-top-right-radius:3px;}
 .cm-bubble a{color:#22d3ee;text-decoration:underline;}
 .cp-typing{display:flex;gap:4px;padding:9px 13px;background:rgba(242,236,224,.06);border:1px solid rgba(242,236,224,.08);border-radius:12px;border-top-left-radius:3px;width:fit-content;}
 .cp-typing span{width:5px;height:5px;border-radius:50%;background:rgba(242,236,224,.5);animation:cpbounce 1.2s infinite;}
@@ -544,7 +544,7 @@ hr.soft{border:none;border-top:1px solid var(--line);margin:14px 0;}
 .cp-input{flex:1;padding:9px 13px;border-radius:10px;border:1px solid rgba(242,236,224,.15);background:rgba(242,236,224,.06);color:#f2ece0;font-size:13px;font-family:inherit;resize:none;outline:none;line-height:1.5;min-height:38px;max-height:100px;transition:border-color .15s;}
 .cp-input:focus{border-color:rgba(192,122,90,.5);}
 .cp-input::placeholder{color:rgba(242,236,224,.28);}
-.cp-send{width:34px;height:34px;border-radius:9px;background:#c07a5a;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:opacity .15s,transform .15s;}
+.cp-send{width:34px;height:34px;border-radius:9px;background:#d4896a;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:opacity .15s,transform .15s;}
 .cp-send:hover{opacity:.88;transform:translateY(-1px);}
 .cp-send:disabled{opacity:.35;cursor:not-allowed;transform:none;}
 .cp-send svg{width:14px;height:14px;}
@@ -553,8 +553,11 @@ hr.soft{border:none;border-top:1px solid var(--line);margin:14px 0;}
 </style>
 
 <button class="chat-fab" id="chatFab" aria-label="Ask Merlin">
-  <svg class="chat-fab-icon" viewBox="0 0 24 24" fill="none">
+  <svg class="chat-fab-icon chat-fab-open" viewBox="0 0 24 24" fill="none">
     <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+  <svg class="chat-fab-icon chat-fab-close" viewBox="0 0 24 24" fill="none" style="display:none;">
+    <path d="M18 6L6 18M6 6l12 12" stroke="white" stroke-width="2" stroke-linecap="round"/>
   </svg>
   <span class="chat-fab-label">Ask Merlin</span>
 </button>
@@ -780,16 +783,22 @@ let cpHistory=[],cpLoading=false;
   const fab=document.getElementById('chatFab');
   const panel=document.getElementById('chatPanel');
   const closeBtn=document.getElementById('chatClose');
+  const openIcon=fab.querySelector('.chat-fab-open');
+  const closeIcon=fab.querySelector('.chat-fab-close');
   const label=fab.querySelector('.chat-fab-label');
   let opened=false;
   function openPanel(){
     panel.classList.add('open');
+    openIcon.style.display='none';
+    closeIcon.style.display='block';
     label.textContent='Close';
-    if(!opened){ opened=true; cpAddMsg('assistant',"Hey! You just saw the talk — happy to answer questions about the frameworks, how Merlin applies this at Zappi, or how to get in touch. What's on your mind?"); }
+    if(!opened){ opened=true; cpAddMsg('assistant',"Hey! Happy to answer questions about the talk, the frameworks, how Merlin applies this at Zappi, or how to get in touch. What's on your mind?"); }
     document.getElementById('cpInput').focus();
   }
   function closePanel(){
     panel.classList.remove('open');
+    openIcon.style.display='block';
+    closeIcon.style.display='none';
     label.textContent='Ask Merlin';
   }
   fab.addEventListener('click',()=>panel.classList.contains('open')?closePanel():openPanel());
