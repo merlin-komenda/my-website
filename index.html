@@ -614,6 +614,7 @@ document.getElementById("y").textContent = new Date().getFullYear();
   let cpHistory = [];
   let visitorType = null;
   let isOpen = false;
+  let opened = false;
 
   // Suggested questions
   const SUGGESTED = [
@@ -673,7 +674,7 @@ document.getElementById("y").textContent = new Date().getFullYear();
   btn.addEventListener('click', () => {
     isOpen = !isOpen;
     pane.style.display = isOpen ? 'flex' : 'none';
-    if (isOpen && cpHistory.length === 0) initChat();
+    if (isOpen && !opened) { opened = true; initChat(); }
   });
 
   function initChat() {
