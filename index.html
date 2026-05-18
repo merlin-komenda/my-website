@@ -684,7 +684,7 @@ document.getElementById("y").textContent = new Date().getFullYear();
 
   function renderVisitorButtons() {
     suggestedEl.innerHTML = '';
-    [['Recruiter', 'blue'], ['Practitioner', 'green'], ['Just curious', 'gray']].forEach(([label, color]) => {
+    [['Collaborator', 'blue'], ['Practitioner', 'green'], ['Just curious', 'gray']].forEach(([label, color]) => {
       const b = document.createElement('button');
       b.textContent = label;
       b.style.cssText = `padding:6px 12px;border-radius:999px;border:1px solid rgba(242,236,224,.15);
@@ -693,8 +693,8 @@ document.getElementById("y").textContent = new Date().getFullYear();
         visitorType = label;
         suggestedEl.innerHTML = '';
         addMessage('user', label);
-        const response = label === 'Recruiter'
-          ? "Got it — I'll keep things relevant to Merlin's background and experience. What would you like to know?"
+        const response = label === 'Collaborator'
+          ? "Great — I'll focus on how Merlin works and what he's building. What are you curious about?"
           : label === 'Practitioner'
           ? "Great — I'll focus on the systems and delivery work. What are you curious about?"
           : "No problem — ask me anything. What brings you here?";
