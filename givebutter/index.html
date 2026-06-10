@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>For Givebutter — Merlin Komenda</title>
+<meta name="description" content="Nine years building implementation systems for mission-driven SaaS. Here's why I reached out." />
+<meta name="robots" content="noindex, nofollow" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Inter:wght@900&display=swap" rel="stylesheet">
+<script src="/mk-logo.js"></script>
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="apple-touch-icon" href="/favicon.png">
+<meta name="theme-color" content="#1b2232">
+
+<script type="text/javascript">
+(function(c,l,a,r,i,t,y){
+  c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+  t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+  y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+})(window, document, "clarity", "script", "vyrgo4rvfs");
+</script>
+
+<style>
+:root{
+  --bg:#1b2232;
+  --surface:rgba(242,236,224,.05);
+  --surface2:rgba(242,236,224,.09);
+  --text:#f2ece0;
+  --muted:rgba(242,236,224,.72);
+  --muted2:rgba(242,236,224,.52);
+  --line:rgba(242,236,224,.13);
+  --accent:#d4896a;
+  --accent-dim:rgba(212,137,106,.14);
+  --accent-border:rgba(212,137,106,.38);
+  --teal:#4ecdc4;
+  --teal-dim:rgba(78,205,196,.12);
+  --max:1200px;
+}
+
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial;
+  color:var(--text);background:var(--bg);
+  background-image:
+    radial-gradient(ellipse 70% 55% at 75% -5%, rgba(212,137,106,.22) 0%, transparent 60%),
+    radial-gradient(ellipse 55% 45% at 5% 85%, rgba(78,205,196,.10) 0%, transparent 55%),
+    radial-gradient(ellipse 40% 35% at 50% 50%, rgba(212,137,106,.04) 0%, transparent 70%);
+  background-attachment:fixed;
+}
+.wrap{max-width:var(--max);margin:0 auto;padding:28px 20px 80px;}
+a{text-decoration:none;color:inherit}
+
+/* Nav — simplified, no active links */
+.nav{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:12px 18px;border:1px solid var(--line);border-radius:999px;
+  background:rgba(27,34,50,.92);backdrop-filter:blur(12px);
+  position:sticky;top:16px;z-index:10;
+}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:14px;text-decoration:none;color:var(--text);letter-spacing:-0.1px;}
+.mark{width:32px;height:32px;flex-shrink:0;}
+.nav-note{font-size:12px;color:var(--muted2);font-family:'IBM Plex Mono',monospace;letter-spacing:.3px;}
+
+/* Page header */
+.page-header{
+  margin-top:40px;padding:48px 44px 52px;
+  border-radius:20px;border:1px solid var(--line);
+  background:rgba(242,236,224,.03);
+}
+@media(max-width:720px){.page-header{padding:32px 24px 36px;}}
+.page-header-eyebrow{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  color:var(--teal);margin-bottom:20px;
+  display:flex;align-items:center;gap:10px;
+}
+.page-header-eyebrow::before{content:"";width:20px;height:1px;background:var(--teal);}
+.page-header h1{
+  font-family:Georgia,'Times New Roman',serif;
+  font-size:clamp(28px,4.5vw,52px);
+  line-height:1.05;letter-spacing:-1.5px;
+  margin:0 0 20px;color:var(--text);
+}
+.page-header .subhead{
+  margin:0;color:var(--muted);font-size:16px;line-height:1.65;max-width:580px;
+  font-family:Georgia,'Times New Roman',serif;font-style:italic;
+}
+
+/* Section heading */
+.sec-heading{
+  font-family:Georgia,'Times New Roman',serif;
+  font-size:20px;font-weight:700;color:var(--text);
+  letter-spacing:-0.2px;margin:0 0 24px;
+  display:flex;align-items:center;gap:14px;
+}
+.sec-heading::before{content:"";width:28px;height:2px;background:var(--teal);flex-shrink:0;}
+section{margin-top:52px;}
+
+/* Prose blocks */
+.prose-block{
+  padding:32px 36px 32px 40px;
+  background:linear-gradient(135deg, rgba(242,236,224,.07) 0%, rgba(242,236,224,.03) 100%);
+  border-radius:16px;border:1px solid rgba(242,236,224,.16);
+  border-left:3px solid var(--accent);
+  margin-bottom:1px;
+  position:relative;
+}
+.prose-block:first-child{border-radius:16px 16px 0 0;}
+.prose-block:last-child{border-radius:0 0 16px 16px;margin-bottom:0;}
+.prose-block:only-child{border-radius:16px;}
+.prose-stack .prose-block+.prose-block{border-top:none;}
+@media(max-width:720px){.prose-block{padding:24px 22px 24px 26px;}}
+.prose-block p{margin:0;font-size:16px;line-height:1.82;color:rgba(242,236,224,.82);}
+.prose-block p+p{margin-top:18px;}
+.prose-block strong{color:var(--text);font-weight:600;}
+
+/* KPI strip */
+.kpi-strip{
+  display:grid;grid-template-columns:1fr 1fr 1fr;
+  gap:1px;background:var(--line);
+  border-radius:14px;overflow:hidden;margin-top:24px;
+}
+@media(max-width:720px){.kpi-strip{grid-template-columns:1fr;}}
+.kpi-cell{padding:32px 32px 28px;background:var(--bg);}
+.kpi-num{
+  font-family:Georgia,'Times New Roman',serif;
+  font-size:56px;font-weight:700;
+  color:var(--accent);line-height:1;
+  letter-spacing:-2px;margin-bottom:10px;display:block;
+}
+.kpi-label{font-size:13px;color:rgba(242,236,224,.45);line-height:1.55;}
+
+/* Context callout — for the Givebutter growth story */
+.callout{
+  padding:28px 32px;border-radius:14px;
+  border:1px solid var(--accent-border);
+  background:var(--accent-dim);
+  font-size:15px;line-height:1.7;color:var(--muted);
+}
+.callout strong{color:var(--text);font-weight:600;}
+
+/* CTA buttons */
+.cta-row{
+  display:flex;gap:14px;flex-wrap:wrap;
+  margin-top:56px;
+}
+.cta-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:14px 26px;border-radius:10px;
+  font-size:15px;font-weight:600;font-family:inherit;
+  text-decoration:none;cursor:pointer;
+  transition:transform .18s,box-shadow .18s,opacity .18s;
+}
+.cta-btn:hover{transform:translateY(-2px);}
+.cta-primary{
+  background:var(--accent);color:#fff;
+  box-shadow:0 4px 20px rgba(212,137,106,.35);
+}
+.cta-primary:hover{box-shadow:0 8px 30px rgba(212,137,106,.45);}
+.cta-secondary{
+  background:transparent;color:var(--muted);
+  border:1px solid var(--line);
+}
+.cta-secondary:hover{background:var(--surface2);color:var(--text);border-color:rgba(242,236,224,.28);}
+
+/* Footer */
+.footer{
+  margin-top:70px;padding-top:24px;
+  border-top:1px solid var(--line);
+  font-size:11px;color:rgba(242,236,224,.32);
+  display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
+  letter-spacing:.5px;font-family:'IBM Plex Mono',monospace;
+}
+.footer a{color:rgba(242,236,224,.32);}
+.footer a:hover{color:var(--muted);}
+
+/* Scroll animations */
+.fade-up{opacity:0;transform:translateY(24px);transition:opacity .55s ease,transform .55s ease;}
+.fade-up.visible{opacity:1;transform:translateY(0);}
+</style>
+</head>
+
+<body>
+<div class="wrap">
+
+  <div class="nav" role="navigation" aria-label="Primary">
+    <a href="/" class="brand"><div class="mark" id="mk-nav"></div><span>Merlin Komenda</span></a>
+    <span class="nav-note">For Givebutter</span>
+  </div>
+
+  <!-- PAGE HEADER -->
+  <div class="page-header fade-up">
+    <div class="page-header-eyebrow">Targeted outreach</div>
+    <h1>I've been building implementation systems for mission-driven SaaS for nine years. I want to bring that to Givebutter.</h1>
+    <p class="subhead">There's no open role. I reached out anyway. Here's the fuller picture.</p>
+  </div>
+
+  <!-- SECTION 1 — WHO I AM -->
+  <section class="fade-up">
+    <div class="sec-heading">Who I am</div>
+
+    <div class="prose-stack">
+      <div class="prose-block">
+        <p>I started at <strong>GiveGab</strong> — working directly with nonprofits every day in support, then CS, then implementation. I know what it feels like when <strong>onboarding breaks for an organization running on three staff members</strong> and a mission they've built their lives around. That's not abstract to me.</p>
+      </div>
+      <div class="prose-block">
+        <p>From there I made a <strong>deliberate move into a different sector</strong>. Zappi is data-heavy, enterprise-facing, a genuinely different kind of customer and a different kind of pressure. I wanted to see what my thinking looked like when I couldn't rely on sector familiarity. What I came back with was sharper — <strong>better process instincts, cleaner systems thinking</strong>, a clearer sense of where implementation functions actually break down and why.</p>
+      </div>
+      <div class="prose-block">
+        <p>At Zappi that meant inheriting a delivery motion built around what worked for us internally, <strong>not what got the customer to value</strong>. So we changed it. Stopped asking customers to carry setup decisions they didn't have context for yet. <strong>Started leading with recommendations instead of questions.</strong> Applied AI at the specific friction points where it actually helped — <strong>only after the process was clear enough to support it.</strong></p>
+      </div>
+    </div>
+
+    <div class="kpi-strip">
+      <div class="kpi-cell">
+        <span class="kpi-num">50%</span>
+        <span class="kpi-label">Reduction in time to first value — 30 days to 15, driven by process redesign and targeted AI.</span>
+      </div>
+      <div class="kpi-cell">
+        <span class="kpi-num">~30%</span>
+        <span class="kpi-label">Reduction in time to live across implementations, with stable satisfaction scores throughout.</span>
+      </div>
+      <div class="kpi-cell">
+        <span class="kpi-num">Same headcount</span>
+        <span class="kpi-label">Across a growing implementation volume — the gains came from design discipline, not added capacity.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 2 — WHY GIVEBUTTER -->
+  <section class="fade-up">
+    <div class="sec-heading">Why Givebutter</div>
+
+    <div class="callout">
+      Givebutter went from <strong>$1 billion to $2 billion to $5 billion</strong> in donations processed in fourteen months. Fast Company named them one of the most innovative social good companies of 2026. They launched financial management tools, acquired a nonprofit community with hundreds of thousands of followers, and held their own annual event for nonprofit leaders — all while keeping the product rated <strong>number one on G2</strong> and the customer experience intact.
+    </div>
+
+    <div class="prose-stack" style="margin-top:16px;">
+      <div class="prose-block">
+        <p>That's the thing. Most platforms at this growth rate <strong>start to slip on the customer side</strong>. The product gets bloated, onboarding gets rushed, and the nonprofit on the other end — usually understaffed and deeply mission-driven — starts to feel like a number. <strong>Givebutter hasn't done that.</strong> The ratings, the retention, the community — it shows.</p>
+        <p>That's what I want to help protect. Not manage it from the outside. <strong>Be part of building the infrastructure that keeps it true</strong> as the scale keeps climbing.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 3 — WHAT I'D BRING -->
+  <section class="fade-up">
+    <div class="sec-heading">What I'd bring</div>
+
+    <div class="prose-stack">
+      <div class="prose-block">
+        <p><strong>Not a checklist runner.</strong> Someone who asks why the playbook exists before deciding whether to keep it. Who's done this work in the nonprofit space and in a completely different sector — and <strong>knows what transfers and what doesn't</strong>. Who can sit in the details and still see the larger picture.</p>
+        <p><strong>Not someone who runs the system. Someone who helps you design a better one.</strong></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BUTTONS -->
+  <div class="cta-row fade-up">
+    <a class="cta-btn cta-primary" href="/resume.pdf" target="_blank" rel="noopener">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><polyline points="14,2 14,8 20,8" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><line x1="16" y1="13" x2="8" y2="13" stroke="white" stroke-width="2" stroke-linecap="round"/><line x1="16" y1="17" x2="8" y2="17" stroke="white" stroke-width="2" stroke-linecap="round"/><polyline points="10,9 9,9 8,9" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>
+      Download Resume
+    </a>
+    <a class="cta-btn cta-secondary" href="https://calendar.app.google/qd66qHTzCbsaNUEa7" target="_blank" rel="noopener">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" stroke="currentColor" stroke-width="2"/><line x1="16" y1="2" x2="16" y2="6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="8" y1="2" x2="8" y2="6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="3" y1="10" x2="21" y2="10" stroke="currentColor" stroke-width="2"/></svg>
+      Schedule 20 minutes
+    </a>
+  </div>
+
+  <div class="footer">
+    <span>© <span id="y"></span> Merlin Komenda</span>
+    <span>42.6526° N, 73.7562° W</span>
+    <span><a href="/resume.pdf" target="_blank" rel="noopener">Resume</a></span>
+    <span><a href="mailto:merlin.komenda@gmail.com">merlin.komenda@gmail.com</a></span>
+  </div>
+
+</div>
+
+<script>
+document.getElementById("y").textContent = new Date().getFullYear();
+MKLogo.compact('mk-nav', { size: 32 });
+
+(function(){
+  const els=document.querySelectorAll('.fade-up');
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); }});
+  },{threshold:0.06});
+  els.forEach(el=>obs.observe(el));
+})();
+</script>
+
+</body>
+</html>
