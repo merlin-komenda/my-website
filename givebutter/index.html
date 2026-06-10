@@ -70,6 +70,13 @@ a{text-decoration:none;color:inherit}
   margin-top:40px;padding:48px 44px 52px;
   border-radius:20px;border:1px solid var(--line);
   background:rgba(242,236,224,.03);
+  position:relative;overflow:hidden;
+}
+.page-header::before{
+  content:"";position:absolute;top:-60px;right:-60px;
+  width:280px;height:280px;border-radius:50%;
+  background:radial-gradient(ellipse at center, rgba(212,137,106,.12) 0%, transparent 70%);
+  pointer-events:none;
 }
 @media(max-width:720px){.page-header{padding:32px 24px 36px;}}
 .page-header-eyebrow{
@@ -82,12 +89,21 @@ a{text-decoration:none;color:inherit}
 .page-header h1{
   font-family:Georgia,'Times New Roman',serif;
   font-size:clamp(28px,4.5vw,52px);
-  line-height:1.05;letter-spacing:-1.5px;
-  margin:0 0 20px;color:var(--text);
+  line-height:1.08;letter-spacing:-1.5px;
+  margin:0 0 24px;color:var(--text);
 }
 .page-header .subhead{
-  margin:0;color:var(--muted);font-size:16px;line-height:1.65;max-width:580px;
+  margin:0 0 0;color:var(--muted);font-size:16px;line-height:1.65;max-width:580px;
   font-family:Georgia,'Times New Roman',serif;font-style:italic;
+}
+.page-header-meta{
+  display:flex;align-items:center;gap:12px;margin-top:28px;flex-wrap:wrap;
+}
+.meta-tag{
+  font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;
+  letter-spacing:.5px;padding:5px 12px;border-radius:6px;
+  background:rgba(242,236,224,.07);border:1px solid var(--line);
+  color:var(--muted2);
 }
 
 /* Section heading */
@@ -112,11 +128,27 @@ section{margin-top:52px;}
 .prose-block:first-child{border-radius:16px 16px 0 0;}
 .prose-block:last-child{border-radius:0 0 16px 16px;margin-bottom:0;}
 .prose-block:only-child{border-radius:16px;}
-.prose-stack .prose-block+.prose-block{border-top:none;}
+.prose-stack .prose-block+.prose-block{border-top:1px solid rgba(242,236,224,.07);}
 @media(max-width:720px){.prose-block{padding:24px 22px 24px 26px;}}
 .prose-block p{margin:0;font-size:16px;line-height:1.82;color:rgba(242,236,224,.82);}
 .prose-block p+p{margin-top:18px;}
 .prose-block strong{color:var(--text);font-weight:600;}
+
+/* Bring list */
+.bring-list{
+  list-style:none;margin:0;padding:0;
+  display:flex;flex-direction:column;gap:14px;
+}
+.bring-list li{
+  display:flex;align-items:flex-start;gap:16px;
+  font-size:16px;line-height:1.65;color:rgba(242,236,224,.82);
+}
+.bring-list li .bi{
+  flex-shrink:0;width:32px;height:32px;border-radius:8px;
+  background:var(--accent-dim);border:1px solid var(--accent-border);
+  display:flex;align-items:center;justify-content:center;margin-top:1px;
+}
+.bring-list li strong{color:var(--text);font-weight:600;}
 
 /* KPI strip */
 .kpi-strip{
@@ -132,6 +164,12 @@ section{margin-top:52px;}
   color:var(--accent);line-height:1;
   letter-spacing:-2px;margin-bottom:10px;display:block;
 }
+.kpi-num-sm{
+  font-family:Georgia,'Times New Roman',serif;
+  font-size:28px;font-weight:700;
+  color:var(--accent);line-height:1.1;
+  letter-spacing:-0.5px;margin-bottom:10px;display:block;
+}
 .kpi-label{font-size:13px;color:rgba(242,236,224,.45);line-height:1.55;}
 
 /* Context callout — for the Givebutter growth story */
@@ -142,6 +180,27 @@ section{margin-top:52px;}
   font-size:15px;line-height:1.7;color:var(--muted);
 }
 .callout strong{color:var(--text);font-weight:600;}
+
+/* Growth timeline */
+.growth-strip{
+  display:flex;align-items:center;gap:0;
+  margin:20px 0 24px;
+}
+.growth-node{
+  display:flex;flex-direction:column;align-items:center;gap:6px;
+  flex:1;
+}
+.growth-node-num{
+  font-family:Georgia,'Times New Roman',serif;
+  font-size:22px;font-weight:700;color:var(--accent);letter-spacing:-0.5px;
+}
+.growth-node-label{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:10px;color:var(--muted2);letter-spacing:.3px;text-align:center;
+}
+.growth-arrow{
+  flex:0 0 auto;color:rgba(212,137,106,.5);font-size:18px;padding:0 4px;margin-bottom:20px;
+}
 
 /* CTA buttons */
 .cta-row{
@@ -197,6 +256,11 @@ section{margin-top:52px;}
     <div class="page-header-eyebrow">Targeted outreach</div>
     <h1>I've been building implementation systems for mission-driven SaaS for nine years. I want to bring that to Givebutter.</h1>
     <p class="subhead">There's no open role. I reached out anyway. Here's the fuller picture.</p>
+    <div class="page-header-meta">
+      <span class="meta-tag">9 yrs implementation</span>
+      <span class="meta-tag">Nonprofit SaaS</span>
+      <span class="meta-tag">Process + AI</span>
+    </div>
   </div>
 
   <!-- SECTION 1 — WHO I AM -->
@@ -225,8 +289,8 @@ section{margin-top:52px;}
         <span class="kpi-label">Reduction in time to live across implementations, with stable satisfaction scores throughout.</span>
       </div>
       <div class="kpi-cell">
-        <span class="kpi-num">Same headcount</span>
-        <span class="kpi-label">Across a growing implementation volume — the gains came from design discipline, not added capacity.</span>
+        <span class="kpi-num-sm">Same headcount,<br>more volume</span>
+        <span class="kpi-label">Across a growing implementation load — the gains came from design discipline, not added capacity.</span>
       </div>
     </div>
   </section>
@@ -236,7 +300,23 @@ section{margin-top:52px;}
     <div class="sec-heading">Why Givebutter</div>
 
     <div class="callout">
-      Givebutter went from <strong>$1 billion to $2 billion to $5 billion</strong> in donations processed in fourteen months. Fast Company named them one of the most innovative social good companies of 2026. They launched financial management tools, acquired a nonprofit community with hundreds of thousands of followers, and held their own annual event for nonprofit leaders — all while keeping the product rated <strong>number one on G2</strong> and the customer experience intact.
+      <div class="growth-strip">
+        <div class="growth-node">
+          <span class="growth-node-num">$1B</span>
+          <span class="growth-node-label">donations</span>
+        </div>
+        <span class="growth-arrow">→</span>
+        <div class="growth-node">
+          <span class="growth-node-num">$2B</span>
+          <span class="growth-node-label">14 months</span>
+        </div>
+        <span class="growth-arrow">→</span>
+        <div class="growth-node">
+          <span class="growth-node-num">$5B</span>
+          <span class="growth-node-label">processed</span>
+        </div>
+      </div>
+      Fast Company named them one of the most innovative social good companies of 2026. They launched financial management tools, acquired a nonprofit community with hundreds of thousands of followers, and held their own annual event for nonprofit leaders — all while keeping the product rated <strong>#1 on G2</strong> and the customer experience intact.
     </div>
 
     <div class="prose-stack" style="margin-top:16px;">
@@ -251,12 +331,30 @@ section{margin-top:52px;}
   <section class="fade-up">
     <div class="sec-heading">What I'd bring</div>
 
-    <div class="prose-stack">
-      <div class="prose-block">
-        <p><strong>Not a checklist runner.</strong> Someone who asks why the playbook exists before deciding whether to keep it. Who's done this work in the nonprofit space and in a completely different sector — and <strong>knows what transfers and what doesn't</strong>. Who can sit in the details and still see the larger picture.</p>
-        <p><strong>Not someone who runs the system. Someone who helps you design a better one.</strong></p>
-      </div>
+    <div class="prose-block" style="margin-bottom:20px;">
+      <p><strong>Not a checklist runner.</strong> Someone who asks why the playbook exists before deciding whether to keep it. Who's done this work in the nonprofit space and in a completely different sector — and <strong>knows what transfers and what doesn't</strong>. Who can sit in the details and still see the larger picture.</p>
     </div>
+
+    <ul class="bring-list">
+      <li>
+        <span class="bi">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 7l10 5 10-5-10-5z" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 17l10 5 10-5" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 12l10 5 10-5" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+        <span><strong>Sector depth + sector distance.</strong> I've worked inside nonprofit-facing SaaS and inside a completely different vertical. That combination is rare — I know the customer context and I've had my assumptions stress-tested.</span>
+      </li>
+      <li>
+        <span class="bi">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="var(--accent)" stroke-width="2"/><path d="M12 6v6l4 2" stroke="var(--accent)" stroke-width="2" stroke-linecap="round"/></svg>
+        </span>
+        <span><strong>Process before tools.</strong> I applied AI to implementation workflows — after we understood the process well enough to know where it actually helped. Not as a shortcut. As a precision instrument.</span>
+      </li>
+      <li>
+        <span class="bi">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9" cy="7" r="4" stroke="var(--accent)" stroke-width="2"/><path d="M23 21v-2a4 4 0 0 0-3-3.87" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 3.13a4 4 0 0 1 0 7.75" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+        <span><strong>Comfortable at every altitude.</strong> In a playbook, in a spreadsheet, in a conversation with a customer about why their launch didn't go the way they expected. The level shifts; the attention doesn't.</span>
+      </li>
+    </ul>
   </section>
 
   <!-- CTA BUTTONS -->
