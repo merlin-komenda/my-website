@@ -1,20 +1,36 @@
 # Site Archive — v1 (Dark Navy Design)
 
-Snapshot of the original site before the June 2026 redesign.
-All files are from the `main` branch as of the redesign cutover.
+The original site files are preserved in git history. No need to duplicate them here.
 
-## Files
-- `index.html` — Original homepage (dark navy, IBM Plex Mono, staggered headline)
-- `experience/index.html` — Experience page (original styling)
-- `projects.html` — Projects / case studies page
-- `ai/index.html` — AI in Practice page
-- `propel26/index.html` — Propel26 talk resources (original, present-tense framing)
+## How to find them
 
-## What changed in v2
-- Design system: dark navy → warm white (#FAFAF7)
+The last commit on `main` before the redesign is:
+
+```
+SHA: 7098c637ab05eac04693daa5d2fec507d8b25615
+```
+
+To view any file at that point in time, go to:
+```
+https://github.com/merlin-komenda/my-website/blob/7098c637ab05eac04693daa5d2fec507d8b25615/<path>
+```
+
+## Original file paths
+
+| Page | Path |
+|------|------|
+| Homepage | `index.html` |
+| Experience | `experience/index.html` |
+| Projects | `projects.html` |
+| AI in Practice | `ai/index.html` |
+| Propel26 (present-tense original) | `propel26/index.html` |
+
+## What changed in v2 (June 2026)
+
+- Design: dark navy → warm white (#FAFAF7)
 - Fonts: IBM Plex Mono + Georgia → Playfair Display + Inter
 - Accent: #d4896a → terracotta #C4552A
-- Homepage rebuilt around new positioning and hero layout
-- /projects/ and /ai/ merged into /how-i-work/
+- Homepage rebuilt with new positioning and hero layout
+- `/projects/` and `/ai/` merged into `/how-i-work/`
 - Propel26 reframed to past tense
-- mk-logo.js removed; scroll animations removed
+- mk-logo.js and scroll animations removed
