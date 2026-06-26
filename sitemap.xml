@@ -6,13 +6,18 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://merlin-komenda.com/projects/</loc>
+    <loc>https://merlin-komenda.com/experience/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://merlin-komenda.com/experience/</loc>
+    <loc>https://merlin-komenda.com/how-i-work/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://merlin-komenda.com/propel26/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
 </urlset>
