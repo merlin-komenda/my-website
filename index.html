@@ -180,8 +180,8 @@ a { text-decoration: none; color: inherit; }
   color: var(--text); margin: 0 0 64px;
   max-width: 560px; font-weight: 600;
 }
-.principle { margin-bottom: 56px; }
-.principle:last-child { margin-bottom: 0; }
+.principle { margin-bottom: 44px; padding-bottom: 44px; border-bottom: 1px solid rgba(0,0,0,0.08); }
+.principle:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
 .principle-numeral {
   font-family: var(--font-serif);
   font-size: 14px; font-weight: 400;
@@ -190,13 +190,13 @@ a { text-decoration: none; color: inherit; }
 }
 .principle-title {
   font-family: var(--font-serif);
-  font-size: clamp(17px, 2vw, 21px);
-  font-weight: 600; color: var(--text);
-  line-height: 1.35; margin: 0 0 12px;
+  font-size: clamp(22px, 2.4vw, 24px);
+  font-weight: 700; color: var(--text);
+  line-height: 1.3; margin: 0 0 10px;
   max-width: 700px;
 }
 .principle-body {
-  font-size: 15px; color: var(--muted);
+  font-size: 13px; color: rgba(0,0,0,0.45);
   line-height: 1.8; margin: 0; font-style: italic;
   max-width: 640px;
 }
