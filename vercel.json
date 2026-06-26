@@ -1,3 +1,9 @@
 {
-  "cleanUrls": true
+  "cleanUrls": true,
+  "redirects": [
+    { "source": "/projects", "destination": "/how-i-work", "permanent": true },
+    { "source": "/projects/", "destination": "/how-i-work", "permanent": true },
+    { "source": "/ai", "destination": "/how-i-work", "permanent": true },
+    { "source": "/ai/", "destination": "/how-i-work", "permanent": true }
+  ]
 }
