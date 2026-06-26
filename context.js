@@ -53,7 +53,7 @@ Built a standardized, AI-supported framework to improve quality and consistency 
 - GiveGab — Customer Success (2016–2018)
 
 == PROPEL26 TALK ==
-Merlin is a confirmed speaker at Propel26 — the world's #1 conference for service delivery professionals, hosted by Rocketlane. San Francisco, May 13–14, 2026.
+Merlin spoke at Propel26 — the world's #1 conference for service delivery professionals, hosted by Rocketlane. San Francisco, May 13–14, 2026.
 
 Talk: "Design Before You Automate: The Implementation Discipline Behind AI That Actually Sticks"
 
@@ -65,6 +65,15 @@ Three principles:
 3. Let automation follow clarity — remove unnecessary steps first, then apply AI at synthesis inflection points
 
 Results from Zappi's own redesign: ~30% improvement in time-to-live, stable satisfaction, increased team capacity. Key line: "The gains came from design discipline, not automation alone."
+
+The talk resources are available at merlin-komenda.com/propel26/ — two practical frameworks attendees can take back to their teams.
+
+== SITE STRUCTURE ==
+The website is at merlin-komenda.com. Key pages:
+- Homepage: merlin-komenda.com
+- Experience: merlin-komenda.com/experience/
+- How I work: merlin-komenda.com/how-i-work/ (covers his six principles, thinking on AI, five case studies, and an impact log)
+- Propel26 talk resources: merlin-komenda.com/propel26/
 
 == WORKING STYLE ==
 Outcome-first, low-drama delivery. Calm under pressure. Values clarity over complexity. Prefers "team recommends, customer reacts" over pushing design work onto clients.
