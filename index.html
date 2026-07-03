@@ -192,6 +192,10 @@ a { text-decoration: none; color: inherit; }
   max-width: 560px; font-weight: 600;
 }
 .principle { margin-bottom: 33px; padding-bottom: 33px; border-bottom: 1px solid rgba(0,0,0,0.08); }
+@media (min-width: 1024px) {
+  .principle { position: relative; }
+  .principle-numeral { position: absolute; left: -48px; top: 0; margin-bottom: 0; }
+}
 .principle:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
 .principle-numeral {
   font-family: var(--font-serif);
@@ -222,6 +226,9 @@ a { text-decoration: none; color: inherit; }
   max-width: 560px; font-weight: 600;
 }
 .work-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+@media (min-width: 1024px) {
+  .work-card:nth-child(2) { margin-top: 24px; }
+}
 .work-card {
   background: var(--bg);
   border: 1px solid rgba(90,122,58,.14);
