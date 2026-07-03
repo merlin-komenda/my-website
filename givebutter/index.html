@@ -9,11 +9,11 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Inter:wght@900&display=swap" rel="stylesheet">
-<script src="/mk-logo.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
 <link rel="icon" type="image/png" href="/favicon.png">
 <link rel="apple-touch-icon" href="/favicon.png">
-<meta name="theme-color" content="#1b2232">
+<meta name="theme-color" content="#FAFAF7">
 
 <script type="text/javascript">
 (function(c,l,a,r,i,t,y){
@@ -24,245 +24,130 @@
 </script>
 
 <style>
-:root{
-  --bg:#1b2232;
-  --surface:rgba(242,236,224,.05);
-  --surface2:rgba(242,236,224,.09);
-  --text:#f2ece0;
-  --muted:rgba(242,236,224,.72);
-  --muted2:rgba(242,236,224,.52);
-  --line:rgba(242,236,224,.13);
-  --accent:#d4896a;
-  --accent-dim:rgba(212,137,106,.14);
-  --accent-border:rgba(212,137,106,.38);
-  --teal:#4ecdc4;
-  --teal-dim:rgba(78,205,196,.12);
-  --max:1200px;
+:root {
+  --bg: #FAFAF7;
+  --bg-white: #FFFFFF;
+  --text: #161410;
+  --muted: rgba(22,20,16,.55);
+  --muted2: rgba(22,20,16,.38);
+  --line: rgba(22,20,16,.10);
+  --terracotta: #5a7a3a;
+  --max: 1100px;
+  --font-serif: 'Lora', Georgia, serif;
+  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
 }
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body { font-family: 'Lora', Georgia, serif; background: var(--bg); color: var(--text); -webkit-font-smoothing: antialiased; }
+a { text-decoration: none; color: inherit; }
+.wrap { max-width: var(--max); margin: 0 auto; padding: 0 28px; }
 
-*{box-sizing:border-box}
-html,body{margin:0;padding:0}
-body{
-  font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial;
-  color:var(--text);background:var(--bg);
-  background-image:
-    radial-gradient(ellipse 70% 55% at 75% -5%, rgba(212,137,106,.22) 0%, transparent 60%),
-    radial-gradient(ellipse 55% 45% at 5% 85%, rgba(78,205,196,.10) 0%, transparent 55%),
-    radial-gradient(ellipse 40% 35% at 50% 50%, rgba(212,137,106,.04) 0%, transparent 70%);
-  background-attachment:fixed;
-}
-.wrap{max-width:var(--max);margin:0 auto;padding:28px 20px 80px;}
-a{text-decoration:none;color:inherit}
-
-/* Nav — simplified, no active links */
-.nav{
-  display:flex;justify-content:space-between;align-items:center;
-  padding:12px 18px;border:1px solid var(--line);border-radius:999px;
-  background:rgba(27,34,50,.92);backdrop-filter:blur(12px);
-  position:sticky;top:16px;z-index:10;
-}
-.brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:14px;text-decoration:none;color:var(--text);letter-spacing:-0.1px;}
-.mark{width:32px;height:32px;flex-shrink:0;}
-.nav-note{font-size:12px;color:var(--muted2);font-family:'IBM Plex Mono',monospace;letter-spacing:.3px;}
+/* Nav — matches main site nav exactly */
+.nav { position: sticky; top: 0; z-index: 50; background: rgba(250,250,247,.94); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
+.nav-inner { max-width: var(--max); margin: 0 auto; padding: 0 28px; display: flex; align-items: center; justify-content: space-between; height: 62px; }
+.nav-brand { font-family: var(--font-serif); font-size: 17px; font-weight: 600; color: var(--text); letter-spacing: -.2px; }
+.nav-brand em { color: var(--terracotta); font-style: italic; }
+.nav-links { display: flex; align-items: center; gap: 2px; }
+.nav-links a { font-size: 14px; font-weight: 500; color: var(--muted); padding: 7px 14px; border-radius: 999px; transition: color .15s, background .15s; }
+.nav-links a:hover { color: var(--text); background: rgba(22,20,16,.05); }
+.nav-cta { background: var(--terracotta) !important; color: #fff !important; }
+.nav-cta:hover { background: #4a6830 !important; color: #fff !important; }
+.nav-menu-btn { display: none; background: none; border: 1px solid var(--line); border-radius: 8px; padding: 8px 12px; cursor: pointer; font-size: 14px; font-weight: 500; color: var(--text); font-family: var(--font-sans); }
+.nav-mobile { display: none; background: var(--bg); border-top: 1px solid var(--line); }
+.nav-mobile.open { display: block; }
+.nav-mobile a { display: block; padding: 15px 28px; font-size: 15px; font-weight: 500; color: var(--muted); border-bottom: 1px solid var(--line); }
+.nav-mobile a:hover { color: var(--text); }
+@media (max-width: 640px) { .nav-links { display: none; } .nav-menu-btn { display: block; } }
 
 /* Page header */
-.page-header{
-  margin-top:40px;padding:48px 44px 52px;
-  border-radius:20px;border:1px solid var(--line);
-  background:rgba(242,236,224,.03);
-  position:relative;overflow:hidden;
-}
-.page-header::before{
-  content:"";position:absolute;top:-60px;right:-60px;
-  width:280px;height:280px;border-radius:50%;
-  background:radial-gradient(ellipse at center, rgba(212,137,106,.12) 0%, transparent 70%);
-  pointer-events:none;
-}
-@media(max-width:720px){.page-header{padding:32px 24px 36px;}}
-.page-header-eyebrow{
-  font-family:'IBM Plex Mono',monospace;
-  font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
-  color:var(--teal);margin-bottom:20px;
-  display:flex;align-items:center;gap:10px;
-}
-.page-header-eyebrow::before{content:"";width:20px;height:1px;background:var(--teal);}
-.page-header h1{
-  font-family:Georgia,'Times New Roman',serif;
-  font-size:clamp(22px,3vw,36px);
-  line-height:1.22;letter-spacing:-0.8px;
-  margin:0 0 20px;color:var(--text);
-}
-.page-header .subhead{
-  margin:0 0 0;color:var(--muted);font-size:16px;line-height:1.65;max-width:580px;
-  font-family:Georgia,'Times New Roman',serif;font-style:italic;
-}
-.page-header-meta{
-  display:flex;align-items:center;gap:12px;margin-top:28px;flex-wrap:wrap;
-}
-.meta-tag{
-  font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;
-  letter-spacing:.5px;padding:5px 12px;border-radius:6px;
-  background:rgba(242,236,224,.07);border:1px solid var(--line);
-  color:var(--muted2);
-}
+.page-header { padding: 80px 0 72px; border-bottom: 1px solid var(--line); background: var(--bg); }
+.page-header-label { font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--muted2); margin: 0 0 20px; font-family: var(--font-sans); }
+.page-header h1 { font-family: var(--font-serif); font-size: clamp(24px, 3.4vw, 38px); font-weight: 700; line-height: 1.22; letter-spacing: -.8px; color: var(--text); margin: 0 0 20px; max-width: 720px; }
+.page-header .subhead { font-family: var(--font-serif); font-style: italic; font-size: 16px; color: var(--muted); line-height: 1.65; margin: 0 0 28px; max-width: 540px; }
 
-/* Section heading */
-.sec-heading{
-  font-family:Georgia,'Times New Roman',serif;
-  font-size:20px;font-weight:700;color:var(--text);
-  letter-spacing:-0.2px;margin:0 0 24px;
-  display:flex;align-items:center;gap:14px;
-}
-.sec-heading::before{content:"";width:28px;height:2px;background:var(--teal);flex-shrink:0;}
-section{margin-top:52px;}
+.meta-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 32px; }
+.chip { display: inline-flex; align-items: center; padding: 5px 12px; border: 1px solid var(--line); font-size: 12px; font-weight: 500; color: var(--muted); font-family: var(--font-sans); }
 
-/* Prose blocks */
-.prose-block{
-  padding:28px 32px 28px 36px;
-  background:rgba(242,236,224,.05);
-  border-radius:14px;border:1px solid rgba(242,236,224,.12);
-  border-left:3px solid var(--accent);
-  position:relative;
-}
-.prose-stack{display:flex;flex-direction:column;gap:10px;}
-.prose-stack .prose-block+.prose-block{border-top:1px solid rgba(242,236,224,.12);}
-@media(max-width:720px){.prose-block{padding:24px 22px 24px 26px;}}
-.prose-block p{margin:0;font-size:16px;line-height:1.82;color:rgba(242,236,224,.82);}
-.prose-block p+p{margin-top:18px;}
-.prose-block strong{color:var(--text);font-weight:600;}
+.actions { display: flex; gap: 10px; flex-wrap: wrap; }
+.btn { padding: 10px 20px; font-size: 13px; font-weight: 600; border: 1px solid var(--line); background: transparent; color: var(--text); cursor: pointer; transition: background .15s, border-color .15s, color .15s, transform .15s; display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-sans); }
+.btn:hover { background: rgba(22,20,16,.05); }
+.btn.primary { border-radius: 999px; background: var(--terracotta); border-color: var(--terracotta); color: #fff; }
+.btn.primary:hover { background: #4a6830; transform: translateY(-1px); }
 
-/* Bring list */
-.bring-list{
-  list-style:none;margin:0;padding:0;
-  display:flex;flex-direction:column;gap:14px;
-}
-.bring-list li{
-  display:flex;align-items:flex-start;gap:16px;
-  font-size:16px;line-height:1.65;color:rgba(242,236,224,.82);
-}
-.bring-list li .bi{
-  flex-shrink:0;width:32px;height:32px;border-radius:8px;
-  background:var(--accent-dim);border:1px solid var(--accent-border);
-  display:flex;align-items:center;justify-content:center;margin-top:1px;
-}
-.bring-list li strong{color:var(--text);font-weight:600;}
+/* Sections */
+section { padding: 64px 0; border-bottom: 1px solid var(--line); }
+.sec-heading { font-family: var(--font-serif); font-size: 22px; font-weight: 700; color: var(--text); margin: 0 0 32px; display: flex; align-items: center; gap: 14px; letter-spacing: -.2px; }
+.sec-heading::before { content: ""; width: 24px; height: 2px; background: var(--terracotta); flex-shrink: 0; }
 
-/* KPI strip */
-.kpi-strip{
-  display:grid;grid-template-columns:1fr 1fr 1fr;
-  gap:1px;background:var(--line);
-  border-radius:14px;overflow:hidden;margin-top:24px;
-}
-@media(max-width:720px){.kpi-strip{grid-template-columns:1fr;}}
-.kpi-cell{padding:32px 32px 28px;background:var(--bg);}
-.kpi-num{
-  font-family:Georgia,'Times New Roman',serif;
-  font-size:56px;font-weight:700;
-  color:var(--accent);line-height:1;
-  letter-spacing:-2px;margin-bottom:10px;display:block;
-}
-.kpi-num-sm{
-  font-family:Georgia,'Times New Roman',serif;
-  font-size:28px;font-weight:700;
-  color:var(--accent);line-height:1.1;
-  letter-spacing:-0.5px;margin-bottom:10px;display:block;
-}
-.kpi-label{font-size:13px;color:rgba(242,236,224,.45);line-height:1.55;}
+/* Prose cards */
+.prose-stack { display: flex; flex-direction: column; gap: 12px; }
+.prose-block { padding: 24px 26px; background: var(--bg-white); border: 1px solid var(--line); border-left: 3px solid var(--terracotta); }
+.prose-block p { margin: 0; font-size: 16px; line-height: 1.8; color: var(--muted); }
+.prose-block p + p { margin-top: 16px; }
+.prose-block strong { color: var(--text); font-weight: 600; }
 
-/* Context callout — for the Givebutter growth story */
-.callout{
-  padding:28px 32px;border-radius:14px;
-  border:1px solid var(--accent-border);
-  background:var(--accent-dim);
-  font-size:15px;line-height:1.7;color:var(--muted);
-}
-.callout strong{color:var(--text);font-weight:600;}
+/* KPI grid */
+.kpi-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); margin-top: 24px; }
+@media (max-width: 720px) { .kpi-grid { grid-template-columns: 1fr; } }
+.kpi-item { padding: 28px 24px; background: var(--bg-white); }
+.kpi-num { font-family: var(--font-serif); font-size: 40px; font-weight: 700; color: var(--terracotta); line-height: 1; letter-spacing: -1px; margin-bottom: 10px; display: block; }
+.kpi-num-sm { font-family: var(--font-serif); font-size: 22px; font-weight: 700; color: var(--terracotta); line-height: 1.2; letter-spacing: -.3px; margin-bottom: 10px; display: block; }
+.kpi-label { font-size: 13px; color: var(--muted2); line-height: 1.55; }
 
-/* Growth timeline */
-.growth-strip{
-  display:flex;align-items:center;gap:0;
-  margin:20px 0 24px;
-}
-.growth-node{
-  display:flex;flex-direction:column;align-items:center;gap:6px;
-  flex:1;
-}
-.growth-node-num{
-  font-family:Georgia,'Times New Roman',serif;
-  font-size:22px;font-weight:700;color:var(--accent);letter-spacing:-0.5px;
-}
-.growth-node-label{
-  font-family:'IBM Plex Mono',monospace;
-  font-size:10px;color:var(--muted2);letter-spacing:.3px;text-align:center;
-}
-.growth-arrow{
-  flex:0 0 auto;color:rgba(212,137,106,.5);font-size:18px;padding:0 4px;margin-bottom:20px;
-}
+/* CTA row */
+.cta-row { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 56px; }
 
-/* CTA buttons */
-.cta-row{
-  display:flex;gap:14px;flex-wrap:wrap;
-  margin-top:56px;
-}
-.cta-btn{
-  display:inline-flex;align-items:center;gap:8px;
-  padding:14px 26px;border-radius:10px;
-  font-size:15px;font-weight:600;font-family:inherit;
-  text-decoration:none;cursor:pointer;
-  transition:transform .18s,box-shadow .18s,opacity .18s;
-}
-.cta-btn:hover{transform:translateY(-2px);}
-.cta-primary{
-  background:var(--accent);color:#fff;
-  box-shadow:0 4px 20px rgba(212,137,106,.35);
-}
-.cta-primary:hover{box-shadow:0 8px 30px rgba(212,137,106,.45);}
-.cta-secondary{
-  background:transparent;color:var(--muted);
-  border:1px solid var(--line);
-}
-.cta-secondary:hover{background:var(--surface2);color:var(--text);border-color:rgba(242,236,224,.28);}
-
-/* Footer */
-.footer{
-  margin-top:70px;padding-top:24px;
-  border-top:1px solid var(--line);
-  font-size:11px;color:rgba(242,236,224,.32);
-  display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
-  letter-spacing:.5px;font-family:'IBM Plex Mono',monospace;
-}
-.footer a{color:rgba(242,236,224,.32);}
-.footer a:hover{color:var(--muted);}
+/* Footer — matches main site footer exactly */
+footer { border-top: 1px solid var(--line); }
+.footer-inner { max-width: var(--max); margin: 0 auto; padding: 28px 28px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+.footer-copy { font-size: 13px; color: var(--muted2); }
+.footer-links { display: flex; gap: 24px; }
+.footer-links a { font-size: 13px; color: var(--muted2); transition: color .15s; }
+.footer-links a:hover { color: var(--text); }
 
 /* Scroll animations */
-.fade-up{opacity:0;transform:translateY(24px);transition:opacity .55s ease,transform .55s ease;}
-.fade-up.visible{opacity:1;transform:translateY(0);}
+.fade-up { opacity: 0; transform: translateY(24px); transition: opacity .55s ease, transform .55s ease; }
+.fade-up.visible { opacity: 1; transform: translateY(0); }
 </style>
 </head>
 
 <body>
-<div class="wrap">
 
-  <div class="nav" role="navigation" aria-label="Primary">
-    <a href="/" class="brand"><div class="mark" id="mk-nav"></div><span>Merlin Komenda</span></a>
-    <span class="nav-note">For Givebutter</span>
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-brand">Merlin <em>Komenda</em></a>
+    <div class="nav-links">
+      <a href="/experience/">Experience</a>
+      <a href="/how-i-work/">How I work</a>
+      <a href="/#contact" class="nav-cta">Connect</a>
+    </div>
+    <button class="nav-menu-btn" id="menuBtn" aria-expanded="false">Menu</button>
   </div>
+  <div class="nav-mobile" id="mobileMenu">
+    <a href="/experience/">Experience</a>
+    <a href="/how-i-work/">How I work</a>
+    <a href="/#contact">Connect</a>
+  </div>
+</nav>
+
+<div class="wrap">
 
   <!-- PAGE HEADER -->
   <div class="page-header fade-up">
-<h1>What got Givebutter here is real.<br>Protecting it at scale is a design challenge, and that's what I've spent nearly a decade solving.</h1>
+    <p class="page-header-label">For Givebutter</p>
+    <h1>What got Givebutter here is real.<br>Protecting it at scale is a design challenge, and that's what I've spent nearly a decade solving.</h1>
     <p class="subhead">Here's the fuller picture about why I reached out.</p>
-    <div class="page-header-meta">
-      <span class="meta-tag">9 yrs implementation</span>
-      <span class="meta-tag">Nonprofit SaaS</span>
-      <span class="meta-tag">Process + AI</span>
+    <div class="meta-row">
+      <span class="chip">9 yrs implementation</span>
+      <span class="chip">Nonprofit SaaS</span>
+      <span class="chip">Process + AI</span>
     </div>
-    <div class="cta-row" style="margin-top:32px;">
-      <a class="cta-btn cta-secondary" style="padding:10px 18px;font-size:13px;" href="/resume.pdf" target="_blank" rel="noopener">
+    <div class="actions">
+      <a class="btn" href="/resume.pdf" target="_blank" rel="noopener">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><polyline points="14,2 14,8 20,8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><line x1="16" y1="13" x2="8" y2="13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="16" y1="17" x2="8" y2="17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
         View Resume
       </a>
-      <a class="cta-btn cta-primary" style="padding:10px 18px;font-size:13px;" href="https://calendar.app.google/qd66qHTzCbsaNUEa7" target="_blank" rel="noopener">
+      <a class="btn primary" href="https://calendar.app.google/qd66qHTzCbsaNUEa7" target="_blank" rel="noopener">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" stroke="currentColor" stroke-width="2"/><line x1="16" y1="2" x2="16" y2="6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="8" y1="2" x2="8" y2="6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="3" y1="10" x2="21" y2="10" stroke="currentColor" stroke-width="2"/></svg>
         Schedule a chat
       </a>
@@ -271,7 +156,7 @@ section{margin-top:52px;}
 
   <!-- SECTION 1 — WHO I AM -->
   <section class="fade-up">
-    <div class="sec-heading">Who I am</div>
+    <h2 class="sec-heading">Who I am</h2>
 
     <div class="prose-stack">
       <div class="prose-block">
@@ -285,16 +170,16 @@ section{margin-top:52px;}
       </div>
     </div>
 
-    <div class="kpi-strip">
-      <div class="kpi-cell">
+    <div class="kpi-grid">
+      <div class="kpi-item">
         <span class="kpi-num">50%</span>
         <span class="kpi-label">Reduction in time to first value — 30 days to 15, driven by process clarity and targeted AI.</span>
       </div>
-      <div class="kpi-cell">
+      <div class="kpi-item">
         <span class="kpi-num">~30%</span>
         <span class="kpi-label">Reduction in time to live across all implementations, with high satisfaction scores throughout.</span>
       </div>
-      <div class="kpi-cell">
+      <div class="kpi-item">
         <span class="kpi-num-sm">Same headcount</span>
         <span class="kpi-label">Across a growing implementation volume — the gains came from a complete redesign focused on customer value, not added capacity.</span>
       </div>
@@ -303,7 +188,7 @@ section{margin-top:52px;}
 
   <!-- SECTION 2 — WHY GIVEBUTTER -->
   <section class="fade-up">
-    <div class="sec-heading">Why Givebutter</div>
+    <h2 class="sec-heading">Why Givebutter</h2>
 
     <div class="prose-stack">
       <div class="prose-block">
@@ -315,7 +200,7 @@ section{margin-top:52px;}
 
   <!-- SECTION 3 — WHAT I'D BRING -->
   <section class="fade-up">
-    <div class="sec-heading">What I'd bring</div>
+    <h2 class="sec-heading">What I'd bring</h2>
 
     <div class="prose-stack">
       <div class="prose-block">
@@ -327,28 +212,41 @@ section{margin-top:52px;}
 
   <!-- CTA BUTTONS -->
   <div class="cta-row fade-up">
-    <a class="cta-btn cta-secondary" href="/resume.pdf" target="_blank" rel="noopener">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><polyline points="14,2 14,8 20,8" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><line x1="16" y1="13" x2="8" y2="13" stroke="white" stroke-width="2" stroke-linecap="round"/><line x1="16" y1="17" x2="8" y2="17" stroke="white" stroke-width="2" stroke-linecap="round"/><polyline points="10,9 9,9 8,9" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>
+    <a class="btn" href="/resume.pdf" target="_blank" rel="noopener">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><polyline points="14,2 14,8 20,8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><line x1="16" y1="13" x2="8" y2="13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="16" y1="17" x2="8" y2="17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><polyline points="10,9 9,9 8,9" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
       View Resume
     </a>
-    <a class="cta-btn cta-primary" href="https://calendar.app.google/qd66qHTzCbsaNUEa7" target="_blank" rel="noopener">
+    <a class="btn primary" href="https://calendar.app.google/qd66qHTzCbsaNUEa7" target="_blank" rel="noopener">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" stroke="currentColor" stroke-width="2"/><line x1="16" y1="2" x2="16" y2="6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="8" y1="2" x2="8" y2="6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="3" y1="10" x2="21" y2="10" stroke="currentColor" stroke-width="2"/></svg>
       Schedule a chat
     </a>
   </div>
 
-  <div class="footer">
-    <span>© <span id="y"></span> Merlin Komenda</span>
-    <span>42.6526° N, 73.7562° W</span>
-    <span><a href="/resume.pdf" target="_blank" rel="noopener">Resume</a></span>
-    <span><a href="mailto:merlin.komenda@gmail.com">merlin.komenda@gmail.com</a></span>
-  </div>
-
 </div>
+
+<footer>
+  <div class="footer-inner">
+    <span class="footer-copy">© <span id="y"></span> Merlin Komenda</span>
+    <div class="footer-links">
+      <a href="/resume.pdf" target="_blank" rel="noopener">Resume</a>
+      <a href="mailto:merlin.komenda@gmail.com">merlin.komenda@gmail.com</a>
+    </div>
+  </div>
+</footer>
 
 <script>
 document.getElementById("y").textContent = new Date().getFullYear();
-MKLogo.compact('mk-nav', { size: 32 });
+
+(function(){
+  const btn = document.getElementById('menuBtn');
+  const menu = document.getElementById('mobileMenu');
+  btn.addEventListener('click', () => {
+    const open = menu.classList.toggle('open');
+    btn.setAttribute('aria-expanded', String(open));
+  });
+  menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => menu.classList.remove('open')));
+  window.addEventListener('keydown', e => { if (e.key === 'Escape') menu.classList.remove('open'); });
+})();
 
 (function(){
   const els=document.querySelectorAll('.fade-up');
