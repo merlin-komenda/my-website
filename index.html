@@ -145,6 +145,12 @@ a { text-decoration: none; color: inherit; }
   font-size: 13px; font-weight: 500; color: var(--muted);
   margin: 0 0 24px; letter-spacing: .1px;
 }
+.hero-eyebrow a {
+  color: inherit; text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color .15s;
+}
+.hero-eyebrow a:hover { border-bottom-color: var(--muted); }
 .hero-name {
   font-family: var(--font-serif);
   font-size: clamp(48px, 6vw, 72px);
@@ -425,7 +431,7 @@ footer { border-top: 1px solid var(--line); }
 <section class="hero">
   <div class="wrap hero-grid">
     <div>
-      <p class="hero-eyebrow">Global Director of Implementation · Zappi · Albany, NY</p>
+      <p class="hero-eyebrow">Global Director of Implementation at <a href="https://www.zappi.io/web/" target="_blank" rel="noopener">Zappi</a></p>
       <h1 class="hero-name">Merlin <em>Komenda</em></h1>
       <p class="hero-tagline">Rigorous by design. <strong>Joyful by default.</strong></p>
     </div>
