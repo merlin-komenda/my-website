@@ -97,6 +97,7 @@ a { text-decoration: none; color: inherit; }
   transition: color .15s, background .15s;
 }
 .nav-links a:hover { color: var(--text); background: rgba(22,20,16,.05); }
+.nav-links a.active { color: var(--text); }
 .nav-cta {
   background: var(--terracotta) !important;
   color: #fff !important;
@@ -419,7 +420,7 @@ footer { border-top: 1px solid var(--line); }
   <div class="nav-mobile" id="mobileMenu">
     <a href="/experience/">Experience</a>
     <a href="/how-i-work/">How I work</a>
-    <a href="#contact">Connect</a>
+    <a href="#contact" class="nav-cta">Connect</a>
   </div>
 </nav>
 

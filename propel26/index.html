@@ -60,6 +60,7 @@ a { text-decoration: none; color: inherit; }
 .nav-links { display: flex; align-items: center; gap: 2px; }
 .nav-links a { font-size: 14px; font-weight: 500; color: var(--muted); padding: 7px 14px; border-radius: 999px; transition: color .15s, background .15s; }
 .nav-links a:hover { color: var(--text); background: rgba(22,20,16,.05); }
+.nav-links a.active { color: var(--text); }
 .nav-cta { background: var(--terracotta) !important; color: #fff !important; }
 .nav-cta:hover { background: #4a6830 !important; color: #fff !important; }
 .nav-menu-btn { display: none; background: none; border: 1px solid var(--line); border-radius: 8px; padding: 8px 12px; cursor: pointer; font-size: 14px; font-weight: 500; color: var(--text); font-family: var(--font-sans); }
@@ -210,7 +211,7 @@ footer { border-top: 1px solid var(--line); }
   <div class="nav-mobile" id="mobileMenu">
     <a href="/experience/">Experience</a>
     <a href="/how-i-work/">How I work</a>
-    <a href="/#contact">Connect</a>
+    <a href="/#contact" class="nav-cta">Connect</a>
   </div>
 </nav>
 
