@@ -20,7 +20,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&display=swap" rel="stylesheet">
 <link rel="icon" type="image/png" href="/favicon.png?v=2">
 <link rel="apple-touch-icon" href="/favicon.png?v=2">
 <meta name="theme-color" content="#FAFAF7">
@@ -43,19 +43,19 @@
   --line: rgba(22,20,16,.10);
   --terracotta: #5a7a3a;
   --max: 1100px;
-  --font-serif: 'Lora', Georgia, serif;
+  --font-serif: 'Newsreader', Georgia, serif;
   --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
 }
 *, *::before, *::after { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; }
-body { font-family: 'Lora', Georgia, serif; background: var(--bg); color: var(--text); -webkit-font-smoothing: antialiased; }
+body { font-family: var(--font-sans); font-optical-sizing: auto; background: var(--bg); color: var(--text); -webkit-font-smoothing: antialiased; }
 a { text-decoration: none; color: inherit; }
 .wrap { max-width: var(--max); margin: 0 auto; padding: 0 28px; }
 
 /* Nav — matches main site nav exactly */
 .nav { position: sticky; top: 0; z-index: 50; background: rgba(250,250,247,.94); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
 .nav-inner { max-width: var(--max); margin: 0 auto; padding: 0 28px; display: flex; align-items: center; justify-content: space-between; height: 62px; }
-.nav-brand { font-family: var(--font-serif); font-size: 17px; font-weight: 600; color: var(--text); letter-spacing: -.2px; }
+.nav-brand { font-family: var(--font-serif); font-size: 17px; font-weight: 600; color: var(--text); letter-spacing: 0; }
 .nav-brand em { color: var(--terracotta); font-style: italic; }
 .nav-links { display: flex; align-items: center; gap: 2px; }
 .nav-links a { font-size: 14px; font-weight: 500; color: var(--muted); padding: 7px 14px; border-radius: 999px; transition: color .15s, background .15s; }
@@ -73,7 +73,7 @@ a { text-decoration: none; color: inherit; }
 /* Page header */
 .page-header { padding: 80px 0 72px; border-bottom: 1px solid var(--line); background: var(--bg); }
 .page-header-label { font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--muted2); margin: 0 0 20px; font-family: var(--font-sans); }
-.page-header h1 { font-family: var(--font-serif); font-size: clamp(24px, 3.4vw, 38px); font-weight: 700; line-height: 1.22; letter-spacing: -.8px; color: var(--text); margin: 0 0 20px; max-width: 720px; }
+.page-header h1 { font-family: var(--font-serif); font-size: clamp(24px, 3.4vw, 38px); font-weight: 700; line-height: 1.22; letter-spacing: -.005em; color: var(--text); margin: 0 0 20px; max-width: 720px; }
 .page-header .subhead { font-family: var(--font-serif); font-style: italic; font-size: 16px; color: var(--muted); line-height: 1.65; margin: 0 0 28px; max-width: 540px; }
 
 .meta-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 32px; }
@@ -87,7 +87,7 @@ a { text-decoration: none; color: inherit; }
 
 /* Sections */
 section { padding: 64px 0; border-bottom: 1px solid var(--line); }
-.sec-heading { font-family: var(--font-serif); font-size: 22px; font-weight: 700; color: var(--text); margin: 0 0 32px; display: flex; align-items: center; gap: 14px; letter-spacing: -.2px; }
+.sec-heading { font-family: var(--font-serif); font-size: 22px; font-weight: 700; color: var(--text); margin: 0 0 32px; display: flex; align-items: center; gap: 14px; letter-spacing: -.005em; }
 .sec-heading::before { content: ""; width: 24px; height: 2px; background: var(--terracotta); flex-shrink: 0; }
 
 /* Prose cards */

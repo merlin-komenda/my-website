@@ -45,7 +45,7 @@
 }
 </script>
 
-<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&display=swap" rel="stylesheet">
 <style>
 :root {
   --bg: #FAFAF7;
@@ -58,13 +58,14 @@
   --terracotta: #5a7a3a;
   --sage: #4A7358;
   --max: 1100px;
-  --font-serif: 'Lora', Georgia, serif;
+  --font-serif: 'Newsreader', Georgia, serif;
   --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
 }
 *, *::before, *::after { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; }
 body {
-  font-family: 'Lora', Georgia, serif;
+  font-family: var(--font-sans);
+  font-optical-sizing: auto;
   background: var(--bg);
   color: var(--text);
   -webkit-font-smoothing: antialiased;
@@ -87,7 +88,7 @@ a { text-decoration: none; color: inherit; }
 .nav-brand {
   font-family: var(--font-serif);
   font-size: 17px; font-weight: 600;
-  color: var(--text); letter-spacing: -.2px;
+  color: var(--text); letter-spacing: 0;
 }
 .nav-brand em { color: var(--terracotta); font-style: italic; }
 .nav-links { display: flex; align-items: center; gap: 2px; }
@@ -147,16 +148,20 @@ a { text-decoration: none; color: inherit; }
 .hero-name {
   font-family: var(--font-serif);
   font-size: clamp(48px, 6vw, 72px);
-  line-height: .96; letter-spacing: -2px;
-  color: var(--text); margin: 0 0 20px; font-weight: 700;
+  line-height: .98; letter-spacing: -.01em;
+  color: var(--text); margin: 0 0 20px;
+  font-weight: 650; font-style: normal;
+  font-optical-sizing: auto; font-variation-settings: 'opsz' 72;
 }
-.hero-name em { color: var(--terracotta); font-style: italic; }
+.hero-name em { color: var(--terracotta); font-style: italic; font-weight: 800; }
 .hero-tagline {
   font-family: var(--font-serif);
   font-size: clamp(18px, 2.2vw, 22px);
-  font-style: italic; color: var(--muted);
-  margin: 0; line-height: 1.5;
+  font-style: normal; color: var(--muted);
+  margin: 0; line-height: 1.4; letter-spacing: -.005em;
+  font-weight: 400;
 }
+.hero-tagline strong { font-weight: 700; font-style: italic; }
 .hero-photo-wrap { display: flex; justify-content: flex-end; }
 .hero-photo {
   width: 100%; max-width: 360px;
@@ -186,7 +191,7 @@ a { text-decoration: none; color: inherit; }
 .think-intro {
   font-family: var(--font-serif);
   font-size: clamp(22px, 2.8vw, 30px);
-  line-height: 1.25; letter-spacing: -.3px;
+  line-height: 1.25; letter-spacing: -.005em;
   color: var(--text); margin: 0 0 64px;
   max-width: 560px; font-weight: 600;
 }
@@ -221,7 +226,7 @@ a { text-decoration: none; color: inherit; }
 .work-intro {
   font-family: var(--font-serif);
   font-size: clamp(22px, 2.8vw, 30px);
-  line-height: 1.25; letter-spacing: -.3px;
+  line-height: 1.25; letter-spacing: -.005em;
   color: var(--text); margin: 0 0 48px;
   max-width: 560px; font-weight: 600;
 }
@@ -285,7 +290,7 @@ a { text-decoration: none; color: inherit; }
 .contact-headline {
   font-family: var(--font-serif);
   font-size: clamp(32px, 4.5vw, 56px);
-  line-height: 1.12; letter-spacing: -.8px;
+  line-height: 1.12; letter-spacing: -.01em;
   color: var(--text); margin: 0 0 24px;
   max-width: 560px; font-weight: 700;
 }
