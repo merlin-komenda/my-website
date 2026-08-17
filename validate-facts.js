@@ -45,6 +45,20 @@ const facts = JSON.parse(fs.readFileSync(path.join(ROOT, 'facts.json'), 'utf8'))
 const failures = [];
 const warnings = [];
 
+// facts.json self-consistency: the tool list and the published tool count
+// are two different fields by necessity (an array vs. a number), so nothing
+// stops them drifting apart except checking it here, every run.
+{
+  const toolsCount = facts.automationCoverage.tools.value.length;
+  const liveCount = facts.automationCoverage.liveAutomations.value;
+  if (toolsCount !== liveCount) {
+    console.error(
+      `validate-facts: facts.json is internally inconsistent — automationCoverage.tools has ${toolsCount} entries but liveAutomations is ${liveCount}. Fix facts.json before validating copy.`
+    );
+    process.exit(1);
+  }
+}
+
 // ---------------------------------------------------------------------------
 // helpers
 // ---------------------------------------------------------------------------
@@ -251,6 +265,12 @@ function checkMetricQualifiers(file, text) {
 // unused-fact detection (warning only)
 // ---------------------------------------------------------------------------
 
+// Hyphen-minus, all Unicode hyphen/dash variants, and the minus sign all
+// collapse to a plain "-" so "8-10" and "8–10" compare equal.
+function normalizeDashes(s) {
+  return s.replace(/[‐-―−]/g, '-');
+}
+
 function collectFactLeaves() {
   const leaves = [];
   for (const [key, val] of Object.entries(facts.identity)) {
@@ -260,16 +280,60 @@ function collectFactLeaves() {
     leaves.push({ path: `metrics.${key}`, value: String(val.value) });
   }
   for (const [key, val] of Object.entries(facts.automationCoverage)) {
+    if (key === 'tools') {
+      for (const tool of val.value) {
+        leaves.push({ path: `automationCoverage.tools["${tool.name}"]`, value: tool.name });
+      }
+      continue;
+    }
     leaves.push({ path: `automationCoverage.${key}`, value: String(val.value) });
   }
   return leaves;
 }
 
+// A literal full-string match is right for text facts (names, titles,
+// email) but wrong for numeric ones: the same figure legitimately appears
+// with different dash styles, word order, or phrasing ("60 people and 7
+// product verticals" vs. "7 product verticals... 60-person"). For numeric
+// facts, require every distinct number in the value to appear somewhere in
+// scanned copy as its own token, rather than the whole string verbatim.
+function isFactUsed(value, normalizedLowerText) {
+  const normValue = normalizeDashes(value).toLowerCase();
+  const numbers = normValue.match(/\d+(?:\.\d+)?/g);
+
+  if (!numbers) {
+    return normalizedLowerText.includes(normValue);
+  }
+  return numbers.every((n) => new RegExp(`\\b${n}\\b`).test(normalizedLowerText));
+}
+
 function checkUnusedFacts(allText) {
-  const lower = allText.toLowerCase();
+  const normalized = normalizeDashes(allText).toLowerCase();
   for (const leaf of collectFactLeaves()) {
-    if (!lower.includes(leaf.value.toLowerCase())) {
-      warnings.push(`fact "${leaf.path}" (value: "${leaf.value}") not found verbatim in any scanned surface — may be paraphrased, or genuinely unused`);
+    if (!isFactUsed(leaf.value, normalized)) {
+      warnings.push(`fact "${leaf.path}" (value: "${leaf.value}") not found in any scanned surface — genuinely unused, or needs a copy update`);
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
+// tool list published check (hard failure — this is the divergence guard
+// item 1 asked for: facts.json's tool names must actually be the ones on
+// the site, not just internally self-consistent)
+// ---------------------------------------------------------------------------
+
+function checkToolNamesPublished(contextJsText) {
+  if (contextJsText === null) {
+    warnings.push('context.js not found — could not verify published tool list against facts.json');
+    return;
+  }
+  for (const tool of facts.automationCoverage.tools.value) {
+    if (!contextJsText.includes(tool.name)) {
+      failures.push({
+        file: 'context.js',
+        line: '(tool list)',
+        message: `tool "${tool.name}" is in facts.json but not found in context.js's published tool list`,
+      });
     }
   }
 }
@@ -279,6 +343,7 @@ function checkUnusedFacts(allText) {
 // ---------------------------------------------------------------------------
 
 let combinedText = '';
+let contextJsText = null;
 
 for (const relPath of SURFACES) {
   const fullPath = path.join(ROOT, relPath);
@@ -296,9 +361,12 @@ for (const relPath of SURFACES) {
   checkVendorNames(relPath, text);
   checkMetricQualifiers(relPath, text);
 
+  if (relPath === 'context.js') contextJsText = text;
+
   combinedText += '\n' + text;
 }
 
+checkToolNamesPublished(contextJsText);
 checkUnusedFacts(combinedText);
 
 // ---------------------------------------------------------------------------

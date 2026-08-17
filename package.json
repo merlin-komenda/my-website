@@ -1,4 +1,9 @@
 {
   "name": "my-website",
-  "version": "1.0.0"
+  "version": "1.0.0",
+  "scripts": {
+    "generate-context": "node generate-context.js",
+    "validate": "node validate-facts.js",
+    "build": "npm run generate-context && npm run validate"
+  }
 }
