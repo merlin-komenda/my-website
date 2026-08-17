@@ -214,6 +214,40 @@ a { text-decoration: none; color: inherit; }
 }
 .section-label::before { content: ""; width: 7px; height: 7px; background: var(--terracotta); flex-shrink: 0; }
 
+/* Companies */
+.companies { padding: 40px 0; border-bottom: 1px solid var(--line); }
+.companies-row {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 40px;
+}
+.company-name {
+  font-family: var(--font-serif); font-style: italic;
+  font-size: 18px; color: var(--muted2);
+}
+
+/* Stats band */
+.stats-band { background: var(--text); color: var(--bg); border-bottom: none; }
+.stats-band .section-label { color: rgba(250,250,247,.55); }
+.stats-band .section-label::before { background: var(--terracotta); }
+.stats-grid {
+  display: grid; grid-template-columns: repeat(4,1fr); gap: 1px;
+  background: rgba(250,250,247,.12);
+}
+.stat-block {
+  background: var(--text); padding: 8px 24px 8px 0;
+}
+.stat-block-num {
+  font-family: var(--font-serif); font-size: 40px; font-weight: 700;
+  color: var(--terracotta); display: block; line-height: 1; letter-spacing: -1px;
+}
+.stat-block-label {
+  font-size: 13px; color: rgba(250,250,247,.6);
+  display: block; margin-top: 8px; line-height: 1.4;
+}
+@media (max-width: 720px) {
+  .stats-grid { grid-template-columns: 1fr 1fr; gap: 28px 1px; }
+  .stat-block { padding: 0 24px 0 0; }
+}
+
 /* How I Think */
 .think-intro {
   font-family: var(--font-serif);
@@ -493,6 +527,18 @@ footer { border-top: 1px solid var(--line); }
   </div>
 </section>
 
+<section class="companies">
+  <div class="wrap">
+    <p class="section-label">/ Where I've worked</p>
+    <div class="companies-row">
+      <span class="company-name">Zappi</span>
+      <span class="company-name">Bonterra</span>
+      <span class="company-name">EveryAction</span>
+      <span class="company-name">GiveGab</span>
+    </div>
+  </div>
+</section>
+
 <section class="section think" id="thinking">
   <div class="wrap">
     <p class="section-label">/ How I think</p>
@@ -562,6 +608,30 @@ footer { border-top: 1px solid var(--line); }
           <h3 class="work-title"><a href="/experience/">Enterprise implementation at scale</a></h3>
           <p class="work-detail">Mid-market to Fortune 500: 60+ clients a year, repeatable outcomes, NPS above 75.</p>
         </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section stats-band">
+  <div class="wrap">
+    <p class="section-label">/ Proven results</p>
+    <div class="stats-grid">
+      <div class="stat-block">
+        <span class="stat-block-num">~38%</span>
+        <span class="stat-block-label">Implementation time reduced, kickoff to live</span>
+      </div>
+      <div class="stat-block">
+        <span class="stat-block-num">50%</span>
+        <span class="stat-block-label">Faster to first customer value</span>
+      </div>
+      <div class="stat-block">
+        <span class="stat-block-num">75+</span>
+        <span class="stat-block-label">NPS across enterprise relationships</span>
+      </div>
+      <div class="stat-block">
+        <span class="stat-block-num">60+</span>
+        <span class="stat-block-label">Implementations delivered annually</span>
       </div>
     </div>
   </div>
