@@ -1,0 +1,94 @@
+{
+  "$schema": "Single machine-readable source of truth for factual claims on merlin-komenda.com. Read by validate-facts.js. Policy, rules, and anything that isn't a value belong in CONTENT-FACTS.md, not here.",
+  "verified": "2026-08-17",
+  "nextReview": "2026-11-17",
+
+  "identity": {
+    "name": { "value": "Merlin Komenda" },
+    "title": {
+      "value": "Global Director of Implementation & Onboarding",
+      "note": "Ampersand required, not 'and'. Do not expand in meta tags."
+    },
+    "company": { "value": "Zappi" },
+    "currentRoleStart": { "value": "Sep 2024" },
+    "email": { "value": "merlin.komenda@gmail.com" },
+    "tagline": { "value": "Rigorous by design. Joyful by default." },
+    "location": { "value": "Albany, NY area" }
+  },
+
+  "metrics": {
+    "implementationTimeReduction": {
+      "value": "~38%",
+      "detail": "73 days to 45, kickoff to fully live. Elapsed calendar time.",
+      "requiresQualifier": true
+    },
+    "operationalEffortEliminated": {
+      "value": "35%",
+      "detail": "Internal effort per implementation.",
+      "note": "Distinct from implementation time reduction — effort, not elapsed time. Do not merge or reconcile these two.",
+      "requiresQualifier": false
+    },
+    "timeToFirstValue": {
+      "value": "30 days to 15",
+      "detail": "~50%",
+      "requiresQualifier": false
+    },
+    "customerSatisfactionScore": {
+      "value": "9/10",
+      "requiresQualifier": false
+    },
+    "implementationsPerYear": {
+      "value": "60+",
+      "requiresQualifier": true,
+      "qualifierChar": "+"
+    },
+    "nps": {
+      "value": "75+",
+      "requiresQualifier": true,
+      "qualifierChar": "+"
+    },
+    "adoptionSpeed": {
+      "value": "~40% faster",
+      "requiresQualifier": true
+    },
+    "onboardingGeneratedRevenue": {
+      "value": "~10% increase",
+      "requiresQualifier": true
+    },
+    "agentSetupTime": {
+      "value": "~20 hours to 8-10 hours",
+      "requiresQualifier": true
+    },
+    "enterpriseAiRollout": {
+      "value": "60 people, 7 product verticals",
+      "note": "Published in the how-i-work impact log and in context.js. Has no case study — see CONTENT-FACTS.md Open Items.",
+      "requiresQualifier": false
+    }
+  },
+
+  "automationCoverage": {
+    "stagesMapped": { "value": 11 },
+    "liveAutomations": { "value": 7 },
+    "stagesWithActiveTooling": { "value": 8 },
+    "stagesHumanByDesign": { "value": 1, "detail": "Stage 4, kickoff call" },
+    "stagesOpen": { "value": 2, "detail": "Stage 9 Analysis Training, Stage 10 CSM handoff" }
+  },
+
+  "retiredStrings": [
+    { "type": "literal", "pattern": "4/7", "reason": "retired automation-coverage fraction" },
+    { "type": "literal", "pattern": "4 of 7", "reason": "retired automation-coverage fraction" },
+    { "type": "literal", "pattern": "Four of seven", "reason": "retired automation-coverage fraction" },
+    { "type": "literal", "pattern": "7-phase", "reason": "retired automation-coverage framing" },
+    { "type": "literal", "pattern": "seven phases", "reason": "retired automation-coverage framing" },
+    { "type": "regex", "pattern": "\\bPhases?\\s*\\d", "flags": "i", "reason": "retired phase-numbering framework — CONTENT-FACTS.md: 'Do not restore it in any form, including as history.' Automation coverage is expressed in stages now." },
+    { "type": "literal", "pattern": "GPT-powered", "reason": "vendor-attributed framing, retired in favor of vendor-neutral phrasing" },
+    {
+      "type": "contextual",
+      "pattern": "~30%",
+      "flags": "i",
+      "contextKeywords": ["time-to-live", "time to first value", "first customer usage", "own redesign"],
+      "contextWindow": 200,
+      "reason": "retired/incorrect figure where it refers to time-to-live or time-to-value (correct values are ~38% implementation time reduction or 30 days to 15 time-to-first-value)"
+    }
+  ]
+}

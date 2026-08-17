@@ -4,64 +4,23 @@ Single source of truth for every factual claim on merlin-komenda.com.
 
 Site copy is checked against this file. This file is not checked against site copy.
 
-If a number, title, or count is not in this file, it does not go on the site.
-No claim gets generated, inferred, or rounded. If it is needed and missing, add it here first.
+If a number, title, or count is not in `facts.json`, it does not go on the site.
+No claim gets generated, inferred, or rounded. If it is needed and missing, add it to `facts.json` first.
 
 Verified: 17 Aug 2026
 Next review: 17 Nov 2026
 
 ---
 
-## Identity
+## Identity and delivery metrics — moved
 
-| Field | Value |
-| --- | --- |
-| Name | Merlin Komenda |
-| Title | Global Director of Implementation & Onboarding |
-| Company | Zappi |
-| Tagline | Rigorous by design. Joyful by default. |
-| Email | merlin.komenda@gmail.com |
-| Start date, current role | Sep 2024 |
+Values for identity (name, title, company, tagline, email, start date), delivery metrics, and automation coverage now live in **`facts.json`** at the repo root. That file is the source of truth for every number, title string, and count; `validate-facts.js` checks published copy against it and blocks the build on mismatch.
 
-Title must match across: site header, all meta tags (title, og:title, twitter:title, description variants), resume PDF, LinkedIn. One value, everywhere.
+This file keeps everything a validator can't check: the naming policy, the vendor-neutrality rule, retired framings and why they're retired, and open editorial questions. Read both together — `facts.json` for what the values are, this file for the rules around them.
 
-Use the ampersand, not "and". Do not expand it in meta tags for readability.
+**Title must match across:** site header, all meta tags (title, og:title, twitter:title, description variants), resume PDF, LinkedIn. One value, everywhere. Use the ampersand, not "and." Do not expand it in meta tags for readability. (Resume PDF and LinkedIn are outside `validate-facts.js`'s scanned surfaces — see Open Items.)
 
----
-
-## Delivery metrics
-
-| Claim | Value | Notes |
-| --- | --- | --- |
-| Implementation time reduction | ~38%, 73 days to 45, kickoff to fully live | |
-| Time to first value | 30 days to 15 (~50%) | Subject of the Propel26 talk |
-| Implementations per year | 60+ | Repeatable outcomes, not added headcount |
-| NPS | 75+ | Enterprise relationships |
-| Adoption speed | ~40% faster | Via scalable setup patterns plus coaching-led model |
-| Onboarding-generated revenue | ~10% increase | |
-| Agent setup time | ~20 hours to 8-10 hours | |
-
-Every figure above carries a tilde or a plus in its current published form. Keep the qualifier. Do not present approximations as exact.
-
----
-
-## Automation system
-
-Source of truth: Implementation: Automation Map (Notion), verified 13 Aug 2026.
-
-| Field | Value |
-| --- | --- |
-| Journey stages mapped | 11 |
-| Live automations | 7 |
-| Stages with active tooling | 8 |
-| Stages human by design | 1 (stage 4, kickoff call) |
-| Stages open and unclaimed | 2 (stage 9 Analysis Training, stage 10 CSM handoff) |
-
-**Retired framing: "4 of 7 phases."** The 7-phase frame no longer describes the system. Do not restore it in any form, including as history.
-
-Preferred framing leads with the gaps, not the ratio. Naming stage 9 and stage 10 as deliberately open is the credibility move. A bare fraction invites "what about the rest."
-
-The two open stages are open on purpose and are documented as such. They are not backlog.
+**Retired framing: "4 of 7 phases."** The 7-phase frame no longer describes the system and is enforced as a banned string in `facts.json`. Do not restore it in any form, including as history. Preferred framing leads with the gaps, not the ratio — naming stage 9 and stage 10 as deliberately open is the credibility move. The two open stages are open on purpose and are documented as such. They are not backlog.
 
 ---
 
@@ -102,7 +61,7 @@ This rule is most likely to be broken when writing up the Intake Brief, because 
 ## Claims that must not be made
 
 - **AgentOS rollback or recovery safety.** The GitHub sync is not built. There is currently no rollback path for the live Notion tree. Do not imply a version-controlled safety net.
-- **Any metric not listed in this file.**
+- **Any metric not listed in `facts.json`.**
 - **Exact figures where the source is approximate.**
 
 ---
@@ -117,7 +76,8 @@ Use years, or month and year. Do not use seasonal labels ("Spring 2026") - they 
 
 1. **Title alignment.** The published value is set. Resume PDF and LinkedIn still need to be brought to match. Until they do, the mismatch is live on the one page a hiring manager cross-references, and it reads as inflation regardless of intent.
 2. **AgentOS vendor naming.** See Tooling attribution. Decide before that copy is drafted, not during.
-3. **Unwritten work.** Present in the record, absent from the site: the Intake Brief reconciliation engine, the V1-to-V2 rescope, AgentOS as a governed system, the enterprise AI rollout across 7 product verticals with 60-person training, and the CSM enablement programme. None of these have approved copy yet. Do not let an automated pass generate them.
+3. **Unwritten work.** Present in the record, absent from the site: the Intake Brief reconciliation engine, the V1-to-V2 rescope, AgentOS as a governed system, and the CSM enablement programme. None of these have approved copy yet. Do not let an automated pass generate them.
+4. **Enterprise AI rollout has no case study.** The claim itself (60 people, 7 product verticals) is published and approved — it's been in the `/how-i-work/` impact log and in `context.js` all along, and is now tracked in `facts.json`. What's missing is a written case study telling that story, not approval for the underlying fact. Don't confuse "no case study yet" with "not cleared to publish."
 
 ---
 

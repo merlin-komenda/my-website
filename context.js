@@ -20,20 +20,20 @@ Core philosophy: Structure beats intensity. Clarity before automation. Systems s
 - NPS 75+ across enterprise relationships
 
 == KEY RESULTS ==
-- ~30% reduction in time-to-live; first customer usage in ~15 days
+- ~38% reduction in time-to-live; first customer usage in 15 days, down from 30
 - ~40% faster adoption through scalable platform setup patterns
 - ~10% improvement in onboarding-generated revenue
 - Enterprise rollout across 60 people and 7 product verticals at a Fortune 500 company
-- Built AI-powered agent setup tool that cut deployment time from 20 hours to 8–10
-- Phase-mapped AI system deployed across 4 of 7 implementation phases, with a structured pipeline for future additions
+- Built AI-powered agent setup tool that cut deployment time from ~20 hours to 8–10
+- Phase-mapped AI system deployed across 8 of 11 implementation stages, with a structured pipeline for future additions
 
 == AI TOOLS BUILT (Zappi Implementation) ==
-Five active AI tools deployed across Zappi's implementation methodology:
+Seven active AI tools deployed across Zappi's implementation methodology:
 1. Pre-kickoff Intelligence Brief (Pre-kickoff) — AI synthesizes account notes and Gong call recordings into a structured customer brief before every kickoff. Replaces manual document hunting across SF, email, and Gong.
-2. Account Update Generator (Phases 2–6, recurring) — Takes call summaries and produces standardized stakeholder updates formatted for the customer's Slack channel after every touchpoint.
-3. Audience Auditor (Phase 3) — Accepts multiple audience files, identifies overlap and redundancy, produces a consolidation recommendation.
-4. Handover Documentation (Phase 7) — AI drafts the end-of-implementation record — platform config, decisions made, training status, research pipeline — for clean CSM handoff.
-5. Custom Spreadsheet Builder (Phase 6) — Produces customer-specific structured spreadsheets built around their platform setup and program design.
+2. Account Update Generator (recurring) — Takes call summaries and produces standardized stakeholder updates formatted for the customer's Slack channel after every touchpoint.
+3. Audience Auditor — Accepts multiple audience files, identifies overlap and redundancy, produces a consolidation recommendation.
+4. Handover Documentation — AI drafts the end-of-implementation record — platform config, decisions made, training status, research pipeline — for clean CSM handoff.
+5. Custom Spreadsheet Builder — Produces customer-specific structured spreadsheets built around their platform setup and program design.
 
 In Progress: Per-Customer AI Agents (account-specific agents connecting call recordings, project trackers, and to-dos — each implementation gets its own persistent AI layer), Training Gap Assessor, Kickoff Deck Personalization.
 
@@ -64,7 +64,7 @@ Three principles:
 2. Lead with expertise — shift from "customer builds, team reviews" to "team recommends, customer validates"
 3. Let automation follow clarity — remove unnecessary steps first, then apply AI at synthesis inflection points
 
-Results from Zappi's own redesign: ~30% improvement in time-to-live, stable satisfaction, increased team capacity. Key line: "The gains came from design discipline, not automation alone."
+Results from Zappi's own redesign: ~38% improvement in time-to-live, stable satisfaction, increased team capacity. Key line: "The gains came from design discipline, not automation alone."
 
 The talk resources are available at merlin-komenda.com/propel26/ — two practical frameworks attendees can take back to their teams.
 
