@@ -60,6 +60,7 @@
   --max: 1100px;
   --font-serif: 'Newsreader', Georgia, serif;
   --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, monospace;
 }
 *, *::before, *::after { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; }
@@ -72,6 +73,27 @@ body {
 }
 a { text-decoration: none; color: inherit; }
 .wrap { max-width: var(--max); margin: 0 auto; padding: 0 28px; }
+
+/* Slash eyebrow */
+.eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 10px; font-weight: 600; letter-spacing: .16em;
+  text-transform: uppercase; color: var(--muted2);
+}
+.eyebrow::before { content: ""; width: 7px; height: 7px; background: var(--terracotta); flex-shrink: 0; }
+
+/* Column framing */
+.col-rule {
+  position: fixed; top: 0; bottom: 0; width: 1px;
+  background: rgba(22,20,16,.1); z-index: 40; pointer-events: none;
+}
+.col-rule-l { left: max(28px, calc(50% - var(--max)/2 + 28px)); }
+.col-rule-r { right: max(28px, calc(50% - var(--max)/2 + 28px)); }
+@media (max-width: 820px) { .col-rule { display: none; } }
+
+/* Section rule */
+.rule-major { border: none; height: 1px; background: rgba(22,20,16,.1); margin: 0; }
 
 /* Nav */
 .nav {
@@ -100,10 +122,10 @@ a { text-decoration: none; color: inherit; }
 .nav-links a:hover { color: var(--text); background: rgba(22,20,16,.05); }
 .nav-links a.active { color: var(--text); }
 .nav-cta {
-  background: var(--terracotta) !important;
-  color: #fff !important;
+  background: var(--text) !important;
+  color: var(--bg) !important;
 }
-.nav-cta:hover { background: #4a6830 !important; color: #fff !important; }
+.nav-cta:hover { background: rgba(22,20,16,.82) !important; color: var(--bg) !important; }
 .nav-menu-btn {
   display: none; background: none; border: 1px solid var(--line);
   border-radius: 8px; padding: 8px 12px; cursor: pointer;
@@ -162,6 +184,17 @@ a { text-decoration: none; color: inherit; }
   font-weight: 400;
 }
 .hero-tagline strong { font-weight: 700; font-style: italic; }
+.hero-ctas { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 32px; }
+.hero-cta {
+  padding: 11px 22px; border-radius: 999px;
+  font-size: 14px; font-weight: 600; font-family: var(--font-sans);
+  cursor: pointer; transition: background .15s, color .15s;
+  display: inline-block; border: 1px solid var(--text);
+}
+.hero-cta.primary { background: var(--text); color: var(--bg); }
+.hero-cta.primary:hover { background: rgba(22,20,16,.82); }
+.hero-cta.secondary { background: transparent; color: var(--text); }
+.hero-cta.secondary:hover { background: rgba(22,20,16,.05); }
 .hero-photo-wrap { display: flex; justify-content: flex-end; }
 .hero-photo {
   width: 100%; max-width: 360px;
@@ -181,10 +214,13 @@ a { text-decoration: none; color: inherit; }
 /* Section base */
 .section { padding: 64px 0; border-bottom: 1px solid var(--line); }
 .section-label {
-  font-size: 11px; font-weight: 600; letter-spacing: 2px;
-  text-transform: uppercase; color: #4b5563;
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 10px; font-weight: 600; letter-spacing: .16em;
+  text-transform: uppercase; color: var(--muted2);
   margin: 0 0 32px;
 }
+.section-label::before { content: ""; width: 7px; height: 7px; background: var(--terracotta); flex-shrink: 0; }
 
 /* How I Think */
 .think { background: var(--bg-white); }
@@ -230,7 +266,7 @@ a { text-decoration: none; color: inherit; }
   color: var(--text); margin: 0 0 48px;
   max-width: 560px; font-weight: 600;
 }
-.work-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+.work-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 20px; }
 .work-card {
   background: var(--bg);
   border: 1px solid rgba(90,122,58,.14);
@@ -284,6 +320,26 @@ a { text-decoration: none; color: inherit; }
 @media (max-width: 840px) {
   .work-grid { grid-template-columns: 1fr; gap: 16px; }
 }
+.work-lead {
+  grid-column: 1 / -1;
+  display: grid; grid-template-columns: 1fr 320px; gap: 32px; align-items: stretch;
+  padding: 0; overflow: hidden;
+}
+.work-lead-body { padding: 32px 28px; display: flex; flex-direction: column; }
+.work-lead-photo-wrap { overflow: hidden; }
+.work-lead-photo { width: 100%; height: 100%; object-fit: cover; object-position: center 25%; display: block; }
+@media (max-width: 840px) {
+  .work-lead { grid-template-columns: 1fr; }
+  .work-lead-photo-wrap { order: -1; }
+  .work-lead-photo { max-height: 280px; }
+}
+.work-compact {
+  padding: 20px 24px;
+  display: flex; align-items: baseline; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+}
+.work-compact-text { font-family: var(--font-sans); font-size: 14px; color: var(--muted); line-height: 1.6; margin: 0; }
+.work-compact-text a { color: var(--text); font-weight: 600; border-bottom: 1px solid var(--line); }
+.work-compact-stat { font-family: var(--font-serif); font-size: 15px; font-style: italic; color: var(--terracotta); white-space: nowrap; }
 
 /* Contact */
 .contact { background: var(--bg); }
@@ -412,20 +468,23 @@ footer { border-top: 1px solid var(--line); }
 </head>
 <body>
 
+<div class="col-rule col-rule-l"></div>
+<div class="col-rule col-rule-r"></div>
+
 <nav class="nav">
   <div class="nav-inner">
     <a href="/" class="nav-brand">Merlin <em>Komenda</em></a>
     <div class="nav-links">
       <a href="/experience/">Experience</a>
       <a href="/how-i-work/">How I work</a>
-      <a href="#contact" class="nav-cta">Connect</a>
+      <a href="/#contact" class="nav-cta">Get in touch</a>
     </div>
     <button class="nav-menu-btn" id="menuBtn" aria-expanded="false">Menu</button>
   </div>
   <div class="nav-mobile" id="mobileMenu">
     <a href="/experience/">Experience</a>
     <a href="/how-i-work/">How I work</a>
-    <a href="#contact" class="nav-cta">Connect</a>
+    <a href="/#contact" class="nav-cta">Get in touch</a>
   </div>
 </nav>
 
@@ -435,6 +494,10 @@ footer { border-top: 1px solid var(--line); }
       <p class="hero-eyebrow">Global Director of Implementation at <a href="https://www.zappi.io/web/" target="_blank" rel="noopener">Zappi</a></p>
       <h1 class="hero-name">Merlin <em>Komenda</em></h1>
       <p class="hero-tagline">Rigorous by design. <strong>Joyful by default.</strong></p>
+      <div class="hero-ctas">
+        <a href="https://calendar.app.google/qd66qHTzCbsaNUEa7" target="_blank" rel="noopener" class="hero-cta primary">Book time</a>
+        <a href="#work" class="hero-cta secondary">See the work</a>
+      </div>
     </div>
     <div class="hero-photo-wrap">
       <img src="/headshot.jpg" alt="Merlin Komenda" class="hero-photo">
@@ -444,7 +507,7 @@ footer { border-top: 1px solid var(--line); }
 
 <section class="section think" id="thinking">
   <div class="wrap">
-    <p class="section-label">How I think</p>
+    <p class="section-label">/ How I think</p>
 
     <div class="principle">
       <span class="principle-numeral">i.</span>
@@ -468,43 +531,33 @@ footer { border-top: 1px solid var(--line); }
 
 <section class="section work" id="work">
   <div class="wrap">
-    <p class="section-label">The work</p>
+    <p class="section-label">/ The work</p>
     <div class="work-grid">
-      <div class="work-card">
-        <div class="work-tag-row">
-          <span class="work-tag">Implementation</span>
-          <span class="work-date">Ongoing</span>
+      <div class="work-card work-lead">
+        <div class="work-lead-body">
+          <div class="work-tag-row">
+            <span class="work-tag">Implementation</span>
+            <span class="work-date">· 2025–26</span>
+          </div>
+          <h3 class="work-title"><a href="/propel26/">If you were building your function today, would you keep it the same?</a></h3>
+          <p class="work-detail">We stopped building the process around our internal rhythm and started building it around the customer's. Shifted from "customer builds, team reviews" to "team recommends, customer validates." The team became the experts, and adoption followed.</p>
+          <div class="work-stat">
+            <span class="work-stat-num">50%</span>
+            <span class="work-stat-label">faster to value</span>
+          </div>
         </div>
-        <h3 class="work-title"><a href="/how-i-work/#redesigned-around-customer">Implementation as coaching, not process</a></h3>
-        <p class="work-detail">Adoption ran ~40% faster. Scalable setup patterns removed the friction, and a coaching-led model meant customers actually used what got set up.</p>
-        <div class="work-stat">
-          <span class="work-stat-num">~40%</span>
-          <span class="work-stat-label">faster adoption</span>
-        </div>
-      </div>
-      <div class="work-card">
-        <div class="work-tag-row">
-          <span class="work-tag">Implementation</span>
-          <span class="work-date">2025</span>
-        </div>
-        <h3 class="work-title"><a href="/how-i-work/#redesigned-around-customer">Implementation redesigned around the customer</a></h3>
-        <p class="work-detail">We stopped building the process for us. Time to first value dropped from 30 days to 15.</p>
-        <div class="work-stat">
-          <span class="work-stat-num">50%</span>
-          <span class="work-stat-label">faster to value</span>
+        <div class="work-lead-photo-wrap">
+          <img
+            src="/propel26-stage-1600.jpg"
+            srcset="/propel26-stage-800.jpg 800w, /propel26-stage-1600.jpg 1600w"
+            sizes="(max-width: 840px) 100vw, 320px"
+            alt="Merlin Komenda presenting at Propel26."
+            class="work-lead-photo">
         </div>
       </div>
-      <div class="work-card">
-        <div class="work-tag-row">
-          <span class="work-tag">Enterprise</span>
-          <span class="work-date">Ongoing</span>
-        </div>
-        <h3 class="work-title"><a href="/experience/">Enterprise implementation at scale</a></h3>
-        <p class="work-detail">From mid-market to Fortune 500: 60+ clients a year, repeatable outcomes, NPS above 75.</p>
-        <div class="work-stat">
-          <span class="work-stat-num">60+</span>
-          <span class="work-stat-label">annually</span>
-        </div>
+      <div class="work-card work-compact">
+        <p class="work-compact-text"><a href="/experience/">Enterprise implementation at scale</a> — from mid-market to Fortune 500: 60+ clients a year, repeatable outcomes, NPS above 75.</p>
+        <span class="work-compact-stat">60+ annually</span>
       </div>
     </div>
   </div>
