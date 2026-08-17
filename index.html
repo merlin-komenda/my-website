@@ -49,14 +49,11 @@
 <style>
 :root {
   --bg: #FAFAF7;
-  --bg-white: #FFFFFF;
-  --bg-work: #FBF3EE;
   --text: #161410;
   --muted: rgba(22,20,16,.55);
   --muted2: rgba(22,20,16,.38);
   --line: rgba(22,20,16,.10);
   --terracotta: #5a7a3a;
-  --sage: #4A7358;
   --max: 1100px;
   --font-serif: 'Newsreader', Georgia, serif;
   --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
@@ -76,12 +73,11 @@ a { text-decoration: none; color: inherit; }
 
 /* Slash eyebrow */
 .eyebrow {
-  display: inline-flex; align-items: center; gap: 8px;
   font-family: var(--font-mono);
   font-size: 10px; font-weight: 600; letter-spacing: .16em;
   text-transform: uppercase; color: var(--muted2);
 }
-.eyebrow::before { content: ""; width: 7px; height: 7px; background: var(--terracotta); flex-shrink: 0; }
+.eyebrow::before { content: ""; display: inline-block; width: 7px; height: 7px; background: var(--terracotta); margin-right: 8px; vertical-align: 1px; }
 
 /* Column framing */
 .col-rule {
@@ -148,19 +144,15 @@ a { text-decoration: none; color: inherit; }
 /* Hero */
 .hero {
   background: var(--bg);
-  padding: 88px 0 80px;
+  padding: 48px 0 64px;
   border-bottom: 1px solid var(--line);
 }
 .hero-grid {
   display: grid;
-  grid-template-columns: 1fr 360px;
-  gap: 56px; align-items: center;
+  grid-template-columns: 1fr 300px;
+  gap: 48px; align-items: start;
 }
-.hero-eyebrow {
-  font-family: var(--font-sans);
-  font-size: 13px; font-weight: 500; color: var(--muted);
-  margin: 0 0 24px; letter-spacing: .1px;
-}
+.hero-eyebrow { margin-bottom: 16px; }
 .hero-eyebrow a {
   color: inherit; text-decoration: none;
   border-bottom: 1px solid var(--line);
@@ -169,22 +161,22 @@ a { text-decoration: none; color: inherit; }
 .hero-eyebrow a:hover { border-bottom-color: var(--muted); }
 .hero-name {
   font-family: var(--font-serif);
-  font-size: clamp(48px, 6vw, 72px);
+  font-size: clamp(44px, 6vw, 68px);
   line-height: .98; letter-spacing: -.01em;
-  color: var(--text); margin: 0 0 20px;
+  color: var(--text); margin: 0 0 12px;
   font-weight: 650; font-style: normal;
   font-optical-sizing: auto; font-variation-settings: 'opsz' 72;
 }
-.hero-name em { color: var(--terracotta); font-style: italic; font-weight: 800; }
+.hero-name em { font-style: italic; font-weight: 800; }
 .hero-tagline {
   font-family: var(--font-serif);
-  font-size: clamp(18px, 2.2vw, 22px);
+  font-size: 20px;
   font-style: normal; color: var(--muted);
-  margin: 0; line-height: 1.4; letter-spacing: -.005em;
+  margin: 0 0 20px; line-height: 1.4; letter-spacing: -.005em;
   font-weight: 400;
 }
-.hero-tagline strong { font-weight: 700; font-style: italic; }
-.hero-ctas { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 32px; }
+.hero-tagline strong { font-weight: 700; font-style: italic; color: var(--text); }
+.hero-ctas { display: flex; gap: 10px; flex-wrap: wrap; }
 .hero-cta {
   padding: 11px 22px; border-radius: 999px;
   font-size: 14px; font-weight: 600; font-family: var(--font-sans);
@@ -197,18 +189,18 @@ a { text-decoration: none; color: inherit; }
 .hero-cta.secondary:hover { background: rgba(22,20,16,.05); }
 .hero-photo-wrap { display: flex; justify-content: flex-end; }
 .hero-photo {
-  width: 100%; max-width: 360px;
-  aspect-ratio: 3/4;
+  width: 100%; max-width: 300px;
+  aspect-ratio: 4/5;
   object-fit: cover; object-position: center top;
   filter: grayscale(100%);
   display: block;
   box-shadow: 0 20px 40px rgba(22,20,16,.12), 0 8px 16px rgba(22,20,16,.08);
 }
 @media (max-width: 820px) {
-  .hero-grid { grid-template-columns: 1fr; gap: 40px; }
-  .hero { padding: 56px 0 60px; }
+  .hero-grid { grid-template-columns: 1fr; gap: 28px; }
+  .hero { padding: 40px 0 48px; }
   .hero-photo-wrap { justify-content: flex-start; }
-  .hero-photo { max-width: 240px; aspect-ratio: 4/5; }
+  .hero-photo { max-width: 240px; }
 }
 
 /* Section base */
@@ -223,7 +215,6 @@ a { text-decoration: none; color: inherit; }
 .section-label::before { content: ""; width: 7px; height: 7px; background: var(--terracotta); flex-shrink: 0; }
 
 /* How I Think */
-.think { background: var(--bg-white); }
 .think-intro {
   font-family: var(--font-serif);
   font-size: clamp(22px, 2.8vw, 30px);
@@ -231,12 +222,12 @@ a { text-decoration: none; color: inherit; }
   color: var(--text); margin: 0 0 64px;
   max-width: 560px; font-weight: 600;
 }
-.principle { margin-bottom: 33px; padding-bottom: 33px; border-bottom: 1px solid rgba(0,0,0,0.08); }
+.principles { display: flex; flex-direction: column; gap: 40px; }
+.principle { max-width: 680px; margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
 @media (min-width: 1024px) {
   .principle { position: relative; }
   .principle-numeral { position: absolute; left: -48px; top: 0; margin-bottom: 0; }
 }
-.principle:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
 .principle-numeral {
   font-family: var(--font-serif);
   font-size: 14px; font-weight: 400;
@@ -245,20 +236,20 @@ a { text-decoration: none; color: inherit; }
 }
 .principle-title {
   font-family: var(--font-serif);
-  font-size: clamp(22px, 2.4vw, 24px);
-  font-weight: 700; color: var(--text);
-  line-height: 1.3; margin: 0 0 10px;
+  font-size: 24px;
+  font-weight: 500; color: var(--text);
+  line-height: 1.28; margin: 0;
   max-width: 700px;
 }
 .principle-body {
   font-family: var(--font-sans);
-  font-size: 13px; color: rgba(0,0,0,0.45);
-  line-height: 1.8; margin: 0; font-style: italic;
+  font-size: 14px; color: var(--muted);
+  line-height: 1.7; margin: 10px 0 0;
   max-width: 640px;
 }
+.principle.is-terse .principle-body { display: none; }
 
 /* The Work */
-.work { background: var(--bg-work); }
 .work-intro {
   font-family: var(--font-serif);
   font-size: clamp(22px, 2.8vw, 30px);
@@ -266,80 +257,77 @@ a { text-decoration: none; color: inherit; }
   color: var(--text); margin: 0 0 48px;
   max-width: 560px; font-weight: 600;
 }
-.work-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 20px; }
-.work-card {
-  background: var(--bg);
-  border: 1px solid rgba(90,122,58,.14);
-  padding: 28px 24px;
-  box-shadow: 0 4px 12px rgba(22,20,16,.06), 0 1px 3px rgba(22,20,16,.04);
-  transition: box-shadow .2s ease, transform .2s ease;
-}
-.work-card:hover {
-  box-shadow: 0 8px 20px rgba(22,20,16,.10);
-  transform: translateY(-2px);
-}
+.work-grid { display: block; }
+.work-card { background: none; border: none; padding: 0; box-shadow: none; }
 .work-tag-row {
   display: flex; align-items: center; gap: 8px;
-  margin-bottom: 16px;
+  margin-bottom: 12px;
 }
 .work-tag {
   display: inline-block;
-  font-size: 11px; font-weight: 600; letter-spacing: 1.2px;
-  text-transform: uppercase; color: var(--sage);
+  font-family: var(--font-mono);
+  font-size: 10px; font-weight: 600; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--muted2);
 }
 .work-date {
   display: inline-block;
-  font-size: 11px; font-weight: 600; letter-spacing: 1.2px;
+  font-family: var(--font-mono);
+  font-size: 10px; font-weight: 600; letter-spacing: .12em;
   text-transform: uppercase; color: var(--muted2);
 }
 .work-title {
   font-family: var(--font-serif);
-  font-size: 18px; font-weight: 600;
-  color: var(--text); line-height: 1.3;
-  margin: 0 0 12px;
+  color: var(--text);
+  margin: 0;
 }
 .work-detail {
   font-family: var(--font-sans);
-  font-size: 14px; color: var(--muted);
-  line-height: 1.7; margin: 0 0 28px;
+  color: var(--muted);
+  margin: 0;
 }
 .work-stat {
-  border-top: 1px solid var(--line);
-  padding-top: 20px;
+  border-top: none;
+  padding-top: 0;
+  display: flex; align-items: baseline; gap: 10px;
 }
 .work-stat-num {
   font-family: var(--font-serif);
-  font-size: 34px; font-weight: 700;
-  color: var(--terracotta); display: block;
-  line-height: 1; letter-spacing: -.5px;
+  font-size: 26px; font-weight: 600;
+  color: var(--terracotta); display: inline;
+  line-height: 1; letter-spacing: normal;
 }
 .work-stat-label {
-  font-size: 12px; color: var(--muted2);
-  display: block; margin-top: 5px; letter-spacing: .2px;
+  font-size: 11px; color: var(--muted2);
+  display: inline; margin-top: 0; letter-spacing: .06em;
+  text-transform: uppercase;
 }
-@media (max-width: 840px) {
-  .work-grid { grid-template-columns: 1fr; gap: 16px; }
-}
+
 .work-lead {
-  grid-column: 1 / -1;
-  display: grid; grid-template-columns: 1fr 320px; gap: 32px; align-items: stretch;
-  padding: 0; overflow: hidden;
+  display: grid; grid-template-columns: 1fr 400px; gap: 36px; align-items: start;
+  margin-top: 28px;
 }
-.work-lead-body { padding: 32px 28px; display: flex; flex-direction: column; }
+.work-lead .work-title { font-size: 30px; font-weight: 500; line-height: 1.16; letter-spacing: -.01em; margin: 0 0 14px; }
+.work-lead .work-detail { font-size: 15px; line-height: 1.7; margin: 0 0 20px; }
 .work-lead-photo-wrap { overflow: hidden; }
-.work-lead-photo { width: 100%; height: 100%; object-fit: cover; object-position: center 25%; display: block; }
+.work-lead-photo {
+  width: 100%; aspect-ratio: 3/2;
+  object-fit: cover; object-position: center 30%;
+  display: block;
+}
 @media (max-width: 840px) {
   .work-lead { grid-template-columns: 1fr; }
   .work-lead-photo-wrap { order: -1; }
-  .work-lead-photo { max-height: 280px; }
 }
-.work-compact {
-  padding: 20px 24px;
-  display: flex; align-items: baseline; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+
+.work-row {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 36px;
+  margin-top: 36px; padding-top: 36px; border-top: 1px solid var(--line);
 }
-.work-compact-text { font-family: var(--font-sans); font-size: 14px; color: var(--muted); line-height: 1.6; margin: 0; }
-.work-compact-text a { color: var(--text); font-weight: 600; border-bottom: 1px solid var(--line); }
-.work-compact-stat { font-family: var(--font-serif); font-size: 15px; font-style: italic; color: var(--terracotta); white-space: nowrap; }
+.work-row .work-title { font-size: 20px; font-weight: 500; line-height: 1.25; margin: 0 0 10px; }
+.work-row .work-detail { font-size: 13px; line-height: 1.65; margin: 0; }
+@media (max-width: 840px) {
+  .work-row { grid-template-columns: 1fr; gap: 24px; }
+}
 
 /* Contact */
 .contact { background: var(--bg); }
@@ -491,7 +479,7 @@ footer { border-top: 1px solid var(--line); }
 <section class="hero">
   <div class="wrap hero-grid">
     <div>
-      <p class="hero-eyebrow">Global Director of Implementation at <a href="https://www.zappi.io/web/" target="_blank" rel="noopener">Zappi</a></p>
+      <p class="eyebrow hero-eyebrow">Global Director of Implementation at <a href="https://www.zappi.io/web/" target="_blank" rel="noopener">Zappi</a></p>
       <h1 class="hero-name">Merlin <em>Komenda</em></h1>
       <p class="hero-tagline">Rigorous by design. <strong>Joyful by default.</strong></p>
       <div class="hero-ctas">
@@ -509,22 +497,24 @@ footer { border-top: 1px solid var(--line); }
   <div class="wrap">
     <p class="section-label">/ How I think</p>
 
-    <div class="principle">
-      <span class="principle-numeral">i.</span>
-      <p class="principle-title">People commit to outcomes when they understand what those outcomes will actually mean for them.</p>
-      <p class="principle-body">Before any work starts, I make sure everyone in the room understands not just where we're going, but what it's going to ask of them personally. That's what turns agreement into actual commitment.</p>
-    </div>
+    <div class="principles">
+      <div class="principle">
+        <span class="principle-numeral">i.</span>
+        <p class="principle-title">People commit to outcomes when they understand what those outcomes will actually mean for them.</p>
+        <p class="principle-body">Before any work starts, I make sure everyone in the room understands not just where we're going, but what it's going to ask of them personally. That's what turns agreement into actual commitment.</p>
+      </div>
 
-    <div class="principle">
-      <span class="principle-numeral">ii.</span>
-      <p class="principle-title">Most people get stuck on what they can't control. That's what stops them from moving what they can.</p>
-      <p class="principle-body">Stuck usually isn't stuck. It's misplaced focus. Once you name what's actually in reach, people start moving.</p>
-    </div>
+      <div class="principle is-terse">
+        <span class="principle-numeral">ii.</span>
+        <p class="principle-title">Most people get stuck on what they can't control. That's what stops them from moving what they can.</p>
+        <p class="principle-body">Stuck usually isn't stuck. It's misplaced focus. Once you name what's actually in reach, people start moving.</p>
+      </div>
 
-    <div class="principle">
-      <span class="principle-numeral">iii.</span>
-      <p class="principle-title">Hard problems don't go away when you minimize them. They become manageable when you give them room to be hard.</p>
-      <p class="principle-body">Some of my best work has been on problems we haven't solved yet. Keeping a team honest, engaged, and willing to try again. That's not a consolation prize. That's the work.</p>
+      <div class="principle">
+        <span class="principle-numeral">iii.</span>
+        <p class="principle-title">Hard problems don't go away when you minimize them. They become manageable when you give them room to be hard.</p>
+        <p class="principle-body">Some of my best work has been on problems we haven't solved yet. Keeping a team honest, engaged, and willing to try again. That's not a consolation prize. That's the work.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -550,14 +540,28 @@ footer { border-top: 1px solid var(--line); }
           <img
             src="/propel26-stage-1600.jpg"
             srcset="/propel26-stage-800.jpg 800w, /propel26-stage-1600.jpg 1600w"
-            sizes="(max-width: 840px) 100vw, 320px"
+            sizes="(max-width: 840px) 100vw, 400px"
             alt="Merlin Komenda presenting at Propel26."
             class="work-lead-photo">
         </div>
       </div>
-      <div class="work-card work-compact">
-        <p class="work-compact-text"><a href="/experience/">Enterprise implementation at scale</a> — from mid-market to Fortune 500: 60+ clients a year, repeatable outcomes, NPS above 75.</p>
-        <span class="work-compact-stat">60+ annually</span>
+      <div class="work-row">
+        <div class="work-card">
+          <div class="work-tag-row">
+            <span class="work-tag">AI Systems</span>
+            <span class="work-date">· 2026</span>
+          </div>
+          <h3 class="work-title"><a href="/how-i-work/#work">Phase-mapped AI integration</a></h3>
+          <p class="work-detail">Four of seven implementation phases now have active AI tooling in production. New capabilities are added against a defined methodology rather than as one-off fixes.</p>
+        </div>
+        <div class="work-card">
+          <div class="work-tag-row">
+            <span class="work-tag">Enterprise</span>
+            <span class="work-date">Ongoing</span>
+          </div>
+          <h3 class="work-title"><a href="/experience/">Enterprise implementation at scale</a></h3>
+          <p class="work-detail">Mid-market to Fortune 500: 60+ clients a year, repeatable outcomes, NPS above 75.</p>
+        </div>
       </div>
     </div>
   </div>
@@ -565,6 +569,7 @@ footer { border-top: 1px solid var(--line); }
 
 <section class="section contact" id="contact">
   <div class="wrap">
+    <p class="section-label">/ Connect</p>
     <h2 class="contact-headline">Let's do hard work <em>together.</em></h2>
     <p class="contact-body">I want to hear from you. Genuinely. If something here sparked a thought, a question, or just a reaction, send me an email.</p>
     <a href="mailto:merlin.komenda@gmail.com" class="contact-email">merlin.komenda@gmail.com</a>
