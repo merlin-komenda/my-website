@@ -102,8 +102,7 @@ a { text-decoration: none; color: inherit; }
 
 /* Page header */
 .page-header {
-  padding: 80px 0 72px;
-  border-bottom: 1px solid var(--line);
+  padding: 80px 0 40px;
   background: var(--bg);
 }
 .page-header-label { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 10px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--muted2); margin: 0 0 20px; }
@@ -111,8 +110,41 @@ a { text-decoration: none; color: inherit; }
 .page-header h1 { font-family: var(--font-serif); font-size: clamp(40px, 5.5vw, 64px); font-weight: 700; line-height: .96; letter-spacing: -.01em; color: var(--text); margin: 0; }
 .page-header h1 em { color: var(--terracotta); font-style: italic; }
 
+/* Jump nav */
+.jump-nav {
+  position: sticky; top: 62px; z-index: 45;
+  background: rgba(250,250,247,.94);
+  backdrop-filter: blur(12px);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.jump-nav-inner {
+  max-width: var(--max); margin: 0 auto; padding: 0 28px;
+  display: flex; align-items: stretch; overflow-x: auto; scrollbar-width: none;
+}
+.jump-nav-inner::-webkit-scrollbar { display: none; }
+.jump-link {
+  position: relative;
+  flex-shrink: 0;
+  font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: .09em; text-transform: uppercase;
+  color: var(--muted);
+  padding: 14px 22px;
+  border-left: 1px solid var(--line);
+  white-space: nowrap;
+  transition: color .15s, background .15s;
+}
+.jump-link:last-child { border-right: 1px solid var(--line); }
+.jump-link:hover { color: var(--text); background: rgba(22,20,16,.03); }
+.jump-link::before, .jump-link::after { content: ""; position: absolute; top: -4px; width: 1px; height: 8px; background: var(--muted2); }
+.jump-link::before { left: -1px; }
+.jump-link::after { right: -1px; }
+.jump-link .jl-label { display: inline-block; padding-bottom: 3px; border-bottom: 2px solid transparent; }
+.jump-link.active { color: var(--terracotta); }
+.jump-link.active .jl-label { border-bottom-color: var(--terracotta); }
+.jump-link.active::before, .jump-link.active::after { background: var(--terracotta); height: 10px; top: -5px; }
+
 /* Section base */
-.section { padding: 88px 0; border-bottom: 1px solid var(--line); }
+.section { padding: 88px 0; border-bottom: 1px solid var(--line); scroll-margin-top: 126px; }
 .section-alt { background: var(--bg-white); }
 .section-work-bg { background: var(--bg-work); }
 .section-label { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 10px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--muted2); margin: 0 0 48px; }
@@ -232,6 +264,15 @@ footer { border-top: 1px solid var(--line); }
     <h1>How I <em>work</em></h1>
   </div>
 </div>
+
+<nav class="jump-nav" aria-label="Page sections">
+  <div class="jump-nav-inner">
+    <a href="#thinking" class="jump-link"><span class="jl-label">How I think</span></a>
+    <a href="#on-ai" class="jump-link"><span class="jl-label">On AI</span></a>
+    <a href="#work" class="jump-link"><span class="jl-label">The work</span></a>
+    <a href="#impact" class="jump-link"><span class="jl-label">Impact log</span></a>
+  </div>
+</nav>
 
 <!-- Section 1: How I Think (6 principles) -->
 <section class="section section-alt" id="thinking">
@@ -441,6 +482,21 @@ footer { border-top: 1px solid var(--line); }
 
 <script src="/context.js"></script>
 <script>
+(function(){
+  const links = document.querySelectorAll('.jump-link');
+  if (!links.length) return;
+  const sections = Array.from(links).map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = '#' + entry.target.id;
+        links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === id));
+      }
+    });
+  }, { rootMargin: '-40% 0px -55% 0px' });
+  sections.forEach(s => io.observe(s));
+})();
+
 (function(){
   const btn = document.getElementById('menuBtn');
   const menu = document.getElementById('mobileMenu');
