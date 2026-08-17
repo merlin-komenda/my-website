@@ -1,5 +1,7 @@
 {
   "cleanUrls": true,
+  "buildCommand": "npm run build",
+  "outputDirectory": ".",
   "redirects": [
     { "source": "/projects", "destination": "/how-i-work", "permanent": true },
     { "source": "/projects/", "destination": "/how-i-work", "permanent": true },

@@ -71,7 +71,19 @@
     "liveAutomations": { "value": 7 },
     "stagesWithActiveTooling": { "value": 8 },
     "stagesHumanByDesign": { "value": 1, "detail": "Stage 4, kickoff call" },
-    "stagesOpen": { "value": 2, "detail": "Stage 9 Analysis Training, Stage 10 CSM handoff" }
+    "stagesOpen": { "value": 2, "detail": "Stage 9 Analysis Training, Stage 10 CSM handoff" },
+    "tools": {
+      "note": "The seven live automations named in liveAutomations. No stage numbers — facts.json carries no tool-to-stage mapping, and inventing one would be a new unsupported claim. Name + description travel together here so the count and the itemized list on the site can't diverge.",
+      "value": [
+        { "name": "Agent Document Processor", "description": "Processes customer documents into agent-ready source material." },
+        { "name": "Account Updates", "description": "In-flight post-call loop: transcript in, channel update and CRM field update out." },
+        { "name": "Tag Recommendation Assistant", "description": "Recommends tag structure for platform setup." },
+        { "name": "Question Wording Assistant", "description": "Designs and refines custom question wording." },
+        { "name": "Implementation Email Assistant", "description": "Drafts customer-facing implementation emails." },
+        { "name": "Scout", "description": "Answers questions about how Implementation works." },
+        { "name": "Implementation Intake Brief", "description": "Internal prep document for the assigned IM ahead of the sales handoff sync." }
+      ]
+    }
   },
 
   "retiredStrings": [
