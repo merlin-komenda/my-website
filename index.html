@@ -388,6 +388,32 @@ a { text-decoration: none; color: inherit; }
 }
 .contact-email:hover { text-decoration: underline; }
 
+.contact-form { display: flex; flex-direction: column; gap: 16px; max-width: 480px; margin: 0 0 28px; }
+.contact-field { display: flex; flex-direction: column; gap: 6px; }
+.contact-field label {
+  font-family: var(--font-mono); font-size: 10px; font-weight: 600;
+  letter-spacing: .12em; text-transform: uppercase; color: var(--muted2);
+}
+.contact-field input, .contact-field textarea {
+  font-family: var(--font-sans); font-size: 15px; color: var(--text);
+  background: #fff; border: 1px solid var(--line); padding: 12px 14px;
+  outline: none; transition: border-color .15s;
+}
+.contact-field input:focus, .contact-field textarea:focus { border-color: var(--terracotta); }
+.contact-field textarea { resize: vertical; min-height: 110px; font-family: inherit; line-height: 1.6; }
+.contact-submit {
+  align-self: flex-start; padding: 12px 26px;
+  font-size: 14px; font-weight: 600; font-family: var(--font-sans);
+  background: var(--terracotta); color: #fff; border: none; cursor: pointer;
+  transition: background .15s, opacity .15s;
+}
+.contact-submit:hover { background: #4a6830; }
+.contact-submit:disabled { opacity: .55; cursor: not-allowed; }
+.contact-status { font-size: 14px; margin: 0; min-height: 20px; }
+.contact-status.success { color: var(--sage); }
+.contact-status.error { color: #b3413a; }
+.contact-alt { font-family: var(--font-sans); font-size: 14px; color: var(--muted2); margin: 0; }
+
 /* Footer */
 footer { border-top: 1px solid var(--line); }
 .footer-main { padding: 56px 0 40px; }
@@ -659,8 +685,25 @@ footer { border-top: 1px solid var(--line); }
   <div class="wrap">
     <p class="section-label">/ Connect</p>
     <h2 class="contact-headline">Let's do hard work <em>together.</em></h2>
-    <p class="contact-body">I want to hear from you. Genuinely. If something here sparked a thought, a question, or just a reaction, send me an email.</p>
-    <a href="mailto:merlin.komenda@gmail.com" class="contact-email">merlin.komenda@gmail.com</a>
+    <p class="contact-body">I want to hear from you. Genuinely. If something here sparked a thought, a question, or just a reaction, send me a message.</p>
+
+    <form class="contact-form" id="contactForm">
+      <input type="hidden" name="access_key" value="f7e66e4b-ba48-47ac-962e-5dd8c72ca9c5">
+      <input type="hidden" name="subject" value="New message from merlin-komenda.com">
+      <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
+      <div class="contact-field">
+        <label for="cf-email">Email</label>
+        <input type="email" id="cf-email" name="email" autocomplete="email" required>
+      </div>
+      <div class="contact-field">
+        <label for="cf-message">Message</label>
+        <textarea id="cf-message" name="message" required></textarea>
+      </div>
+      <button type="submit" class="contact-submit" id="contactSubmit">Send message</button>
+      <p class="contact-status" id="contactStatus" role="status" aria-live="polite"></p>
+    </form>
+
+    <p class="contact-alt">Prefer email? <a href="mailto:merlin.komenda@gmail.com" class="contact-email">merlin.komenda@gmail.com</a></p>
   </div>
 </section>
 
@@ -748,6 +791,36 @@ footer { border-top: 1px solid var(--line); }
 (function(){
   const backTop = document.getElementById('backTopBtn');
   if (backTop) backTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+})();
+
+(function(){
+  const form = document.getElementById('contactForm');
+  if (!form) return;
+  const submitBtn = document.getElementById('contactSubmit');
+  const status = document.getElementById('contactStatus');
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    submitBtn.disabled = true;
+    status.textContent = '';
+    status.className = 'contact-status';
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify(Object.fromEntries(new FormData(form)))
+      });
+      const data = await res.json();
+      if (!data.success) throw new Error(data.message || 'Submission failed');
+      form.reset();
+      status.textContent = "Thanks — I'll get back to you soon.";
+      status.className = 'contact-status success';
+    } catch (err) {
+      status.textContent = 'Something went wrong — try emailing me directly instead.';
+      status.className = 'contact-status error';
+    } finally {
+      submitBtn.disabled = false;
+    }
+  });
 })();
 
 (function(){
