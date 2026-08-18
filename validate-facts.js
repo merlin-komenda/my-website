@@ -146,9 +146,6 @@ function checkVendorNames(file, text) {
     const lineEnd = text.indexOf('\n', m.index);
     const line = text.slice(lineStart, lineEnd === -1 ? text.length : lineEnd);
 
-    // Exception: the "Ask Merlin" widget's own product-attribution label.
-    if (/Powered by Claude/i.test(line)) continue;
-
     // Exception: context.js's Personal Projects section, about the site's
     // own build rather than Zappi case-study work.
     if (file === 'context.js') {
@@ -160,7 +157,7 @@ function checkVendorNames(file, text) {
       }
     }
 
-    report(file, m.index, text, `vendor/model name "${m[0]}" in published copy — no vendor names outside the widget label and context.js's Personal Projects section`);
+    report(file, m.index, text, `vendor/model name "${m[0]}" in published copy — no vendor names outside context.js's Personal Projects section`);
   }
 }
 
