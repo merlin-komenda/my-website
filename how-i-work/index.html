@@ -142,6 +142,14 @@ a { text-decoration: none; color: inherit; }
 .jump-link.active { color: var(--terracotta); }
 .jump-link.active .jl-label { border-bottom-color: var(--terracotta); }
 .jump-link.active::before, .jump-link.active::after { background: var(--terracotta); height: 10px; top: -5px; }
+@media (max-width: 640px) {
+  .jump-nav-inner { overflow-x: visible; display: grid; grid-template-columns: repeat(2, 1fr); }
+  .jump-link { text-align: center; padding: 14px 10px; border-bottom: 1px solid var(--line); }
+  .jump-link:nth-child(odd) { border-right: 1px solid var(--line); }
+  .jump-link:nth-last-child(-n+2) { border-bottom: none; }
+  .jump-link:last-child { border-right: none; }
+  .jump-link::before, .jump-link::after { content: none; }
+}
 
 /* Section base */
 .section { padding: 88px 0; border-bottom: 1px solid var(--line); scroll-margin-top: 126px; }
