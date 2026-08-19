@@ -120,10 +120,10 @@ a { text-decoration: none; color: inherit; }
 .nav-links a:hover { color: var(--text); background: rgba(22,20,16,.05); }
 .nav-links a.active { color: var(--text); }
 .nav-cta {
-  background: var(--text) !important;
-  color: var(--bg) !important;
+  background: var(--terracotta) !important;
+  color: #fff !important;
 }
-.nav-cta:hover { background: rgba(22,20,16,.82) !important; color: var(--bg) !important; }
+.nav-cta:hover { background: #4a6830 !important; color: #fff !important; }
 .nav-menu-btn {
   display: none; background: none; border: 1px solid var(--line);
   border-radius: 8px; padding: 8px 12px; cursor: pointer;
@@ -185,10 +185,8 @@ a { text-decoration: none; color: inherit; }
   cursor: pointer; transition: background .15s, color .15s;
   display: inline-block; border: 1px solid var(--text);
 }
-.hero-cta.primary { background: var(--text); color: var(--bg); }
-.hero-cta.primary:hover { background: rgba(22,20,16,.82); }
-.hero-cta.secondary { background: transparent; color: var(--text); }
-.hero-cta.secondary:hover { background: rgba(22,20,16,.05); }
+.hero-cta.primary { background: var(--terracotta); color: #fff; border-color: var(--terracotta); }
+.hero-cta.primary:hover { background: #4a6830; border-color: #4a6830; }
 .hero-photo-wrap { display: flex; justify-content: flex-end; }
 .hero-photo {
   width: 100%; max-width: 300px;
@@ -414,6 +412,7 @@ a { text-decoration: none; color: inherit; }
 .contact-status.success { color: var(--sage); }
 .contact-status.error { color: #b3413a; }
 .contact-alt { font-family: var(--font-sans); font-size: 14px; color: var(--muted2); margin: 0; }
+.contact-alt + .contact-alt { margin-top: 6px; }
 
 /* Footer */
 footer { border-top: 1px solid var(--line); }
@@ -562,8 +561,7 @@ footer { border-top: 1px solid var(--line); }
       <h1 class="hero-name">Merlin <em>Komenda</em></h1>
       <p class="hero-tagline">Rigorous by design. <strong>Joyful by default.</strong></p>
       <div class="hero-ctas">
-        <a href="https://calendar.app.google/qd66qHTzCbsaNUEa7" target="_blank" rel="noopener" class="hero-cta primary">Book time</a>
-        <a href="#work" class="hero-cta secondary">See the work</a>
+        <a href="#work" class="hero-cta primary">See the work</a>
       </div>
     </div>
     <div class="hero-photo-wrap">
@@ -705,6 +703,7 @@ footer { border-top: 1px solid var(--line); }
     </form>
 
     <p class="contact-alt">Prefer email? <a href="mailto:merlin.komenda@gmail.com" class="contact-email">merlin.komenda@gmail.com</a></p>
+    <p class="contact-alt">Rather just grab 15 minutes? <a href="https://calendar.app.google/qd66qHTzCbsaNUEa7" target="_blank" rel="noopener" class="contact-email">Book time</a>.</p>
   </div>
 </section>
 
