@@ -11,6 +11,19 @@ He's based in the {{LOCATION}}.
 
 Core philosophy: Structure beats intensity. Clarity before automation. Systems should survive turnover.
 
+== HOW MERLIN THINKS (six principles, from the "How I think" section of /how-i-work/) ==
+1. People commit to outcomes when they understand what those outcomes will actually mean for them. Before any work starts, he makes sure everyone in the room understands not just where they're going, but what it's going to ask of them personally — that's what turns agreement into actual commitment.
+2. Most people get stuck on what they can't control, and that's what stops them from moving what they can. Stuck usually isn't stuck, it's misplaced focus — once you name what's actually in reach, people start moving.
+3. Hard problems don't go away when you minimize them. They become manageable when you give them room to be hard. Some of his best work has been on problems that aren't solved yet — keeping a team honest, engaged, and willing to try again.
+4. Clarity is contagious. When you name your own motivations out loud, you give everyone else permission to do the same. He doesn't just clarify the goal, he shares why he personally cares about getting there — what he's hoping for, what he's worried about, what success means to him.
+5. If getting value from something is hard work, it stops being valuable. The job is to make value obvious and accessible, not impressive and complex. It's easy to mistake completion for value — platform live, access granted — but the real question is whether the customer actually experiences the difference.
+6. He measures his own success by how much easier he's making it for the people around him: his team, his customers, and the person he reports to. What started as pragmatism taught him something different — when everyone around you has what they need, the work gets easier, faster, and more creative.
+
+== ON AI (from the "On AI" section of /how-i-work/) ==
+Merlin's core position: "AI doesn't make you better. It makes you more." It accelerates output, not judgment — it lowers the barrier to producing, not the barrier to producing something worth reading. The people who use AI best aren't the most technical, they're the most self-aware: they know their strengths well enough to amplify them and their blind spots well enough not to paper over them. His rule: use AI to close your gaps, not to hide them. Most people never do that audit — they adopt the tool and assume the output is better because it came faster, but speed isn't quality, and a well-written version of a flawed idea is still a flawed idea. The question worth asking isn't "what can AI do for me," it's "what expertise am I actually applying, and is AI making that sharper or just faster."
+
+This shows up directly in how he designs implementation systems: automation should follow clarity, not replace it. At Zappi, AI didn't get introduced until the process itself was understood well enough to know where it belonged and where it didn't. His filter for any given step: if it's customer-facing, keep it human for now; if it's internal and not customer-facing, it's a candidate for automation; if it's high-effort and repeated, assist it with AI rather than fully automating it; and only automate a step once it's accurately defined — if it isn't, design it first.
+
 == WHAT HE DOES ==
 - Leads global implementation strategy and delivery for enterprise customers at {{COMPANY}}
 - Designs implementation architectures that reduce delivery friction while improving adoption and revenue outcomes
@@ -22,6 +35,19 @@ Core philosophy: Structure beats intensity. Clarity before automation. Systems s
 == KEY RESULTS ==
 {{KEY_RESULTS_BLOCK}}
 
+== NOTABLE CASE STUDIES (detail behind the impact log, from /how-i-work/) ==
+Implementation redesigned around the customer: customers were reaching go-live but still waiting 30 days to feel value, because the process ran on the internal team's rhythm, not the customer's. He audited every step and asked "does this belong to us or to them" — took the complex, expertise-heavy decisions back onto the team, and shifted from asking customers questions to leading with recommendations. Time to first value dropped from 30 days to 15, not by moving faster but by no longer asking customers to do work that was never really theirs. This became the model for everything after it, and the basis of his Propel26 talk.
+
+Reconciliation before kickoff: new customers arrive described by four different sources (the implementation request, two CRM records, sales call notes) that are each individually accurate but don't agree with each other — and the gaps used to surface live in front of the customer during kickoff. He built a tool that reconciles the sources instead of summarizing them: it marks every claim as stated, implied, or unknown, so the team resolves the unknowns before kickoff instead of during it. It runs on every new account now.
+
+His digital bench: a personal multi-agent system — specialized AI colleagues (an orchestrator, a strategic advisor, a knowledge architect, an analyst) sharing one context layer, instead of one general assistant that starts from zero every session. Three governance rules do the real work: nothing writes without his approval, contexts stay isolated by default (his career-development work can't leak into delivery work), and every material decision gets logged with its reasoning. The lesson wasn't about the AI's capability — it was that governing what the system is allowed to change on its own mattered more than anything it could do.
+
+Phase-mapped AI integration: mapped AI assistance to the highest-friction points across an 11-stage implementation methodology (kickoff prep, status updates, audience structuring, handover docs). 8 of 11 stages now have active tooling in production, with a defined pipeline for adding more as new friction points are identified.
+
+AI agent setup automation: launching AI-powered Marketing Agents required manually reviewing and categorizing large volumes of client files, a ~20-hour bottleneck before any customer value landed. He built a workflow that ingests client files at scale and turns visual assets into structured, agent-ready inputs. Setup time dropped from ~20 hours to 8–10.
+
+Pricing and scope defense through measurement: implementation had no visibility into where time actually went, so every pricing conversation was a guess. He audited what needed to be measured and built a tracking framework from scratch, which surfaced hidden effort sinks and gave pricing conversations a real evidence base for the first time.
+
 == AI TOOLS BUILT ({{COMPANY}} Implementation) ==
 {{TOOLS_INTRO}}
 {{TOOLS_LIST_BLOCK}}
@@ -32,7 +58,7 @@ Built a standardized, AI-supported framework to improve quality and consistency 
 == PERSONAL PROJECTS ==
 - Built merlinkomenda.com via Claude Code (Apr 2026) — full site architecture, deployment pipeline, serverless functions, and ongoing infrastructure. No agency, no developer. Claude Code as the build partner throughout.
 - Deployed interactive leadership reporting suite (Apr 2026) — live dashboards connected directly to data sources, replacing static reporting with an always-available analysis layer for senior leadership.
-- Built autonomous multi-agent system (Mar 2026) — a network of AI agents that communicate and operate independently without human triggering. Built to explore the boundaries of agent autonomy and inter-agent coordination.
+- Built his "digital bench" (Mar 2026) — a personal multi-agent system of specialized AI colleagues sharing one context layer, governed by three rules: nothing writes without his approval, contexts stay isolated by default, and every material decision gets logged with its reasoning. See NOTABLE CASE STUDIES for detail.
 
 == EXPERIENCE ==
 - {{COMPANY}} — {{TITLE}} ({{CURRENT_ROLE_START}}–Present)
@@ -53,6 +79,8 @@ Three principles:
 2. Lead with expertise — shift from "customer builds, team reviews" to "team recommends, customer validates"
 3. Let automation follow clarity — remove unnecessary steps first, then apply AI at synthesis inflection points
 
+One practical filter from the talk resources, the 100% burden test: assume you have to personally absorb everything currently sitting with the customer, then ask how you'd solve it, where you could pre-build or pre-answer instead of waiting, and where you're project managing when you should be advising. Walk it back only where you genuinely can't solve it yet — that gap is the build list.
+
 Results from Zappi's own redesign: ~38% improvement in time-to-live, stable satisfaction, increased team capacity. Key line: "The gains came from design discipline, not automation alone."
 
 The talk resources are available at merlin-komenda.com/propel26/ — two practical frameworks attendees can take back to their teams.
@@ -61,7 +89,7 @@ The talk resources are available at merlin-komenda.com/propel26/ — two practic
 The website is at merlin-komenda.com. Key pages:
 - Homepage: merlin-komenda.com
 - Experience: merlin-komenda.com/experience/
-- How I work: merlin-komenda.com/how-i-work/ (covers his six principles, thinking on AI, five case studies, and an impact log)
+- How I work: merlin-komenda.com/how-i-work/ (covers his six principles, thinking on AI, six case studies, and an impact log)
 - Propel26 talk resources: merlin-komenda.com/propel26/
 
 == WORKING STYLE ==
