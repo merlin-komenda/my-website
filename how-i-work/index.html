@@ -32,7 +32,7 @@
 <meta name="twitter:image" content="https://merlin-komenda.com/headshot.jpg" />
 
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&display=swap" rel="stylesheet">
-<style>
+<style id="page-css">
 :root {
   --bg: #FAFAF7;
   --bg-white: #FFFFFF;
@@ -286,6 +286,8 @@ footer { border-top: 1px solid var(--line); }
   </div>
 </nav>
 
+<main id="page">
+
 <div class="page-header">
   <div class="wrap">
     <p class="page-header-label">/ Principles · Thinking · Work</p>
@@ -502,6 +504,8 @@ footer { border-top: 1px solid var(--line); }
   </div>
 </section>
 
+</main>
+
 <footer>
   <div class="footer-main">
     <div class="footer-main-inner">
@@ -571,7 +575,8 @@ footer { border-top: 1px solid var(--line); }
 </div>
 
 <script src="/context.js"></script>
-<script>
+
+<script data-page-script>
 (function(){
   const links = document.querySelectorAll('.jump-link');
   if (!links.length) return;
@@ -586,7 +591,9 @@ footer { border-top: 1px solid var(--line); }
   }, { rootMargin: '-40% 0px -55% 0px' });
   sections.forEach(s => io.observe(s));
 })();
+</script>
 
+<script>
 (function(){
   const btn = document.getElementById('menuBtn');
   const menu = document.getElementById('mobileMenu');
@@ -638,5 +645,7 @@ footer { border-top: 1px solid var(--line); }
   input.addEventListener('input', () => { input.style.height = 'auto'; input.style.height = Math.min(input.scrollHeight, 100) + 'px'; });
 })();
 </script>
+<script src="/nav.js" defer></script>
+
 </body>
 </html>

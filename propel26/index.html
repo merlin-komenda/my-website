@@ -32,7 +32,7 @@
 <meta name="twitter:description" content="Three principles for building implementation functions that are ready for AI." />
 <meta name="twitter:image" content="https://merlin-komenda.com/headshot.jpg" />
 
-<style>
+<style id="page-css">
 :root {
   --bg: #FAFAF7;
   --bg-white: #FFFFFF;
@@ -257,6 +257,8 @@ footer { border-top: 1px solid var(--line); }
   </div>
 </nav>
 
+<main id="page">
+
 <div class="page-header">
   <div class="wrap">
     <p class="page-header-label">/ Propel26 · San Francisco · May 2026</p>
@@ -388,6 +390,8 @@ footer { border-top: 1px solid var(--line); }
   </div>
 </section>
 
+</main>
+
 <footer>
   <div class="footer-main">
     <div class="footer-main-inner">
@@ -451,17 +455,23 @@ footer { border-top: 1px solid var(--line); }
 </div>
 
 <script src="/context.js"></script>
-<script>
+
+<script data-page-script>
+(function(){
 const resource1Text = `Principle 2: Lead with Expertise\nAre you removing customer burden, or just managing it?\n\nStep 1: Who is this step actually designed for?\n- Is the customer being asked to figure something out you already know?\n- Are they waiting on guidance that should have been given proactively?\n- If this step failed, who would feel it most: you or them?\n\nStep 2: What outcome is this step responsible for?\nNot what the step produces internally. What does the customer feel, know, or become able to do because this step happened?\n\nStep 3: Apply the 100% burden test\nAssume you have to absorb everything currently sitting with the customer. All of it.\n- How would we solve this if it was entirely our responsibility?\n- Where could we pre-build, pre-answer, or pre-solve?\n- Where are we project managing when we should be advising?\n\nStep 4: Check your stance\nWaiting: \"What do you want to do?\" / \"Can you fill out this spreadsheet?\"\nLeading: \"We recommend…\" / \"Based on your use-case, you should…\"\nThat shift, from coordinator to advisor, is the whole game.`;
 const resource2Text = `Principle 3: Let Automation follow Clarity\n\nFilter:\nIs it customer-facing? If not — candidate for automation. If yes — keep human for now.\nIs it high effort and repeated? If yes — assist with AI.\nIs it accurately defined? If yes — ready for automation. If no, design first.\n\nAI Driven: Operational. Repeatable. Internal. (Handoff docs, program builds, update generation)\nAI Assistance: Multiplying expertise. Human stays accountable. (Tailored worksheets, processing docs)\nHuman Only: Presence is the point. (Live training, validating decisions, building confidence)\n\nList your top 10 implementation activities. Place each one.\nWhere humans do AI Driven work — first automation opportunity.\nWhere Human Only work is automated — first quality risk.\nWhere AI Assistance could extend but hasn't — next build priority.`;
-function copyResource(n) {
+window.copyResource = function (n) {
   const text = n === 1 ? resource1Text : resource2Text;
   const btn = document.getElementById('copy-btn-' + n);
   navigator.clipboard.writeText(text).then(() => {
     btn.textContent = 'Copied'; btn.classList.add('copied');
     setTimeout(() => { btn.textContent = 'Copy to clipboard'; btn.classList.remove('copied'); }, 2000);
   });
-}
+};
+})();
+</script>
+
+<script>
 (function(){
   const btn=document.getElementById('menuBtn'),menu=document.getElementById('mobileMenu');
   btn.addEventListener('click',()=>{const o=menu.classList.toggle('open');btn.setAttribute('aria-expanded',String(o));});
@@ -502,5 +512,7 @@ function copyResource(n) {
   input.addEventListener('input',()=>{input.style.height='auto';input.style.height=Math.min(input.scrollHeight,100)+'px';});
 })();
 </script>
+<script src="/nav.js" defer></script>
+
 </body>
 </html>

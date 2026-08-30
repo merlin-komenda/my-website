@@ -32,7 +32,7 @@
 <meta name="twitter:image" content="https://merlin-komenda.com/headshot.jpg" />
 
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&display=swap" rel="stylesheet">
-<style>
+<style id="page-css">
 :root {
   --bg: #FAFAF7;
   --bg-white: #FFFFFF;
@@ -241,6 +241,8 @@ footer { border-top: 1px solid var(--line); }
   </div>
 </nav>
 
+<main id="page">
+
 <div class="page-header">
   <div class="wrap">
     <p class="page-header-label">/ Career · Outcomes · Capabilities</p>
@@ -441,6 +443,8 @@ footer { border-top: 1px solid var(--line); }
   </div>
 </section>
 
+</main>
+
 <footer>
   <div class="footer-main">
     <div class="footer-main-inner">
@@ -546,5 +550,7 @@ footer { border-top: 1px solid var(--line); }
   input.addEventListener('input',()=>{input.style.height='auto';input.style.height=Math.min(input.scrollHeight,100)+'px';});
 })();
 </script>
+<script src="/nav.js" defer></script>
+
 </body>
 </html>
