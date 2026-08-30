@@ -46,7 +46,7 @@
 </script>
 
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&display=swap" rel="stylesheet">
-<style>
+<style id="page-css">
 :root {
   --bg: #FAFAF7;
   --text: #161410;
@@ -554,6 +554,8 @@ footer { border-top: 1px solid var(--line); }
   </div>
 </nav>
 
+<main id="page">
+
 <section class="hero">
   <div class="wrap hero-grid">
     <div>
@@ -707,6 +709,8 @@ footer { border-top: 1px solid var(--line); }
   </div>
 </section>
 
+</main>
+
 <footer>
   <div class="footer-main">
     <div class="footer-main-inner">
@@ -792,7 +796,9 @@ footer { border-top: 1px solid var(--line); }
   const backTop = document.getElementById('backTopBtn');
   if (backTop) backTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 })();
+</script>
 
+<script data-page-script>
 (function(){
   const form = document.getElementById('contactForm');
   if (!form) return;
@@ -822,7 +828,9 @@ footer { border-top: 1px solid var(--line); }
     }
   });
 })();
+</script>
 
+<script>
 (function(){
   const btn = document.getElementById('cpBtn');
   const pane = document.getElementById('cpPane');
@@ -905,5 +913,7 @@ footer { border-top: 1px solid var(--line); }
   input.addEventListener('input', () => { input.style.height = 'auto'; input.style.height = Math.min(input.scrollHeight, 100) + 'px'; });
 })();
 </script>
+<script src="/nav.js" defer></script>
+
 </body>
 </html>
