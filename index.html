@@ -54,12 +54,11 @@
 }
 
 /* Hero */
-.hero { padding: clamp(40px, 6vw, 80px) 0 clamp(40px, 5vw, 72px); }
-.hero-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1.45fr) minmax(0, .8fr);
-  gap: clamp(28px, 5vw, 72px); align-items: end;
-}
+/* The portrait fills the right of the hero, from the nav rule to the section rule,
+   and runs off the screen edge: the wall's pink becomes a colour field, with no box. */
+.hero { position: relative; overflow: hidden; padding: clamp(40px, 6vw, 80px) 0 clamp(40px, 5vw, 72px); }
+.hero-grid { display: grid; grid-template-columns: minmax(0, 1fr); }
+.hero-grid > div:first-child { position: relative; z-index: 1; max-width: 56%; }
 .hero-eyebrow { font-size: 15px; font-weight: 500; color: var(--muted); margin: 0 0 clamp(18px, 2.4vw, 30px); }
 .hero-eyebrow a { color: var(--ink); border-bottom: 1px solid var(--ink); }
 .hero-eyebrow a:hover { color: var(--accent-text); border-bottom-color: var(--accent-text); }
@@ -79,14 +78,19 @@
   padding: 15px 24px 14px;
 }
 .hero-cta:hover, .contact-submit:hover { background: var(--accent-text); }
-.hero-photo-wrap { margin: 0; }
-.hero-photo {
-  display: block; width: 100%; height: auto;
-  aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 22%;
+.hero-photo-wrap {
+  position: absolute; top: 0; bottom: 0; right: 0; margin: 0;
+  width: max(42%, calc((100% - var(--max)) / 2 + var(--max) * .42));
 }
+.hero-photo { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 40% 24%; }
 @media (max-width: 820px) {
-  .hero-grid { grid-template-columns: minmax(0, 1fr); gap: 24px; }
-  .hero-photo-wrap { order: -1; max-width: 220px; }
+  .hero-grid { gap: 24px; }
+  .hero-grid > div:first-child { max-width: none; }
+  .hero-photo-wrap {
+    position: relative; order: -1; width: auto;
+    margin: calc(-1 * clamp(40px, 6vw, 80px)) calc(-1 * var(--pad)) 0;
+  }
+  .hero-photo { height: auto; aspect-ratio: 1 / 1; object-position: 50% 20%; }
 }
 
 /* Section rhythm: two tempos, sections separated by a rule */
@@ -217,7 +221,7 @@
       </div>
     </div>
     <div class="hero-photo-wrap">
-      <img src="/headshot.jpg" alt="Merlin Komenda" class="hero-photo" width="4417" height="4417">
+      <img src="/headshot-1400.jpg" srcset="/headshot-800.jpg 800w, /headshot-1400.jpg 1400w" sizes="(max-width: 820px) 100vw, 42vw" alt="Merlin Komenda" class="hero-photo" width="1400" height="1400">
     </div>
   </div>
 </section>
