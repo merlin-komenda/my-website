@@ -45,96 +45,12 @@
 }
 </script>
 
-<!-- Not used by the homepage. Kept so nav.js can swap to the other pages, which still use Inter and Newsreader. -->
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/site.css">
 <style id="page-css">
-/* Fonts are imported here as well as linked in <head>: nav.js swaps only this
-   block when arriving from another page, so the homepage's fonts travel with it. */
-@import url('https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..125,400..750&family=Big+Shoulders+Display:wght@700..900&display=swap');
-:root {
-  --bg: #E4E5E7;
-  --surface: #EDEEF0;
-  --ink: #131416;
-  --muted: #4D5157;
-  --line: #BCC0C6;
-  --accent: #C2571A;
-  --accent-text: #93400C;
-  --error: #A3322B;
-  --max: 1180px;
-  --pad: clamp(18px, 4.5vw, 56px);
-  --font-display: 'Big Shoulders Display', 'Arial Narrow', Impact, sans-serif;
-  --font-body: 'Archivo', 'Helvetica Neue', Arial, sans-serif;
-  --space-open: clamp(56px, 8vw, 112px);
-  --space-tight: clamp(40px, 5vw, 72px);
-}
-*, *::before, *::after { box-sizing: border-box; }
-html, body { margin: 0; padding: 0; }
-body {
-  font-family: var(--font-body);
-  font-size: 17px; line-height: 1.55;
-  background: var(--bg);
-  color: var(--ink);
-  -webkit-font-smoothing: antialiased;
-}
-a { text-decoration: none; color: inherit; }
-.wrap { max-width: var(--max); margin: 0 auto; padding: 0 var(--pad); }
-a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible {
-  outline: 2px solid var(--ink); outline-offset: 3px;
-}
-@media (prefers-reduced-motion: no-preference) {
-  a, button { transition: color .15s, background-color .15s, border-color .15s; }
-}
-
-/* Display face: name, labels, numerals, meta, buttons. Never sentences. */
-.nav-brand, .hero-name, .section-label, .principle-numeral, .work-tag-row,
-.stat-block-num, .work-stat-num, .hero-cta, .contact-submit, #cpBtn, .footer-brand-name {
+/* Homepage display elements (shared ones are in site.css) */
+.hero-name, .principle-numeral, .work-tag-row, .stat-block-num, .work-stat-num, .hero-cta, .contact-submit {
   font-family: var(--font-display);
   text-transform: uppercase;
-}
-
-/* Section labels: the slash survives, without mono or a colored square */
-.section-label {
-  font-size: 26px; font-weight: 800; letter-spacing: .02em; line-height: 1;
-  margin: 0;
-}
-.section-label .slash { color: var(--accent); }
-
-/* Nav */
-.nav {
-  position: sticky; top: 0; z-index: 50;
-  background: var(--bg);
-  border-bottom: 1px solid var(--line);
-}
-.nav-inner {
-  max-width: var(--max); margin: 0 auto; padding: 0 var(--pad);
-  display: flex; align-items: center; justify-content: space-between;
-  height: 62px;
-}
-.nav-brand { font-size: 22px; font-weight: 800; letter-spacing: .02em; }
-.nav-brand em { font-style: normal; }
-.nav-links { display: flex; align-items: center; gap: 26px; }
-.nav-links a { font-size: 15px; font-weight: 500; color: var(--muted); }
-.nav-links a:hover, .nav-links a.active { color: var(--ink); }
-.nav-links .nav-cta { color: var(--accent-text); font-weight: 700; }
-.nav-links .nav-cta:hover { color: var(--ink); }
-.nav-menu-btn {
-  display: none; background: none; border: 1px solid var(--ink);
-  padding: 8px 12px; cursor: pointer;
-  font-size: 14px; font-weight: 600; color: var(--ink);
-  font-family: var(--font-body);
-}
-.nav-mobile { display: none; background: var(--bg); border-top: 1px solid var(--line); }
-.nav-mobile.open { display: block; }
-.nav-mobile a {
-  display: block; padding: 15px var(--pad);
-  font-size: 16px; font-weight: 500; color: var(--ink);
-  border-bottom: 1px solid var(--line);
-}
-.nav-mobile .nav-cta { color: var(--accent-text); font-weight: 700; }
-@media (max-width: 640px) {
-  .nav-links { display: none; }
-  .nav-menu-btn { display: block; }
 }
 
 /* Hero */
@@ -266,98 +182,10 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   .contact-body, .contact-form, .contact-alt { grid-column: 1; grid-row: auto; }
   .contact-form { margin-bottom: 24px; }
 }
-
-/* Footer */
-footer { border-top: 1px solid var(--line); }
-.footer-main { padding: var(--space-tight) 0 40px; }
-.footer-main-inner { max-width: var(--max); margin: 0 auto; padding: 0 var(--pad); display: grid; grid-template-columns: 1.4fr .8fr .8fr; gap: 48px; }
-@media (max-width: 640px) { .footer-main-inner { grid-template-columns: 1fr; gap: 32px; } }
-.footer-brand-name { font-size: 24px; font-weight: 800; letter-spacing: .02em; margin: 0 0 8px; }
-.footer-brand-name em { font-style: normal; }
-.footer-tagline { font-size: 15px; color: var(--muted); margin: 0 0 22px; max-width: 280px; }
-.footer-tagline strong { font-weight: 700; color: var(--ink); }
-.footer-icons { display: flex; gap: 8px; }
-.footer-icon { width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--ink); color: var(--ink); }
-.footer-icon:hover { background: var(--ink); color: var(--bg); }
-.footer-icon svg { width: 15px; height: 15px; }
-.footer-col-title { font-size: 14px; font-weight: 700; margin: 0 0 14px; }
-.footer-col-links { display: flex; flex-direction: column; gap: 10px; list-style: none; padding: 0; margin: 0; }
-.footer-col-links a { font-size: 15px; color: var(--muted); }
-.footer-col-links a:hover { color: var(--ink); }
-.footer-bottom { border-top: 1px solid var(--line); }
-.footer-bottom-inner { max-width: var(--max); margin: 0 auto; padding: 18px var(--pad); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
-.footer-copy { font-size: 14px; color: var(--muted); }
-.footer-back-top { font: inherit; font-size: 14px; color: var(--muted); display: inline-flex; align-items: center; gap: 6px; cursor: pointer; background: none; border: none; padding: 0; }
-.footer-back-top:hover { color: var(--ink); }
-.footer-back-top svg { width: 11px; height: 11px; }
-
-/* Ask Merlin: restrained, square, no glow */
-#cpBtn {
-  position: fixed; bottom: 24px; right: 24px; z-index: 1000;
-  background: var(--ink); color: var(--bg); border: none; border-radius: 0;
-  padding: 13px 20px 12px; cursor: pointer;
-  font-size: 18px; font-weight: 800; letter-spacing: .05em; line-height: 1;
-}
-#cpBtn:hover { background: var(--accent-text); }
-@media (max-width: 640px) { #cpBtn { bottom: 16px; right: 16px; font-size: 16px; padding: 11px 16px 10px; } #cpPane { right: 16px; bottom: 64px; } }
-#cpPane {
-  display: none; position: fixed; bottom: 76px; right: 24px;
-  z-index: 999; width: min(380px, calc(100vw - 40px));
-  border: 1px solid var(--ink); background: var(--surface); color: var(--ink);
-  flex-direction: column; overflow: hidden;
-}
-.cp-header-l {
-  padding: 16px 18px 14px; border-bottom: 1px solid var(--line);
-  display: flex; align-items: flex-start; justify-content: space-between;
-}
-.cp-header-l-text .cp-title { font-family: var(--font-display); text-transform: uppercase; font-weight: 800; font-size: 20px; letter-spacing: .03em; line-height: 1; margin: 0 0 4px; }
-.cp-header-l-text .cp-sub { font-size: 13px; color: var(--muted); margin: 0; }
-.cp-close-btn { background: none; border: none; cursor: pointer; color: var(--muted); font-size: 20px; line-height: 1; padding: 2px 4px; }
-.cp-close-btn:hover { color: var(--ink); }
-#cpMessages { padding: 14px 16px; max-height: 320px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; font-size: 14px; line-height: 1.55; }
-#cpMessages::-webkit-scrollbar { width: 4px; }
-#cpMessages::-webkit-scrollbar-thumb { background: var(--line); }
-.cm { display: flex; gap: 8px; align-items: flex-start; max-width: 88%; }
-.cm.user { align-self: flex-end; flex-direction: row-reverse; }
-.cm.assistant { align-self: flex-start; }
-.cm-av { width: 24px; height: 24px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; }
-.cm.assistant .cm-av { background: var(--ink); color: var(--bg); }
-.cm.user .cm-av { background: var(--bg); color: var(--muted); border: 1px solid var(--line); }
-.cm-bubble { padding: 9px 12px; font-size: 14px; line-height: 1.55; }
-.cm.assistant .cm-bubble { background: var(--bg); color: var(--ink); }
-.cm.user .cm-bubble { background: var(--ink); color: var(--bg); }
-.cp-typing { display: flex; gap: 4px; padding: 11px 12px; background: var(--bg); width: fit-content; }
-.cp-typing span { width: 5px; height: 5px; background: var(--muted); opacity: .6; }
-@media (prefers-reduced-motion: no-preference) {
-  .cp-typing span { animation: cpbounce 1.2s infinite; }
-  .cp-typing span:nth-child(2) { animation-delay: .2s; }
-  .cp-typing span:nth-child(3) { animation-delay: .4s; }
-}
-@keyframes cpbounce { 0%,60%,100% { opacity: .35; } 30% { opacity: 1; } }
-#cpSuggested { padding: 0 12px 10px; display: flex; flex-wrap: wrap; gap: 6px; }
-.cp-sq { padding: 6px 10px; border: 1px solid var(--line); background: transparent; color: var(--ink); font: inherit; font-size: 13px; cursor: pointer; text-align: left; }
-.cp-sq:hover { border-color: var(--ink); }
-.cp-input-row { padding: 10px 14px 14px; border-top: 1px solid var(--line); display: flex; gap: 8px; align-items: flex-end; }
-.cp-input {
-  flex: 1; padding: 9px 12px; border: 1px solid var(--line); border-radius: 0; background: var(--bg);
-  color: var(--ink); font: inherit; font-size: 14px;
-  resize: none; line-height: 1.5; min-height: 38px; max-height: 100px;
-}
-.cp-input:focus { border-color: var(--ink); }
-.cp-input::placeholder { color: var(--muted); }
-.cp-send { width: 38px; height: 38px; background: var(--ink); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-.cp-send:hover { background: var(--accent-text); }
-.cp-send:disabled { opacity: .35; cursor: not-allowed; }
-.cp-send svg { width: 14px; height: 14px; }
-.cp-footer-l { padding: 0 14px 10px; font-size: 12px; color: var(--muted); text-align: center; }
-.cp-footer-l a { color: var(--muted); }
 </style>
 </head>
 <body>
 
-<!-- Unstyled on the homepage; kept for the other pages after a nav.js swap. -->
-<div class="col-rule col-rule-l"></div>
-<div class="col-rule col-rule-r"></div>
 
 <nav class="nav">
   <div class="nav-inner">
