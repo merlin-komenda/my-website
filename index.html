@@ -102,23 +102,13 @@
 .stats-band, .companies, .contact { padding: var(--space-tight) 0; }
 .think .section-label, .work .section-label { margin-bottom: clamp(28px, 4vw, 48px); }
 
-/* How I think: one lead principle, then a quieter pair */
-.principles { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
-.principle { display: grid; grid-template-columns: 3.2ch minmax(0, 1fr); column-gap: 18px; align-content: start; }
-.principle > :not(.principle-numeral) { grid-column: 2; }
-.principle-numeral { font-size: 22px; font-weight: 800; color: var(--accent-text); line-height: 1.2; text-transform: none; }
-.principle-title { font-size: clamp(21px, 2vw, 26px); font-weight: 650; font-stretch: 88%; line-height: 1.16; letter-spacing: -.01em; margin: 0; text-wrap: balance; }
-.principle-body { color: var(--muted); margin: 14px 0 0; max-width: 52ch; }
-.principle:first-child { grid-column: 1 / -1; padding-bottom: clamp(36px, 5vw, 64px); border-bottom: 1px solid var(--line); }
-.principle:first-child .principle-title { font-size: clamp(30px, 3.8vw, 50px); font-stretch: 85%; line-height: 1.04; letter-spacing: -.02em; max-width: 26ch; }
-.principle:first-child .principle-body { max-width: 58ch; }
-.principle:nth-child(2) { padding: clamp(28px, 4vw, 44px) clamp(16px, 3vw, 40px) 0 0; }
-.principle:nth-child(3) { padding: clamp(28px, 4vw, 44px) 0 0 clamp(16px, 3vw, 40px); border-left: 1px solid var(--line); }
-@media (max-width: 760px) {
-  .principles { grid-template-columns: minmax(0, 1fr); }
-  .principle:nth-child(2) { padding: 28px 0 0; }
-  .principle:nth-child(3) { padding: 28px 0 0; margin-top: 28px; border-left: 0; border-top: 1px solid var(--line); }
-}
+/* How I think: three principles at equal weight, each under a thin rule. No boxes. */
+.principles { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px clamp(24px, 3.5vw, 48px); }
+.principle { padding-top: 18px; border-top: 1px solid var(--ink); }
+.principle-numeral { display: block; font-size: 24px; font-weight: 800; color: var(--accent-text); line-height: 1; margin: 0 0 14px; text-transform: none; }
+.principle-title { font-size: clamp(20px, 1.9vw, 24px); font-weight: 650; font-stretch: 88%; line-height: 1.18; letter-spacing: -.01em; margin: 0; text-wrap: balance; }
+.principle-body { color: var(--muted); margin: 12px 0 0; }
+@media (max-width: 860px) { .principles { grid-template-columns: minmax(0, 1fr); } }
 
 /* The work: Propel26 leads with its photo and result; the rest are ruled rows */
 .work-tag-row { display: flex; gap: 6px; flex-wrap: wrap; align-items: baseline; margin: 0 0 14px; font-size: 18px; font-weight: 700; letter-spacing: .04em; color: var(--accent-text); }
@@ -164,12 +154,14 @@
 
 /* Contact */
 .contact .wrap { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); grid-template-rows: auto auto auto auto auto 1fr; column-gap: clamp(28px, 5vw, 72px); align-items: start; }
-.contact .section-label, .contact-headline { grid-column: 1 / -1; }
+/* Invitation on the left, form beside it from the headline down */
+.contact .section-label { grid-column: 1 / -1; }
+.contact-headline { grid-column: 1; }
 .contact .section-label { margin-bottom: clamp(20px, 3vw, 32px); }
-.contact-headline { font-family: var(--font-display); text-transform: uppercase; font-size: clamp(56px, 8vw, 112px); font-weight: 900; line-height: .9; letter-spacing: -.005em; margin: 0 0 clamp(24px, 3.5vw, 40px); max-width: 15ch; text-wrap: balance; }
+.contact-headline { font-family: var(--font-display); text-transform: uppercase; font-size: clamp(52px, 6.4vw, 92px); font-weight: 900; line-height: .9; letter-spacing: -.005em; margin: 0 0 clamp(20px, 3vw, 32px); text-wrap: balance; }
 .contact-headline em { font-style: normal; color: var(--accent); }
 .contact-body { grid-column: 1; color: var(--muted); max-width: 46ch; margin: 0 0 20px; }
-.contact-form { grid-column: 2; grid-row: 3 / span 4; display: flex; flex-direction: column; gap: 16px; margin: 0; }
+.contact-form { grid-column: 2; grid-row: 2 / span 5; display: flex; flex-direction: column; gap: 16px; margin: 0; }
 .contact-field { display: flex; flex-direction: column; gap: 6px; }
 .contact-field label { font-size: 14px; font-weight: 600; }
 .contact-field input, .contact-field textarea {
@@ -189,7 +181,7 @@
 .contact-email:hover { color: var(--accent-text); border-bottom-color: var(--accent-text); }
 @media (max-width: 760px) {
   .contact .wrap { grid-template-columns: minmax(0, 1fr); grid-template-rows: none; }
-  .contact-body, .contact-form, .contact-alt { grid-column: 1; grid-row: auto; }
+  .contact-headline, .contact-body, .contact-form, .contact-alt { grid-column: 1; grid-row: auto; }
   .contact-form { margin-bottom: 24px; }
 }
 </style>
