@@ -48,7 +48,7 @@
 <link rel="stylesheet" href="/site.css">
 <style id="page-css">
 /* Homepage display elements (shared ones are in site.css) */
-.hero-name, .principle-numeral, .work-tag-row, .stat-block-num, .work-stat-num, .hero-cta, .contact-submit {
+.hero-name, .principle-numeral, .work-tag-row, .stat-block-num, .hero-cta, .contact-submit {
   font-family: var(--font-display);
   text-transform: uppercase;
 }
@@ -123,9 +123,7 @@
 .work-lead-photo { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; object-position: 50% 40%; }
 .work-lead .work-title { font-size: clamp(26px, 3vw, 40px); line-height: 1.06; }
 .work-lead .work-detail { margin-top: 18px; max-width: 56ch; }
-.work-stat { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--line); }
-.work-stat-num { font-size: 60px; font-weight: 900; line-height: .9; color: var(--accent-text); font-variant-numeric: tabular-nums; }
-.work-stat-label { font-weight: 600; }
+.work-lead-photo-link { display: block; }
 .work-row { margin-top: clamp(36px, 5vw, 56px); }
 .work-row .work-card { display: grid; grid-template-columns: minmax(0, 11rem) minmax(0, 1fr) minmax(0, 1.5fr); gap: 8px clamp(20px, 3vw, 40px); padding: 22px 0; border-top: 1px solid var(--line); }
 .work-row .work-card:last-child { border-bottom: 1px solid var(--line); }
@@ -258,24 +256,21 @@
       <div class="work-card work-lead">
         <div class="work-lead-body">
           <div class="work-tag-row">
-            <span class="work-tag">Implementation</span>
+            <span class="work-tag">Propel26 talk · Implementation</span>
             <span class="work-date">· 2025–26</span>
           </div>
           <h3 class="work-title"><a href="/propel26/">If you were building your function today, would you keep it the same?</a></h3>
           <p class="work-detail">We stopped building the process around our internal rhythm and started building it around the customer's. Shifted from "customer builds, team reviews" to "team recommends, customer validates." We led with our expertise and adoption followed.</p>
-          <div class="work-stat">
-            <span class="work-stat-num">50%</span>
-            <span class="work-stat-label">faster time to first customer value</span>
-          </div>
         </div>
         <div class="work-lead-photo-wrap">
-          <img
+          <!-- The title link is the accessible one; the photo is a second, larger click target for the same page. -->
+          <a href="/propel26/" class="work-lead-photo-link" tabindex="-1" aria-hidden="true"><img
             src="/propel26-stage-1600.jpg"
             srcset="/propel26-stage-800.jpg 800w, /propel26-stage-1600.jpg 1600w"
             sizes="(max-width: 840px) 100vw, 500px"
             width="1600" height="1067"
             alt="Merlin Komenda presenting at Propel26."
-            class="work-lead-photo">
+            class="work-lead-photo"></a>
         </div>
       </div>
       <div class="work-row">
