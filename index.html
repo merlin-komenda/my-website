@@ -70,7 +70,10 @@
 .hero-name em { font-style: normal; display: block; }
 .hero-tagline { font-size: clamp(20px, 2vw, 24px); font-weight: 500; font-stretch: 88%; letter-spacing: -.01em; line-height: 1.3; margin: 0 0 28px; }
 .hero-tagline strong { font-weight: 750; }
-.hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+.hero-ctas { display: flex; gap: 12px 24px; flex-wrap: wrap; align-items: center; }
+.hero-link { font-size: 16px; font-weight: 650; border-bottom: 1px solid var(--ink); padding-bottom: 1px; }
+.hero-link::after { content: "\00a0\2192"; content: "\00a0\2192" / ""; }
+.hero-link:hover { color: var(--accent-text); border-bottom-color: var(--accent-text); }
 .hero-cta, .contact-submit {
   display: inline-block; cursor: pointer; border: none;
   background: var(--ink); color: var(--bg);
@@ -120,7 +123,9 @@
 /* The work: Propel26 leads with its photo and result; the rest are ruled rows */
 .work-tag-row { display: flex; gap: 6px; flex-wrap: wrap; align-items: baseline; margin: 0 0 14px; font-size: 18px; font-weight: 700; letter-spacing: .04em; color: var(--accent-text); }
 .work-title { margin: 0; font-weight: 650; font-stretch: 85%; letter-spacing: -.02em; text-wrap: balance; }
-.work-title a:hover { color: var(--accent-text); }
+.work-title a { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .18em; text-decoration-color: var(--line); }
+.work-title a::after { content: "\00a0\2192"; content: "\00a0\2192" / ""; }
+.work-title a:hover { color: var(--accent-text); text-decoration-color: currentColor; }
 .work-detail { color: var(--muted); margin: 0; }
 .work-lead { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: clamp(24px, 4vw, 56px); align-items: start; }
 .work-lead-photo-wrap { grid-column: 1; grid-row: 1; }
@@ -150,18 +155,19 @@
 .stat-block-num { font-size: clamp(64px, 8vw, 104px); font-weight: 900; line-height: .85; font-variant-numeric: tabular-nums; }
 .stat-block:first-child .stat-block-num { color: var(--accent-text); }
 .stat-block-label { font-size: 18px; font-weight: 550; font-stretch: 90%; }
-.companies-row { display: flex; flex-wrap: wrap; gap: 8px 32px; }
-.company-name { font-size: 22px; font-weight: 600; font-stretch: 90%; }
+.companies-row { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px clamp(20px, 3vw, 36px); }
+.company-name { font-family: var(--font-display); text-transform: uppercase; font-size: clamp(22px, 2.4vw, 30px); font-weight: 800; letter-spacing: .02em; line-height: 1; color: var(--muted); }
 @media (max-width: 760px) {
   .stats-band .wrap, .companies .wrap { grid-template-columns: minmax(0, 1fr); }
+  .companies-row { justify-content: flex-start; }
 }
 
 /* Contact */
 .contact .wrap { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); grid-template-rows: auto auto auto auto auto 1fr; column-gap: clamp(28px, 5vw, 72px); align-items: start; }
 .contact .section-label, .contact-headline { grid-column: 1 / -1; }
 .contact .section-label { margin-bottom: clamp(20px, 3vw, 32px); }
-.contact-headline { font-size: clamp(40px, 6vw, 80px); font-weight: 650; font-stretch: 85%; line-height: 1; letter-spacing: -.025em; margin: 0 0 clamp(24px, 3.5vw, 40px); text-wrap: balance; }
-.contact-headline em { font-style: normal; }
+.contact-headline { font-family: var(--font-display); text-transform: uppercase; font-size: clamp(56px, 8vw, 112px); font-weight: 900; line-height: .9; letter-spacing: -.005em; margin: 0 0 clamp(24px, 3.5vw, 40px); max-width: 15ch; text-wrap: balance; }
+.contact-headline em { font-style: normal; color: var(--accent); }
 .contact-body { grid-column: 1; color: var(--muted); max-width: 46ch; margin: 0 0 20px; }
 .contact-form { grid-column: 2; grid-row: 3 / span 4; display: flex; flex-direction: column; gap: 16px; margin: 0; }
 .contact-field { display: flex; flex-direction: column; gap: 6px; }
@@ -218,6 +224,7 @@
       <p class="hero-tagline">Rigorous by design. <strong>Joyful by default.</strong></p>
       <div class="hero-ctas">
         <a href="#work" class="hero-cta primary">See the work</a>
+        <a href="https://calendar.app.google/qd66qHTzCbsaNUEa7" target="_blank" rel="noopener" class="hero-link">Book 15 minutes</a>
       </div>
     </div>
     <div class="hero-photo-wrap">
